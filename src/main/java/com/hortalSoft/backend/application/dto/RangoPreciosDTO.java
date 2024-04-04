@@ -1,22 +1,18 @@
-package com.hortalSoft.backend.domain.model;
+package com.hortalSoft.backend.application.dto;
 
-import com.hortalSoft.backend.application.dto.AsociacionDTO;
+import com.hortalSoft.backend.domain.model.Asociacion;
+import com.hortalSoft.backend.domain.model.Producto;
 import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
-@Getter
-@Setter
-@Entity
-@ToString
-@SuperBuilder
-@RequiredArgsConstructor
-public class RangoPrecios {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class RangoPreciosDTO {
     private String identificador;
     private Producto producto;
     private Asociacion asociacion;

@@ -7,21 +7,17 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 @Getter
 @Setter
 @Entity
 @ToString
 @SuperBuilder
 @RequiredArgsConstructor
-public class Producto {
+public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private long identificador;
+    private String identificador;
     private String nombre;
-    private Subcategoria subcategoria;
-    private ArrayList<Oferta> listaOfertas;
+    private String descripcion;
 }

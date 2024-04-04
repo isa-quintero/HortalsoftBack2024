@@ -8,10 +8,9 @@ import lombok.experimental.SuperBuilder;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TipoDocumentoDTO {
+public class CategoriaDTO {
 
     private String identificador;
-    private String codigo;
     private String nombre;
     private String descripcion;
 }
