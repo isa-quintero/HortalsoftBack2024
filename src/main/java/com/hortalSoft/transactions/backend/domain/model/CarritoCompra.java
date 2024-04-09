@@ -1,6 +1,6 @@
 package com.hortalSoft.transactions.backend.domain.model;
 
-import com.hortalSoft.products.backend.domain.model.Oferta;
+import com.hortalSoft.products.backend.domain.entity.OfferEntity;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 @SuperBuilder
 @RequiredArgsConstructor
 public class CarritoCompra {
-    private ArrayList<Oferta> listaOfertas;
+    private ArrayList<OfferEntity> listaOfferEntities;
     private int valorTotal;
 
 }
