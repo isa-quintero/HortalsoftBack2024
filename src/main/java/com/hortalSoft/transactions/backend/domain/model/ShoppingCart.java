@@ -16,8 +16,8 @@ import java.util.ArrayList;
 @ToString
 @SuperBuilder
 @RequiredArgsConstructor
-public class CarritoCompra {
-    private ArrayList<OfferEntity> listaOfferEntities;
-    private int valorTotal;
+public class ShoppingCart {
+    private ArrayList<OfferEntity> offerEntityList;
+    private int totalCost;
 
 }

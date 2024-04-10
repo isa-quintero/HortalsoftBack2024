@@ -1,4 +1,4 @@
-package com.hortalSoft.users.backend.application.dto.agricultor;
+package com.hortalSoft.users.backend.application.dto.farmer;
 
 import com.hortalSoft.users.backend.domain.model.Association;
 import com.hortalSoft.users.backend.domain.model.DocumentType;
@@ -11,16 +11,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AgricultorDTO {
+public class FarmerDTO {
 
-    private long identificador;
+    private long id;
     private DocumentType documentType;
-    private long numeroIdentificacion;
-    private String nombre;
-    private String apellido;
-    private long telefono;
+    private long idNumber;
+    private String name;
+    private String lastname;
+    private long phoneNumber;
     private String email;
-    private String direccion;
-    private String ciudad;
+    private String address;
+    private String city;
     private Association association;
 }
