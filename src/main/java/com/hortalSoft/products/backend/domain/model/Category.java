@@ -9,11 +9,11 @@ import java.util.List;
 @AllArgsConstructor
 public class Category implements Serializable {
 
-    private long identificador;
+    private long id;
     @NonNull
-    private String nombre;
+    private String name;
     @NonNull
-    private String descripcion;
+    private String description;
     @NonNull
     private List<Subcategory> subcategory;
 }

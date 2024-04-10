@@ -1,6 +1,6 @@
 package com.hortalSoft.products.backend.domain.entity;
 
-import com.hortalSoft.users.backend.domain.model.Asociacion;
+import com.hortalSoft.users.backend.domain.model.Association;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,14 +16,14 @@ public class PriceRangeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private long identificador;
+    private long id;
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
     private ProductEntity productEntity;
-    @ManyToOne(fetch = FetchType.LAZY,targetEntity = Asociacion.class)
-    private Asociacion asociacion;
-    private float rangoInicial;
-    private float rangoFinal;
-    private Date fechaInicial;
-    private Date fechaFinal;
-    private int vigencia;
+    @ManyToOne(fetch = FetchType.LAZY,targetEntity = Association.class)
+    private Association association;
+    private float initialRange;
+    private float finalRange;
+    private Date initialDate;
+    private Date finalDate;
+    private int validity;
 }

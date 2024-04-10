@@ -9,17 +9,17 @@ import java.util.Date;
 @AllArgsConstructor
 public class Offer {
 
-    private long identificador;
+    private long id;
     private Product product;
     @NonNull
-    private String descripcion;
-    private int cantidad;
+    private String description;
+    private int amount;
     @NonNull
-    private int precio;
+    private int price;
     @NonNull
-    private Date fechaInicial;
+    private Date initialDate;
     @NonNull
-    private Date fechaFinal;
+    private Date finalDate;
     @NonNull
-    private int vigencia;
+    private int validity;
 }

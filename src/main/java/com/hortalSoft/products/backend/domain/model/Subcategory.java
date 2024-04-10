@@ -11,12 +11,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Subcategory {
 
-    private long identificador;
+    private long id;
     @NonNull
-    private String nombre;
+    private String name;
     @NonNull
-    private String descripcion;
+    private String description;
     @NonNull
     private Category category;
-    private List<Product> productEntities;
+    private List<Product> product;
 }

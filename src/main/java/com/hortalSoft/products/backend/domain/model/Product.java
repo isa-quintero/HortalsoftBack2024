@@ -9,11 +9,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Product {
 
-    private long identificador;
+    private long id;
     @NonNull
-    private String nombre;
+    private String name;
     @NonNull
     private Subcategory subcategory;
-    private List<Offer> listaOfferEntities;
+    private List<Offer> offerList;
     private List<PriceRange> priceRangeList;
 }

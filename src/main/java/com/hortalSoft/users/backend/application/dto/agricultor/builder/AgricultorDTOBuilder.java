@@ -1,7 +1,7 @@
 package com.hortalSoft.users.backend.application.dto.agricultor.builder;
 
-import com.hortalSoft.users.backend.domain.model.Asociacion;
-import com.hortalSoft.users.backend.domain.model.TipoDocumento;
+import com.hortalSoft.users.backend.domain.model.Association;
+import com.hortalSoft.users.backend.domain.model.DocumentType;
 
 public class AgricultorDTOBuilder implements AgricultorBuilder {
     public static AgricultorDTOBuilder getAgricultorDTOBuilder(){
@@ -13,7 +13,7 @@ public class AgricultorDTOBuilder implements AgricultorBuilder {
     }
 
     @Override
-    public AgricultorDTOBuilder setTipoDocumento(TipoDocumento tipoDocumento) {
+    public AgricultorDTOBuilder setTipoDocumento(DocumentType documentType) {
         return null;
     }
 
@@ -48,7 +48,7 @@ public class AgricultorDTOBuilder implements AgricultorBuilder {
     }
 
     @Override
-    public AgricultorDTOBuilder setAsociacion(Asociacion asociacion) {
+    public AgricultorDTOBuilder setAsociacion(Association association) {
         return null;
     }
 }

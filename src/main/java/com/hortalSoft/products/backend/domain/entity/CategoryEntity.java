@@ -15,9 +15,9 @@ public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private String identificador;
-    private String nombre;
-    private String descripcion;
+    private String id;
+    private String name;
+    private String description;
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "customer",cascade=CascadeType.ALL,orphanRemoval = true)
     private List<SubcategoryEntity> subcategoryEntity;
 }
