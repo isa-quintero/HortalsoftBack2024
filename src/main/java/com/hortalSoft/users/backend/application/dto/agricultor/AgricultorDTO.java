@@ -1,7 +1,7 @@
 package com.hortalSoft.users.backend.application.dto.agricultor;
 
-import com.hortalSoft.users.backend.domain.model.Asociacion;
-import com.hortalSoft.users.backend.domain.model.TipoDocumento;
+import com.hortalSoft.users.backend.domain.model.Association;
+import com.hortalSoft.users.backend.domain.model.DocumentType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class AgricultorDTO {
 
     private long identificador;
-    private TipoDocumento tipoDocumento;
+    private DocumentType documentType;
     private long numeroIdentificacion;
     private String nombre;
     private String apellido;
@@ -22,5 +22,5 @@ public class AgricultorDTO {
     private String email;
     private String direccion;
     private String ciudad;
-    private Asociacion asociacion;
+    private Association association;
 }

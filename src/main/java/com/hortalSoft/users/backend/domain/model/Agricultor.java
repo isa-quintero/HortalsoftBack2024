@@ -18,7 +18,7 @@ public class Agricultor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private String identificador;
-    private TipoDocumento tipoDocumento;
+    private DocumentType documentType;
     private long numeroIdentificacion;
     private String nombre;
     private String apellido;
@@ -26,5 +26,5 @@ public class Agricultor {
     private String email;
     private String direccion;
     private String ciudad;
-    private Asociacion asociacion;
+    private Association association;
 }

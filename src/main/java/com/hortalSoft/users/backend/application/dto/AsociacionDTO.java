@@ -1,6 +1,6 @@
 package com.hortalSoft.users.backend.application.dto;
 
-import com.hortalSoft.users.backend.domain.model.TipoDocumento;
+import com.hortalSoft.users.backend.domain.model.DocumentType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class AsociacionDTO {
 
     private String identificador;
-    private TipoDocumento tipoDocumento;
+    private DocumentType documentType;
     private int numeroIdentificacion;
     private String codigo;
     private String nombre;
