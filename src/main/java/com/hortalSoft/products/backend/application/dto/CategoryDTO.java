@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 public class CategoryDTO {
 
-    private String identificador;
-    private String nombre;
-    private String descripcion;
+    private String id;
+    private String name;
+    private String description;
 }
