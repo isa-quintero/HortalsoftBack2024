@@ -2,7 +2,7 @@ package com.hortalSoft.products.backend.infrastructure.mapper;
 
 import java.util.List;
 
-public interface InfraestructuraEntityMapper<Entity, Domain>{
+public interface entityMapperInfrastructure<Entity, Domain>{
     Entity toEntity(Domain domain);
 
     Domain toDomain(Entity entity);

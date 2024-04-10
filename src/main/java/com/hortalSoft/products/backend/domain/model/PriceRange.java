@@ -1,6 +1,6 @@
 package com.hortalSoft.products.backend.domain.model;
 
-import com.hortalSoft.users.backend.domain.model.Asociacion;
+import com.hortalSoft.users.backend.domain.model.Association;
 import lombok.*;
 
 import java.util.Date;
@@ -10,17 +10,17 @@ import java.util.Date;
 @AllArgsConstructor
 public class PriceRange {
 
-    private long identificador;
+    private long id;
     private Product product;
-    private Asociacion asociacion;
+    private Association association;
     @NonNull
-    private float rangoInicial;
+    private float initialRange;
     @NonNull
-    private float rangoFinal;
+    private float finalRange;
     @NonNull
-    private Date fechaInicial;
+    private Date initialDate;
     @NonNull
-    private Date fechaFinal;
+    private Date finalDate;
     @NonNull
-    private int vigencia;
+    private int validity;
 }

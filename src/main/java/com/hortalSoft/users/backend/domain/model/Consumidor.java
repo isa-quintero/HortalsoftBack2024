@@ -18,7 +18,7 @@ public class Consumidor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private String identificador;
-    private TipoDocumento tipoDocumento;
+    private DocumentType documentType;
     private long numeroIdentificacion;
     private String nombre;
     private String apellido;

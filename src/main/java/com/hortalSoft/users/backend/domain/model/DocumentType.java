@@ -13,17 +13,12 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 @RequiredArgsConstructor
-public class Asociacion {
+public class DocumentType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private String identificador;
-    private TipoDocumento tipoDocumento;
-    private long numeroIdentificacion;
     private String codigo;
     private String nombre;
-    private long telefono;
-    private String email;
-    private String direccion;
-    private String ciudad;
+    private String descripcion;
 }

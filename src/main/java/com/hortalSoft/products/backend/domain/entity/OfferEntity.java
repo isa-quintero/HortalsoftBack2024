@@ -16,13 +16,13 @@ public class OfferEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private long identificador;
+    private long id;
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
     private ProductEntity productEntity;
-    private String descripcion;
-    private int cantidad;
-    private int precio;
-    private Date fechaInicial;
-    private Date fechaFinal;
-    private int vigencia;
+    private String description;
+    private int amount;
+    private int price;
+    private Date initialDate;
+    private Date finalDate;
+    private int validity;
 }
