@@ -1,6 +1,5 @@
 package com.hortalSoft.products.backend.application.dto;
 
-import com.hortalSoft.products.backend.domain.entity.ProductEntity;
 import lombok.*;
 
 import java.util.Date;
@@ -11,12 +10,12 @@ import java.util.Date;
 @NoArgsConstructor
 public class OfferDTO {
 
-    private String identificador;
-    private ProductEntity productEntity;
-    private String descripcion;
-    private int cantidad;
-    private int precio;
-    private Date fechaInicial;
-    private Date fechaFinal;
-    private int vigencia;
+    private String id;
+    private ProductDTO productDTO;
+    private String description;
+    private int amount;
+    private int price;
+    private Date initialDate;
+    private Date finalDate;
+    private int validity;
 }
