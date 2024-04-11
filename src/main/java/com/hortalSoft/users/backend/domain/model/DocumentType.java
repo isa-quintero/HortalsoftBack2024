@@ -17,8 +17,8 @@ public class DocumentType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private String identificador;
-    private String codigo;
-    private String nombre;
-    private String descripcion;
+    private String id;
+    private String code;
+    private String name;
+    private String description;
 }

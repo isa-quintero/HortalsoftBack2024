@@ -17,13 +17,13 @@ public class Association {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private String identificador;
+    private String id;
     private DocumentType documentType;
-    private long numeroIdentificacion;
-    private String codigo;
-    private String nombre;
-    private long telefono;
+    private long idNumber;
+    private String code;
+    private String name;
+    private long phoneNumber;
     private String email;
-    private String direccion;
-    private String ciudad;
+    private String address;
+    private String city;
 }

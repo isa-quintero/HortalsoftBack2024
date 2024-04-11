@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AsociacionDTO {
+public class CustomerDTO {
 
-    private String identificador;
+    private String id;
     private DocumentType documentType;
-    private int numeroIdentificacion;
-    private String codigo;
-    private String nombre;
-    private  int telefono;
+    private long idNumber;
+    private String name;
+    private String lastname;
+    private long phoneNumber;
     private String email;
-    private String direccion;
-    private String ciudad;
+    private String address;
+    private String city;
 }

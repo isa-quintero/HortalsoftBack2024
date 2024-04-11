@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TipoDocumentoDTO {
+public class DocumentTypeDTO {
 
-    private String identificador;
-    private String codigo;
-    private String nombre;
-    private String descripcion;
+    private String id;
+    private String code;
+    private String name;
+    private String description;
 }

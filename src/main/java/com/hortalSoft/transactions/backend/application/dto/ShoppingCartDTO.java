@@ -9,8 +9,8 @@ import java.util.ArrayList;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CarritoCompraDTO {
-    private ArrayList<OfferEntity> listaOfferEntities;
-    private int valorTotal;
+public class ShoppingCartDTO {
+    private ArrayList<OfferEntity> offerEntityList;
+    private int totalCost;
 
 }

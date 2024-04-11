@@ -1,7 +1,7 @@
 package com.hortalSoft.transactions.backend.domain.model;
 
-import com.hortalSoft.users.backend.domain.model.Agricultor;
-import com.hortalSoft.users.backend.domain.model.Consumidor;
+import com.hortalSoft.users.backend.domain.model.Farmer;
+import com.hortalSoft.users.backend.domain.model.Customer;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,15 +17,15 @@ import java.util.Date;
 @ToString
 @SuperBuilder
 @RequiredArgsConstructor
-public class Factura {
+public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private String identificador;
-    private Date fecha;
-    private Consumidor comprador;
-    private Agricultor vendedor;
-    private String descripcion;
+    private String id;
+    private Date date;
+    private Customer customer;
+    private Farmer farmer;
+    private String description;
     private int total;
 
 }
