@@ -1,4 +1,4 @@
 package com.hortalsof.location;
 
-public class dummy {
+public interface Dummy {
 }

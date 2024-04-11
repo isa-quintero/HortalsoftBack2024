@@ -1,4 +1,4 @@
 package com.hortalsof.logistics;
 
-public class Dummy {
+public interface Dummy {
 }
