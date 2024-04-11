@@ -1,6 +1,6 @@
-package com.hortalSoft.users.backend.application.dto;
+package com.hortalsoft.users.backend.application.dto;
 
-import com.hortalSoft.users.backend.domain.model.DocumentType;
+import com.hortalsoft.users.backend.domain.model.DocumentType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

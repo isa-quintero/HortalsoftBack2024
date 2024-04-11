@@ -1,4 +1,4 @@
-package com.hortalSoft.users.backend.domain.model;
+package com.hortalsoft.users.backend.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

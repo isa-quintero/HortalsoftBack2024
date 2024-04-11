@@ -1,4 +1,4 @@
-package com.hortalSoft.users.backend.domain.model;
+package com.hortalsoft.users.backend.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,7 +18,7 @@ public class Farmer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private String id;
-    private DocumentType documentType;
+    //private DocumentType documentType;
     private long idNumber;
     private String name;
     private String lastname;
@@ -26,5 +26,5 @@ public class Farmer {
     private String email;
     private String address;
     private String city;
-    private Association association;
+    //private Association association;
 }

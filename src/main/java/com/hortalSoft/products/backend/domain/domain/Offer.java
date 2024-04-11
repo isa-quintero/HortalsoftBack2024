@@ -1,13 +1,15 @@
 package com.hortalsoft.products.backend.domain.domain;
 
 import lombok.*;
+
+import java.io.Serializable;
 import java.util.Date;
 
 
 @Data
 @Builder
 @AllArgsConstructor
-public class Offer {
+public class Offer implements Serializable {
 
     private long id;
     private Product product;

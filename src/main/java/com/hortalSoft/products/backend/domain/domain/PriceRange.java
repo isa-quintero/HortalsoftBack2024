@@ -1,14 +1,15 @@
 package com.hortalsoft.products.backend.domain.domain;
 
-import com.hortalSoft.users.backend.domain.model.Association;
+import com.hortalsoft.users.backend.domain.model.Association;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Builder
 @AllArgsConstructor
-public class PriceRange {
+public class PriceRange implements Serializable {
 
     private long id;
     private Product product;

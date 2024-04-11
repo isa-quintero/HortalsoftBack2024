@@ -1,6 +1,6 @@
 package com.hortalsoft.products.backend.application.dto;
 
-import com.hortalSoft.users.backend.domain.model.Association;
+import com.hortalsoft.users.backend.domain.model.Association;
 import lombok.*;
 
 import java.util.Date;

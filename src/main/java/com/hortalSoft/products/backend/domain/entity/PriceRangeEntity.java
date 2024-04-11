@@ -1,6 +1,6 @@
 package com.hortalsoft.products.backend.domain.entity;
 
-import com.hortalSoft.users.backend.domain.model.Association;
+import com.hortalsoft.users.backend.domain.model.Association;
 import jakarta.persistence.*;
 import lombok.*;
 

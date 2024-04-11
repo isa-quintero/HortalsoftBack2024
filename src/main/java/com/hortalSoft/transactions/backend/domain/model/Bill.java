@@ -1,7 +1,7 @@
-package com.hortalSoft.transactions.backend.domain.model;
+package com.hortalsoft.transactions.backend.domain.model;
 
-import com.hortalSoft.users.backend.domain.model.Farmer;
-import com.hortalSoft.users.backend.domain.model.Customer;
+import com.hortalsoft.users.backend.domain.model.Farmer;
+import com.hortalsoft.users.backend.domain.model.Customer;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
