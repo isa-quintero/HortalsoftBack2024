@@ -1,4 +1,4 @@
-package com.hortalSoft.products.backend.application.dto.response;
+package com.hortalsoft.products.backend.application.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class GenericResponseDTO<T> implements Serializable {
     private static final long serialVersionUID = 2150687141828922398L;
-    private T data;
+    private transient T data;
 }
 
 

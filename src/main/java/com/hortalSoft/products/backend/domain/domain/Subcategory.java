@@ -3,13 +3,14 @@ package com.hortalsoft.products.backend.domain.domain;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 
 //@Builder
 @RequiredArgsConstructor
-public class Subcategory {
+public class Subcategory implements Serializable {
 
     private long id;
     @NonNull

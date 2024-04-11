@@ -1,4 +1,4 @@
-package com.hortalSoft.products.backend;
+package com.hortalsoft.products.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

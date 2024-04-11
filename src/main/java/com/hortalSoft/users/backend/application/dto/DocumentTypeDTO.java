@@ -1,4 +1,4 @@
-package com.hortalSoft.users.backend.application.dto;
+package com.hortalsoft.users.backend.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

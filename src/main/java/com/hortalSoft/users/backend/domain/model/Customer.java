@@ -1,4 +1,4 @@
-package com.hortalSoft.users.backend.domain.model;
+package com.hortalsoft.users.backend.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,7 +18,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private String id;
-    private DocumentType documentType;
+    //private DocumentType documentType;
     private long idNumber;
     private String name;
     private String lastname;
