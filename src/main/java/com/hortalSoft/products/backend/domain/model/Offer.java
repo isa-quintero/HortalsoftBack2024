@@ -1,4 +1,4 @@
-package com.hortalSoft.products.backend.domain.model;
+package com.hortalsoft.products.backend.domain.model;
 
 import lombok.*;
 import java.util.Date;

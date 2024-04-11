@@ -1,7 +1,7 @@
-package com.hortalSoft.products.backend.domain.repository;
+package com.hortalsoft.products.backend.domain.repository;
 
 
-import com.hortalSoft.products.backend.domain.entity.CategoryEntity;
+import com.hortalsoft.products.backend.domain.entity.CategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

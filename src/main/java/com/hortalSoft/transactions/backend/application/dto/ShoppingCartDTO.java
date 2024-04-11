@@ -1,6 +1,6 @@
-package com.hortalSoft.transactions.backend.application.dto;
+package com.hortalsoft.transactions.backend.application.dto;
 
-import com.hortalSoft.products.backend.domain.entity.OfferEntity;
+import com.hortalsoft.products.backend.domain.entity.OfferEntity;
 import lombok.*;
 
 import java.util.ArrayList;

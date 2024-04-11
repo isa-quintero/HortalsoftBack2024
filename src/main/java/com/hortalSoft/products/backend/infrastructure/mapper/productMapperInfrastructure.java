@@ -1,7 +1,7 @@
-package com.hortalSoft.products.backend.infrastructure.mapper;
+package com.hortalsoft.products.backend.infrastructure.mapper;
 
-import com.hortalSoft.products.backend.domain.entity.ProductEntity;
-import com.hortalSoft.products.backend.domain.model.Product;
+import com.hortalsoft.products.backend.domain.entity.ProductEntity;
+import com.hortalsoft.products.backend.domain.model.Product;
 
 public interface productMapperInfrastructure extends entityMapperInfrastructure<ProductEntity, Product> {
 }

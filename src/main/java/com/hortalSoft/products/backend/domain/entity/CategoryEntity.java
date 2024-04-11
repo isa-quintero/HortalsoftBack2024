@@ -1,4 +1,4 @@
-package com.hortalSoft.products.backend.domain.entity;
+package com.hortalsoft.products.backend.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @Entity
 @ToString
-@Builder
+//@Builder
 @RequiredArgsConstructor
 @Table(name = "Category")
 public class CategoryEntity {

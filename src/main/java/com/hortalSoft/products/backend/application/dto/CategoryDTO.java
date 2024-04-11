@@ -1,4 +1,4 @@
-package com.hortalSoft.products.backend.application.dto;
+package com.hortalsoft.products.backend.application.dto;
 
 import lombok.*;
 

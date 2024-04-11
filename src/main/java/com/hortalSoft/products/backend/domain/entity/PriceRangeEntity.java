@@ -1,4 +1,4 @@
-package com.hortalSoft.products.backend.domain.entity;
+package com.hortalsoft.products.backend.domain.entity;
 
 import com.hortalSoft.users.backend.domain.model.Association;
 import jakarta.persistence.*;
@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @Entity
 @ToString
-@Builder
+//@Builder
 @RequiredArgsConstructor
 @Table(name = "PriceRange")
 public class PriceRangeEntity {

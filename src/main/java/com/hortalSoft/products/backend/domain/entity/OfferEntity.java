@@ -1,4 +1,4 @@
-package com.hortalSoft.products.backend.domain.entity;
+package com.hortalsoft.products.backend.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 @Entity
 @ToString
-@Builder
+//@Builder
 @RequiredArgsConstructor
 @Table(name = "Offer")
 public class OfferEntity {
