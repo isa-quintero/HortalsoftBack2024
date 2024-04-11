@@ -1,4 +1,4 @@
-package com.hortalsoft.products.backend.domain.model;
+package com.hortalsoft.products.backend.domain.domain;
 
 import com.hortalSoft.users.backend.domain.model.Association;
 import lombok.*;
