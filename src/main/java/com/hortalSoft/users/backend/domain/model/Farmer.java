@@ -13,17 +13,18 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 @RequiredArgsConstructor
-public class Consumidor {
+public class Farmer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private String identificador;
+    private String id;
     private DocumentType documentType;
-    private long numeroIdentificacion;
-    private String nombre;
-    private String apellido;
-    private long telefono;
+    private long idNumber;
+    private String name;
+    private String lastname;
+    private long phoneNumber;
     private String email;
-    private String direccion;
-    private String ciudad;
+    private String address;
+    private String city;
+    private Association association;
 }

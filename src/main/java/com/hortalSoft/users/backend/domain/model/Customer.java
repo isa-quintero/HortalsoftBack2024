@@ -1,4 +1,4 @@
-package com.hortalSoft.transactions.backend.domain.model;
+package com.hortalSoft.users.backend.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -13,13 +13,17 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 @RequiredArgsConstructor
-public class BilleteraElectronica {
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private String identificador;
-    private String direccionBilletera;
-    private String nombre;
+    private String id;
+    private DocumentType documentType;
+    private long idNumber;
+    private String name;
+    private String lastname;
+    private long phoneNumber;
     private String email;
-    private long fondosDisponibles;
+    private String address;
+    private String city;
 }
