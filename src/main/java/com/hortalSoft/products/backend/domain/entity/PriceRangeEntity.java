@@ -19,8 +19,8 @@ public class PriceRangeEntity {
     private long id;
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
     private ProductEntity productEntity;
-    @ManyToOne(fetch = FetchType.LAZY,targetEntity = Association.class)
-    private Association association;
+    //@ManyToOne(fetch = FetchType.LAZY,targetEntity = Association.class)
+    //private Association association;
     private float initialRange;
     private float finalRange;
     private Date initialDate;

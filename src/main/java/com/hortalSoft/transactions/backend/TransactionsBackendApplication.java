@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TransactionsBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProductsBackendApplication.class, args);
+		SpringApplication.run(TransactionsBackendApplication.class, args);
 	}
 
 }
