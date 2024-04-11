@@ -1,4 +1,4 @@
-package com.hortalSoft.transactions.backend.domain.model;
+package com.hortalsoft.transactions.backend.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

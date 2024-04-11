@@ -1,4 +1,4 @@
-package com.hortalSoft.transactions.backend.infraestructure.mapper;
+package com.hortalsoft.transactions.backend.infraestructure.mapper;
 
 import java.util.List;
 

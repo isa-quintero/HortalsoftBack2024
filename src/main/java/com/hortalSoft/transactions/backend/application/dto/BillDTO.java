@@ -1,7 +1,7 @@
-package com.hortalSoft.transactions.backend.application.dto;
+package com.hortalsoft.transactions.backend.application.dto;
 
-import com.hortalSoft.users.backend.domain.model.Farmer;
-import com.hortalSoft.users.backend.domain.model.Customer;
+import com.hortalsoft.users.backend.domain.model.Farmer;
+import com.hortalsoft.users.backend.domain.model.Customer;
 import lombok.*;
 
 import java.util.Date;

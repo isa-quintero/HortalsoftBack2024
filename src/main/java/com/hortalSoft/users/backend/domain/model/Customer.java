@@ -1,29 +1,26 @@
-package com.hortalSoft.users.backend.domain.model;
+package com.hortalsoft.users.backend.domain.model;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
-@Getter
-@Setter
-@Entity
-@ToString
-@SuperBuilder
+import java.io.Serializable;
+
+@Data
+@Builder
 @RequiredArgsConstructor
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+public class Customer implements Serializable {
+
     private String id;
-    private DocumentType documentType;
+    //private DocumentType documentType;
     private long idNumber;
+    @NonNull
     private String name;
+    @NonNull
     private String lastname;
     private long phoneNumber;
+    @NonNull
     private String email;
+    @NonNull
     private String address;
+    @NonNull
     private String city;
 }

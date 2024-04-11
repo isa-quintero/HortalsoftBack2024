@@ -1,4 +1,4 @@
-package com.hortalSoft.users.backend.infraestructure.mapper;
+package com.hortalsoft.users.backend.infraestructure.mapper;
 
 import java.util.List;
 

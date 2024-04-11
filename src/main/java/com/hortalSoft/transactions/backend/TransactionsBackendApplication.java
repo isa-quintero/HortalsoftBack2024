@@ -1,6 +1,6 @@
-package com.hortalSoft.transactions.backend;
+package com.hortalsoft.transactions.backend;
 
-import com.hortalSoft.products.backend.ProductsBackendApplication;
+import com.hortalsoft.products.backend.ProductsBackendApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TransactionsBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProductsBackendApplication.class, args);
+		SpringApplication.run(TransactionsBackendApplication.class, args);
 	}
 
 }
