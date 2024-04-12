@@ -2,12 +2,13 @@ package com.hortalsoft.crosscutting.response;
 
 import java.util.List;
 
-public interface ApplicationEntityMapper<ENT, DOM> {
-    ENT toEntity(DOM domain);
+public interface ApplicationEntityMapper<E, D> {
+    E toEntity(D domain);
 
-    DOM toDomain(ENT entity);
+    D toDomain(E entity);
 
-    List<DOM> toDomains(List<ENT> entityList);
 
-    List<ENT> toEntities(List<DOM> domainList);
+    List<D> toDomains(List<E> entityList);
+
+    List<E> toEntities(List<D> domainList);
 }

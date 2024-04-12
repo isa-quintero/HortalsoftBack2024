@@ -2,12 +2,12 @@ package com.hortalsoft.crosscutting.response;
 
 import java.util.List;
 
-public interface ApplicationDTOMapper<DTO, DOM> {
-    DOM toDomain(DTO dto);
+public interface ApplicationDTOMapper<T, D> {
+    D toDomain(T dto);
 
-    DTO toDto(DOM dom);
+    T toDto(D dom);
 
-    List<DOM> toDomains(List<DTO> dtoList);
+    List<D> toDomains(List<T> dtoList);
 
-    List<DTO> toDtos(List<DOM> domList);
+    List<T> toDtos(List<D> domList);
 }
