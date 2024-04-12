@@ -1,27 +1,25 @@
-package com.hortalsoft.users.domain.domain;
+package com.hortalsoft.users.application.dto;
 
+import com.hortalsoft.users.domain.domain.DocumentType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-@RequiredArgsConstructor
-public class Association {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class AssociationDTO {
     private String id;
-    @NonNull
     private DocumentType documentType;
     private long idNumber;
-    @NonNull
     private String code;
-    @NonNull
     private String name;
     private long phoneNumber;
-    @NonNull
     private String email;
-    @NonNull
     private String address;
-    @NonNull
     private String city;
 }

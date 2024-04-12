@@ -18,7 +18,7 @@ public class SubcategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private String id;
+    private long id;
     private String name;
     private String description;
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = CategoryEntity.class)

@@ -4,24 +4,18 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-
 @Data
 @RequiredArgsConstructor
-public class Association {
+public class Farmer {
     private String id;
-    @NonNull
     private DocumentType documentType;
     private long idNumber;
-    @NonNull
-    private String code;
-    @NonNull
     private String name;
+    private String lastname;
     private long phoneNumber;
-    @NonNull
     private String email;
-    @NonNull
     private String address;
-    @NonNull
     private String city;
+    private Association association;
+
 }
