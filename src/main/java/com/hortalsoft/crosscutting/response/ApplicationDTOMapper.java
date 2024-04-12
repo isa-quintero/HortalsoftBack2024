@@ -1,8 +1,8 @@
-package com.hortalsoft.transactions.application.mapper;
+package com.hortalsoft.crosscutting.response;
 
 import java.util.List;
 
-public interface ApplicationEntityMapper <Dto, Domain> {
+public interface ApplicationDTOMapper<Dto, Domain> {
     Domain toDomain(Dto dto);
 
     Dto toDto(Domain domain);
