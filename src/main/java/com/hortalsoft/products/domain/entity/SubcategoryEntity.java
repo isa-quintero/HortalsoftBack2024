@@ -1,12 +1,10 @@
 package com.hortalsoft.products.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Data

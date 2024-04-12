@@ -1,7 +1,6 @@
 package com.hortalsoft.users.domain.domain;
 
 import lombok.Data;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Data

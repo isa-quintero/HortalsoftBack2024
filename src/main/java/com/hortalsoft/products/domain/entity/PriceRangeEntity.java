@@ -1,9 +1,7 @@
 package com.hortalsoft.products.domain.entity;
 
-import com.hortalsoft.users.domain.domain.Association;
 import com.hortalsoft.users.domain.entity.AssociationEntity;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;

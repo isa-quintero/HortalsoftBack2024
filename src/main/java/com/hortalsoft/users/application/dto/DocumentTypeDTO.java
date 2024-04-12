@@ -1,6 +1,5 @@
 package com.hortalsoft.users.application.dto;
 
-import com.hortalsoft.users.domain.domain.DocumentType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

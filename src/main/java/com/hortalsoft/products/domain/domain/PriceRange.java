@@ -16,6 +16,6 @@ public class PriceRange implements Serializable {
     @NonNull
     private String description;
     @NonNull
-    private Category category;
+    private transient Category category;
     private List<Product> product;
 }

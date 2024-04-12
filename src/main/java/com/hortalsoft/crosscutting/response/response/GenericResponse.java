@@ -13,5 +13,5 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class GenericResponse<T> implements Serializable {
     private static final long serialVersionUID = 2150687141828922398L;
-    private T data;
+    private transient T data;
 }

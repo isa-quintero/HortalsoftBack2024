@@ -2,12 +2,10 @@ package com.hortalsoft.users.domain.entity;
 
 import com.hortalsoft.users.domain.domain.DocumentType;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-import java.util.List;
 
 @Data
 @Entity

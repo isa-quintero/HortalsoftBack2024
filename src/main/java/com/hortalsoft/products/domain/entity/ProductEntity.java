@@ -4,7 +4,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Data
