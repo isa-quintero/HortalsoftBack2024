@@ -17,6 +17,6 @@ public class CategoryEntity {
     private String id;
     private String name;
     private String description;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Transient
     private List<SubcategoryEntity> subcategoryEntity;
 }

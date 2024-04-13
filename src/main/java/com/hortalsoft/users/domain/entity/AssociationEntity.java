@@ -17,9 +17,9 @@ public class AssociationEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private long id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @Transient
-    private DocumentType documentType;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@Transient
+    //private DocumentType documentType;
     private long idNumber;
     private String code;
     private String name;

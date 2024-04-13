@@ -18,9 +18,13 @@ public class ProductEntity {
     private long id;
     private String name;
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = SubcategoryEntity.class)
+    @JoinColumn(name="subcategoryId",nullable = true)
     private SubcategoryEntity subcategoryEntity;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product",cascade=CascadeType.ALL,orphanRemoval = true)
+    private long codeSubcategory;
+    @Transient
+    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "product",cascade=CascadeType.ALL,orphanRemoval = true)
     private List<OfferEntity> offerEntityList;
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "customer",cascade=CascadeType.ALL,orphanRemoval = true)
+    //@OneToMany(fetch = FetchType.LAZY,mappedBy = "product",cascade=CascadeType.ALL,orphanRemoval = true)
+    @Transient
     private List<PriceRangeEntity> priceRangeEntityList;
 }

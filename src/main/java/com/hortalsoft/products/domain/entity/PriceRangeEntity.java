@@ -19,9 +19,11 @@ public class PriceRangeEntity {
     @Column(name = "id", nullable = false)
     private long id;
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
+    @JoinColumn(name="productId",nullable = true)
     private ProductEntity productEntity;
-    @ManyToOne(fetch = FetchType.LAZY,targetEntity = AssociationEntity.class)
-    private AssociationEntity association;
+    //@ManyToOne(fetch = FetchType.LAZY,targetEntity = AssociationEntity.class)
+    //private AssociationEntity association;
+    private String association;
     private float initialRange;
     private float finalRange;
     private Date initialDate;

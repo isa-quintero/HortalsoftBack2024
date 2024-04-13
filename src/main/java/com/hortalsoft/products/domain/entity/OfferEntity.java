@@ -16,7 +16,8 @@ public class OfferEntity {
     @Column(name = "id", nullable = false)
     private long id;
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
-    private ProductEntity productEntity;
+    @JoinColumn(name="productId",nullable = true)
+    private ProductEntity customer;
     private String description;
     private int amount;
     private int price;

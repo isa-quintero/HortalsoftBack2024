@@ -20,7 +20,8 @@ public class SubcategoryEntity {
     private String name;
     private String description;
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = CategoryEntity.class)
-    private CategoryEntity categoryEntity;
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "customer",cascade=CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name="categoryId",nullable = true)
+    private CategoryEntity customer;
+    @Transient
     private List<ProductEntity> productEntityList;
 }
