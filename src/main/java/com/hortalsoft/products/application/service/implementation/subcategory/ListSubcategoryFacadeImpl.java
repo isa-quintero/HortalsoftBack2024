@@ -1,8 +1,15 @@
 package com.hortalsoft.products.application.service.implementation.subcategory;
 
 
-import com.hortalsoft.crosscutting.response.usecase.facade.UseCaseListFacade;
 import com.hortalsoft.products.application.dto.SubcategoryDTO;
+import com.hortalsoft.products.application.service.facade.subcategory.ListSubcategoryFacade;
 
-public interface ListSubcategoryFacadeImpl extends UseCaseListFacade<SubcategoryDTO> {
+import java.util.List;
+import java.util.Optional;
+
+public class ListSubcategoryFacadeImpl implements ListSubcategoryFacade {
+    @Override
+    public List<SubcategoryDTO> execute(Optional<SubcategoryDTO> dto) {
+        return List.of();
+    }
 }

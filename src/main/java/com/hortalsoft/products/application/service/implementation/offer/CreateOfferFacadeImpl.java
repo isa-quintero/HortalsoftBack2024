@@ -12,7 +12,6 @@ public class CreateOfferFacadeImpl implements CreateOfferFacade {
 
 
     @Override
-    public OfferDTO execute(OfferDTO dto) {
-        return null;
+    public void execute(OfferDTO dto) {
     }
 }

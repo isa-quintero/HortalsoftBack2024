@@ -17,7 +17,5 @@ public class Product implements Serializable {
     private String name;
     private long codeSubcategory;
     @Transient
-    private List<Offer> offerList;
-    @Transient
     private List<PriceRange> priceRangeList;
 }

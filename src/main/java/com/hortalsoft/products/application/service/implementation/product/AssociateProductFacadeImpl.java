@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class AssociateProductFacadeImpl implements AssociateProductFacade {
     @Override
-    public ProductDTO execute(ProductDTO dto) {
-        return null;
+    public void execute(ProductDTO dto) {
     }
 }

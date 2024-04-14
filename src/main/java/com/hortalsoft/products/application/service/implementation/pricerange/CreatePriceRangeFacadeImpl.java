@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class CreatePriceRangeFacadeImpl implements CreatePriceRangeFacade {
     @Override
-    public PriceRangeDTO execute(PriceRangeDTO dto) {
-        return null;
+    public void execute(PriceRangeDTO dto) {
     }
 }

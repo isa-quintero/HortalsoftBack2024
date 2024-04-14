@@ -11,7 +11,6 @@ import java.util.List;
 public class ProductDTO {
     private long id;
     private String name;
-    private SubcategoryDTO subcategoryDTO;
-    private List<OfferDTO> offerDTOList;
+    private long codeSubcategory;
     private List<PriceRangeDTO> priceRangeDTOList;
 }

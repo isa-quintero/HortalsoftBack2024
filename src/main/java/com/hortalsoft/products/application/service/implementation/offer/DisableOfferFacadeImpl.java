@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class DisableOfferFacadeImpl implements DisableOfferFacade {
     @Override
-    public OfferDTO execute(OfferDTO dto) {
-        return null;
+    public void execute(OfferDTO dto) {
+
     }
 }

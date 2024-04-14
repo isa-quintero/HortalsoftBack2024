@@ -21,10 +21,8 @@ public class ProductEntity {
     @JoinColumn(name="subcategoryId",nullable = true)
     private SubcategoryEntity subcategoryEntity;
     private long codeSubcategory;
-    @Transient
-    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "product",cascade=CascadeType.ALL,orphanRemoval = true)
-    private List<OfferEntity> offerEntityList;
-    //@OneToMany(fetch = FetchType.LAZY,mappedBy = "product",cascade=CascadeType.ALL,orphanRemoval = true)
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "product",cascade=CascadeType.ALL,orphanRemoval = true)
     @Transient
     private List<PriceRangeEntity> priceRangeEntityList;
 }
