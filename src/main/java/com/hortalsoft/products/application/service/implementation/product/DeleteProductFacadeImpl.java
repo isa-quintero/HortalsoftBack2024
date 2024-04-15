@@ -10,6 +10,7 @@ import com.hortalsoft.products.domain.port.product.DeleteProductUseCase;
 import com.hortalsoft.products.util.mapper.MapperDTOToDomain;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionSystemException;
 
 @Service
 @Transactional
@@ -30,7 +31,7 @@ public class DeleteProductFacadeImpl implements DeleteProductFacade {
             useCase.execute(domain);
         }
         catch(Exception e){
-            e.printStackTrace();
+            throw new TransactionSystemException(e.getMessage());
         }
     }
 }

@@ -9,6 +9,7 @@ import com.hortalsoft.products.domain.port.product.CreateProductUseCase;
 import com.hortalsoft.products.util.mapper.MapperDTOToDomain;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionSystemException;
 
 
 @Service
@@ -19,10 +20,8 @@ public class CreateProductFacadeImpl implements CreateProductFacade {
     MapperDTOToDomain<OfferDTO,Offer> mapperDTOsToDomains = new MapperDTOToDomain();
     private final CreateProductUseCase useCase;
 
-
     public CreateProductFacadeImpl(CreateProductUseCase useCase) {
         this.useCase = useCase;
-
     }
 
     @Override
@@ -32,8 +31,7 @@ public class CreateProductFacadeImpl implements CreateProductFacade {
             useCase.execute(domain);
         }
         catch(Exception e){
-            e.printStackTrace();
+            throw new TransactionSystemException(e.getMessage());
         }
-
     }
 }

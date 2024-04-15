@@ -6,13 +6,12 @@ import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.port.product.CreateProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.util.mapper.MapperDomainToEntity;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionSystemException;
 
 
 @Service
-@Transactional
 public class CreateProductService implements CreateProductUseCase {
 
     private final ProductRepository productRepository;
@@ -30,10 +29,9 @@ public class CreateProductService implements CreateProductUseCase {
         try{
             ProductEntity entity =  mapperDomainToEntity.mapToEntity(domain,ProductEntity.class);
             productRepository.save(entity);
-
         }
         catch(Exception e){
-            e.printStackTrace();
+            throw new TransactionSystemException(e.getMessage());
         }
     }
 }
