@@ -1,27 +1,35 @@
 package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.products.application.dto.ProductDTO;
-import com.hortalsoft.products.application.service.facade.product.CreateProductFacade;
-import com.hortalsoft.products.application.service.facade.product.DeleteProductFacade;
-import com.hortalsoft.products.application.service.facade.product.FindProductFacade;
-import com.hortalsoft.products.application.service.usecase.product.ListProductsService;
+import com.hortalsoft.products.application.facade.product.CreateProductFacade;
+import com.hortalsoft.products.application.facade.product.DeleteProductFacade;
+import com.hortalsoft.products.application.facade.product.FindProductFacade;
+import com.hortalsoft.products.application.facade.product.ListProductsFacade;
+import com.hortalsoft.products.domain.domain.Product;
+import com.hortalsoft.products.domain.entity.ProductEntity;
+import com.hortalsoft.products.util.mapper.MapperDomainToDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/product")
 public class ProductController {
 
     private final CreateProductFacade facadeCreate;
     private final DeleteProductFacade facadeDelete;
     private final FindProductFacade facadeFind;
-    private final ListProductsService facadeList;
+    private final ListProductsFacade facadeList;
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+    MapperDomainToDto<Product,ProductDTO> mapperDomainToDto = new MapperDomainToDto<>();
 
-    public ProductController(CreateProductFacade facade,DeleteProductFacade facadeDelete,FindProductFacade facadeFind, ListProductsService facadeList) {
+    public ProductController(CreateProductFacade facade,DeleteProductFacade facadeDelete,FindProductFacade facadeFind, ListProductsFacade facadeList) {
         this.facadeCreate = facade;
         this.facadeDelete = facadeDelete;
         this.facadeFind = facadeFind;
@@ -31,11 +39,12 @@ public class ProductController {
     public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO input){
         try{
             facadeCreate.execute(input);
-            return new ResponseEntity<>(HttpStatus.OK);
+            logger.info("Producto creado");
+            return ResponseEntity.ok().build();
         }
         catch (Error e){
-            System.out.println(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            logger.error("Error creando el producto",e.getMessage());
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -46,40 +55,43 @@ public class ProductController {
             product.setId(id);
             product.setName("");
             product.setCodeSubcategory(0);
+            logger.info("Producto eliminado");
             facadeDelete.execute(product);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok().build();
         }
         catch (Error e){
-            System.out.println(e.getMessage());
+            logger.error("Error eliminando el producto",e.getMessage());
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 
     @GetMapping
     public ResponseEntity<ProductDTO> findProduct(@RequestParam (name = "id") long id){
-        try{
-            ProductDTO product = new ProductDTO();
-            product.setId(id);
-            product.setName("");
-            product.setCodeSubcategory(0);
-            facadeFind.execute(product);
-            return new ResponseEntity<>(HttpStatus.OK);
+        ProductDTO product = new ProductDTO();
+        product.setId(id);
+        product.setName("");
+        product.setCodeSubcategory(0);
+        ProductDTO productDTO = mapperDomainToDto.mapToDto(facadeFind.execute(product), ProductDTO.class);
+        if (productDTO != null){
+            logger.info("Producto encontrado");
+            //return productDTO.map(ResponseEntity::ok).orElseGet(()-> ResponseEntity.notFound().build());
+            return ResponseEntity.ok().body(productDTO);
+        } else{
+            logger.error("Producto no encontrado");
+            return ResponseEntity.notFound().build();
         }
-        catch (Error e){
-            System.out.println(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
+
     }
 
     @GetMapping("/list")
-    public ResponseEntity<ProductDTO> listProducts(){
+    public ResponseEntity<List<ProductDTO>> listProducts(){
         try{
-            facadeList.execute(Optional.empty());
-            return new ResponseEntity<>(HttpStatus.OK);
+            List<ProductDTO> productDTOS = facadeList.execute(Optional.empty());
+            return new ResponseEntity<>(productDTOS, HttpStatus.OK);
         }
         catch (Error e){
-            System.out.println(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            logger.error("Error obteniendo los productos",e.getMessage());
+            return ResponseEntity.badRequest().build();
         }
     }
 }

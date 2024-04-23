@@ -13,9 +13,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Product implements Serializable {
     private long id;
-    @NonNull
     private String name;
     private long codeSubcategory;
-    @Transient
-    private List<PriceRange> priceRangeList;
+    //@Transient
+    //private List<PriceRange> priceRangeList;
+
+    public Product( String name, long codeSubcategory) {
+        this.name = name;
+        this.codeSubcategory = codeSubcategory;
+    }
 }
