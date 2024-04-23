@@ -81,13 +81,6 @@ public class OfferController {
 
     @GetMapping("/list")
     public ResponseEntity<OfferDTO> listOffers(){
-        try{
-            facadeList.execute(Optional.empty());
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        catch (Error e){
-            System.out.println(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
+        return null;
     }
 }

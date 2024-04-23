@@ -27,7 +27,6 @@ public class ProductController {
     private final FindProductFacade facadeFind;
     private final ListProductsFacade facadeList;
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
-    MapperDomainToDto<Product,ProductDTO> mapperDomainToDto = new MapperDomainToDto<>();
 
     public ProductController(CreateProductFacade facade,DeleteProductFacade facadeDelete,FindProductFacade facadeFind, ListProductsFacade facadeList) {
         this.facadeCreate = facade;
@@ -71,7 +70,7 @@ public class ProductController {
         product.setId(id);
         product.setName("");
         product.setCodeSubcategory(0);
-        ProductDTO productDTO = mapperDomainToDto.mapToDto(facadeFind.execute(product), ProductDTO.class);
+        ProductDTO productDTO =facadeFind.execute(product);
         if (productDTO != null){
             logger.info("Producto encontrado");
             //return productDTO.map(ResponseEntity::ok).orElseGet(()-> ResponseEntity.notFound().build());
@@ -86,7 +85,7 @@ public class ProductController {
     @GetMapping("/list")
     public ResponseEntity<List<ProductDTO>> listProducts(){
         try{
-            List<ProductDTO> productDTOS = facadeList.execute(Optional.empty());
+            List<ProductDTO> productDTOS = facadeList.execute();
             return new ResponseEntity<>(productDTOS, HttpStatus.OK);
         }
         catch (Error e){

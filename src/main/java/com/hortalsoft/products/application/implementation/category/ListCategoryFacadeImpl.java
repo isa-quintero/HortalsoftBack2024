@@ -13,7 +13,7 @@ import java.util.Optional;
 @Transactional
 public class ListCategoryFacadeImpl implements ListCategoryFacade {
     @Override
-    public List<CategoryDTO> execute(Optional<CategoryDTO> dto) {
+    public List<CategoryDTO> execute() {
         return List.of();
     }
 }

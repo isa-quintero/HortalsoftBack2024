@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class FindCategoryFacadeImpl implements FindCategoryFacade {
     @Override
-    public Category execute(CategoryDTO dto) {
+    public CategoryDTO execute(CategoryDTO dto) {
         return null;
     }
 }

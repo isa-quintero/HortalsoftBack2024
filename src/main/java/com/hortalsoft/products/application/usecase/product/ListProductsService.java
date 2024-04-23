@@ -30,14 +30,10 @@ public class ListProductsService implements ListProductsUseCase {
 
 
     @Override
-    public List<Product> execute(Optional<Product> domain) {
+    public List<Product> execute() {
         try{
             List<ProductEntity> resultList = productRepository.findAll();
-            List<Product> products = new ArrayList<>();
-            resultList.forEach(productEntity -> {
-                Product result = mapperEntityToDomain.mapToDomain(productEntity,Product.class);
-                products.add(result);
-            });
+            List<Product> products=mapperEntityToDomain.mapToDomainList(resultList,Product.class);
             return products;
         }
         catch(Exception e){

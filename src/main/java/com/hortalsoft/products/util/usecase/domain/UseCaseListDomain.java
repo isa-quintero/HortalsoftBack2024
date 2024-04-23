@@ -4,5 +4,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UseCaseListDomain<D> {
-    List<D> execute(Optional<D> domain);
+    List<D> execute();
 }

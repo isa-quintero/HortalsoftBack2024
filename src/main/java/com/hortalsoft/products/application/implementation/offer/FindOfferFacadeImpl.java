@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class FindOfferFacadeImpl implements FindOfferFacade {
     @Override
-    public Offer execute(OfferDTO dto) {
+    public OfferDTO execute(OfferDTO dto) {
         return null;
     }
 }

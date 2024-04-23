@@ -11,8 +11,9 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ListOfferFacadeImpl implements ListOfferFacade {
+
     @Override
-    public List<OfferDTO> execute(Optional<OfferDTO> dto) {
+    public List<OfferDTO> execute() {
         return List.of();
     }
 }

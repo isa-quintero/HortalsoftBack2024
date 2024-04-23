@@ -6,5 +6,5 @@ import com.hortalsoft.products.application.dto.PriceRangeDTO;
 import com.hortalsoft.products.domain.domain.PriceRange;
 
 
-public interface FindPriceRangeFacade extends UseCaseFindFacade<PriceRangeDTO, PriceRange> {
+public interface FindPriceRangeFacade extends UseCaseFindFacade<PriceRangeDTO> {
 }

@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class ListSubcategoryFacadeImpl implements ListSubcategoryFacade {
+
     @Override
-    public List<SubcategoryDTO> execute(Optional<SubcategoryDTO> dto) {
+    public List<SubcategoryDTO> execute() {
         return List.of();
     }
 }

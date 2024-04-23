@@ -4,8 +4,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Data
 @Entity
 @ToString
@@ -14,7 +12,6 @@ import java.util.List;
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "id", nullable = false)
     private long id;
     private String name;
     //@ManyToOne(fetch = FetchType.LAZY,targetEntity = SubcategoryEntity.class)
@@ -22,7 +19,5 @@ public class ProductEntity {
     //private SubcategoryEntity subcategoryEntity;
     private long codeSubcategory;
 
-    //@OneToMany(fetch = FetchType.LAZY,mappedBy = "product",cascade=CascadeType.ALL,orphanRemoval = true)
-    //@Transient
-    //private List<PriceRangeEntity> priceRangeEntityList;
+
 }

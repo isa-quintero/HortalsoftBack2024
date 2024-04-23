@@ -12,8 +12,10 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ListPricesRangesFacadeImpl implements ListPricesRangesFacade {
+
+
     @Override
-    public List<PriceRangeDTO> execute(Optional<PriceRangeDTO> dto) {
+    public List<PriceRangeDTO> execute() {
         return List.of();
     }
 }

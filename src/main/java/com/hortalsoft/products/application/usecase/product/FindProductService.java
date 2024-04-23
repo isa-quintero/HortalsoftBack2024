@@ -20,7 +20,7 @@ public class FindProductService implements FindProductUseCase {
 
     private final ProductRepository productRepository;
     MapperDomainToEntity<Product,ProductEntity> mapperDomainToEntity = new MapperDomainToEntity();
-    MapperEntityToDomain<Optional<ProductEntity>,Product> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperEntityToDomain<ProductEntity,Product> mapperEntityToDomain = new MapperEntityToDomain<>();
 
     @Autowired
     public FindProductService(ProductRepository productRepository) {
@@ -30,13 +30,13 @@ public class FindProductService implements FindProductUseCase {
 
 
     @Override
-    public ProductEntity execute(Product domain) {
+    public Product execute(Product domain) {
         try{
-            if(productRepository.existsById(domain.getId())){
-                ProductEntity entity =  mapperDomainToEntity.mapToEntity(domain,ProductEntity.class);
-                Optional<ProductEntity> result= productRepository.findById(entity.getId());
-                //Product result = mapperEntityToDomain.mapToDomain(resultEntity,Product.class);
-                return result.orElse(null);
+            ProductEntity entity =  mapperDomainToEntity.mapToEntity(domain,ProductEntity.class);
+            Optional<ProductEntity> resultEntity= productRepository.findById(entity.getId());
+            if (resultEntity.isPresent()) {
+                Product result = mapperEntityToDomain.mapToDomain(resultEntity.get(),Product.class);
+                return result;
             }
             else{
                 System.out.println("El producto no existe");

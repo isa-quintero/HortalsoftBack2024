@@ -19,7 +19,7 @@ public class FindSubcategoryFacadeImpl implements FindSubcategoryFacade {
 
 
     @Override
-    public Subcategory execute(SubcategoryDTO dto) {
+    public SubcategoryDTO execute(SubcategoryDTO dto) {
         return null;
     }
 }

@@ -1,8 +1,7 @@
 package com.hortalsoft.products.util.mapper;
 
 import org.modelmapper.ModelMapper;
-
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapperDTOToDomain<T,D>{
@@ -11,7 +10,9 @@ public class MapperDTOToDomain<T,D>{
         return mapper.map(dto, domain);
     }
     public List<D> mapToDomainList(List<T> dtoList, Class<D> domain){
-        return Collections.singletonList(mapper.map(dtoList, domain));
+        List<D> domainList = new ArrayList<D>();
+        dtoList.forEach(dto -> domainList.add(mapToDomain(dto, domain)));
+        return domainList;
     }
 
 }
