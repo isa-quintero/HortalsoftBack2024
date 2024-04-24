@@ -1,13 +1,10 @@
 package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.products.application.dto.ProductDTO;
-import com.hortalsoft.products.application.facade.product.CreateProductFacade;
-import com.hortalsoft.products.application.facade.product.DeleteProductFacade;
-import com.hortalsoft.products.application.facade.product.FindProductFacade;
-import com.hortalsoft.products.application.facade.product.ListProductsFacade;
-import com.hortalsoft.products.domain.domain.Product;
-import com.hortalsoft.products.domain.entity.ProductEntity;
-import com.hortalsoft.products.util.mapper.MapperDomainToDto;
+import com.hortalsoft.products.application.facades.facade.product.CreateProductFacade;
+import com.hortalsoft.products.application.facades.facade.product.DeleteProductFacade;
+import com.hortalsoft.products.application.facades.facade.product.FindProductFacade;
+import com.hortalsoft.products.application.facades.facade.product.ListProductsFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -15,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController

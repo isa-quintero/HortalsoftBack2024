@@ -1,16 +1,15 @@
 package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.products.application.dto.OfferDTO;
-import com.hortalsoft.products.application.facade.offer.CreateOfferFacade;
-import com.hortalsoft.products.application.facade.offer.DisableOfferFacade;
-import com.hortalsoft.products.application.facade.offer.FindOfferFacade;
-import com.hortalsoft.products.application.facade.offer.ListOfferFacade;
+import com.hortalsoft.products.application.facades.facade.offer.CreateOfferFacade;
+import com.hortalsoft.products.application.facades.facade.offer.DisableOfferFacade;
+import com.hortalsoft.products.application.facades.facade.offer.FindOfferFacade;
+import com.hortalsoft.products.application.facades.facade.offer.ListOfferFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.Optional;
 
 
 @RestController

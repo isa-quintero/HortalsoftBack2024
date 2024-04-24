@@ -2,13 +2,9 @@ package com.hortalsoft.products.application.usecase.pricerange;
 
 
 import com.hortalsoft.products.domain.domain.PriceRange;
-import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.entity.PriceRangeEntity;
-import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.port.pricerange.DeletePriceRangeUseCase;
-import com.hortalsoft.products.domain.port.product.DeleteProductUseCase;
 import com.hortalsoft.products.domain.repository.PriceRangeRepository;
-import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.util.mapper.MapperDomainToEntity;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
