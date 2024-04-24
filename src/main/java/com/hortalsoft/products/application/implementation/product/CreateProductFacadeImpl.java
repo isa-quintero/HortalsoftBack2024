@@ -14,7 +14,7 @@ import org.springframework.transaction.TransactionSystemException;
 @Transactional
 public class CreateProductFacadeImpl implements CreateProductFacade {
 
-    MapperDTOToDomain<ProductDTO ,Product> mapperDTOToDomain = new MapperDTOToDomain();
+    MapperDTOToDomain<ProductDTO ,Product> mapperDTOToDomain = new MapperDTOToDomain<>();
     private final CreateProductUseCase useCase;
 
     public CreateProductFacadeImpl(CreateProductUseCase useCase) {

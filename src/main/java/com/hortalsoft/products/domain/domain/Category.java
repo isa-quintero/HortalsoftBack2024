@@ -4,8 +4,6 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-
 @Data
 @RequiredArgsConstructor
 public class Category {
@@ -14,6 +12,4 @@ public class Category {
     private String name;
     @NonNull
     private String description;
-    @NonNull
-    private List<Subcategory> subcategory;
 }

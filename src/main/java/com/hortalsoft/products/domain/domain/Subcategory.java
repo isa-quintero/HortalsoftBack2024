@@ -5,7 +5,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @RequiredArgsConstructor
@@ -15,7 +14,8 @@ public class Subcategory implements Serializable {
     private String name;
     @NonNull
     private String description;
-    @NonNull
-    private transient Category category;
-    private List<Product> product;
+    //TODO eliminar codeCategory y descomentar
+    //@NonNull
+    //private transient Category category;
+    private long codeCategory;
 }

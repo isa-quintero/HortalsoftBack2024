@@ -21,7 +21,7 @@ import java.util.Optional;
 public class DeleteProductService implements DeleteProductUseCase {
 
     private final ProductRepository productRepository;
-    MapperDomainToEntity<Product,ProductEntity> mapperDomainToEntity = new MapperDomainToEntity();
+    MapperDomainToEntity<Product,ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
     private static final Logger logger = LoggerFactory.getLogger(DeleteProductService.class);
 
 

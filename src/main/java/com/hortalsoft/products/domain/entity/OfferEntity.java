@@ -9,15 +9,17 @@ import java.util.Date;
 @Entity
 @ToString
 @RequiredArgsConstructor
-@Table(name = "Offer")
+//@Table(name = "Offer")
 public class OfferEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private long id;
-    @ManyToOne(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
-    @JoinColumn(name="productId",nullable = true)
-    private ProductEntity customer;
+
+    //TODO se debe descomentar este código y borrar linea codeproduct
+    //@ManyToOne(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
+    //@JoinColumn(name="productId",nullable = true)
+    //private ProductEntity product;
+    private long codeProduct;
     private String description;
     private int amount;
     private int price;

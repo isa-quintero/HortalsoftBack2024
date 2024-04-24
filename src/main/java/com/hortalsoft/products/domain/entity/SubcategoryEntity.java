@@ -5,23 +5,21 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-import java.util.List;
 
 @Data
 @Entity
 @ToString
 @RequiredArgsConstructor
-@Table(name = "Subcategory")
+//@Table(name = "Subcategory")
 public class SubcategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private long id;
     private String name;
     private String description;
-    @ManyToOne(fetch = FetchType.LAZY,targetEntity = CategoryEntity.class)
-    @JoinColumn(name="categoryId",nullable = true)
-    private CategoryEntity customer;
-    @Transient
-    private List<ProductEntity> productEntityList;
+    //TODO se debe descomentar el codigo a continación y borrar codeCategory
+    //@ManyToOne(fetch = FetchType.LAZY,targetEntity = CategoryEntity.class)
+    //@JoinColumn(name="categoryId",nullable = true)
+    //private CategoryEntity category;
+    private long codeCategory;
 }

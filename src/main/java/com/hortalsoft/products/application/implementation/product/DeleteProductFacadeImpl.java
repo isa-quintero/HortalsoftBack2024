@@ -1,10 +1,8 @@
 package com.hortalsoft.products.application.implementation.product;
 
 
-import com.hortalsoft.products.application.dto.OfferDTO;
 import com.hortalsoft.products.application.dto.ProductDTO;
 import com.hortalsoft.products.application.facade.product.DeleteProductFacade;
-import com.hortalsoft.products.domain.domain.Offer;
 import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.port.product.DeleteProductUseCase;
 import com.hortalsoft.products.util.mapper.MapperDTOToDomain;
@@ -15,7 +13,7 @@ import org.springframework.transaction.TransactionSystemException;
 @Service
 @Transactional
 public class DeleteProductFacadeImpl implements DeleteProductFacade {
-    MapperDTOToDomain<ProductDTO ,Product> mapperDTOToDomain = new MapperDTOToDomain();
+    MapperDTOToDomain<ProductDTO ,Product> mapperDTOToDomain = new MapperDTOToDomain<>();
     private final DeleteProductUseCase useCase;
 
 

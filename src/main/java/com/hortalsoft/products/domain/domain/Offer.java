@@ -11,7 +11,9 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class Offer implements Serializable {
     private long id;
-    private Product product;
+    //TODO eliminar codeproduct, quitar comentario
+    private long codeProduct;
+    //private Product product;
     @NonNull
     private String description;
     private int amount;

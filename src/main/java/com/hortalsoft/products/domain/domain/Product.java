@@ -6,16 +6,14 @@ import lombok.RequiredArgsConstructor;
 import java.io.Serializable;
 
 @Data
-//@Builder
 @RequiredArgsConstructor
 public class Product implements Serializable {
     private long id;
     private String name;
+    //TODO eliminar codeSubcategory y descomentar código
     private long codeSubcategory;
+    //private Subcategory subcategory;
 
 
-    public Product( String name, long codeSubcategory) {
-        this.name = name;
-        this.codeSubcategory = codeSubcategory;
-    }
+
 }
