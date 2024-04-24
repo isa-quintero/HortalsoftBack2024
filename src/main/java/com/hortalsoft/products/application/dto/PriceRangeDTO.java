@@ -2,7 +2,7 @@ package com.hortalsoft.products.application.dto;
 
 import lombok.*;
 
-import java.util.List;
+import java.util.Date;
 
 @Data
 @Builder
@@ -10,8 +10,14 @@ import java.util.List;
 @NoArgsConstructor
 public class PriceRangeDTO {
     private long id;
-    private String name;
-    private String description;
-    private CategoryDTO categoryDTO;
-    private List<ProductDTO> productDTO;
+    //TODO eliminar productID y association y descomentar
+    //private Product product;
+    private long productId;
+    private String association;
+    //private Association association;
+    private float initialRange;
+    private float finalRange;
+    private Date initialDate;
+    private Date finalDate;
+    private int validity;
 }

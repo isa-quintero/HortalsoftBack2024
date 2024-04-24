@@ -1,7 +1,6 @@
 package com.hortalsoft.products.application.facade.pricerange;
 
 
-//import com.hortalsoft.crosscutting.response.usecase.facade.UseCaseFindFacade;
 import com.hortalsoft.products.util.usecase.facade.UseCaseListFacade;
 import com.hortalsoft.products.application.dto.PriceRangeDTO;
 

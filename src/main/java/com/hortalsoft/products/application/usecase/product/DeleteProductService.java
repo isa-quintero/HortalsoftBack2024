@@ -5,7 +5,6 @@ import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.port.product.DeleteProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
-import com.hortalsoft.products.infrastructure.adapter.inbound.controller.ProductController;
 import com.hortalsoft.products.util.mapper.MapperDomainToEntity;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
 
-import java.util.Optional;
 
 @Service
 @Transactional

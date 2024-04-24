@@ -19,7 +19,7 @@ import java.util.Optional;
 public class FindProductService implements FindProductUseCase {
 
     private final ProductRepository productRepository;
-    MapperDomainToEntity<Product,ProductEntity> mapperDomainToEntity = new MapperDomainToEntity();
+    MapperDomainToEntity<Product,ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
     MapperEntityToDomain<ProductEntity,Product> mapperEntityToDomain = new MapperEntityToDomain<>();
 
     @Autowired
@@ -35,8 +35,7 @@ public class FindProductService implements FindProductUseCase {
             ProductEntity entity =  mapperDomainToEntity.mapToEntity(domain,ProductEntity.class);
             Optional<ProductEntity> resultEntity= productRepository.findById(entity.getId());
             if (resultEntity.isPresent()) {
-                Product result = mapperEntityToDomain.mapToDomain(resultEntity.get(),Product.class);
-                return result;
+                return mapperEntityToDomain.mapToDomain(resultEntity.get(),Product.class);
             }
             else{
                 System.out.println("El producto no existe");

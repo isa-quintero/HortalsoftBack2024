@@ -13,7 +13,7 @@ import lombok.*;
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private long id;
     private String name;
     private String description;
 }

@@ -28,7 +28,6 @@ public class FindProductFacadeImpl implements FindProductFacade {
     @Override
     public ProductDTO execute(ProductDTO dto) {
         Product domain = mapperDTOToDomain.mapToDomain(dto,Product.class);
-        ProductDTO product = mapperDomainToDto.mapToDto(useCase.execute(domain),ProductDTO.class);
-        return product;
+        return mapperDomainToDto.mapToDto(useCase.execute(domain),ProductDTO.class);
     }
 }

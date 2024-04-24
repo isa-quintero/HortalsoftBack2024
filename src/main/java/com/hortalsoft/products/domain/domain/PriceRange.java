@@ -11,11 +11,12 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class PriceRange implements Serializable {
     private long id;
-    //TODO eliminar productID y descomentar
+    //TODO eliminar productID y association y descomentar
     //private Product product;
     private long productId;
     @NonNull
     private String association;
+    //private Association association;
     private float initialRange;
     private float finalRange;
     private Date initialDate;

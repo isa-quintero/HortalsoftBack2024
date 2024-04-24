@@ -2,7 +2,9 @@ package com.hortalsoft.products.application.usecase.offer;
 
 
 import com.hortalsoft.products.domain.domain.Offer;
+import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.entity.OfferEntity;
+import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.port.offer.ListOfferUseCase;
 import com.hortalsoft.products.domain.repository.OfferRepository;
 import com.hortalsoft.products.domain.repository.ProductRepository;
@@ -13,26 +15,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
 public class ListOffersService implements ListOfferUseCase {
 
-    private final ProductRepository productRepository;
     private final OfferRepository offerRepository;
-    MapperEntityToDomain<OfferEntity,Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperEntityToDomain<OfferEntity, Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
 
 
     @Autowired
-    public ListOffersService(ProductRepository productRepository, OfferRepository offerRepository) {
-        this.productRepository = productRepository;
+    public ListOffersService(OfferRepository offerRepository) {
         this.offerRepository = offerRepository;
     }
 
 
     @Override
-    public List<Offer> execute(Optional<Offer> domain) {
+    public List<Offer> execute() {
         try{
             List<OfferEntity> resultList = offerRepository.findAll();
             return mapperEntityToDomain.mapToDomainList(resultList,Offer.class);

@@ -15,7 +15,7 @@ import org.springframework.transaction.TransactionSystemException;
 public class CreateProductService implements CreateProductUseCase {
 
     private final ProductRepository productRepository;
-    MapperDomainToEntity<Product,ProductEntity> mapperDomainToEntity = new MapperDomainToEntity();
+    MapperDomainToEntity<Product,ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
 
     @Autowired

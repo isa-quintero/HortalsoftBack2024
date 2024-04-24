@@ -10,7 +10,9 @@ import java.util.Date;
 @AllArgsConstructor
 public class OfferDTO {
     private long id;
-    private ProductDTO productDTO;
+    //TODO eliminar codeProduct y descomentar
+    //private ProductDTO productDTO;
+    private long codeProduct;
     private String description;
     private int amount;
     private int price;
