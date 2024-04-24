@@ -33,8 +33,7 @@ public class ListProductsService implements ListProductsUseCase {
     public List<Product> execute() {
         try{
             List<ProductEntity> resultList = productRepository.findAll();
-            List<Product> products=mapperEntityToDomain.mapToDomainList(resultList,Product.class);
-            return products;
+            return mapperEntityToDomain.mapToDomainList(resultList,Product.class);
         }
         catch(Exception e){
             throw new TransactionSystemException(e.getMessage());

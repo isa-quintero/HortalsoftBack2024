@@ -16,7 +16,6 @@ import org.springframework.transaction.TransactionSystemException;
 @Transactional
 public class DeleteProductFacadeImpl implements DeleteProductFacade {
     MapperDTOToDomain<ProductDTO ,Product> mapperDTOToDomain = new MapperDTOToDomain();
-    MapperDTOToDomain<OfferDTO, Offer> mapperDTOsToDomains = new MapperDTOToDomain();
     private final DeleteProductUseCase useCase;
 
 

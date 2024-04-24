@@ -27,8 +27,14 @@ public class CreateProductService implements CreateProductUseCase {
     @Override
     public void execute(Product domain) {
         try{
+
             ProductEntity entity =  mapperDomainToEntity.mapToEntity(domain,ProductEntity.class);
-            productRepository.save(entity);
+            if (!productRepository.existsByName(entity.getName())){
+                productRepository.save(entity);
+            }
+            else{
+                System.out.println("El producto ya existe en el sistema");
+            }
         }
         catch(Exception e){
             throw new TransactionSystemException(e.getMessage());

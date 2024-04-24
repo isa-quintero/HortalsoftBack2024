@@ -50,10 +50,7 @@ public class ProductController {
     @DeleteMapping
     public ResponseEntity<ProductDTO> deleteProduct(@RequestParam (name = "id") long id){
         try{
-            ProductDTO product = new ProductDTO();
-            product.setId(id);
-            product.setName("");
-            product.setCodeSubcategory(0);
+            ProductDTO product = new ProductDTO(id,"",0);
             logger.info("Producto eliminado");
             facadeDelete.execute(product);
             return ResponseEntity.ok().build();
@@ -66,10 +63,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<ProductDTO> findProduct(@RequestParam (name = "id") long id){
-        ProductDTO product = new ProductDTO();
-        product.setId(id);
-        product.setName("");
-        product.setCodeSubcategory(0);
+        ProductDTO product = new ProductDTO(id,"",0);
         ProductDTO productDTO =facadeFind.execute(product);
         if (productDTO != null){
             logger.info("Producto encontrado");
