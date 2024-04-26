@@ -15,7 +15,6 @@ public class Subcategory implements Serializable {
     @NonNull
     private String description;
     //TODO eliminar codeCategory y descomentar
-    //@NonNull
     //private transient Category category;
     private long codeCategory;
 }

@@ -2,10 +2,8 @@ package com.hortalsoft.products.domain.port.usecase.pricerange;
 
 
 import com.hortalsoft.products.domain.domain.PriceRange;
-import com.hortalsoft.products.domain.entity.PriceRangeEntity;
 import com.hortalsoft.products.domain.port.input.pricerange.DeletePriceRangeUseCase;
 import com.hortalsoft.products.domain.repository.PriceRangeRepository;
-import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +17,6 @@ import org.springframework.transaction.TransactionSystemException;
 public class DeletePriceRangeService implements DeletePriceRangeUseCase {
 
     private final PriceRangeRepository priceRangeRepository;
-    MapperDomainToEntity<PriceRange, PriceRangeEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
     private static final Logger logger = LoggerFactory.getLogger(DeletePriceRangeService.class);
 
 

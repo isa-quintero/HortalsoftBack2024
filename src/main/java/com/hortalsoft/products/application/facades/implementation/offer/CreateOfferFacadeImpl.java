@@ -14,7 +14,7 @@ import org.springframework.transaction.TransactionSystemException;
 @Transactional
 public class CreateOfferFacadeImpl implements CreateOfferFacade {
 
-    MapperDTOToDomain<OfferDTO, Offer> mapperDTOToDomain = new MapperDTOToDomain<OfferDTO, Offer>();
+    MapperDTOToDomain<OfferDTO, Offer> mapperDTOToDomain = new MapperDTOToDomain<>();
     private final CreateOfferUseCase useCase;
 
     public CreateOfferFacadeImpl(CreateOfferUseCase useCase){
