@@ -5,10 +5,10 @@ import com.hortalsoft.products.application.dto.CategoryDTO;
 import com.hortalsoft.products.application.facades.facade.category.FindCategoryFacade;
 import com.hortalsoft.products.domain.domain.Category;
 import com.hortalsoft.products.domain.entity.CategoryEntity;
-import com.hortalsoft.products.domain.port.category.FindCategoryUseCase;
-import com.hortalsoft.products.util.mapper.MapperDTOToDomain;
-import com.hortalsoft.products.util.mapper.MapperDomainToDto;
-import com.hortalsoft.products.util.mapper.MapperEntityToDomain;
+import com.hortalsoft.products.domain.port.input.category.FindCategoryUseCase;
+import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
+import com.hortalsoft.products.application.mapper.MapperDomainToDto;
+import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
