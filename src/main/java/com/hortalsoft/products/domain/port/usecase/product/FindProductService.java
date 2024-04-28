@@ -7,6 +7,7 @@ import com.hortalsoft.products.domain.port.input.product.FindProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,13 +39,12 @@ public class FindProductService implements FindProductUseCase {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),Product.class);
             }
             else{
-                System.out.println("El producto no existe");
-                return null;
+                throw  new ExceptionHortalsoft("Producto no encontrado", 6001);
             }
 
         }
         catch(Exception e){
-            throw new TransactionSystemException(e.getMessage());
+            throw e;
 
         }
 

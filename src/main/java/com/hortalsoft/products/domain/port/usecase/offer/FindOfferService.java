@@ -7,10 +7,10 @@ import com.hortalsoft.products.domain.port.input.offer.FindOfferUseCase;
 import com.hortalsoft.products.domain.repository.OfferRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 import java.util.Optional;
 
@@ -38,13 +38,12 @@ public class FindOfferService implements FindOfferUseCase {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),Offer.class);
             }
             else{
-                System.out.println("La oferta no existe");
-                return null;
+                throw  new ExceptionHortalsoft("Oferta no encontrada", 6001);
             }
 
         }
         catch(Exception e){
-            throw new TransactionSystemException(e.getMessage());
+            throw e;
 
         }
 

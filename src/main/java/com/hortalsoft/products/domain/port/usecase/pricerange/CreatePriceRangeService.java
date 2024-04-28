@@ -6,9 +6,9 @@ import com.hortalsoft.products.domain.entity.PriceRangeEntity;
 import com.hortalsoft.products.domain.port.input.pricerange.CreatePriceRangeUseCase;
 import com.hortalsoft.products.domain.repository.PriceRangeRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 
 @Service
@@ -34,11 +34,11 @@ public class CreatePriceRangeService implements CreatePriceRangeUseCase {
                 priceRangeRepository.save(entity);
             }
             else{
-                System.out.println("El rango de precios ya existe en el sistema");
+                throw  new ExceptionHortalsoft("El rango de precios ya existe", 5001);
             }
         }
         catch(Exception e){
-            throw new TransactionSystemException(e.getMessage());
+            throw e;
         }
     }
 }

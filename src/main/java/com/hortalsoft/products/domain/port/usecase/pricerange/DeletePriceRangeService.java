@@ -4,12 +4,10 @@ package com.hortalsoft.products.domain.port.usecase.pricerange;
 import com.hortalsoft.products.domain.domain.PriceRange;
 import com.hortalsoft.products.domain.port.input.pricerange.DeletePriceRangeUseCase;
 import com.hortalsoft.products.domain.repository.PriceRangeRepository;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 
 @Service
@@ -17,7 +15,6 @@ import org.springframework.transaction.TransactionSystemException;
 public class DeletePriceRangeService implements DeletePriceRangeUseCase {
 
     private final PriceRangeRepository priceRangeRepository;
-    private static final Logger logger = LoggerFactory.getLogger(DeletePriceRangeService.class);
 
 
 
@@ -34,11 +31,11 @@ public class DeletePriceRangeService implements DeletePriceRangeUseCase {
                 priceRangeRepository.deleteById(domain.getId());
             }
             else{
-                logger.error("El producto no existe");
+                throw new ExceptionHortalsoft("El rnago de precios no existe",6001);
             }
         }
-        catch(Exception e){
-            throw new TransactionSystemException(e.getMessage());
+        catch(ExceptionHortalsoft e){
+            throw e;
         }
     }
 }

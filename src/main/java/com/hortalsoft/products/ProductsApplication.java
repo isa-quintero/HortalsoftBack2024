@@ -1,4 +1,4 @@
-package com.hortalsoft;
+package com.hortalsoft.products;
 
 
 import org.springframework.boot.SpringApplication;

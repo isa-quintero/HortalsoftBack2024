@@ -5,6 +5,8 @@ import com.hortalsoft.products.application.facades.facade.product.CreateProductF
 import com.hortalsoft.products.application.facades.facade.product.DeleteProductFacade;
 import com.hortalsoft.products.application.facades.facade.product.FindProductFacade;
 import com.hortalsoft.products.application.facades.facade.product.ListProductsFacade;
+import com.hortalsoft.products.util.ExceptionHandlingAspect;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,65 +24,67 @@ public class ProductController {
     private final DeleteProductFacade facadeDelete;
     private final FindProductFacade facadeFind;
     private final ListProductsFacade facadeList;
+    private final ExceptionHandlingAspect exceptionHandlingAspect;
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-    public ProductController(CreateProductFacade facade,DeleteProductFacade facadeDelete,FindProductFacade facadeFind, ListProductsFacade facadeList) {
+    public ProductController(CreateProductFacade facade, DeleteProductFacade facadeDelete, FindProductFacade facadeFind, ListProductsFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.facadeCreate = facade;
         this.facadeDelete = facadeDelete;
         this.facadeFind = facadeFind;
         this.facadeList = facadeList;
+        this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
     @PostMapping
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO input){
+    public ResponseEntity<?> createProduct(@RequestBody ProductDTO input){
         try{
             facadeCreate.execute(input);
             logger.info("Producto creado");
             return ResponseEntity.ok().build();
         }
-        catch (Error e){
-            logger.error("Error creando el producto",e.getMessage());
-            return ResponseEntity.badRequest().build();
+        catch (ExceptionHortalsoft e){
+            logger.error(e.getMessage());
+            return exceptionHandlingAspect.handleException(e);
         }
     }
 
     @DeleteMapping
-    public ResponseEntity<ProductDTO> deleteProduct(@RequestParam (name = "id") long id){
+    public ResponseEntity<?> deleteProduct(@RequestParam (name = "id") int id){
         try{
             ProductDTO product = new ProductDTO(id,"",0);
-            logger.info("Producto eliminado");
             facadeDelete.execute(product);
+            logger.info("Producto eliminado");
             return ResponseEntity.ok().build();
         }
-        catch (Error e){
-            logger.error("Error eliminando el producto",e.getMessage());
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        catch (ExceptionHortalsoft e){
+            logger.error(e.getMessage());
+            return exceptionHandlingAspect.handleException(e);
         }
     }
 
     @GetMapping
-    public ResponseEntity<ProductDTO> findProduct(@RequestParam (name = "id") long id){
-        ProductDTO product = new ProductDTO(id,"",0);
-        ProductDTO productDTO =facadeFind.execute(product);
-        if (productDTO != null){
+    public ResponseEntity<?> findProduct(@RequestParam (name = "id") int id){
+        try {
+            ProductDTO product = new ProductDTO(id, "", 0);
+            ProductDTO productDTO = facadeFind.execute(product);
             logger.info("Producto encontrado");
-            //return productDTO.map(ResponseEntity::ok).orElseGet(()-> ResponseEntity.notFound().build());
             return ResponseEntity.ok().body(productDTO);
-        } else{
-            logger.error("Producto no encontrado");
-            return ResponseEntity.notFound().build();
+        }
+        catch (ExceptionHortalsoft e){
+            logger.error(e.getMessage());
+            return exceptionHandlingAspect.handleException(e);
         }
 
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<ProductDTO>> listProducts(){
+    public ResponseEntity<?> listProducts(){
         try{
             List<ProductDTO> productDTOS = facadeList.execute();
             return new ResponseEntity<>(productDTOS, HttpStatus.OK);
         }
-        catch (Error e){
-            logger.error("Error obteniendo los productos",e.getMessage());
-            return ResponseEntity.badRequest().build();
+        catch (ExceptionHortalsoft e){
+            logger.error(e.getMessage());
+            return exceptionHandlingAspect.handleException(e);
         }
     }
 }

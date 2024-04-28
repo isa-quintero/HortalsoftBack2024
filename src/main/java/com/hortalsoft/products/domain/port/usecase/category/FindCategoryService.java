@@ -7,10 +7,10 @@ import com.hortalsoft.products.domain.port.input.category.FindCategoryUseCase;
 import com.hortalsoft.products.domain.repository.CategoryRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 import java.util.Optional;
 
@@ -38,15 +38,11 @@ public class FindCategoryService implements FindCategoryUseCase {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),Category.class);
             }
             else{
-                System.out.println("La categoria no existe");
-                return null;
+                throw  new ExceptionHortalsoft("Categoria no encontrada", 6001);
             }
-
         }
         catch(Exception e){
-            throw new TransactionSystemException(e.getMessage());
-
+            throw e;
         }
-
     }
 }

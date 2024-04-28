@@ -6,6 +6,7 @@ import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.PriceRange;
 import com.hortalsoft.products.domain.port.input.pricerange.FindPriceRangeUseCase;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,11 @@ public class FindPriceRangeFacadeImpl implements FindPriceRangeFacade {
 
     @Override
     public PriceRangeDTO execute(PriceRangeDTO dto) {
-        PriceRange domain = mapperDTOToDomain.mapToDomain(dto,PriceRange.class);
-        return mapperDomainToDto.mapToDto(useCase.execute(domain),PriceRangeDTO.class);
+        try {
+            PriceRange domain = mapperDTOToDomain.mapToDomain(dto, PriceRange.class);
+            return mapperDomainToDto.mapToDto(useCase.execute(domain), PriceRangeDTO.class);
+        }catch(ExceptionHortalsoft ex){
+            throw  ex;
+        }
     }
 }

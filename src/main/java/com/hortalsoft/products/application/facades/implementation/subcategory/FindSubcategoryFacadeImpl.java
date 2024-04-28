@@ -7,6 +7,7 @@ import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.Subcategory;
 import com.hortalsoft.products.domain.port.input.subcategory.FindSubcategoryUseCase;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,12 @@ public class FindSubcategoryFacadeImpl implements FindSubcategoryFacade {
 
     @Override
     public SubcategoryDTO execute(SubcategoryDTO dto) {
-        Subcategory domain = mapperDTOToDomain.mapToDomain(dto,Subcategory.class);
-        return mapperDomainToDto.mapToDto(useCase.execute(domain),SubcategoryDTO.class);    }
+        try{
+            Subcategory domain = mapperDTOToDomain.mapToDomain(dto,Subcategory.class);
+            return mapperDomainToDto.mapToDto(useCase.execute(domain),SubcategoryDTO.class);
+        } catch(ExceptionHortalsoft ex){
+            throw  ex;
+        }
+
+    }
 }

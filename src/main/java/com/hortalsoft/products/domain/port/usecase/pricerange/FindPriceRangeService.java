@@ -7,10 +7,10 @@ import com.hortalsoft.products.domain.port.input.pricerange.FindPriceRangeUseCas
 import com.hortalsoft.products.domain.repository.PriceRangeRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 import java.util.Optional;
 
@@ -38,15 +38,11 @@ public class FindPriceRangeService implements FindPriceRangeUseCase {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),PriceRange.class);
             }
             else{
-                System.out.println("El producto no existe");
-                return null;
+                throw new ExceptionHortalsoft("El rnago de precios no existe",6001);
             }
-
         }
         catch(Exception e){
-            throw new TransactionSystemException(e.getMessage());
-
+            throw e;
         }
-
     }
 }

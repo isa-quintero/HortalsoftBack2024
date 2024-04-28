@@ -5,10 +5,10 @@ import com.hortalsoft.products.domain.domain.Offer;
 import com.hortalsoft.products.domain.entity.OfferEntity;
 import com.hortalsoft.products.domain.port.input.offer.DisableOfferUseCase;
 import com.hortalsoft.products.domain.repository.OfferRepository;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 import java.util.Optional;
 
@@ -33,11 +33,11 @@ public class DisableOfferService implements DisableOfferUseCase {
                 offerRepository.delete(findbyId.get());
             }
             else{
-                System.out.println("El producto no existe");
+                throw  new ExceptionHortalsoft("Producto no encontrado", 6001);
             }
         }
         catch(Exception e){
-            throw new TransactionSystemException(e.getMessage());
+            throw e;
         }
     }
 }

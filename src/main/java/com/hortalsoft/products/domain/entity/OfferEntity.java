@@ -14,11 +14,14 @@ public class OfferEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
+    //@ManyToOne(fetch = FetchType.LAZY,targetEntity = FarmerEntity.class)
+    //@JoinColumn(name="farmerId",nullable = true)
+    //private FarmerEntity farmer;
     //TODO se debe descomentar este código y borrar linea codeproduct
     //@ManyToOne(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
     //@JoinColumn(name="productId",nullable = true)
     //private ProductEntity product;
+    private long codeFarmer;
     private long codeProduct;
     private String description;
     private int amount;

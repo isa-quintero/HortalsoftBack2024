@@ -13,7 +13,9 @@ public class Offer implements Serializable {
     private long id;
     //TODO eliminar codeproduct, quitar comentario
     private long codeProduct;
+    private long codeFarmer;
     //private Product product;
+    //private Farmer farmer;
     @NonNull
     private String description;
     private int amount;

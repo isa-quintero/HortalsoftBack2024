@@ -4,12 +4,10 @@ package com.hortalsoft.products.domain.port.usecase.product;
 import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.port.input.product.DeleteProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 
 @Service
@@ -17,7 +15,6 @@ import org.springframework.transaction.TransactionSystemException;
 public class DeleteProductService implements DeleteProductUseCase {
 
     private final ProductRepository productRepository;
-    private static final Logger logger = LoggerFactory.getLogger(DeleteProductService.class);
 
 
 
@@ -34,11 +31,11 @@ public class DeleteProductService implements DeleteProductUseCase {
                 productRepository.deleteById(domain.getId());
             }
             else{
-                logger.error("El producto no existe");
+                throw  new ExceptionHortalsoft("Producto no encontrado", 6001);
             }
         }
         catch(Exception e){
-            throw new TransactionSystemException(e.getMessage());
+            throw e;
         }
     }
 }

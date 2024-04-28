@@ -6,9 +6,9 @@ import com.hortalsoft.products.application.facades.facade.offer.CreateOfferFacad
 import com.hortalsoft.products.domain.domain.Offer;
 import com.hortalsoft.products.domain.port.input.offer.CreateOfferUseCase;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 @Service
 @Transactional
@@ -27,9 +27,8 @@ public class CreateOfferFacadeImpl implements CreateOfferFacade {
             Offer domain = mapperDTOToDomain.mapToDomain(dto, Offer.class);
             useCase.execute(domain);
 
-        }catch (Exception e){
-            throw new TransactionSystemException(e.getMessage());
-
+        }catch(ExceptionHortalsoft ex){
+            throw  ex;
         }
     }
 }

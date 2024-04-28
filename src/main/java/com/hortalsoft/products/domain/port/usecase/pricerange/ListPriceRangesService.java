@@ -6,10 +6,10 @@ import com.hortalsoft.products.domain.entity.PriceRangeEntity;
 import com.hortalsoft.products.domain.port.input.pricerange.ListPricesRangesUseCase;
 import com.hortalsoft.products.domain.repository.PriceRangeRepository;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 import java.util.List;
 
@@ -30,11 +30,15 @@ public class ListPriceRangesService implements ListPricesRangesUseCase {
     @Override
     public List<PriceRange> execute() {
         try{
-            List<PriceRangeEntity> resultList = priceRangeRepository.findAll();
-            return mapperEntityToDomain.mapToDomainList(resultList,PriceRange.class);
+            if (priceRangeRepository.count() != 0) {
+                List<PriceRangeEntity> resultList = priceRangeRepository.findAll();
+                return mapperEntityToDomain.mapToDomainList(resultList, PriceRange.class);
+            }else{
+                throw  new ExceptionHortalsoft("No hay rangos de precios para mostrar", 6001);
+            }
         }
         catch(Exception e){
-            throw new TransactionSystemException(e.getMessage());
+            throw e;
         }
     }
 }

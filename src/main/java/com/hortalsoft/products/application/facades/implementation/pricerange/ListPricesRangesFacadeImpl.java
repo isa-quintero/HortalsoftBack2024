@@ -6,6 +6,7 @@ import com.hortalsoft.products.application.facades.facade.pricerange.ListPricesR
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.PriceRange;
 import com.hortalsoft.products.domain.port.input.pricerange.ListPricesRangesUseCase;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,10 @@ public class ListPricesRangesFacadeImpl implements ListPricesRangesFacade {
 
     @Override
     public List<PriceRangeDTO> execute() {
-        return mapperDomainToDto.mapToDtoList(useCase.execute(),PriceRangeDTO.class);
+        try {
+            return mapperDomainToDto.mapToDtoList(useCase.execute(), PriceRangeDTO.class);
+        }catch(ExceptionHortalsoft ex){
+            throw  ex;
+        }
     }
 }

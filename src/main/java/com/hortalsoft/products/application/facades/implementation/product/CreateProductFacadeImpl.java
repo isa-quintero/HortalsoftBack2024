@@ -5,9 +5,9 @@ import com.hortalsoft.products.application.facades.facade.product.CreateProductF
 import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.port.input.product.CreateProductUseCase;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 
 @Service
@@ -27,8 +27,8 @@ public class CreateProductFacadeImpl implements CreateProductFacade {
             Product domain = mapperDTOToDomain.mapToDomain(dto, Product.class);
             useCase.execute(domain);
         }
-        catch(Exception e){
-            throw new TransactionSystemException(e.getMessage());
+        catch(ExceptionHortalsoft ex){
+            throw  ex;
         }
     }
 }

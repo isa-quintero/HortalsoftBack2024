@@ -6,6 +6,7 @@ import com.hortalsoft.products.application.facades.facade.category.ListCategoryF
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.Category;
 import com.hortalsoft.products.domain.port.input.category.ListCategoryUseCase;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,10 @@ public class ListCategoryFacadeImpl implements ListCategoryFacade {
 
     @Override
     public List<CategoryDTO> execute() {
-        return mapperDomainToDto.mapToDtoList(useCase.execute(),CategoryDTO.class);
+        try {
+            return mapperDomainToDto.mapToDtoList(useCase.execute(), CategoryDTO.class);
+        }catch(ExceptionHortalsoft ex){
+            throw  ex;
+        }
     }
 }

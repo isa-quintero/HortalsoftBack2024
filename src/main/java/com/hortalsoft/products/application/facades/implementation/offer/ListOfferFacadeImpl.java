@@ -5,6 +5,7 @@ import com.hortalsoft.products.application.facades.facade.offer.ListOfferFacade;
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.Offer;
 import com.hortalsoft.products.domain.port.input.offer.ListOfferUseCase;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,10 @@ public class ListOfferFacadeImpl implements ListOfferFacade {
 
     @Override
     public List<OfferDTO> execute() {
-        return mapperDomainToDto.mapToDtoList(useCase.execute(), OfferDTO.class);
+        try {
+            return mapperDomainToDto.mapToDtoList(useCase.execute(), OfferDTO.class);
+        }catch(ExceptionHortalsoft ex){
+            throw  ex;
+        }
     }
 }
