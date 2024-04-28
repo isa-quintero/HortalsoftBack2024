@@ -6,7 +6,7 @@ import com.hortalsoft.products.application.facades.facade.offer.CreateOfferFacad
 import com.hortalsoft.products.domain.domain.Offer;
 import com.hortalsoft.products.domain.port.input.offer.CreateOfferUseCase;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.products.util.ExceptionHandlingAspect;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +16,11 @@ public class CreateOfferFacadeImpl implements CreateOfferFacade {
 
     MapperDTOToDomain<OfferDTO, Offer> mapperDTOToDomain = new MapperDTOToDomain<>();
     private final CreateOfferUseCase useCase;
+    private final ExceptionHandlingAspect exceptionHandlingAspect;
 
-    public CreateOfferFacadeImpl(CreateOfferUseCase useCase){
+    public CreateOfferFacadeImpl(CreateOfferUseCase useCase, ExceptionHandlingAspect exceptionHandlingAspect){
         this.useCase = useCase;
+        this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
     @Override
@@ -27,8 +29,8 @@ public class CreateOfferFacadeImpl implements CreateOfferFacade {
             Offer domain = mapperDTOToDomain.mapToDomain(dto, Offer.class);
             useCase.execute(domain);
 
-        }catch(ExceptionHortalsoft ex){
-            throw  ex;
+        }catch(Exception e){
+            exceptionHandlingAspect.exceptionsApplication(e);
         }
     }
 }

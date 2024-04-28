@@ -26,8 +26,12 @@ public class ListCategoryFacadeImpl implements ListCategoryFacade {
     public List<CategoryDTO> execute() {
         try {
             return mapperDomainToDto.mapToDtoList(useCase.execute(), CategoryDTO.class);
-        }catch(ExceptionHortalsoft ex){
-            throw  ex;
+        }catch(Exception e){
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Application");
+            }
         }
     }
 }

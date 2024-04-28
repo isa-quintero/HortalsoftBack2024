@@ -13,14 +13,12 @@ import org.springframework.stereotype.Service;
 public class CreateOfferService implements CreateOfferUseCase {
 
     private final OfferRepository offerRepository;
-    private final FindOfferService findOfferService;
     MapperDomainToEntity<Offer, OfferEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
 
     @Autowired
-    public CreateOfferService(OfferRepository offerRepository, FindOfferService findOfferService) {
+    public CreateOfferService(OfferRepository offerRepository) {
         this.offerRepository = offerRepository;
-        this.findOfferService = findOfferService;
     }
 
     @Override
@@ -31,11 +29,15 @@ public class CreateOfferService implements CreateOfferUseCase {
                 offerRepository.save(entity);
             }
             else{
-                throw  new ExceptionHortalsoft("La oferta ya existe", 5001);
+                throw  new ExceptionHortalsoft("La oferta ya existe", 5001,"Domain");
             }
         }
         catch(Exception e){
-            throw e;
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Domain");
+            }
         }
     }
 }

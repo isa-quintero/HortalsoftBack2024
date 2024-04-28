@@ -34,11 +34,15 @@ public class CreatePriceRangeService implements CreatePriceRangeUseCase {
                 priceRangeRepository.save(entity);
             }
             else{
-                throw  new ExceptionHortalsoft("El rango de precios ya existe", 5001);
+                throw  new ExceptionHortalsoft("El rango de precios ya existe", 5001,"Domain");
             }
         }
         catch(Exception e){
-            throw e;
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Domain");
+            }
         }
     }
 }

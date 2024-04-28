@@ -9,7 +9,6 @@ import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.util.ExceptionHortalsoft;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 
 @Service
@@ -34,11 +33,15 @@ public class CreateProductService implements CreateProductUseCase {
                 productRepository.save(entity);
             }
             else{
-                throw  new ExceptionHortalsoft("El producto ya existe", 5001);
+                throw  new ExceptionHortalsoft("El producto ya existe", 5001,"Domain");
             }
         }
         catch(Exception e){
-            throw e;
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Domain");
+            }
         }
     }
 }

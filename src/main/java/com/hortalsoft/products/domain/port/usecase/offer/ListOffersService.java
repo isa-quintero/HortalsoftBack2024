@@ -10,7 +10,6 @@ import com.hortalsoft.products.util.ExceptionHortalsoft;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 import java.util.List;
 
@@ -35,12 +34,15 @@ public class ListOffersService implements ListOfferUseCase {
                 List<OfferEntity> resultList = offerRepository.findAll();
                 return mapperEntityToDomain.mapToDomainList(resultList, Offer.class);
             }else{
-                throw  new ExceptionHortalsoft("No hay productos para mostrar", 6001);
+                throw  new ExceptionHortalsoft("No hay productos para mostrar", 6001,"Domain");
             }
         }
         catch(Exception e){
-            throw new TransactionSystemException(e.getMessage());
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Domain");
+            }
         }
     }
-
 }

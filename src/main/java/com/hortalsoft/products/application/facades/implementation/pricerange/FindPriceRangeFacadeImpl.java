@@ -26,8 +26,12 @@ public class FindPriceRangeFacadeImpl implements FindPriceRangeFacade {
         try {
             PriceRange domain = mapperDTOToDomain.mapToDomain(dto, PriceRange.class);
             return mapperDomainToDto.mapToDto(useCase.execute(domain), PriceRangeDTO.class);
-        }catch(ExceptionHortalsoft ex){
-            throw  ex;
+        }catch(Exception e){
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Application");
+            }
         }
     }
 }

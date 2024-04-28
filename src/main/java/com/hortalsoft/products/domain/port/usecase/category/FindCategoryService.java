@@ -38,11 +38,15 @@ public class FindCategoryService implements FindCategoryUseCase {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),Category.class);
             }
             else{
-                throw  new ExceptionHortalsoft("Categoria no encontrada", 6001);
+                throw  new ExceptionHortalsoft("Categoria no encontrada", 6001,"Domain");
             }
         }
         catch(Exception e){
-            throw e;
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Domain");
+            }
         }
     }
 }

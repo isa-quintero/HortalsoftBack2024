@@ -26,8 +26,12 @@ public class ListOfferFacadeImpl implements ListOfferFacade {
     public List<OfferDTO> execute() {
         try {
             return mapperDomainToDto.mapToDtoList(useCase.execute(), OfferDTO.class);
-        }catch(ExceptionHortalsoft ex){
-            throw  ex;
+        }catch(Exception e){
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Application");
+            }
         }
     }
 }

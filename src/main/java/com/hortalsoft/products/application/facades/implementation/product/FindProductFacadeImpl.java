@@ -19,6 +19,7 @@ public class FindProductFacadeImpl implements FindProductFacade {
     MapperDomainToDto<Product, ProductDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final FindProductUseCase useCase;
 
+
     public FindProductFacadeImpl(FindProductUseCase useCase) {
         this.useCase = useCase;
     }
@@ -29,8 +30,12 @@ public class FindProductFacadeImpl implements FindProductFacade {
             Product domain = mapperDTOToDomain.mapToDomain(dto,Product.class);
             return mapperDomainToDto.mapToDto(useCase.execute(domain),ProductDTO.class);
         }
-        catch(ExceptionHortalsoft ex){
-            throw  ex;
+        catch(Exception e){
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Application");
+            }
         }
     }
 }

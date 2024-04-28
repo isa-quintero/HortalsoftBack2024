@@ -5,7 +5,7 @@ import com.hortalsoft.products.application.facades.facade.product.CreateProductF
 import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.port.input.product.CreateProductUseCase;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.products.util.ExceptionHandlingAspect;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -15,20 +15,24 @@ import org.springframework.stereotype.Service;
 public class CreateProductFacadeImpl implements CreateProductFacade {
 
     MapperDTOToDomain<ProductDTO ,Product> mapperDTOToDomain = new MapperDTOToDomain<>();
-    private final CreateProductUseCase useCase;
+    private final CreateProductUseCase useCaseCreate;
+    private final ExceptionHandlingAspect exceptionHandlingAspect;
 
-    public CreateProductFacadeImpl(CreateProductUseCase useCase) {
-        this.useCase = useCase;
+
+
+    public CreateProductFacadeImpl(CreateProductUseCase useCase, ExceptionHandlingAspect exceptionHandlingAspect) {
+        this.useCaseCreate = useCase;
+        this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
     @Override
     public void execute(ProductDTO dto) {
         try{
             Product domain = mapperDTOToDomain.mapToDomain(dto, Product.class);
-            useCase.execute(domain);
+            useCaseCreate.execute(domain);
         }
-        catch(ExceptionHortalsoft ex){
-            throw  ex;
+        catch(Exception e){
+            exceptionHandlingAspect.exceptionsApplication(e);
         }
     }
 }

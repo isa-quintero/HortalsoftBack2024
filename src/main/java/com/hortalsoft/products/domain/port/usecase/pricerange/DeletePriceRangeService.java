@@ -31,11 +31,15 @@ public class DeletePriceRangeService implements DeletePriceRangeUseCase {
                 priceRangeRepository.deleteById(domain.getId());
             }
             else{
-                throw new ExceptionHortalsoft("El rnago de precios no existe",6001);
+                throw new ExceptionHortalsoft("El rnago de precios no existe",6001,"Domain");
             }
         }
-        catch(ExceptionHortalsoft e){
-            throw e;
+        catch(Exception e){
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Domain");
+            }
         }
     }
 }

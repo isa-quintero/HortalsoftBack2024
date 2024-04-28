@@ -6,7 +6,7 @@ import com.hortalsoft.products.application.facades.facade.pricerange.DeletePrice
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.products.domain.domain.PriceRange;
 import com.hortalsoft.products.domain.port.input.pricerange.DeletePriceRangeUseCase;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.products.util.ExceptionHandlingAspect;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +15,11 @@ import org.springframework.stereotype.Service;
 public class DeletePriceRangeFacadeImpl implements DeletePriceRangeFacade {
     MapperDTOToDomain<PriceRangeDTO, PriceRange> mapperDTOToDomain = new MapperDTOToDomain<>();
     private final DeletePriceRangeUseCase useCase;
+    private final ExceptionHandlingAspect exceptionHandlingAspect;
 
-    public DeletePriceRangeFacadeImpl(DeletePriceRangeUseCase useCase) {
+    public DeletePriceRangeFacadeImpl(DeletePriceRangeUseCase useCase, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.useCase = useCase;
+        this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
     @Override
@@ -25,9 +27,8 @@ public class DeletePriceRangeFacadeImpl implements DeletePriceRangeFacade {
         try{
             PriceRange domain = mapperDTOToDomain.mapToDomain(dto, PriceRange.class);
             useCase.execute(domain);
-        }
-        catch(ExceptionHortalsoft ex){
-            throw  ex;
+        }catch(Exception e){
+            exceptionHandlingAspect.exceptionsApplication(e);
         }
     }
 }

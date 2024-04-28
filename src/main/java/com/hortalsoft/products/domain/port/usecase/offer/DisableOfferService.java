@@ -33,11 +33,15 @@ public class DisableOfferService implements DisableOfferUseCase {
                 offerRepository.delete(findbyId.get());
             }
             else{
-                throw  new ExceptionHortalsoft("Producto no encontrado", 6001);
+                throw  new ExceptionHortalsoft("Producto no encontrado", 6001,"Domain");
             }
         }
         catch(Exception e){
-            throw e;
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Domain");
+            }
         }
     }
 }

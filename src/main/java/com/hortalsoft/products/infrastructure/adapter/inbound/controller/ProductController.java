@@ -1,10 +1,7 @@
 package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.products.application.dto.ProductDTO;
-import com.hortalsoft.products.application.facades.facade.product.CreateProductFacade;
-import com.hortalsoft.products.application.facades.facade.product.DeleteProductFacade;
-import com.hortalsoft.products.application.facades.facade.product.FindProductFacade;
-import com.hortalsoft.products.application.facades.facade.product.ListProductsFacade;
+import com.hortalsoft.products.application.facades.facade.product.*;
 import com.hortalsoft.products.util.ExceptionHandlingAspect;
 import com.hortalsoft.products.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
@@ -24,14 +21,16 @@ public class ProductController {
     private final DeleteProductFacade facadeDelete;
     private final FindProductFacade facadeFind;
     private final ListProductsFacade facadeList;
+    private final ModifyProductFacade facadeModify;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-    public ProductController(CreateProductFacade facade, DeleteProductFacade facadeDelete, FindProductFacade facadeFind, ListProductsFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
-        this.facadeCreate = facade;
+    public ProductController(CreateProductFacade facadeCreate, DeleteProductFacade facadeDelete, FindProductFacade facadeFind, ListProductsFacade facadeList, ModifyProductFacade facadeModify, ExceptionHandlingAspect exceptionHandlingAspect) {
+        this.facadeCreate = facadeCreate;
         this.facadeDelete = facadeDelete;
         this.facadeFind = facadeFind;
         this.facadeList = facadeList;
+        this.facadeModify = facadeModify;
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
     @PostMapping
@@ -41,9 +40,8 @@ public class ProductController {
             logger.info("Producto creado");
             return ResponseEntity.ok().build();
         }
-        catch (ExceptionHortalsoft e){
-            logger.error(e.getMessage());
-            return exceptionHandlingAspect.handleException(e);
+        catch (Exception e){
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
 
@@ -55,9 +53,8 @@ public class ProductController {
             logger.info("Producto eliminado");
             return ResponseEntity.ok().build();
         }
-        catch (ExceptionHortalsoft e){
-            logger.error(e.getMessage());
-            return exceptionHandlingAspect.handleException(e);
+        catch (Exception e){
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
 
@@ -70,8 +67,7 @@ public class ProductController {
             return ResponseEntity.ok().body(productDTO);
         }
         catch (ExceptionHortalsoft e){
-            logger.error(e.getMessage());
-            return exceptionHandlingAspect.handleException(e);
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
 
     }
@@ -83,8 +79,18 @@ public class ProductController {
             return new ResponseEntity<>(productDTOS, HttpStatus.OK);
         }
         catch (ExceptionHortalsoft e){
-            logger.error(e.getMessage());
-            return exceptionHandlingAspect.handleException(e);
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
+        }
+    }
+    @PutMapping("/update")
+    public ResponseEntity<?> updateProduct(@RequestBody ProductDTO input){
+        try{
+            facadeModify.execute(input);
+            logger.info("Producto modificado");
+            return ResponseEntity.ok().build();
+        }
+        catch (ExceptionHortalsoft e){
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
 }

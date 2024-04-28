@@ -28,8 +28,12 @@ public class FindSubcategoryFacadeImpl implements FindSubcategoryFacade {
         try{
             Subcategory domain = mapperDTOToDomain.mapToDomain(dto,Subcategory.class);
             return mapperDomainToDto.mapToDto(useCase.execute(domain),SubcategoryDTO.class);
-        } catch(ExceptionHortalsoft ex){
-            throw  ex;
+        } catch(Exception e){
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Application");
+            }
         }
 
     }

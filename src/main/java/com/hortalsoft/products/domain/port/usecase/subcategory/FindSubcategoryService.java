@@ -38,11 +38,15 @@ public class FindSubcategoryService implements FindSubcategoryUseCase {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),Subcategory.class);
             }
             else{
-                throw  new ExceptionHortalsoft("Subcategoria no encontrado", 6001);
+                throw  new ExceptionHortalsoft("Subcategoria no encontrado", 6001,"Domain");
             }
         }
         catch(Exception e){
-            throw e;
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Domain");
+            }
         }
 
     }

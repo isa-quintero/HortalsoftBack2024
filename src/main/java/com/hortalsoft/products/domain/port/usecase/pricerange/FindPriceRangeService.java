@@ -38,11 +38,15 @@ public class FindPriceRangeService implements FindPriceRangeUseCase {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),PriceRange.class);
             }
             else{
-                throw new ExceptionHortalsoft("El rnago de precios no existe",6001);
+                throw new ExceptionHortalsoft("El rango de precios no existe",6001,"Domain");
             }
         }
         catch(Exception e){
-            throw e;
+            if (e instanceof ExceptionHortalsoft){
+                throw (ExceptionHortalsoft) e;
+            }else{
+                throw new ExceptionHortalsoft(e.getMessage(),500,"Domain");
+            }
         }
     }
 }
