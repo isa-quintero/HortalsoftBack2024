@@ -8,6 +8,7 @@ import com.hortalsoft.products.domain.repository.OfferRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.products.util.Layers;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class FindOfferService implements FindOfferUseCase {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),Offer.class);
             }
             else{
-                throw  new ExceptionHortalsoft("Oferta no encontrada", 6001,"Domain");
+                throw  new ExceptionHortalsoft("Oferta no encontrada", 6001, Layers.DOMAIN);
             }
 
         }
@@ -46,7 +47,7 @@ public class FindOfferService implements FindOfferUseCase {
             if (e instanceof ExceptionHortalsoft){
                 throw (ExceptionHortalsoft) e;
             }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500,"Domain");
+                throw new ExceptionHortalsoft(e.getMessage(),500,Layers.DOMAIN);
             }
         }
     }

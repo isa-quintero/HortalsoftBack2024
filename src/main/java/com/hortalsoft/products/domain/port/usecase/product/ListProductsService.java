@@ -7,6 +7,7 @@ import com.hortalsoft.products.domain.port.input.product.ListProductsUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.products.util.Layers;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class ListProductsService implements ListProductsUseCase {
                 return mapperEntityToDomain.mapToDomainList(resultList,Product.class);
             }
             else{
-                throw  new ExceptionHortalsoft("No hay productos para mostrar", 6001,"Domain");
+                throw  new ExceptionHortalsoft("No hay productos para mostrar", 6001, Layers.DOMAIN);
             }
 
         }
@@ -43,7 +44,7 @@ public class ListProductsService implements ListProductsUseCase {
             if (e instanceof ExceptionHortalsoft){
                 throw (ExceptionHortalsoft) e;
             }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500,"Domain");
+                throw new ExceptionHortalsoft(e.getMessage(),500,Layers.DOMAIN);
             }
         }
     }

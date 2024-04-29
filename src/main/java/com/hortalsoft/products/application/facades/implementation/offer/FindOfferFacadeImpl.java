@@ -9,6 +9,7 @@ import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.Offer;
 import com.hortalsoft.products.domain.port.input.offer.FindOfferUseCase;
 import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.products.util.Layers;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class FindOfferFacadeImpl implements FindOfferFacade {
             if (e instanceof ExceptionHortalsoft){
                 throw (ExceptionHortalsoft) e;
             }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500,"Application");
+                throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION);
             }
         }
     }

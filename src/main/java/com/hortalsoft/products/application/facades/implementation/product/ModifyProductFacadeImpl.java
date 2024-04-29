@@ -6,6 +6,7 @@ import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.port.input.product.ModifyProductUseCase;
 import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.products.util.Layers;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class ModifyProductFacadeImpl implements ModifyProductFacade {
             if (e instanceof ExceptionHortalsoft){
                 throw (ExceptionHortalsoft) e;
             }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500,"Application");
+                throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION);
             }
         }
     }

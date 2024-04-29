@@ -32,11 +32,11 @@ public class ExceptionHandlingAspect {
         String layer;
         if (e instanceof ExceptionHortalsoft){
             message=e.getMessage();
-            layer= ((ExceptionHortalsoft) e).getLayer();
+            layer= String.valueOf(((ExceptionHortalsoft) e).getLayer());
         }else{
-            ExceptionHortalsoft ex = new ExceptionHortalsoft(e.getMessage(),500,"Infrastructure");
+            ExceptionHortalsoft ex = new ExceptionHortalsoft(e.getMessage(),500,Layers.INFRASTRUCTURE);
             message= ex.getMessage();
-            layer=ex.getLayer();
+            layer= String.valueOf(ex.getLayer());
         }
         logger.error("{}: Capa {}",message,layer);
         return handleException(e);
@@ -46,7 +46,7 @@ public class ExceptionHandlingAspect {
         if (e instanceof ExceptionHortalsoft){
             throw (ExceptionHortalsoft) e;
         }else{
-            throw new ExceptionHortalsoft(e.getMessage(),500,"Application");
+            throw new ExceptionHortalsoft(e.getMessage(),500,Layers.APPLICATION);
         }
     }
 }
