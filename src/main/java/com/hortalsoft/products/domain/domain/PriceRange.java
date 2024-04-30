@@ -5,7 +5,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @RequiredArgsConstructor
@@ -19,7 +19,7 @@ public class PriceRange implements Serializable {
     //private Association association;
     private float initialRange;
     private float finalRange;
-    private Date initialDate;
-    private Date finalDate;
+    private LocalDate initialDate;
+    private LocalDate finalDate;
     private int validity;
 }

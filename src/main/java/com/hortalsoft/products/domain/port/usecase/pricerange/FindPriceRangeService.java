@@ -34,7 +34,7 @@ public class FindPriceRangeService implements FindPriceRangeUseCase {
     public PriceRange execute(PriceRange domain) {
         try{
             PriceRangeEntity entity =  mapperDomainToEntity.mapToEntity(domain,PriceRangeEntity.class);
-            Optional<PriceRangeEntity> resultEntity= priceRangeRepository.findById(entity.getId());
+            Optional<PriceRangeEntity> resultEntity= priceRangeRepository.findByFinalDateValidAndId(entity.getId());
             if (resultEntity.isPresent()) {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),PriceRange.class);
             }

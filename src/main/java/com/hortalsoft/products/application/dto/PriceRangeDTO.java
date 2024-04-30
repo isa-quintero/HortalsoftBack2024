@@ -3,7 +3,7 @@ package com.hortalsoft.products.application.dto;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -23,8 +23,8 @@ public class PriceRangeDTO {
     @NotNull(message = "El rango final no puede ser nulo")
     private float finalRange;
     @NotNull(message = "La fecha inicial no puede ser nula")
-    private Date initialDate;
+    private LocalDate initialDate;
     @NotNull(message = "La fecha final no puede ser nula")
-    private Date finalDate;
+    private LocalDate finalDate;
     private int validity;
 }

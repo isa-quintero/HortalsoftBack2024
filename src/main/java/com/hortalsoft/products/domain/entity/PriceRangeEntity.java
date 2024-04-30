@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -27,7 +27,7 @@ public class PriceRangeEntity {
     private String association;
     private float initialRange;
     private float finalRange;
-    private Date initialDate;
-    private Date finalDate;
+    private LocalDate initialDate;
+    private LocalDate finalDate;
     private int validity;
 }

@@ -32,10 +32,10 @@ public class ListPriceRangesService implements ListPricesRangesUseCase {
     public List<PriceRange> execute() {
         try{
             if (priceRangeRepository.count() != 0) {
-                List<PriceRangeEntity> resultList = priceRangeRepository.findAll();
+                List<PriceRangeEntity> resultList = priceRangeRepository.findAllByFinalDateValid();
                 return mapperEntityToDomain.mapToDomainList(resultList, PriceRange.class);
             }else{
-                throw  new ExceptionHortalsoft("No hay rangos de precios para mostrar", 6001,Layers.DOMAIN);
+                throw  new ExceptionHortalsoft("No hay rangos de precios vigentes para mostrar", 6001,Layers.DOMAIN);
             }
         }
         catch(Exception e){

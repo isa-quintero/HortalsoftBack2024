@@ -29,10 +29,15 @@ public class CreatePriceRangeService implements CreatePriceRangeUseCase {
     public void execute(PriceRange domain) {
         try{
 
-            //TODO implementar validaciones para creación de price range
+
             PriceRangeEntity entity =  mapperDomainToEntity.mapToEntity(domain,PriceRangeEntity.class);
             if (!priceRangeRepository.existsById(entity.getId())){
-                priceRangeRepository.save(entity);
+                if (!priceRangeRepository.existsByAssociationAndInitialDateAndProductId(entity.getAssociation(),entity.getInitialDate(),entity.getProductId())){
+                    priceRangeRepository.save(entity);
+                }
+                else{
+                    throw  new ExceptionHortalsoft("El rango de precios ya existe", 5001, Layers.DOMAIN);
+                }
             }
             else{
                 throw  new ExceptionHortalsoft("El rango de precios ya existe", 5001, Layers.DOMAIN);
