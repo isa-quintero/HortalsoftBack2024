@@ -9,7 +9,8 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class Offer implements Serializable {
     private int id;
-    private Product product;
+    private int productId;
+    //private Product product;
     private int FarmerId;
     private String description;
     private int amount;
@@ -17,4 +18,6 @@ public class Offer implements Serializable {
     private LocalDate initialDate;
     private LocalDate finalDate;
     private int validity;
+    private String idBlockchain;
+
 }

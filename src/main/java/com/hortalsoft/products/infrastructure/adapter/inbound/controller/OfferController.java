@@ -1,12 +1,12 @@
 package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.products.application.dto.OfferDTO;
-import com.hortalsoft.products.application.dto.ProductDTO;
 import com.hortalsoft.products.application.facades.facade.offer.CreateOfferFacade;
 import com.hortalsoft.products.application.facades.facade.offer.DisableOfferFacade;
 import com.hortalsoft.products.application.facades.facade.offer.FindOfferFacade;
 import com.hortalsoft.products.application.facades.facade.offer.ListOfferFacade;
 import com.hortalsoft.products.util.ExceptionHandlingAspect;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @RestController
@@ -51,7 +52,7 @@ public class OfferController {
     public ResponseEntity<OfferDTO> disableOffer(@RequestParam (name = "id") int id){
         try{
             LocalDate date=LocalDate.now();
-            OfferDTO offer = new OfferDTO(id,new ProductDTO(),0,"",0,0,date,date,0);
+            OfferDTO offer = new OfferDTO(id,0,0,"",0,0,date,date,0,"");
             facadeDelete.execute(offer);
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -64,7 +65,7 @@ public class OfferController {
     @GetMapping
     public ResponseEntity<?> findOffer(@RequestParam (name = "id") int id){
         try{
-            OfferDTO offer = new OfferDTO(id,new ProductDTO(),0,"",0,0,LocalDate.now(),LocalDate.now(),0);
+            OfferDTO offer = new OfferDTO(id,0,0,"",0,0,LocalDate.now(),LocalDate.now(),0,"");
             OfferDTO result=facadeFind.execute(offer);
             logger.info("Oferta encontrada");
             return ResponseEntity.ok().body(result);
@@ -75,7 +76,13 @@ public class OfferController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<OfferDTO> listOffers(){
-        return null;
+    public ResponseEntity<?> listPriceRanges(){
+        try{
+            List<OfferDTO> offerDTOS = facadeList.execute();
+            return new ResponseEntity<>(offerDTOS, HttpStatus.OK);
+        }
+        catch (ExceptionHortalsoft e){
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
+        }
     }
 }

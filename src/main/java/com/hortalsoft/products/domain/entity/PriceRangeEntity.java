@@ -14,7 +14,8 @@ import java.time.LocalDate;
 @Table(name = "price_range",schema = "products")
 public class PriceRangeEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products.product_seq")
+    @SequenceGenerator(name = "products.product_seq", sequenceName = "products.product_seq", allocationSize = 1)
     @Column(name = "id_price_range")
     private int id;
     @ManyToOne//(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)

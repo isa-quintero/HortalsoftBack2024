@@ -12,7 +12,8 @@ import java.time.LocalDate;
 @Table(name = "offer",schema = "products")
 public class OfferEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products.product_seq")
+    @SequenceGenerator(name = "products.product_seq", sequenceName = "products.product_seq", allocationSize = 1)
     @Column(name = "id_offer")
     private int id;
     @ManyToOne//(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
@@ -32,4 +33,7 @@ public class OfferEntity {
     private LocalDate finalDate;
     @Column(name = "validity")
     private int validity;
+    @Column(name = "id_blockchain")
+    private String idBlockchain;
+
 }

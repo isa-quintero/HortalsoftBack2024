@@ -11,5 +11,6 @@ public class Subcategory implements Serializable {
     private int id;
     private String name;
     private String description;
-    private Category category;
+    private int categoryId;
+    //private Category category;
 }

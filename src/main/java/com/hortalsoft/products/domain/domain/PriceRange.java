@@ -9,7 +9,8 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class PriceRange implements Serializable {
     private int id;
-    private Product product;
+    private int productId;
+    //private Product product;
     private int associationId;
     private float initialRange;
     private float finalRange;

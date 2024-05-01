@@ -12,7 +12,8 @@ import java.time.LocalDate;
 public class OfferDTO {
     private int id;
     @NotNull(message = "El producto no puede ser nulo")
-    private ProductDTO productDTO;
+    private int productId;
+    //private ProductDTO productDTO;
     @NotNull(message = "El producto no puede ser nulo")
     private int farmerId;
     private String description;
@@ -25,6 +26,7 @@ public class OfferDTO {
     @NotNull(message = "La fecha final no puede ser nula")
     private LocalDate finalDate;
     private int validity;
+    private String idBlockchain;
 
     public void setDescription(String description) {
         this.description = (description != null) ? description : "";

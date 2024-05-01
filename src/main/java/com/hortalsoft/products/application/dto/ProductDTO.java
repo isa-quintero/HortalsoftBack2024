@@ -14,5 +14,5 @@ public class ProductDTO {
     @NotBlank(message = "El nombre no puede estar vacío")
     private String name;
     @NotNull(message = "La subcategoria no puede ser nula ")
-    private SubcategoryDTO subcategoryDto;
+    private int subcategoryId;
 }
