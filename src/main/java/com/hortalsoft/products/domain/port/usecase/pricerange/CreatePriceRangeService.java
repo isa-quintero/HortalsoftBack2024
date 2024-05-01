@@ -32,7 +32,7 @@ public class CreatePriceRangeService implements CreatePriceRangeUseCase {
 
             PriceRangeEntity entity =  mapperDomainToEntity.mapToEntity(domain,PriceRangeEntity.class);
             if (!priceRangeRepository.existsById(entity.getId())){
-                if (!priceRangeRepository.existsByAssociationAndInitialDateAndProductId(entity.getAssociation(),entity.getInitialDate(),entity.getProductId())){
+                if (!priceRangeRepository.existsByAssociationIdAndInitialDateAndProductId(entity.getAssociationId(),entity.getInitialDate(),entity.getProduct().getId())){
                     priceRangeRepository.save(entity);
                 }
                 else{

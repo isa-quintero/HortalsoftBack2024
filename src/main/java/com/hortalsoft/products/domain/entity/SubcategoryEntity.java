@@ -10,16 +10,17 @@ import lombok.ToString;
 @Entity
 @ToString
 @RequiredArgsConstructor
-//@Table(name = "Subcategory")
+@Table(name = "Subcategory",schema="products")
 public class SubcategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Column(name = "id_subcategory")
+    private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
     private String description;
-    //TODO se debe descomentar el codigo a continación y borrar codeCategory
-    //@ManyToOne(fetch = FetchType.LAZY,targetEntity = CategoryEntity.class)
-    //@JoinColumn(name="categoryId",nullable = true)
-    //private CategoryEntity category;
-    private long codeCategory;
+    @ManyToOne//(fetch = FetchType.LAZY,targetEntity = CategoryEntity.class)
+    @JoinColumn(name="categoryId",nullable = true)
+    private CategoryEntity category;
 }

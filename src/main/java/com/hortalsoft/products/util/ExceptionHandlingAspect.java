@@ -15,7 +15,7 @@ public class ExceptionHandlingAspect {
 
     @AfterThrowing(pointcut = "execution(* com.hortalsoft.products.*.*(..))", throwing = "ex")
     public ResponseEntity<String> handleException(Exception ex) {
-        HttpStatus status = HttpStatus.OK;
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         if (ex instanceof ExceptionHortalsoft exceptionHortalsoft) {
             status = switch (exceptionHortalsoft.getErrorCode()) {
                 case 4001 -> HttpStatus.BAD_REQUEST;

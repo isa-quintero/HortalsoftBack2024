@@ -1,36 +1,41 @@
 package com.hortalsoft.products.domain.port.usecase.offer;
 
+
 import com.hortalsoft.products.domain.domain.Offer;
 import com.hortalsoft.products.domain.entity.OfferEntity;
-import com.hortalsoft.products.domain.port.input.offer.CreateOfferUseCase;
+import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
+import com.hortalsoft.products.domain.port.input.offer.ListOfferUseCase;
 import com.hortalsoft.products.domain.repository.OfferRepository;
-import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.util.ExceptionHortalsoft;
 import com.hortalsoft.products.util.Layers;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class CreateOfferService implements CreateOfferUseCase {
+@Transactional
+public class ListOffersByFarmerService implements ListOfferUseCase {
 
     private final OfferRepository offerRepository;
-    MapperDomainToEntity<Offer, OfferEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
+    MapperEntityToDomain<OfferEntity, Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
 
 
     @Autowired
-    public CreateOfferService(OfferRepository offerRepository) {
+    public ListOffersByFarmerService(OfferRepository offerRepository) {
         this.offerRepository = offerRepository;
     }
 
+
     @Override
-    public void execute(Offer domain) {
+    public List<Offer> execute() {
         try{
-            OfferEntity entity =  mapperDomainToEntity.mapToEntity(domain,OfferEntity.class);
-            if (offerRepository.findByProduct_IdAndInitialDateAndCodeFarmer(entity.getProduct().getId(),entity.getInitialDate(), entity.getCodeFarmer()) != null) {
-                offerRepository.save(entity);
-            }
-            else{
-                throw  new ExceptionHortalsoft("La oferta ya existe", 5001, Layers.DOMAIN);
+            if (offerRepository.count() != 0) {
+                List<OfferEntity> resultList = offerRepository.findAll();
+                return mapperEntityToDomain.mapToDomainList(resultList, Offer.class);
+            }else{
+                throw  new ExceptionHortalsoft("No hay productos para mostrar", 6001, Layers.DOMAIN);
             }
         }
         catch(Exception e){

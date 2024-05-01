@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoryDTO {
-    private long id;
+    private int id;
     @NotNull(message = "El nombre no puede ser nulo")
     private String name;
     private String description;

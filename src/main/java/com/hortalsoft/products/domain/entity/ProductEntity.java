@@ -7,17 +7,17 @@ import lombok.*;
 @Entity
 @ToString
 @RequiredArgsConstructor
-//@Table(name = "Product")
+@Table(name = "product",schema = "products")
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Column(name = "id_product")
+    private int id;
+    @Column(name = "name")
     private String name;
-    //TODO se debe descomentar el codigo que se encuentra a continuación y eliminar codeSubcategory
-    //@ManyToOne(fetch = FetchType.LAZY,targetEntity = SubcategoryEntity.class)
-    //@JoinColumn(name="subcategoryId",nullable = true)
-    //private SubcategoryEntity subcategoryEntity;
-    private long codeSubcategory;
+    @ManyToOne//(fetch = FetchType.LAZY,targetEntity = SubcategoryEntity.class)
+    @JoinColumn(name="subcategoryId",nullable = true,insertable = false, updatable = false)
+    private SubcategoryEntity subcategory;
 
 
 }

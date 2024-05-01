@@ -8,12 +8,12 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface PriceRangeRepository extends JpaRepository<PriceRangeEntity,Long> {
+public interface PriceRangeRepository extends JpaRepository<PriceRangeEntity, Integer> {
     @Query("SELECT p FROM PriceRangeEntity p WHERE p.finalDate >= CURRENT_DATE")
     List<PriceRangeEntity> findAllByFinalDateValid();
 
     @Query("SELECT p FROM PriceRangeEntity p WHERE p.finalDate >= CURRENT_DATE AND p.id =:id")
-    Optional<PriceRangeEntity> findByFinalDateValidAndId(long id);
+    Optional<PriceRangeEntity> findByFinalDateValidAndId(int id);
 
-    boolean existsByAssociationAndInitialDateAndProductId(String association, LocalDate initialDate, Long productId);
+    boolean existsByAssociationIdAndInitialDateAndProductId(int association_id, LocalDate initialDate, int productId);
 }

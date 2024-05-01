@@ -36,13 +36,13 @@ public class ModifyProductService implements ModifyProductUseCase {
                 if (resultEntity.get().getName().equals(entity.getName())){
                     resultEntity.get().setId(entity.getId());
                     resultEntity.get().setName(entity.getName());
-                    resultEntity.get().setCodeSubcategory(entity.getCodeSubcategory());
+                    resultEntity.get().setSubcategory(entity.getSubcategory());
                     productRepository.save(resultEntity.get());
                 }
-                else if (!productRepository.existsByName(entity.getName())){
+                else if (productRepository.existsByName(entity.getName())){
                     resultEntity.get().setId(entity.getId());
                     resultEntity.get().setName(entity.getName());
-                    resultEntity.get().setCodeSubcategory(entity.getCodeSubcategory());
+                    resultEntity.get().setSubcategory(entity.getSubcategory());
                     productRepository.save(resultEntity.get());
                 } else{
                     throw  new ExceptionHortalsoft("No es posible modificar el producto", 5001,Layers.DOMAIN);

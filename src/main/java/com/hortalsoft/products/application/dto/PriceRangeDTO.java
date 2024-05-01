@@ -10,14 +10,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PriceRangeDTO {
-    private long id;
+    private int id;
     @NotNull(message = "El producto no puede ser nulo")
-    //TODO eliminar productID y association y descomentar
-    //private Product product;
-    private long productId;
+    private ProductDTO product;
     @NotNull(message = "La asociación no puede ser nula")
-    private String association;
-    //private Association association;
+    private int associationID;
     @NotNull(message = "El rango inicial no puede ser nulo")
     private float initialRange;
     @NotNull(message = "El rango final no puede ser nulo")

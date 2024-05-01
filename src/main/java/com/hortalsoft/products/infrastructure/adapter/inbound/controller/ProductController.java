@@ -1,6 +1,7 @@
 package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.products.application.dto.ProductDTO;
+import com.hortalsoft.products.application.dto.SubcategoryDTO;
 import com.hortalsoft.products.application.facades.facade.product.*;
 import com.hortalsoft.products.util.ExceptionHandlingAspect;
 import com.hortalsoft.products.util.ExceptionHortalsoft;
@@ -48,7 +49,7 @@ public class ProductController {
     @DeleteMapping
     public ResponseEntity<?> deleteProduct(@RequestParam (name = "id") int id){
         try{
-            ProductDTO product = new ProductDTO(id,"",0);
+            ProductDTO product = new ProductDTO(id,"",new SubcategoryDTO());
             facadeDelete.execute(product);
             logger.info("Producto eliminado");
             return ResponseEntity.ok().build();
@@ -61,7 +62,7 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<?> findProduct(@RequestParam (name = "id") int id){
         try {
-            ProductDTO product = new ProductDTO(id, "", 0);
+            ProductDTO product = new ProductDTO(id, "",new SubcategoryDTO());
             ProductDTO productDTO = facadeFind.execute(product);
             logger.info("Producto encontrado");
             return ResponseEntity.ok().body(productDTO);

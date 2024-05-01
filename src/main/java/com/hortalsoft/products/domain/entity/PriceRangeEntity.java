@@ -11,23 +11,25 @@ import java.time.LocalDate;
 @Entity
 @ToString
 @RequiredArgsConstructor
-//@Table(name = "PriceRange")
+@Table(name = "price_range",schema = "products")
 public class PriceRangeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    //@ManyToOne(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
-    //@JoinColumn(name="productId",nullable = true)
-    //private ProductEntity productEntity;
-    //@ManyToOne(fetch = FetchType.LAZY,targetEntity = AssociationEntity.class)
-    //private AssociationEntity association;
-
-    //TODO Se debe eliminar el string associationy productID y descomentar codigo de arriba
-    private long productId;
-    private String association;
+    @Column(name = "id_price_range")
+    private int id;
+    @ManyToOne//(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
+    @JoinColumn(name="id_product",nullable = true,insertable = false, updatable = false)
+    private ProductEntity product;
+    @Column(name = "id_association")
+    private int associationId;
+    @Column(name = "initial_range")
     private float initialRange;
+    @Column(name = "final_range")
     private float finalRange;
+    @Column(name = "initial_date")
     private LocalDate initialDate;
+    @Column(name = "final_date")
     private LocalDate finalDate;
+    @Column(name = "validity")
     private int validity;
 }

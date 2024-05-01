@@ -8,12 +8,7 @@ import java.io.Serializable;
 @Data
 @RequiredArgsConstructor
 public class Product implements Serializable {
-    private long id;
+    private int id;
     private String name;
-    //TODO eliminar codeSubcategory y descomentar código
-    private long codeSubcategory;
-    //private Subcategory subcategory;
-
-
-
+    private Subcategory subcategory;
 }

@@ -8,12 +8,14 @@ import lombok.*;
 @Entity
 @ToString
 @RequiredArgsConstructor
-//TODO descomentar
-//@Table(name = "Category")
+@Table(name = "category",schema = "products")
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Column(name = "id")
+    private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
     private String description;
 }

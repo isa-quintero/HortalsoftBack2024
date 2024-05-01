@@ -10,14 +10,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubcategoryDTO {
-    private long id;
+    private int id;
     @NotBlank(message = "El nombre no puede estar vacío")
     private String name;
     private String description;
-    //TODO eliminar codeCategory y descomentar
     @NotNull(message = "La categoría no puede ser nula")
-    private long codeCategory;
-    //private CategoryDTO categoryDTO;
+    private CategoryDTO categoryDTO;
 
     public void setDescription(String description) {
         this.description = (description != null) ? description : "";
