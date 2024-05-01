@@ -17,7 +17,7 @@ public class OfferEntity {
     @Column(name = "id_offer")
     private int id;
     @ManyToOne//(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
-    @JoinColumn(name="id_product",nullable = true,insertable = false, updatable = false)
+    @JoinColumn(name="id_product")
     private ProductEntity product;
     @Column(name = "id_farmer")
     private int codeFarmer;
