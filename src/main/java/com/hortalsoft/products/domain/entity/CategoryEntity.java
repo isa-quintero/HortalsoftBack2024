@@ -12,7 +12,7 @@ import lombok.*;
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id_category")
     private int id;
     @Column(name = "name")
     private String name;
