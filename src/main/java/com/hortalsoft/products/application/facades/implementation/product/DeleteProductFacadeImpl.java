@@ -6,7 +6,7 @@ import com.hortalsoft.products.application.facades.facade.product.DeleteProductF
 import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.port.input.product.DeleteProductUseCase;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
-import com.hortalsoft.products.util.ExceptionHandlingAspect;
+import com.hortalsoft.util.ExceptionHandlingAspect;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.hortalsoft.products.util;
+package com.hortalsoft.util;
 
 
 public enum Layers {

@@ -1,4 +1,4 @@
-package com.hortalsoft.products.util;
+package com.hortalsoft.util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

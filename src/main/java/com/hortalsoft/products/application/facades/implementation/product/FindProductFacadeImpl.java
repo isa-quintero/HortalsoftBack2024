@@ -7,8 +7,8 @@ import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.port.input.product.FindProductUseCase;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
-import com.hortalsoft.products.util.Layers;
+import com.hortalsoft.util.ExceptionHortalsoft;
+import com.hortalsoft.util.Layers;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -30,13 +30,10 @@ public class FindProductFacadeImpl implements FindProductFacade {
         try{
             Product domain = mapperDTOToDomain.mapToDomain(dto,Product.class);
             return mapperDomainToDto.mapToDto(useCase.execute(domain),ProductDTO.class);
-        }
-        catch(Exception e){
-            if (e instanceof ExceptionHortalsoft){
-                throw (ExceptionHortalsoft) e;
-            }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION);
-            }
+        }catch(ExceptionHortalsoft e){
+            throw e;
+        }catch(Exception e){
+            throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION, e);
         }
     }
 }

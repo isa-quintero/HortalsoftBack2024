@@ -1,4 +1,4 @@
-package com.hortalsoft.products.util;
+package com.hortalsoft.util;
 
 import com.hortalsoft.products.infrastructure.adapter.inbound.controller.ProductController;
 import org.aspectj.lang.annotation.*;
@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 
 @Aspect
 public class ExceptionHandlingAspect {
-    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExceptionHandlingAspect.class);
 
     @AfterThrowing(pointcut = "execution(* com.hortalsoft.products.*.*(..))", throwing = "ex")
     public ResponseEntity<String> handleException(Exception ex) {

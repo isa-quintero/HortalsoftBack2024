@@ -6,8 +6,8 @@ import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.port.input.product.CreateProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
-import com.hortalsoft.products.util.Layers;
+import com.hortalsoft.util.ExceptionHortalsoft;
+import com.hortalsoft.util.Layers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

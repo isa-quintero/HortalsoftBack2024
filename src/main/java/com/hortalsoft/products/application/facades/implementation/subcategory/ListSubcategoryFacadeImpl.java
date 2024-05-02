@@ -6,8 +6,8 @@ import com.hortalsoft.products.application.facades.facade.subcategory.ListSubcat
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.Subcategory;
 import com.hortalsoft.products.domain.port.input.subcategory.ListSubcategoryUseCase;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
-import com.hortalsoft.products.util.Layers;
+import com.hortalsoft.util.ExceptionHortalsoft;
+import com.hortalsoft.util.Layers;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -28,12 +28,10 @@ public class ListSubcategoryFacadeImpl implements ListSubcategoryFacade {
     public List<SubcategoryDTO> execute() {
         try{
             return mapperDomainToDto.mapToDtoList(useCase.execute(), SubcategoryDTO.class);
+        }catch(ExceptionHortalsoft e){
+            throw e;
         }catch(Exception e){
-            if (e instanceof ExceptionHortalsoft){
-                throw (ExceptionHortalsoft) e;
-            }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION);
-            }
+            throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION, e);
         }
 
     }
