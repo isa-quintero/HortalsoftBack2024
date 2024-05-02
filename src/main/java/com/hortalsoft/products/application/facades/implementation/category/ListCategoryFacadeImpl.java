@@ -6,8 +6,8 @@ import com.hortalsoft.products.application.facades.facade.category.ListCategoryF
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.Category;
 import com.hortalsoft.products.domain.port.input.category.ListCategoryUseCase;
-import com.hortalsoft.util.ExceptionHortalsoft;
-import com.hortalsoft.util.Layers;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.products.util.Layers;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

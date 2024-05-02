@@ -6,8 +6,8 @@ import com.hortalsoft.products.application.facades.facade.offer.DisableOfferFaca
 import com.hortalsoft.products.application.facades.facade.offer.FindOfferFacade;
 import com.hortalsoft.products.application.facades.facade.offer.ListOfferFacade;
 import com.hortalsoft.products.infrastructure.adapter.inbound.controller.ProductController;
-import com.hortalsoft.util.ExceptionHandlingAspect;
-import com.hortalsoft.util.ExceptionHortalsoft;
+import com.hortalsoft.products.util.ExceptionHandlingAspect;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,5 @@
-package com.hortalsoft.util;
+package com.hortalsoft.products.util;
 
-import com.hortalsoft.products.infrastructure.adapter.inbound.controller.ProductController;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;

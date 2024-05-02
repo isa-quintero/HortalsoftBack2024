@@ -6,7 +6,7 @@ import com.hortalsoft.products.application.facades.facade.pricerange.DeletePrice
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.products.domain.domain.PriceRange;
 import com.hortalsoft.products.domain.port.input.pricerange.DeletePriceRangeUseCase;
-import com.hortalsoft.util.ExceptionHandlingAspect;
+import com.hortalsoft.products.util.ExceptionHandlingAspect;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

@@ -2,8 +2,8 @@ package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.products.application.dto.ProductDTO;
 import com.hortalsoft.products.application.facades.facade.product.*;
-import com.hortalsoft.util.ExceptionHandlingAspect;
-import com.hortalsoft.util.ExceptionHortalsoft;
+import com.hortalsoft.products.util.ExceptionHandlingAspect;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

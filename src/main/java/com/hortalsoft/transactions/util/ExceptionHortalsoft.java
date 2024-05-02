@@ -1,4 +1,4 @@
-package com.hortalsoft.util;
+package com.hortalsoft.transactions.util;
 
 import lombok.Getter;
 

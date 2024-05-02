@@ -5,8 +5,8 @@ import com.hortalsoft.products.application.facades.facade.pricerange.CreatePrice
 import com.hortalsoft.products.application.facades.facade.pricerange.DeletePriceRangeFacade;
 import com.hortalsoft.products.application.facades.facade.pricerange.FindPriceRangeFacade;
 import com.hortalsoft.products.application.facades.facade.pricerange.ListPricesRangesFacade;
-import com.hortalsoft.util.ExceptionHandlingAspect;
-import com.hortalsoft.util.ExceptionHortalsoft;
+import com.hortalsoft.products.util.ExceptionHandlingAspect;
+import com.hortalsoft.products.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
