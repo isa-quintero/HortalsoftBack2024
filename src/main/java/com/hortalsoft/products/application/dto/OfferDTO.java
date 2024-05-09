@@ -13,7 +13,6 @@ public class OfferDTO {
     private int id;
     @NotNull(message = "El producto no puede ser nulo")
     private int productId;
-    //private ProductDTO productDTO;
     @NotNull(message = "El producto no puede ser nulo")
     private int farmerId;
     private String description;

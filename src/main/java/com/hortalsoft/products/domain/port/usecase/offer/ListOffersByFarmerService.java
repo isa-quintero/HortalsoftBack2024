@@ -21,8 +21,6 @@ public class ListOffersByFarmerService implements ListOfferUseCase {
     private final OfferRepository offerRepository;
     MapperEntityToDomain<OfferEntity, Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
 
-
-    @Autowired
     public ListOffersByFarmerService(OfferRepository offerRepository) {
         this.offerRepository = offerRepository;
     }
@@ -30,20 +28,6 @@ public class ListOffersByFarmerService implements ListOfferUseCase {
 
     @Override
     public List<Offer> execute() {
-        try{
-            if (offerRepository.count() != 0) {
-                List<OfferEntity> resultList = offerRepository.findAll();
-                return mapperEntityToDomain.mapToDomainList(resultList, Offer.class);
-            }else{
-                throw  new ExceptionHortalsoft("No hay productos para mostrar", 6001, Layers.DOMAIN);
-            }
-        }
-        catch(Exception e){
-            if (e instanceof ExceptionHortalsoft){
-                throw (ExceptionHortalsoft) e;
-            }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500,Layers.DOMAIN);
-            }
-        }
+        return List.of();
     }
 }

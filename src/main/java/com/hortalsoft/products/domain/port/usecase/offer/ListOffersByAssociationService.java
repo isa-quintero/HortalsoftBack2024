@@ -18,18 +18,18 @@ public class ListOffersByAssociationService implements ListOfferUseCase {
     private final OfferRepository offerRepository;
     MapperEntityToDomain<OfferEntity, Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
 
-
-    //@Autowired
     public ListOffersByAssociationService(OfferRepository offerRepository) {
         this.offerRepository = offerRepository;
     }
 
-
     @Override
     public List<Offer> execute() {
         try{
+            OfferEntity offerEntity=new OfferEntity();
+            offerEntity.setIdOffer(1);
+            offerEntity.setIdOffer(2);
             if (offerRepository.count() != 0) {
-                List<OfferEntity> resultList = offerRepository.findAll();
+                List<OfferEntity> resultList = offerRepository.findByCodeFarmer(offerEntity.getIdFarmer());
                 return mapperEntityToDomain.mapToDomainList(resultList, Offer.class);
             }else{
                 throw  new ExceptionHortalsoft("No hay productos para mostrar", 6001, Layers.DOMAIN);

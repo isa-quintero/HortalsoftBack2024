@@ -17,7 +17,7 @@ public class PriceRangeEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products.price_range_seq")
     @SequenceGenerator(name = "products.price_range_seq", sequenceName = "products.price_range_seq", allocationSize = 1)
     @Column(name = "id_price_range")
-    private int id;
+    private int idPriceRange;
     @ManyToOne//(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
     @JoinColumn(name="id_product")
     private ProductEntity product;
@@ -28,9 +28,9 @@ public class PriceRangeEntity {
     @Column(name = "final_range")
     private float finalRange;
     @Column(name = "initial_date")
-    private LocalDate initialDate;
+    private LocalDate initialDatePriceRange;
     @Column(name = "final_date")
-    private LocalDate finalDate;
+    private LocalDate finalDatePriceRange;
     @Column(name = "validity")
     private int validity;
 }

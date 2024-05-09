@@ -34,7 +34,7 @@ public class FindOfferService implements FindOfferUseCase {
     public Offer execute(Offer domain) {
         try{
             OfferEntity entity =  mapperDomainToEntity.mapToEntity(domain,OfferEntity.class);
-            Optional<OfferEntity> resultEntity= offerRepository.findById(entity.getId());
+            Optional<OfferEntity> resultEntity= offerRepository.findById(entity.getIdOffer());
             if (resultEntity.isPresent()) {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),Offer.class);
             }

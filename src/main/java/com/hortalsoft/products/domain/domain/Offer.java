@@ -10,7 +10,6 @@ import java.time.LocalDate;
 public class Offer implements Serializable {
     private int id;
     private int productId;
-    //private Product product;
     private int FarmerId;
     private String description;
     private int amount;

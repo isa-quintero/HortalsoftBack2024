@@ -16,7 +16,6 @@ public class SubcategoryDTO {
     private String description;
     @NotNull(message = "La categoría no puede ser nula")
     private int categoryId;
-    //private CategoryDTO categoryDTO;
 
     public void setDescription(String description) {
         this.description = (description != null) ? description : "";

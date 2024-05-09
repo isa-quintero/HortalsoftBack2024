@@ -12,5 +12,4 @@ public class Subcategory implements Serializable {
     private String name;
     private String description;
     private int categoryId;
-    //private Category category;
 }

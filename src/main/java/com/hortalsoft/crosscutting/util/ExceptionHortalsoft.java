@@ -17,6 +17,7 @@ public class ExceptionHortalsoft extends RuntimeException {
         super(message);
         this.errorCode = errorCode;
         this.layer = layer;
+        this.setStackTrace(cause.getStackTrace());
     }
 }
 

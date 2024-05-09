@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface OfferRepository extends JpaRepository<OfferEntity,Integer> {
     OfferRepository findByProduct_IdAndInitialDateAndCodeFarmer(int codeProduct, LocalDate initialDate, int codeFarmer);
-    List<OfferRepository> findByCodeFarmer(int codeFarmer);
+    List<OfferEntity> findByCodeFarmer(int codeFarmer);
 
 }

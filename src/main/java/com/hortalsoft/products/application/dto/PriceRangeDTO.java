@@ -13,7 +13,6 @@ public class PriceRangeDTO {
     private int id;
     @NotNull(message = "El producto no puede ser nulo")
     private int productId;
-    //private ProductDTO product;
     @NotNull(message = "La asociación no puede ser nula")
     private int associationID;
     @NotNull(message = "El rango inicial no puede ser nulo")

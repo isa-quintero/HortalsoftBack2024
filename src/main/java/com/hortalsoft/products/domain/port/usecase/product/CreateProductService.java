@@ -37,12 +37,10 @@ public class CreateProductService implements CreateProductUseCase {
             } else {
                 throw new ExceptionHortalsoft("El producto ya existe", 5001, Layers.DOMAIN);
             }
+        } catch (ExceptionHortalsoft e) {
+            throw e;
         } catch (Exception e) {
-            if (e instanceof ExceptionHortalsoft) {
-                throw (ExceptionHortalsoft) e;
-            } else {
-                throw new ExceptionHortalsoft(e.getMessage(), 500, Layers.DOMAIN);
-            }
+            throw new ExceptionHortalsoft(e.getMessage(), 500, Layers.DOMAIN);
         }
     }
 }

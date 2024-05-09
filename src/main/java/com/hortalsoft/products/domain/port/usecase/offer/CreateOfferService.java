@@ -26,7 +26,7 @@ public class CreateOfferService implements CreateOfferUseCase {
     public void execute(Offer domain) {
         try{
             OfferEntity entity =  mapperDomainToEntity.mapToEntity(domain,OfferEntity.class);
-            if (offerRepository.findByProduct_IdAndInitialDateAndCodeFarmer(entity.getProduct().getId(),entity.getInitialDate(), entity.getCodeFarmer()) != null) {
+            if (offerRepository.findByProduct_IdAndInitialDateAndCodeFarmer(entity.getProduct().getId(),entity.getInitialDateOffer(), entity.getIdFarmer()) != null) {
                 offerRepository.save(entity);
             }
             else{

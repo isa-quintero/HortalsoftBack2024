@@ -48,13 +48,10 @@ public class ModifyProductService implements ModifyProductUseCase {
             else{
                 throw  new ExceptionHortalsoft("Producto no encontrado", 6001, Layers.DOMAIN);
             }
-        }
-        catch(Exception e){
-            if (e instanceof ExceptionHortalsoft){
-                throw (ExceptionHortalsoft) e;
-            }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500,Layers.DOMAIN);
-            }
+        } catch (ExceptionHortalsoft e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExceptionHortalsoft(e.getMessage(), 500, Layers.DOMAIN);
         }
     }
 }

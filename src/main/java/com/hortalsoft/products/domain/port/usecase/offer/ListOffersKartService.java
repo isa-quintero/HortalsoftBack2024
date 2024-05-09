@@ -10,16 +10,15 @@ import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layers;
 
 import java.util.List;
+import java.util.Optional;
 
 //@Service
 //@Transactional
 public class ListOffersKartService implements ListOfferUseCase {
 
     private final OfferRepository offerRepository;
-    MapperEntityToDomain<OfferEntity, Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperEntityToDomain<Optional<OfferEntity>, Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
 
-
-    //@Autowired
     public ListOffersKartService(OfferRepository offerRepository) {
         this.offerRepository = offerRepository;
     }
@@ -29,8 +28,8 @@ public class ListOffersKartService implements ListOfferUseCase {
     public List<Offer> execute() {
         try{
             if (offerRepository.count() != 0) {
-                List<OfferEntity> resultList = offerRepository.findAll();
-                return mapperEntityToDomain.mapToDomainList(resultList, Offer.class);
+                Optional<OfferEntity> resultList = offerRepository.findById(1);
+                return (List<Offer>) mapperEntityToDomain.mapToDomain(resultList, Offer.class);
             }else{
                 throw  new ExceptionHortalsoft("No hay productos para mostrar", 6001, Layers.DOMAIN);
             }

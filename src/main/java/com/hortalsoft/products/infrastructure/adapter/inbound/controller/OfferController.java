@@ -42,8 +42,8 @@ public class OfferController {
             facadeCreate.execute(input);
             return new ResponseEntity<>(HttpStatus.OK);
         }
-        catch (Error e){
-            System.out.println(e.getMessage());
+        catch (Exception e){
+           logger.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
@@ -56,8 +56,8 @@ public class OfferController {
             facadeDelete.execute(offer);
             return new ResponseEntity<>(HttpStatus.OK);
         }
-        catch (Error e){
-            System.out.println(e.getMessage());
+        catch (Exception e){
+            logger.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
