@@ -6,12 +6,13 @@ import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.port.input.product.ModifyProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
+import com.hortalsoft.products.domain.specification.implementation.ProductExistsSpecification;
+import com.hortalsoft.products.domain.specification.implementation.UniqueProductNameSpecification;
 import com.hortalsoft.products.util.ExceptionHortalsoft;
 import com.hortalsoft.products.util.Layers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 
 @Service
@@ -30,20 +31,15 @@ public class ModifyProductService implements ModifyProductUseCase {
     @Override
     public void execute(Product domain) {
         try{
+            UniqueProductNameSpecification uniqueNameSpec = new UniqueProductNameSpecification(domain.getName(), productRepository);
             ProductEntity entity =  mapperDomainToEntity.mapToEntity(domain,ProductEntity.class);
-            Optional<ProductEntity> resultEntity= productRepository.findById(entity.getId());
-            if (resultEntity.isPresent()) {
-                if (resultEntity.get().getName().equals(entity.getName())){
-                    resultEntity.get().setId(entity.getId());
-                    resultEntity.get().setName(entity.getName());
-                    resultEntity.get().setSubcategory(entity.getSubcategory());
-                    productRepository.save(resultEntity.get());
-                }
-                else if (productRepository.existsByName(entity.getName())){
-                    resultEntity.get().setId(entity.getId());
-                    resultEntity.get().setName(entity.getName());
-                    resultEntity.get().setSubcategory(entity.getSubcategory());
-                    productRepository.save(resultEntity.get());
+            ProductExistsSpecification productExistsSpec = new ProductExistsSpecification(entity.getId(), productRepository);
+            if (productExistsSpec.isSatisfiedBy(entity)) {
+                if (uniqueNameSpec.isSatisfiedBy(entity)){
+                    entity.setId(entity.getId());
+                    entity.setName(entity.getName());
+                    entity.setSubcategory(entity.getSubcategory());
+                    productRepository.save(entity);
                 } else{
                     throw  new ExceptionHortalsoft("No es posible modificar el producto", 5001,Layers.DOMAIN);
                 }

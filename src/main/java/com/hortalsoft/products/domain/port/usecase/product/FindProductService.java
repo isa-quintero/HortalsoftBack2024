@@ -7,6 +7,7 @@ import com.hortalsoft.products.domain.port.input.product.FindProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
+import com.hortalsoft.products.domain.specification.implementation.ProductExistsSpecification;
 import com.hortalsoft.products.util.ExceptionHortalsoft;
 import com.hortalsoft.products.util.Layers;
 import jakarta.transaction.Transactional;
@@ -35,7 +36,8 @@ public class FindProductService implements FindProductUseCase {
         try{
             ProductEntity entity =  mapperDomainToEntity.mapToEntity(domain,ProductEntity.class);
             Optional<ProductEntity> resultEntity= productRepository.findById(entity.getId());
-            if (resultEntity.isPresent()) {
+            ProductExistsSpecification productExistsSpec = new ProductExistsSpecification(entity.getId(), productRepository);
+            if (productExistsSpec.isSatisfiedBy(entity)) {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),Product.class);
             }
             else{
