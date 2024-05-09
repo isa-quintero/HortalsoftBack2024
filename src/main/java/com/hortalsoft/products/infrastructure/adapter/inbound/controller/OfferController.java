@@ -5,8 +5,8 @@ import com.hortalsoft.products.application.facades.facade.offer.CreateOfferFacad
 import com.hortalsoft.products.application.facades.facade.offer.DisableOfferFacade;
 import com.hortalsoft.products.application.facades.facade.offer.FindOfferFacade;
 import com.hortalsoft.products.application.facades.facade.offer.ListOfferFacade;
-import com.hortalsoft.products.util.ExceptionHandlingAspect;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
+import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/offers")
+@RequestMapping("/inventory")
 public class OfferController {
 
     private final CreateOfferFacade facadeCreate;
@@ -36,7 +36,7 @@ public class OfferController {
         this.facadeList = facadeList;
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
-    @PostMapping
+    @PostMapping("/offer")
     public ResponseEntity<OfferDTO> createOffer(@RequestBody OfferDTO input){
         try{
             facadeCreate.execute(input);
@@ -48,8 +48,8 @@ public class OfferController {
         }
     }
 
-    @DeleteMapping
-    public ResponseEntity<OfferDTO> disableOffer(@RequestParam (name = "id") int id){
+    @DeleteMapping("/offer/{id}")
+    public ResponseEntity<OfferDTO> disableOffer(@PathVariable (name = "id") int id){
         try{
             LocalDate date=LocalDate.now();
             OfferDTO offer = new OfferDTO(id,0,0,"",0,0,date,date,0,"");
@@ -62,8 +62,8 @@ public class OfferController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<?> findOffer(@RequestParam (name = "id") int id){
+    @GetMapping("/offer/{id}")
+    public ResponseEntity<?> findOffer(@PathVariable (name = "id") int id){
         try{
             OfferDTO offer = new OfferDTO(id,0,0,"",0,0,LocalDate.now(),LocalDate.now(),0,"");
             OfferDTO result=facadeFind.execute(offer);
@@ -75,7 +75,7 @@ public class OfferController {
         }
     }
 
-    @GetMapping("/list")
+    @GetMapping("/offers")
     public ResponseEntity<?> listPriceRanges(){
         try{
             List<OfferDTO> offerDTOS = facadeList.execute();

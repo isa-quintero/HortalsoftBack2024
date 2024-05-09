@@ -2,8 +2,8 @@ package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.products.application.dto.ProductDTO;
 import com.hortalsoft.products.application.facades.facade.product.*;
-import com.hortalsoft.products.util.ExceptionHandlingAspect;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
+import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/inventory")
 public class ProductController {
 
     private final CreateProductFacade facadeCreate;
@@ -33,7 +33,7 @@ public class ProductController {
         this.facadeModify = facadeModify;
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
-    @PostMapping
+    @PostMapping("/product")
     public ResponseEntity<?> createProduct(@RequestBody ProductDTO input){
         try{
             facadeCreate.execute(input);
@@ -45,8 +45,8 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> deleteProduct(@RequestParam (name = "id") int id){
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable (name = "id") int id){
         try{
             ProductDTO product = new ProductDTO(id,"",0);
             facadeDelete.execute(product);
@@ -58,8 +58,8 @@ public class ProductController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<?> findProduct(@RequestParam (name = "id") int id){
+    @GetMapping("/product/{id}")
+    public ResponseEntity<?> findProduct(@PathVariable (name = "id") int id){
         try {
             ProductDTO product = new ProductDTO(id, "",0);
             ProductDTO productDTO = facadeFind.execute(product);
@@ -72,7 +72,7 @@ public class ProductController {
 
     }
 
-    @GetMapping("/list")
+    @GetMapping("/products")
     public ResponseEntity<?> listProducts(){
         try{
             List<ProductDTO> productDTOS = facadeList.execute();
@@ -82,7 +82,7 @@ public class ProductController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
-    @PutMapping("/update")
+    @PutMapping("/product")
     public ResponseEntity<?> updateProduct(@RequestBody ProductDTO input){
         try{
             facadeModify.execute(input);

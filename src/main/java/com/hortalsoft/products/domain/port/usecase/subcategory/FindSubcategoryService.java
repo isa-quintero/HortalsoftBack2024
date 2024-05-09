@@ -7,8 +7,8 @@ import com.hortalsoft.products.domain.port.input.subcategory.FindSubcategoryUseC
 import com.hortalsoft.products.domain.repository.SubcategoryRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
-import com.hortalsoft.products.util.Layers;
+import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
+import com.hortalsoft.crosscutting.util.Layers;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

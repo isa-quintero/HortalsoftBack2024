@@ -5,8 +5,8 @@ import com.hortalsoft.products.application.facades.facade.pricerange.CreatePrice
 import com.hortalsoft.products.application.facades.facade.pricerange.DeletePriceRangeFacade;
 import com.hortalsoft.products.application.facades.facade.pricerange.FindPriceRangeFacade;
 import com.hortalsoft.products.application.facades.facade.pricerange.ListPricesRangesFacade;
-import com.hortalsoft.products.util.ExceptionHandlingAspect;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
+import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/priceRange")
+@RequestMapping("/inventory")
 public class PriceRangeController {
 
     private final CreatePriceRangeFacade facadeCreate;
@@ -35,7 +35,7 @@ public class PriceRangeController {
         this.facadeList = facadeList;
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
-    @PostMapping
+    @PostMapping("/price-range")
     public ResponseEntity<?> createPriceRange(@RequestBody PriceRangeDTO input){
         try{
             facadeCreate.execute(input);
@@ -47,8 +47,8 @@ public class PriceRangeController {
         }
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> deletePriceRange(@RequestParam (name = "id") int id){
+    @DeleteMapping("/price-range/{id}")
+    public ResponseEntity<?> deletePriceRange(@PathVariable (name = "id") int id){
         try{
             PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0,0,LocalDate.now(), LocalDate.now(),0);
             facadeDelete.execute(priceRange);
@@ -60,8 +60,8 @@ public class PriceRangeController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<?> findPriceRange(@RequestParam (name = "id") int id){
+    @GetMapping("/price-range/{id}")
+    public ResponseEntity<?> findPriceRange(@PathVariable (name = "id") int id){
         try {
             PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0,0,LocalDate.now(), LocalDate.now(),0);
             PriceRangeDTO priceRangeDTO = facadeFind.execute(priceRange);
@@ -74,7 +74,7 @@ public class PriceRangeController {
 
     }
 
-    @GetMapping("/list")
+    @GetMapping("/price-ranges")
     public ResponseEntity<?> listPriceRanges(){
         try{
             List<PriceRangeDTO> priceRangeDTOS = facadeList.execute();

@@ -6,8 +6,8 @@ import com.hortalsoft.products.domain.entity.OfferEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.products.domain.port.input.offer.ListOfferUseCase;
 import com.hortalsoft.products.domain.repository.OfferRepository;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
-import com.hortalsoft.products.util.Layers;
+import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
+import com.hortalsoft.crosscutting.util.Layers;
 
 import java.util.List;
 

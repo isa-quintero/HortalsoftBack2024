@@ -1,4 +1,4 @@
-package com.hortalsoft.transactions.util;
+package com.hortalsoft.crosscutting.util;
 
 import lombok.Getter;
 

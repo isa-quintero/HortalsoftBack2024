@@ -5,8 +5,8 @@ import com.hortalsoft.products.application.facades.facade.product.ModifyProductF
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.port.input.product.ModifyProductUseCase;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
-import com.hortalsoft.products.util.Layers;
+import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
+import com.hortalsoft.crosscutting.util.Layers;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

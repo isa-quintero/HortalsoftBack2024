@@ -6,7 +6,7 @@ import com.hortalsoft.products.application.facades.facade.offer.CreateOfferFacad
 import com.hortalsoft.products.domain.domain.Offer;
 import com.hortalsoft.products.domain.port.input.offer.CreateOfferUseCase;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
-import com.hortalsoft.products.util.ExceptionHandlingAspect;
+import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

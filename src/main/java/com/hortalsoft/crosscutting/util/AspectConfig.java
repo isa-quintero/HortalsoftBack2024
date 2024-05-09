@@ -1,4 +1,4 @@
-package com.hortalsoft.transactions.util;
+package com.hortalsoft.crosscutting.util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

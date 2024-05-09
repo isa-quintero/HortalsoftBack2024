@@ -8,8 +8,8 @@ import com.hortalsoft.products.domain.port.input.product.ModifyProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.domain.specification.implementation.ProductExistsSpecification;
 import com.hortalsoft.products.domain.specification.implementation.UniqueProductNameSpecification;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
-import com.hortalsoft.products.util.Layers;
+import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
+import com.hortalsoft.crosscutting.util.Layers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -3,8 +3,8 @@ package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 import com.hortalsoft.products.application.dto.SubcategoryDTO;
 import com.hortalsoft.products.application.facades.facade.subcategory.FindSubcategoryFacade;
 import com.hortalsoft.products.application.facades.facade.subcategory.ListSubcategoryFacade;
-import com.hortalsoft.products.util.ExceptionHandlingAspect;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
+import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/subcategory")
+@RequestMapping("/inventory")
 public class SubcategoryController {
 
     private final FindSubcategoryFacade facadeFind;
@@ -29,8 +29,8 @@ public class SubcategoryController {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
-    @GetMapping
-    public ResponseEntity<?> findSubcategory(@RequestParam (name = "id") int id){
+    @GetMapping("/subcategory/{id}")
+    public ResponseEntity<?> findSubcategory(@PathVariable (name = "id") int id){
         try {
             SubcategoryDTO subcategory = new SubcategoryDTO(id, "","",0);
             SubcategoryDTO subcategoryDTO = facadeFind.execute(subcategory);
@@ -42,7 +42,7 @@ public class SubcategoryController {
         }
     }
 
-    @GetMapping("/list")
+    @GetMapping("/subcategories")
     public ResponseEntity<?> listSubcategories(){
         try{
             List<SubcategoryDTO> subcategoryDTOS = facadeList.execute();

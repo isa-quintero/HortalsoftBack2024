@@ -1,4 +1,4 @@
-package com.hortalsoft.products.util;
+package com.hortalsoft.crosscutting.util;
 
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.annotation.Aspect;

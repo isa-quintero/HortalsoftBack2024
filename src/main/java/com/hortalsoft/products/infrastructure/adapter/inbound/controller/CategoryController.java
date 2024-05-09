@@ -3,8 +3,8 @@ package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 import com.hortalsoft.products.application.dto.CategoryDTO;
 import com.hortalsoft.products.application.facades.facade.category.FindCategoryFacade;
 import com.hortalsoft.products.application.facades.facade.category.ListCategoryFacade;
-import com.hortalsoft.products.util.ExceptionHandlingAspect;
-import com.hortalsoft.products.util.ExceptionHortalsoft;
+import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
+import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/inventory")
 public class CategoryController {
 
     private final FindCategoryFacade facadeFind;
@@ -29,8 +29,8 @@ public class CategoryController {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
-    @GetMapping
-    public ResponseEntity<?> findCategory(@RequestParam (name = "id") int id){
+    @GetMapping("/category/{id}")
+    public ResponseEntity<?> findCategory(@PathVariable (name = "id") int id){
         try {
             CategoryDTO category = new CategoryDTO(id, "","");
             CategoryDTO categoryDTO = facadeFind.execute(category);
@@ -43,7 +43,7 @@ public class CategoryController {
 
     }
 
-    @GetMapping("/list")
+    @GetMapping("/categories")
     public ResponseEntity<?> listCategories(){
         try{
             List<CategoryDTO> categoryDTOs = facadeList.execute();
