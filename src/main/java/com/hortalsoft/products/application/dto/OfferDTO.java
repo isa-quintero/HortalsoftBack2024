@@ -1,33 +1,40 @@
 package com.hortalsoft.products.application.dto;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+
+
+
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class OfferDTO {
-    private int id;
+    @NotNull
+    private Integer id;
     @NotNull(message = "El producto no puede ser nulo")
-    private int productId;
-    @NotNull(message = "El producto no puede ser nulo")
-    private int farmerId;
-    private String description;
+    private Integer productId;
+    @NotNull(message = "El agricultor no puede ser nulo")
+    private Integer farmerId;
+    @Size(max = 500)
+    @Builder.Default
+    private String description= "";
     @NotNull(message = "La cantidad no puede ser nula")
-    private int amount;
+    @Min(1)
+    private Integer amount;
     @NotNull(message = "El precio no puede ser nulo")
-    private int price;
+    @DecimalMin(value = "0.0", inclusive = false)
+    private BigDecimal price;
     @NotNull(message = "La fecha inicial no puede ser nula")
+    @FutureOrPresent
     private LocalDate initialDate;
     @NotNull(message = "La fecha final no puede ser nula")
+    @FutureOrPresent
     private LocalDate finalDate;
-    private int validity;
+    private Integer validity;
     private String idBlockchain;
-
-    public void setDescription(String description) {
-        this.description = (description != null) ? description : "";
-    }
 }

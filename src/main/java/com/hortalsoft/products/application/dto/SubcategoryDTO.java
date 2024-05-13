@@ -2,6 +2,7 @@ package com.hortalsoft.products.application.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 
@@ -10,14 +11,14 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubcategoryDTO {
-    private int id;
+    private Integer id;
+    @Size(min = 1, max = 100)
+    @NotNull(message = "El nombre no puede ser nulo")
     @NotBlank(message = "El nombre no puede estar vacío")
     private String name;
-    private String description;
+    @Size(max = 500)
+    @Builder.Default
+    private String description= "";
     @NotNull(message = "La categoría no puede ser nula")
-    private int categoryId;
-
-    public void setDescription(String description) {
-        this.description = (description != null) ? description : "";
-    }
+    private Integer categoryId;
 }
