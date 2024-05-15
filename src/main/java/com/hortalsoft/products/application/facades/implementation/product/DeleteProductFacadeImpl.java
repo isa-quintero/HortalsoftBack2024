@@ -23,13 +23,18 @@ public class DeleteProductFacadeImpl implements DeleteProductFacade {
 
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
+    /**
+     * Executes the delete product use case with the given product DTO.
+     *
+     * @param dto The product DTO to be deleted.
+     */
     @Override
     public void execute(ProductDTO dto) {
         try{
             Product domain = mapperDTOToDomain.mapToDomain(dto, Product.class);
             useCase.execute(domain);
-        }catch(Exception e){
-            exceptionHandlingAspect.exceptionsApplication(e);
+        }catch(Exception exception){
+            exceptionHandlingAspect.exceptionsApplication(exception);
         }
     }
 }

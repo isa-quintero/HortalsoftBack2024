@@ -17,11 +17,18 @@ public class ModifyProductFacadeImpl implements ModifyProductFacade {
 
     MapperDTOToDomain<ProductDTO ,Product> mapperDTOToDomain = new MapperDTOToDomain<>();
     private final ModifyProductUseCase useCase;
+    private final Layers layer = Layers.APPLICATION;
 
     public ModifyProductFacadeImpl(ModifyProductUseCase useCase) {
         this.useCase = useCase;
     }
 
+    /**
+     * Executes the modification of a product.
+     *
+     * @param dto The ProductDTO object containing the data for the product to be modified.
+     * @throws ExceptionHortalsoft If an error occurs during the execution of the modification.
+     */
     @Override
     public void execute(ProductDTO dto) {
         try{
@@ -32,7 +39,7 @@ public class ModifyProductFacadeImpl implements ModifyProductFacade {
             if (e instanceof ExceptionHortalsoft){
                 throw (ExceptionHortalsoft) e;
             }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION);
+                throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer);
             }
         }
     }

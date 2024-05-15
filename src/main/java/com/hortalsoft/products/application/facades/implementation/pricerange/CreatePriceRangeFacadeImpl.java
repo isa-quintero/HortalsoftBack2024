@@ -22,13 +22,18 @@ public class CreatePriceRangeFacadeImpl implements CreatePriceRangeFacade {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
+    /**
+     * Executes the given PriceRangeDTO by mapping it to a PriceRange domain object and invoking the use case to execute the domain object.
+     *
+     * @param dto The PriceRangeDTO to be executed.
+     */
     @Override
     public void execute(PriceRangeDTO dto) {
         try{
             PriceRange domain = mapperDTOToDomain.mapToDomain(dto, PriceRange.class);
             useCase.execute(domain);
-        }catch(Exception e){
-            exceptionHandlingAspect.exceptionsApplication(e);
+        }catch(Exception exception){
+            exceptionHandlingAspect.exceptionsApplication(exception);
         }
     }
 }

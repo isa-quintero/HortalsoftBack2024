@@ -18,19 +18,26 @@ public class ListOfferFacadeImpl implements ListOfferFacade {
 
     MapperDomainToDto<Offer, OfferDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListOfferUseCase useCase;
+    private final Layers layer = Layers.APPLICATION;
 
     public ListOfferFacadeImpl(ListOfferUseCase useCase) {
         this.useCase = useCase;
     }
 
+    /**
+     * Executes the list offer use case and maps the resulting domain objects to DTOs.
+     *
+     * @return a list of OfferDTO objects representing the offers
+     * @throws ExceptionHortalsoft if an error occurs during the execution of the use case
+     */
     @Override
     public List<OfferDTO> execute() {
         try {
             return mapperDomainToDto.mapToDtoList(useCase.execute(), OfferDTO.class);
-        }catch(ExceptionHortalsoft e){
-            throw e;
-        }catch(Exception e){
-            throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION, e);
+        }catch(ExceptionHortalsoft exceptionHortalsoft){
+            throw exceptionHortalsoft;
+        }catch(Exception exception){
+            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
         }
     }
 }

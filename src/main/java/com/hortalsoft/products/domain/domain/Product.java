@@ -9,16 +9,16 @@ import java.util.Objects;
 @Data
 @RequiredArgsConstructor
 public class Product implements Serializable {
-    private int id;
+    private Integer id;
     private String name;
-    private int subCategoryId;
+    private Integer subCategoryId;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && subCategoryId == product.subCategoryId && Objects.equals(name, product.name);
+        return Objects.equals(id, product.id) && Objects.equals(subCategoryId, product.subCategoryId) && Objects.equals(name, product.name);
     }
 
     @Override

@@ -41,11 +41,11 @@ public class ExceptionHandlingAspect {
         return handleException(e);
     }
 
-    public void exceptionsApplication(Exception e){
-        if (e instanceof ExceptionHortalsoft){
-            throw (ExceptionHortalsoft) e;
+    public void exceptionsApplication(Exception exception){
+        if (exception instanceof ExceptionHortalsoft){
+            throw (ExceptionHortalsoft) exception;
         }else{
-            throw new ExceptionHortalsoft(e.getMessage(),500,Layers.APPLICATION);
+            throw new ExceptionHortalsoft("Ha ocurrido un error",500,Layers.APPLICATION,exception);
         }
     }
 }

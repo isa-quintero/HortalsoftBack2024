@@ -10,7 +10,12 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class AssociateProductFacadeImpl implements AssociateProductFacade {
     //Por el momento no se va a desarrollar este enfoque
-    @Override
+
+    /**
+     * Executes the operation for associating a product.
+     *
+     * @param dto The product DTO containing the necessary information.
+     */@Override
     public void execute(ProductDTO dto) {
     }
 }

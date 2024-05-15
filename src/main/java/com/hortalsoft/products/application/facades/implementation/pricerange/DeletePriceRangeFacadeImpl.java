@@ -22,13 +22,18 @@ public class DeletePriceRangeFacadeImpl implements DeletePriceRangeFacade {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
+    /**
+     * Executes the delete operation for a PriceRangeDTO.
+     *
+     * @param dto The PriceRangeDTO object to be deleted.
+     */
     @Override
     public void execute(PriceRangeDTO dto) {
         try{
             PriceRange domain = mapperDTOToDomain.mapToDomain(dto, PriceRange.class);
             useCase.execute(domain);
-        }catch(Exception e){
-            exceptionHandlingAspect.exceptionsApplication(e);
+        }catch(Exception exception){
+            exceptionHandlingAspect.exceptionsApplication(exception);
         }
     }
 }

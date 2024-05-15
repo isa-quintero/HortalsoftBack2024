@@ -19,19 +19,28 @@ public class FindOfferFacadeImpl implements FindOfferFacade {
     MapperDTOToDomain<OfferDTO, Offer> mapperDTOToDomain = new MapperDTOToDomain<>();
     MapperDomainToDto<Offer, OfferDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final FindOfferUseCase useCase;
+    private final Layers layer = Layers.APPLICATION;
 
     public FindOfferFacadeImpl(FindOfferUseCase useCase) {
         this.useCase = useCase;
     }
+
+    /**
+     * Executes the find offer use case.
+     *
+     * @param dto the offer DTO
+     * @return the offer DTO
+     * @throws ExceptionHortalsoft if an exception occurs
+     */
     @Override
     public OfferDTO execute(OfferDTO dto) {
         try {
             Offer domain = mapperDTOToDomain.mapToDomain(dto, Offer.class);
             return mapperDomainToDto.mapToDto(useCase.execute(domain), OfferDTO.class);
-        }catch(ExceptionHortalsoft e){
-            throw e;
-        }catch(Exception e){
-            throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION, e);
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
+            throw exceptionHortalsoft;
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("ha ocurrido un error", 500, layer, exception);
         }
     }
 }

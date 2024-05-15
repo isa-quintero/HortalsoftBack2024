@@ -18,21 +18,28 @@ public class FindSubcategoryFacadeImpl implements FindSubcategoryFacade {
     MapperDTOToDomain<SubcategoryDTO, Subcategory> mapperDTOToDomain = new MapperDTOToDomain<>();
     MapperDomainToDto<Subcategory, SubcategoryDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final FindSubcategoryUseCase useCase;
+    private final Layers layer = Layers.APPLICATION;
 
     public FindSubcategoryFacadeImpl(FindSubcategoryUseCase useCase) {
         this.useCase = useCase;
     }
 
-
+    /**
+     * Executes the FindSubcategoryFacadeImpl operation.
+     *
+     * @param dto The SubcategoryDTO object to be executed.
+     * @return The SubcategoryDTO object after execution.
+     * @throws ExceptionHortalsoft If any ExceptionHortalsoft exception is thrown during the execution.
+     */
     @Override
     public SubcategoryDTO execute(SubcategoryDTO dto) {
         try{
             Subcategory domain = mapperDTOToDomain.mapToDomain(dto,Subcategory.class);
             return mapperDomainToDto.mapToDto(useCase.execute(domain),SubcategoryDTO.class);
-        }catch(ExceptionHortalsoft e){
-            throw e;
-        }catch(Exception e){
-            throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION, e);
+        }catch(ExceptionHortalsoft exceptionHortalsoft){
+            throw exceptionHortalsoft;
+        }catch(Exception exception){
+            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
         }
 
     }

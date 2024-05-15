@@ -18,19 +18,27 @@ import java.util.List;
 public class ListCategoryFacadeImpl implements ListCategoryFacade {
     MapperDomainToDto<Category, CategoryDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListCategoryUseCase useCase;
+    private final Layers layer = Layers.APPLICATION;
+
 
     public ListCategoryFacadeImpl(ListCategoryUseCase useCase) {
         this.useCase = useCase;
     }
 
+    /**
+     * Executes the list category operation.
+     *
+     * @return a list of CategoryDTO objects representing the categories.
+     * @throws ExceptionHortalsoft if an ExceptionHortalsoft occurs during the execution.
+     */
     @Override
     public List<CategoryDTO> execute() {
         try {
             return mapperDomainToDto.mapToDtoList(useCase.execute(), CategoryDTO.class);
-        }catch(ExceptionHortalsoft e){
-            throw e;
-        }catch(Exception e){
-            throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION,e);
+        }catch(ExceptionHortalsoft exceptionHortalsoft){
+            throw exceptionHortalsoft;
+        }catch(Exception exception){
+            throw new ExceptionHortalsoft("Ha ocurrido un error al listar las categorias",500, layer,exception);
         }
     }
 }

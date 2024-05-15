@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -17,20 +18,20 @@ public class PriceRangeEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products.price_range_seq")
     @SequenceGenerator(name = "products.price_range_seq", sequenceName = "products.price_range_seq", allocationSize = 1)
     @Column(name = "id_price_range")
-    private int idPriceRange;
-    @ManyToOne//(fetch = FetchType.LAZY,targetEntity = ProductEntity.class)
+    private Integer idPriceRange;
+    @ManyToOne
     @JoinColumn(name="id_product")
     private ProductEntity product;
     @Column(name = "id_association")
-    private int associationId;
+    private Integer associationId;
     @Column(name = "initial_range")
-    private float initialRange;
+    private BigDecimal initialRange;
     @Column(name = "final_range")
-    private float finalRange;
+    private BigDecimal finalRange;
     @Column(name = "initial_date")
     private LocalDate initialDatePriceRange;
     @Column(name = "final_date")
     private LocalDate finalDatePriceRange;
     @Column(name = "validity")
-    private int validity;
+    private Integer validity;
 }

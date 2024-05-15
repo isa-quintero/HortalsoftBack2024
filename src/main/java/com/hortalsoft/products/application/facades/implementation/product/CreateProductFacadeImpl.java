@@ -25,14 +25,21 @@ public class CreateProductFacadeImpl implements CreateProductFacade {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
+    /**
+     * Executes the CreateProductFacadeImpl by mapping the given ProductDTO to a Product domain object
+     * and invoking the execute method of the CreateProductUseCase with the domain object as a parameter.
+     *
+     * @param dto The ProductDTO object containing the data to be mapped to the domain object.
+     * @throws Exception If an error occurs during the execution of the use case.
+     */
     @Override
     public void execute(ProductDTO dto) {
         try{
             Product domain = mapperDTOToDomain.mapToDomain(dto, Product.class);
             useCaseCreate.execute(domain);
         }
-        catch(Exception e){
-            exceptionHandlingAspect.exceptionsApplication(e);
+        catch(Exception exception){
+            exceptionHandlingAspect.exceptionsApplication(exception);
         }
     }
 }

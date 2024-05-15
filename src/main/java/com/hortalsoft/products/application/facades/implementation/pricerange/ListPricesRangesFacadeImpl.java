@@ -19,19 +19,26 @@ public class ListPricesRangesFacadeImpl implements ListPricesRangesFacade {
 
     MapperDomainToDto<PriceRange, PriceRangeDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListPricesRangesUseCase useCase;
+    private final Layers layer = Layers.APPLICATION;
 
     public ListPricesRangesFacadeImpl(ListPricesRangesUseCase useCase) {
         this.useCase = useCase;
     }
 
+    /**
+     * Executes the list prices ranges use case and maps the result to a list of PriceRangeDTO objects.
+     *
+     * @return A list of PriceRangeDTO objects representing the price ranges.
+     * @throws ExceptionHortalsoft if an ExceptionHortalsoft is thrown during the execution.
+     */
     @Override
     public List<PriceRangeDTO> execute() {
         try {
             return mapperDomainToDto.mapToDtoList(useCase.execute(), PriceRangeDTO.class);
-        }catch(ExceptionHortalsoft e){
-            throw e;
-        }catch(Exception e){
-            throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION, e);
+        }catch(ExceptionHortalsoft exceptionHortalsoft){
+            throw exceptionHortalsoft;
+        }catch(Exception exception){
+            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
         }
     }
 }

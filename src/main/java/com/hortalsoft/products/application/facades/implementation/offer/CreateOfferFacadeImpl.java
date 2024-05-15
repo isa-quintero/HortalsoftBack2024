@@ -1,6 +1,7 @@
 package com.hortalsoft.products.application.facades.implementation.offer;
 
 
+import com.hortalsoft.crosscutting.util.Layers;
 import com.hortalsoft.products.application.dto.OfferDTO;
 import com.hortalsoft.products.application.facades.facade.offer.CreateOfferFacade;
 import com.hortalsoft.products.domain.domain.Offer;
@@ -8,7 +9,11 @@ import com.hortalsoft.products.domain.port.input.offer.CreateOfferUseCase;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
 import jakarta.transaction.Transactional;
+import jakarta.validation.ValidationException;
 import org.springframework.stereotype.Service;
+
+
+
 
 @Service
 @Transactional
@@ -23,14 +28,32 @@ public class CreateOfferFacadeImpl implements CreateOfferFacade {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
+    /**
+     * Executes the CreateOfferFacadeImpl by validating the OfferDTO and mapping it to the Offer domain object.
+     *
+     * @param dto The OfferDTO object to be executed.
+     * @throws ValidationException If the Product ID or Farmer ID in the OfferDTO is null.
+     * @throws Exception If any other exception occurs during execution.
+     */
     @Override
     public void execute(OfferDTO dto) {
+        validateOfferDTO(dto);
+
         try{
             Offer domain = mapperDTOToDomain.mapToDomain(dto, Offer.class);
             useCase.execute(domain);
 
-        }catch(Exception e){
-            exceptionHandlingAspect.exceptionsApplication(e);
+        }catch(Exception exception){
+            exceptionHandlingAspect.exceptionsApplication(exception);
+        }
+    }
+
+    private void validateOfferDTO(OfferDTO dto) {
+        if (dto.getProductId() == null) {
+            throw new ValidationException("Producto ID no puede ser nulo");
+        }
+        if (dto.getFarmerId() == null) {
+            throw new ValidationException("Agricultor ID no puede ser nulo");
         }
     }
 }

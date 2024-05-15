@@ -22,13 +22,18 @@ public class DisableOfferFacadeImpl implements DisableOfferFacade {
 
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
+    /**
+     * Executes the disable offer operation.
+     *
+     * @param dto The OfferDTO object containing the offer details.
+     */
     @Override
     public void execute(OfferDTO dto) {
         try{
             Offer domain = mapperDTOToDomain.mapToDomain(dto, Offer.class);
             useCase.execute(domain);
-        }catch(Exception e){
-            exceptionHandlingAspect.exceptionsApplication(e);
+        }catch(Exception exception){
+            exceptionHandlingAspect.exceptionsApplication(exception);
         }
     }
 }

@@ -19,21 +19,32 @@ public class FindProductFacadeImpl implements FindProductFacade {
     MapperDTOToDomain<ProductDTO, Product> mapperDTOToDomain = new MapperDTOToDomain<>();
     MapperDomainToDto<Product, ProductDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final FindProductUseCase useCase;
+    private final Layers layer = Layers.APPLICATION;
 
 
     public FindProductFacadeImpl(FindProductUseCase useCase) {
         this.useCase = useCase;
     }
 
+    /**
+     * Executes the FindProductFacadeImpl by mapping the given ProductDTO to a Product domain object,
+     * and then calling the execute method of the FindProductUseCase with the domain object as a parameter.
+     * The result is then mapped back to a ProductDTO and returned.
+     *
+     * @param dto The ProductDTO object to be executed.
+     * @return The resulting ProductDTO object.
+     * @throws ExceptionHortalsoft if an ExceptionHortalsoft is thrown during execution.
+     */
+
     @Override
     public ProductDTO execute(ProductDTO dto) {
         try{
             Product domain = mapperDTOToDomain.mapToDomain(dto,Product.class);
             return mapperDomainToDto.mapToDto(useCase.execute(domain),ProductDTO.class);
-        }catch(ExceptionHortalsoft e){
-            throw e;
-        }catch(Exception e){
-            throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION, e);
+        }catch(ExceptionHortalsoft exceptionHortalsoft){
+            throw exceptionHortalsoft;
+        }catch(Exception exception){
+            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
         }
     }
 }

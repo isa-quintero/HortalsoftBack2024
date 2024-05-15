@@ -19,19 +19,26 @@ public class ListSubcategoryFacadeImpl implements ListSubcategoryFacade {
 
     MapperDomainToDto<Subcategory, SubcategoryDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListSubcategoryUseCase useCase;
+    private final Layers layer = Layers.APPLICATION;
 
     public ListSubcategoryFacadeImpl(ListSubcategoryUseCase useCase) {
         this.useCase = useCase;
     }
 
+    /**
+     * Executes the list subcategory use case and maps the resulting domain objects to DTOs.
+     *
+     * @return a list of SubcategoryDTO objects representing the subcategories
+     * @throws ExceptionHortalsoft if an ExceptionHortalsoft is thrown during the execution
+     */
     @Override
     public List<SubcategoryDTO> execute() {
         try{
             return mapperDomainToDto.mapToDtoList(useCase.execute(), SubcategoryDTO.class);
-        }catch(ExceptionHortalsoft e){
-            throw e;
-        }catch(Exception e){
-            throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION, e);
+        }catch(ExceptionHortalsoft exceptionHortalsoft){
+            throw exceptionHortalsoft;
+        }catch(Exception exception){
+            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
         }
 
     }

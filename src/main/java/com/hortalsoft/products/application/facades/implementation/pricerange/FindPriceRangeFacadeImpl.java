@@ -17,20 +17,30 @@ public class FindPriceRangeFacadeImpl implements FindPriceRangeFacade {
     MapperDTOToDomain<PriceRangeDTO, PriceRange> mapperDTOToDomain = new MapperDTOToDomain<>();
     MapperDomainToDto<PriceRange, PriceRangeDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final FindPriceRangeUseCase useCase;
+    private final Layers layer = Layers.APPLICATION;
 
     public FindPriceRangeFacadeImpl(FindPriceRangeUseCase useCase) {
         this.useCase = useCase;
     }
 
+    /**
+     * Executes the FindPriceRangeFacadeImpl by mapping the given PriceRangeDTO to a PriceRange domain object,
+     * and then executing the useCase to find the price range. The result is then mapped back to a PriceRangeDTO
+     * and returned.
+     *
+     * @param dto The PriceRangeDTO object containing the data to be mapped and used for finding the price range.
+     * @return The PriceRangeDTO object representing the found price range.
+     * @throws ExceptionHortalsoft if an ExceptionHortalsoft is caught during the execution.
+     */
     @Override
     public PriceRangeDTO execute(PriceRangeDTO dto) {
         try {
             PriceRange domain = mapperDTOToDomain.mapToDomain(dto, PriceRange.class);
             return mapperDomainToDto.mapToDto(useCase.execute(domain), PriceRangeDTO.class);
-        }catch(ExceptionHortalsoft e){
-            throw e;
-        }catch(Exception e){
-            throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION, e);
+        }catch(ExceptionHortalsoft exceptionHortalsoft){
+            throw exceptionHortalsoft;
+        }catch(Exception exception){
+            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
         }
     }
 }

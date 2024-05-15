@@ -15,12 +15,12 @@ public class SubcategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_subcategory")
-    private int id;
+    private Integer id;
     @Column(name = "name")
     private String name;
     @Column(name = "description")
     private String description;
-    @ManyToOne//(fetch = FetchType.LAZY,targetEntity = CategoryEntity.class)
+    @ManyToOne
     @JoinColumn(name="id_category")
     private CategoryEntity category;
 }

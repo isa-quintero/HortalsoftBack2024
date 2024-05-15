@@ -3,16 +3,33 @@ package com.hortalsoft.products.application.mapper;
 import org.modelmapper.ModelMapper;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MapperDTOToDomain<T,D>{
     private static final ModelMapper mapper = new ModelMapper();
+
+    /**
+     * Maps a DTO object to a domain object using the ModelMapper library.
+     *
+     * @param dto    The DTO object to be mapped.
+     * @param domain The class of the domain object.
+     * @return The mapped domain object.
+     */
     public D mapToDomain(T dto, Class<D> domain){
         return mapper.map(dto, domain);
     }
+
+    /**
+     * Maps a list of DTO objects to a list of domain objects using the ModelMapper library.
+     *
+     * @param dtoList The list of DTO objects to be mapped.
+     * @param domain  The class of the domain object.
+     * @return The list of mapped domain objects.
+     */
     public List<D> mapToDomainList(List<T> dtoList, Class<D> domain){
-        List<D> domainList = new ArrayList<D>();
-        dtoList.forEach(dto -> domainList.add(mapToDomain(dto, domain)));
-        return domainList;
+        return dtoList.parallelStream()
+                .map(dto -> mapToDomain(dto,domain))
+                .collect(Collectors.toList());
     }
 
 }

@@ -18,18 +18,26 @@ import java.util.List;
 public class ListProductsFacadeImpl implements ListProductsFacade {
     MapperDomainToDto<Product, ProductDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListProductsUseCase useCase;
+    private final Layers layer = Layers.APPLICATION;
 
     public ListProductsFacadeImpl(ListProductsUseCase useCase) {
         this.useCase = useCase;
     }
+
+    /**
+     * Executes the list products use case and maps the resulting domain objects to DTOs.
+     *
+     * @return a list of ProductDTO objects representing the products
+     * @throws ExceptionHortalsoft if an ExceptionHortalsoft is thrown during the execution
+     */
     @Override
     public List<ProductDTO> execute() {
         try{
             return mapperDomainToDto.mapToDtoList(useCase.execute(),ProductDTO.class);
-        }catch(ExceptionHortalsoft e){
-            throw e;
-        }catch(Exception e){
-            throw new ExceptionHortalsoft(e.getMessage(),500, Layers.APPLICATION, e);
+        }catch(ExceptionHortalsoft exceptionHortalsoft){
+            throw exceptionHortalsoft;
+        }catch(Exception exception){
+            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
         }
     }
 }
