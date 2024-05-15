@@ -1,7 +1,6 @@
 package com.hortalsoft.products.application.facades.implementation.offer;
 
 
-import com.hortalsoft.crosscutting.util.Layers;
 import com.hortalsoft.products.application.dto.OfferDTO;
 import com.hortalsoft.products.application.facades.facade.offer.CreateOfferFacade;
 import com.hortalsoft.products.domain.domain.Offer;

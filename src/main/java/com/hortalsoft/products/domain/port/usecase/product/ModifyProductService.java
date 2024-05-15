@@ -9,7 +9,7 @@ import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.domain.specification.implementation.ProductExistsSpecification;
 import com.hortalsoft.products.domain.specification.implementation.UniqueProductNameSpecification;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,17 +41,17 @@ public class ModifyProductService implements ModifyProductUseCase {
                     entity.setSubcategory(entity.getSubcategory());
                     productRepository.save(entity);
                 } else{
-                    throw  new ExceptionHortalsoft("No es posible modificar el producto", 5001,Layers.DOMAIN);
+                    throw  new ExceptionHortalsoft("No es posible modificar el producto", 5001, Layer.DOMAIN);
                 }
 
             }
             else{
-                throw  new ExceptionHortalsoft("Producto no encontrado", 6001, Layers.DOMAIN);
+                throw  new ExceptionHortalsoft("Producto no encontrado", 6001, Layer.DOMAIN);
             }
         } catch (ExceptionHortalsoft e) {
             throw e;
         } catch (Exception e) {
-            throw new ExceptionHortalsoft(e.getMessage(), 500, Layers.DOMAIN);
+            throw new ExceptionHortalsoft(e.getMessage(), 500, Layer.DOMAIN);
         }
     }
 }

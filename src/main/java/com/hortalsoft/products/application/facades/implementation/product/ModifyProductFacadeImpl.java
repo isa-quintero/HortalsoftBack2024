@@ -6,7 +6,7 @@ import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.port.input.product.ModifyProductUseCase;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class ModifyProductFacadeImpl implements ModifyProductFacade {
 
     MapperDTOToDomain<ProductDTO ,Product> mapperDTOToDomain = new MapperDTOToDomain<>();
     private final ModifyProductUseCase useCase;
-    private final Layers layer = Layers.APPLICATION;
+    private final static Layer layer = Layer.APPLICATION;
 
     public ModifyProductFacadeImpl(ModifyProductUseCase useCase) {
         this.useCase = useCase;
@@ -35,12 +35,11 @@ public class ModifyProductFacadeImpl implements ModifyProductFacade {
             Product domain = mapperDTOToDomain.mapToDomain(dto, Product.class);
             useCase.execute(domain);
         }
-        catch(Exception e){
-            if (e instanceof ExceptionHortalsoft){
-                throw (ExceptionHortalsoft) e;
-            }else{
-                throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer);
-            }
+        catch(ExceptionHortalsoft exceptionHortalsoft){
+            throw exceptionHortalsoft;
+        }catch (Exception exception){
+            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer);
         }
     }
 }
+

@@ -8,7 +8,7 @@ import com.hortalsoft.products.domain.port.input.product.FindProductUseCase;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class FindProductFacadeImpl implements FindProductFacade {
     MapperDTOToDomain<ProductDTO, Product> mapperDTOToDomain = new MapperDTOToDomain<>();
     MapperDomainToDto<Product, ProductDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final FindProductUseCase useCase;
-    private final Layers layer = Layers.APPLICATION;
+    private final static Layer layer = Layer.APPLICATION;
 
 
     public FindProductFacadeImpl(FindProductUseCase useCase) {

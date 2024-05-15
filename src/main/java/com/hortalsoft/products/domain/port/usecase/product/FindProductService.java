@@ -9,7 +9,7 @@ import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.products.domain.specification.implementation.ProductExistsSpecification;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,13 +41,13 @@ public class FindProductService implements FindProductUseCase {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),Product.class);
             }
             else{
-                throw  new ExceptionHortalsoft("Producto no encontrado", 6001, Layers.DOMAIN);
+                throw  new ExceptionHortalsoft("Producto no encontrado", 6001, Layer.DOMAIN);
             }
 
         } catch (ExceptionHortalsoft e) {
             throw e;
         } catch (Exception e) {
-            throw new ExceptionHortalsoft(e.getMessage(), 500, Layers.DOMAIN);
+            throw new ExceptionHortalsoft(e.getMessage(), 500, Layer.DOMAIN);
         }
     }
 }

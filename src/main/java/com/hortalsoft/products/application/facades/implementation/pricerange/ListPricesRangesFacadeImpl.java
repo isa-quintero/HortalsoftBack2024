@@ -7,7 +7,7 @@ import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.PriceRange;
 import com.hortalsoft.products.domain.port.input.pricerange.ListPricesRangesUseCase;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class ListPricesRangesFacadeImpl implements ListPricesRangesFacade {
 
     MapperDomainToDto<PriceRange, PriceRangeDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListPricesRangesUseCase useCase;
-    private final Layers layer = Layers.APPLICATION;
+    private final static Layer layer = Layer.APPLICATION;
 
     public ListPricesRangesFacadeImpl(ListPricesRangesUseCase useCase) {
         this.useCase = useCase;

@@ -7,7 +7,7 @@ import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.port.input.product.ListProductsUseCase;
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class ListProductsFacadeImpl implements ListProductsFacade {
     MapperDomainToDto<Product, ProductDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListProductsUseCase useCase;
-    private final Layers layer = Layers.APPLICATION;
+    private final static Layer layer = Layer.APPLICATION;
 
     public ListProductsFacadeImpl(ListProductsUseCase useCase) {
         this.useCase = useCase;

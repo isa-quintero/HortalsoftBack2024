@@ -8,7 +8,7 @@ import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.specification.implementation.UniqueProductNameSpecification;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreateProductService implements CreateProductUseCase {
 
+    private final static Layer layer = Layer.DOMAIN;
     private final ProductRepository productRepository;
     MapperDomainToEntity<Product,ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
@@ -35,12 +36,12 @@ public class CreateProductService implements CreateProductUseCase {
             if (uniqueNameSpec.isSatisfiedBy(entity)) {
                 productRepository.save(entity);
             } else {
-                throw new ExceptionHortalsoft("El producto ya existe", 5001, Layers.DOMAIN);
+                throw new ExceptionHortalsoft("El producto ya existe", 5001,layer);
             }
-        } catch (ExceptionHortalsoft e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ExceptionHortalsoft(e.getMessage(), 500, Layers.DOMAIN);
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
+            throw exceptionHortalsoft;
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error", 500, layer,exception);
         }
     }
 }

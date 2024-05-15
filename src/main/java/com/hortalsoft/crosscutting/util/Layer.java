@@ -1,6 +1,6 @@
 package com.hortalsoft.crosscutting.util;
 
 
-public enum Layers {
+public enum Layer {
     DOMAIN, APPLICATION, INFRASTRUCTURE
 }

@@ -33,7 +33,7 @@ public class ExceptionHandlingAspect {
             message=e.getMessage();
             layer= String.valueOf(((ExceptionHortalsoft) e).getLayer());
         }else{
-            ExceptionHortalsoft ex = new ExceptionHortalsoft(e.getMessage(),500,Layers.INFRASTRUCTURE);
+            ExceptionHortalsoft ex = new ExceptionHortalsoft(e.getMessage(),500, Layer.INFRASTRUCTURE);
             message= ex.getMessage();
             layer= String.valueOf(ex.getLayer());
         }
@@ -45,7 +45,7 @@ public class ExceptionHandlingAspect {
         if (exception instanceof ExceptionHortalsoft){
             throw (ExceptionHortalsoft) exception;
         }else{
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500,Layers.APPLICATION,exception);
+            throw new ExceptionHortalsoft("Ha ocurrido un error",500, Layer.APPLICATION,exception);
         }
     }
 }

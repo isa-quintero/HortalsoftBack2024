@@ -7,7 +7,7 @@ import com.hortalsoft.products.domain.port.input.pricerange.ListPricesRangesUseC
 import com.hortalsoft.products.domain.repository.PriceRangeRepository;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +18,7 @@ import java.util.List;
 @Transactional
 public class ListPriceRangesService implements ListPricesRangesUseCase {
 
+    private final static Layer layer = Layer.DOMAIN;
     private final PriceRangeRepository priceRangeRepository;
     MapperEntityToDomain<PriceRangeEntity,PriceRange> mapperEntityToDomain = new MapperEntityToDomain<>();
 
@@ -35,15 +36,13 @@ public class ListPriceRangesService implements ListPricesRangesUseCase {
                 List<PriceRangeEntity> resultList = priceRangeRepository.findAllByFinalDateValid();
                 return mapperEntityToDomain.mapToDomainList(resultList, PriceRange.class);
             }else{
-                throw  new ExceptionHortalsoft("No hay rangos de precios vigentes para mostrar", 6001,Layers.DOMAIN);
+                throw  new ExceptionHortalsoft("No hay rangos de precios vigentes para mostrar", 6001, layer);
             }
         }
-        catch(Exception e){
-            if (e instanceof ExceptionHortalsoft){
-                throw (ExceptionHortalsoft) e;
-            }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500, Layers.DOMAIN);
-            }
+        catch(ExceptionHortalsoft exceptionHortalsoft){
+                throw exceptionHortalsoft;
+        }catch (Exception exception){
+                throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer,exception);
         }
     }
 }

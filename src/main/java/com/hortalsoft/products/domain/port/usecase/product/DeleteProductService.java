@@ -5,7 +5,7 @@ import com.hortalsoft.products.domain.domain.Product;
 import com.hortalsoft.products.domain.port.input.product.DeleteProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,12 +32,12 @@ public class DeleteProductService implements DeleteProductUseCase {
                 productRepository.deleteById(domain.getId());
             }
             else{
-                throw  new ExceptionHortalsoft("Producto no encontrado", 6001, Layers.DOMAIN);
+                throw  new ExceptionHortalsoft("Producto no encontrado", 6001, Layer.DOMAIN);
             }
         } catch (ExceptionHortalsoft e) {
             throw e;
         } catch (Exception e) {
-            throw new ExceptionHortalsoft(e.getMessage(), 500, Layers.DOMAIN);
+            throw new ExceptionHortalsoft(e.getMessage(), 500, Layer.DOMAIN);
         }
     }
 }

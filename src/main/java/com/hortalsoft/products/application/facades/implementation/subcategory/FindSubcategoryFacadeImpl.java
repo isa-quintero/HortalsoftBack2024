@@ -8,7 +8,7 @@ import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.Subcategory;
 import com.hortalsoft.products.domain.port.input.subcategory.FindSubcategoryUseCase;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class FindSubcategoryFacadeImpl implements FindSubcategoryFacade {
     MapperDTOToDomain<SubcategoryDTO, Subcategory> mapperDTOToDomain = new MapperDTOToDomain<>();
     MapperDomainToDto<Subcategory, SubcategoryDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final FindSubcategoryUseCase useCase;
-    private final Layers layer = Layers.APPLICATION;
+    private final static Layer layer = Layer.APPLICATION;
 
     public FindSubcategoryFacadeImpl(FindSubcategoryUseCase useCase) {
         this.useCase = useCase;

@@ -8,7 +8,7 @@ import com.hortalsoft.products.domain.repository.OfferRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +19,7 @@ import java.util.Optional;
 @Transactional
 public class FindOfferService implements FindOfferUseCase {
 
+    private final static Layer layer =Layer.DOMAIN;
     private final OfferRepository offerRepository;
     MapperDomainToEntity<Offer,OfferEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
     MapperEntityToDomain<OfferEntity,Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
@@ -39,16 +40,13 @@ public class FindOfferService implements FindOfferUseCase {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),Offer.class);
             }
             else{
-                throw  new ExceptionHortalsoft("Oferta no encontrada", 6001, Layers.DOMAIN);
+                throw  new ExceptionHortalsoft("Oferta no encontrada", 6001, layer);
             }
-
         }
-        catch(Exception e){
-            if (e instanceof ExceptionHortalsoft){
-                throw (ExceptionHortalsoft) e;
-            }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500,Layers.DOMAIN);
-            }
+        catch(ExceptionHortalsoft exceptionHortalsoft){
+            throw exceptionHortalsoft;
+        }catch (Exception exception){
+            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer,exception);
         }
     }
 }

@@ -6,7 +6,7 @@ import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.Offer;
 import com.hortalsoft.products.domain.port.input.offer.ListOfferUseCase;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class ListOfferFacadeImpl implements ListOfferFacade {
 
     MapperDomainToDto<Offer, OfferDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListOfferUseCase useCase;
-    private final Layers layer = Layers.APPLICATION;
+    private final static Layer layer = Layer.APPLICATION;
 
     public ListOfferFacadeImpl(ListOfferUseCase useCase) {
         this.useCase = useCase;

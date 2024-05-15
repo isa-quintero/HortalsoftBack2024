@@ -7,7 +7,7 @@ import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.Subcategory;
 import com.hortalsoft.products.domain.port.input.subcategory.ListSubcategoryUseCase;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class ListSubcategoryFacadeImpl implements ListSubcategoryFacade {
 
     MapperDomainToDto<Subcategory, SubcategoryDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListSubcategoryUseCase useCase;
-    private final Layers layer = Layers.APPLICATION;
+    private final Layer layer = Layer.APPLICATION;
 
     public ListSubcategoryFacadeImpl(ListSubcategoryUseCase useCase) {
         this.useCase = useCase;

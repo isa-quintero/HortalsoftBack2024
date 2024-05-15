@@ -8,7 +8,7 @@ import com.hortalsoft.products.domain.repository.SubcategoryRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.crosscutting.util.Layers;
+import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,14 +39,14 @@ public class FindSubcategoryService implements FindSubcategoryUseCase {
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(),Subcategory.class);
             }
             else{
-                throw  new ExceptionHortalsoft("Subcategoria no encontrado", 6001, Layers.DOMAIN);
+                throw  new ExceptionHortalsoft("Subcategoria no encontrado", 6001, Layer.DOMAIN);
             }
         }
         catch(Exception e){
             if (e instanceof ExceptionHortalsoft){
                 throw (ExceptionHortalsoft) e;
             }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500,Layers.DOMAIN);
+                throw new ExceptionHortalsoft(e.getMessage(),500, Layer.DOMAIN);
             }
         }
 
