@@ -33,7 +33,7 @@ public class DeleteProductService implements DeleteProductUseCase {
     public void execute(Product domain) {
         try {
             ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
-            ProductExistsByIdSpecification productExistsSpec = new ProductExistsByIdSpecification(entity, productRepository);
+            ProductExistsByIdSpecification productExistsSpec = new ProductExistsByIdSpecification(productRepository);
             if (productExistsSpec.isSatisfiedBy(entity)) {
                 productRepository.deleteById(domain.getId());
             } else {

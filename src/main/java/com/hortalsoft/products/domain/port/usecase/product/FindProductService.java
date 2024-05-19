@@ -34,7 +34,7 @@ public class FindProductService implements FindProductUseCase {
     public Product execute(Product domain) {
         try {
             ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
-            ProductExistsByIdSpecification productExistsSpec = new ProductExistsByIdSpecification(entity, productRepository);
+            ProductExistsByIdSpecification productExistsSpec = new ProductExistsByIdSpecification(productRepository);
             if (productExistsSpec.isSatisfiedBy(entity)) {
                 return mapperEntityToDomain.mapToDomain(entity, Product.class);
             } else {

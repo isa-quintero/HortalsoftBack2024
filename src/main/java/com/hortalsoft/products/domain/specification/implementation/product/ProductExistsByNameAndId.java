@@ -10,9 +10,9 @@ public class ProductExistsByNameAndId extends AbstractSpecification<ProductEntit
     private final AbstractSpecification<ProductEntity> regla2;
 
 
-    public ProductExistsByNameAndId(ProductRepository productRepository, ProductEntity product) {
-        regla1 = new ProductExistsByIdSpecification(product, productRepository);
-        regla2 = new UniqueProductNameSpecification(product, productRepository);
+    public ProductExistsByNameAndId(ProductRepository productRepository) {
+        regla1 = new ProductExistsByIdSpecification(productRepository);
+        regla2 = new UniqueProductNameSpecification(productRepository);
     }
 
     @Override

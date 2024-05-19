@@ -38,31 +38,30 @@ public class OfferController {
     }
 
     @PostMapping("/offer")
-    public ResponseEntity<OfferDTO> createOffer(@RequestBody OfferDTO input) {
+    public ResponseEntity<Object> createOffer(@RequestBody OfferDTO input) {
         try {
             facadeCreate.execute(input);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
+
         }
     }
 
     @DeleteMapping("/offer/{id}")
-    public ResponseEntity<OfferDTO> disableOffer(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Object> disableOffer(@PathVariable(name = "id") int id) {
         try {
             LocalDate date = LocalDate.now();
             OfferDTO offer = new OfferDTO(id, 0, 0, "", 0, 0.0, date, date, 0, "");
             facadeDelete.execute(offer);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
 
     @GetMapping("/offer/{id}")
-    public ResponseEntity<?> findOffer(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Object> findOffer(@PathVariable(name = "id") int id) {
         try {
             OfferDTO offer = new OfferDTO(id, 0, 0, "", 0, 0.0, LocalDate.now(), LocalDate.now(), 0, "");
             OfferDTO result = facadeFind.execute(offer);
@@ -74,7 +73,7 @@ public class OfferController {
     }
 
     @GetMapping("/offers")
-    public ResponseEntity<?> listPriceRanges() {
+    public ResponseEntity<Object> listPriceRanges() {
         try {
             List<OfferDTO> offerDTOS = facadeList.execute();
             return new ResponseEntity<>(offerDTOS, HttpStatus.OK);

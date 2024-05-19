@@ -30,7 +30,7 @@ public class CategoryController {
     }
 
     @GetMapping("/category/{id}")
-    public ResponseEntity<?> findCategory(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Object> findCategory(@PathVariable(name = "id") int id) {
         try {
             CategoryDTO category = new CategoryDTO(id, "", "");
             CategoryDTO categoryDTO = facadeFind.execute(category);
@@ -43,7 +43,7 @@ public class CategoryController {
     }
 
     @GetMapping("/categories")
-    public ResponseEntity<?> listCategories() {
+    public ResponseEntity<Object> listCategories() {
         try {
             List<CategoryDTO> categoryDTOs = facadeList.execute();
             return new ResponseEntity<>(categoryDTOs, HttpStatus.OK);

@@ -1,5 +1,6 @@
 package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
+import com.hortalsoft.products.application.dto.OfferDTO;
 import com.hortalsoft.products.application.dto.ProductDTO;
 import com.hortalsoft.products.application.facades.facade.product.*;
 import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
@@ -34,7 +35,7 @@ public class ProductController {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
     @PostMapping("/product")
-    public ResponseEntity<?> createProduct(@RequestBody ProductDTO input){
+    public ResponseEntity<Object> createProduct(@RequestBody ProductDTO input){
         try{
             facadeCreate.execute(input);
             logger.info("Producto creado");
@@ -46,7 +47,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/product/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable (name = "id") int id){
+    public ResponseEntity<Object> deleteProduct(@PathVariable (name = "id") int id){
         try{
             ProductDTO product = new ProductDTO(id,"",0);
             facadeDelete.execute(product);
@@ -59,7 +60,7 @@ public class ProductController {
     }
 
     @GetMapping("/product/{id}")
-    public ResponseEntity<?> findProduct(@PathVariable (name = "id") int id){
+    public ResponseEntity<Object> findProduct(@PathVariable (name = "id") int id){
         try {
             ProductDTO product = new ProductDTO(id, "",0);
             ProductDTO productDTO = facadeFind.execute(product);
@@ -73,7 +74,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<?> listProducts(){
+    public ResponseEntity<Object> listProducts(){
         try{
             List<ProductDTO> productDTOS = facadeList.execute();
             return new ResponseEntity<>(productDTOS, HttpStatus.OK);
@@ -83,7 +84,7 @@ public class ProductController {
         }
     }
     @PutMapping("/product")
-    public ResponseEntity<?> updateProduct(@RequestBody ProductDTO input){
+    public ResponseEntity<Object> updateProduct(@RequestBody ProductDTO input){
         try{
             facadeModify.execute(input);
             logger.info("Producto modificado");

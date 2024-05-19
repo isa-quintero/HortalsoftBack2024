@@ -30,7 +30,7 @@ public class SubcategoryController {
     }
 
     @GetMapping("/subcategory/{id}")
-    public ResponseEntity<?> findSubcategory(@PathVariable (name = "id") int id){
+    public ResponseEntity<Object> findSubcategory(@PathVariable (name = "id") int id){
         try {
             SubcategoryDTO subcategory = new SubcategoryDTO(id, "","",0);
             SubcategoryDTO subcategoryDTO = facadeFind.execute(subcategory);
@@ -43,7 +43,7 @@ public class SubcategoryController {
     }
 
     @GetMapping("/subcategories")
-    public ResponseEntity<?> listSubcategories(){
+    public ResponseEntity<Object> listSubcategories(){
         try{
             List<SubcategoryDTO> subcategoryDTOS = facadeList.execute();
             return new ResponseEntity<>(subcategoryDTOS, HttpStatus.OK);

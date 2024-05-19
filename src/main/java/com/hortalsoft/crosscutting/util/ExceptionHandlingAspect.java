@@ -15,7 +15,7 @@ public class ExceptionHandlingAspect {
     private static final Layer layerInfra = Layer.INFRASTRUCTURE;
 
     @AfterThrowing(pointcut = "execution(* com.hortalsoft.products.*.*(..))", throwing = "exception")
-    public ResponseEntity<String> handleException(Exception exception) {
+    public ResponseEntity<Object> handleException(Exception exception) {
         logger.error("Exception occurred: {}", exception.getMessage());
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         if (exception instanceof ExceptionHortalsoft exceptionHortalsoft) {
@@ -29,12 +29,12 @@ public class ExceptionHandlingAspect {
         return ResponseEntity.status(status).body(exception.getMessage());
     }
 
-    public ResponseEntity<String> exceptionsInfrastructure(Exception exception){
+    public ResponseEntity<Object> exceptionsInfrastructure(Exception exception){
         String message;
         Layer layer;
-        if (exception instanceof ExceptionHortalsoft){
-            message = exception.getMessage();
-            layer = ((ExceptionHortalsoft) exception).getLayer();
+        if (exception instanceof ExceptionHortalsoft exceptionHortalsoft){
+            message = exceptionHortalsoft.getMessage();
+            layer = exceptionHortalsoft.getLayer();
         }else{
             message = "Ha ocurrido un error inesperado";
             layer = layerInfra;
@@ -48,13 +48,13 @@ public class ExceptionHandlingAspect {
         logger.error("{}: Capa {}", message, layer);
     }
 
-    private ResponseEntity<String> createResponse(Exception exception){
+    private ResponseEntity<Object> createResponse(Exception exception){
         return handleException(exception);
     }
 
     public void exceptionsApplication(Exception exception){
-        if (exception instanceof ExceptionHortalsoft){
-            throw (ExceptionHortalsoft) exception;
+        if (exception instanceof ExceptionHortalsoft exceptionHortalsoft){
+            throw exceptionHortalsoft;
         }else{
             throw new ExceptionHortalsoft("Ha ocurrido un error inesperado",500, layerApp,exception);
         }

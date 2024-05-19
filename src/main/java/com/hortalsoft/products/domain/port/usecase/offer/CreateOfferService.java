@@ -27,7 +27,7 @@ public class CreateOfferService implements CreateOfferUseCase {
     public void execute(Offer domain) {
         try {
             OfferEntity entity = mapperDomainToEntity.mapToEntity(domain, OfferEntity.class);
-            if (offerRepository.findByProduct_IdAndInitialDateAndCodeFarmer(entity.getProduct().getId(), entity.getInitialDateOffer(), entity.getIdFarmer()) != null) {
+            if (offerRepository.findByProduct_IdAndInitialDateOfferAndIdFarmer(entity.getProduct().getId(), entity.getInitialDateOffer(), entity.getIdFarmer()) != null) {
                 offerRepository.save(entity);
             } else {
                 throw new ExceptionHortalsoft("La oferta ya existe", 5001, layer);

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface OfferRepository extends JpaRepository<OfferEntity,Integer> {
-    OfferRepository findByProduct_IdAndInitialDateAndCodeFarmer(int codeProduct, LocalDate initialDate, int codeFarmer);
-    List<OfferEntity> findByCodeFarmer(int codeFarmer);
+    OfferRepository findByProduct_IdAndInitialDateOfferAndIdFarmer(Integer productId, LocalDate initialDate, Integer codeFarmer);
+    List<OfferEntity> findByIdFarmer(int codeFarmer);
 
 }

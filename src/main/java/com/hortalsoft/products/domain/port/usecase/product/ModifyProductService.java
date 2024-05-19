@@ -29,8 +29,8 @@ public class ModifyProductService implements ModifyProductUseCase {
     @Override
     public void execute(Product domain) {
         try {
+            ProductExistsByNameAndId productExistsByNameAndId = new ProductExistsByNameAndId(productRepository);
             ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
-            ProductExistsByNameAndId productExistsByNameAndId = new ProductExistsByNameAndId(productRepository,entity);
             if (productExistsByNameAndId.isSatisfiedBy(entity)) {
                 entity.setId(entity.getId());
                 entity.setName(entity.getName());

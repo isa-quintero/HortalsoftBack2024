@@ -29,9 +29,8 @@ public class CreateProductService implements CreateProductUseCase {
     @Override
     public void execute(Product domain) {
         try {
+            UniqueProductNameSpecification uniqueProductNameSpecification = new UniqueProductNameSpecification(productRepository);
             ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
-            UniqueProductNameSpecification uniqueProductNameSpecification = new UniqueProductNameSpecification(entity, productRepository);
-
             if (uniqueProductNameSpecification.isSatisfiedBy(entity)) {
                 productRepository.save(entity);
             } else {

@@ -1,5 +1,6 @@
 package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
+import com.hortalsoft.products.application.dto.OfferDTO;
 import com.hortalsoft.products.application.dto.PriceRangeDTO;
 import com.hortalsoft.products.application.facades.facade.pricerange.CreatePriceRangeFacade;
 import com.hortalsoft.products.application.facades.facade.pricerange.DeletePriceRangeFacade;
@@ -36,7 +37,7 @@ public class PriceRangeController {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
     @PostMapping("/price-range")
-    public ResponseEntity<?> createPriceRange(@RequestBody PriceRangeDTO input){
+    public ResponseEntity<Object> createPriceRange(@RequestBody PriceRangeDTO input){
         try{
             facadeCreate.execute(input);
             logger.info("Rango de precios creado");
@@ -48,7 +49,7 @@ public class PriceRangeController {
     }
 
     @DeleteMapping("/price-range/{id}")
-    public ResponseEntity<?> deletePriceRange(@PathVariable (name = "id") int id){
+    public ResponseEntity<Object> deletePriceRange(@PathVariable (name = "id") int id){
         try{
             PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0.0,0.0,LocalDate.now(), LocalDate.now(),0);
             facadeDelete.execute(priceRange);
@@ -61,7 +62,7 @@ public class PriceRangeController {
     }
 
     @GetMapping("/price-range/{id}")
-    public ResponseEntity<?> findPriceRange(@PathVariable (name = "id") int id){
+    public ResponseEntity<Object> findPriceRange(@PathVariable (name = "id") int id){
         try {
             PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0.0,0.0,LocalDate.now(), LocalDate.now(),0);
             PriceRangeDTO priceRangeDTO = facadeFind.execute(priceRange);
@@ -75,7 +76,7 @@ public class PriceRangeController {
     }
 
     @GetMapping("/price-ranges")
-    public ResponseEntity<?> listPriceRanges(){
+    public ResponseEntity<Object> listPriceRanges(){
         try{
             List<PriceRangeDTO> priceRangeDTOS = facadeList.execute();
             return new ResponseEntity<>(priceRangeDTOS, HttpStatus.OK);

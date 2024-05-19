@@ -7,11 +7,9 @@ import com.hortalsoft.products.domain.specification.AbstractSpecification;
 import java.util.Objects;
 
 public class UniqueProductNameSpecification extends AbstractSpecification<ProductEntity> {
-    private final ProductEntity product;
     private final ProductRepository productRepository;
 
-    public UniqueProductNameSpecification(ProductEntity product, ProductRepository productRepository) {
-        this.product = product;
+    public UniqueProductNameSpecification(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

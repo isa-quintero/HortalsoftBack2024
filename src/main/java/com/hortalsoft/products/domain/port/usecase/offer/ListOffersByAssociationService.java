@@ -30,7 +30,7 @@ public class ListOffersByAssociationService implements ListOfferUseCase {
             offerEntity.setIdOffer(1);
             offerEntity.setIdOffer(2);
             if (offerRepository.count() != 0) {
-                List<OfferEntity> resultList = offerRepository.findByCodeFarmer(offerEntity.getIdFarmer());
+                List<OfferEntity> resultList = offerRepository.findByIdFarmer(offerEntity.getIdFarmer());
                 return mapperEntityToDomain.mapToDomainList(resultList, Offer.class);
             } else {
                 throw new ExceptionHortalsoft("No hay productos para mostrar", 6001, layer);

@@ -10,7 +10,7 @@ import java.util.Optional;
 public class ProductExistsByIdSpecification extends AbstractSpecification<ProductEntity> {
     private final ProductRepository productRepository;
 
-    public ProductExistsByIdSpecification(ProductEntity product, ProductRepository productRepository) {
+    public ProductExistsByIdSpecification( ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
