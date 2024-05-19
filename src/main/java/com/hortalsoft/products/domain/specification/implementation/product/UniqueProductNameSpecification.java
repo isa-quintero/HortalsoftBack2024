@@ -1,8 +1,10 @@
-package com.hortalsoft.products.domain.specification.implementation;
+package com.hortalsoft.products.domain.specification.implementation.product;
 
 import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.domain.specification.AbstractSpecification;
+
+import java.util.Objects;
 
 public class UniqueProductNameSpecification extends AbstractSpecification<ProductEntity> {
     private final String productName;
@@ -19,6 +21,6 @@ public class UniqueProductNameSpecification extends AbstractSpecification<Produc
         if (existingProduct == null) {
             return true;
         }
-        return existingProduct.getId() == product.getId();
+        return Objects.equals(existingProduct.getId(), product.getId());
     }
 }

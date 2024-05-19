@@ -1,16 +1,18 @@
 package com.hortalsoft.products.domain.specification;
 
-public class NotSpecification<T> extends AbstractSpecification<T> {
+import java.util.Optional;
 
-    private Specification<T> spec;
+public final class NotSpecification<T> extends AbstractSpecification<T> {
 
-    public NotSpecification(Specification<T> s) {
-        this.spec=s;
+    private final Specification<T> specification;
+
+    public NotSpecification(final Specification<T> rule) {
+        this.specification = Optional.ofNullable(rule).orElseThrow();
     }
 
     @Override
     public boolean isSatisfiedBy(T t) {
-        return !spec.isSatisfiedBy(t);
+        return !specification.isSatisfiedBy(t);
     }
 
 }

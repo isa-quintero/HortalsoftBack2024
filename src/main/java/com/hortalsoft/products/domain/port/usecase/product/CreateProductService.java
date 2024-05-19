@@ -6,7 +6,7 @@ import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.port.input.product.CreateProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
-import com.hortalsoft.products.domain.specification.implementation.UniqueProductNameSpecification;
+import com.hortalsoft.products.domain.specification.implementation.product.UniqueProductNameSpecification;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import org.springframework.beans.factory.annotation.Autowired;

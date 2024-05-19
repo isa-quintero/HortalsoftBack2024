@@ -1,30 +1,18 @@
 package com.hortalsoft.products.domain.specification;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Optional;
 
-public class AndSpecification <T> extends AbstractSpecification<T> {
+public final class AndSpecification <T> extends AbstractSpecification<T> {
 
-    private Set<Specification<T>> set = new HashSet<Specification<T>>();
+    private final Specification<T> specificationA;
+    private final Specification<T> specificationB;
 
-    public AndSpecification(Specification<T> a, Specification<T> b) {
-        set.add(a);
-        set.add(b);
+    public AndSpecification(final Specification<T> ruleA, final Specification<T> ruleB) {
+        specificationA = Optional.ofNullable(ruleA).orElseThrow();
+        specificationB = Optional.ofNullable(ruleB).orElseThrow();
     }
 
-    public boolean isSatisfiedBy(T t) {
-        for( Specification<T> s : set ) {
-            if( !s.isSatisfiedBy(t) ) {
-                return false;
-            }
-        }
-        return true;
+    public boolean isSatisfiedBy(final T t) {
+        return specificationA.isSatisfiedBy(t) && specificationB.isSatisfiedBy(t);
     }
-
-    @Override
-    public AbstractSpecification<T> and(Specification<T> s) {
-        set.add(s);
-        return this;
-    }
-
 }

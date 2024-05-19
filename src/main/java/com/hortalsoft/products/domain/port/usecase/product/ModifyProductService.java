@@ -6,8 +6,8 @@ import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.port.input.product.ModifyProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
-import com.hortalsoft.products.domain.specification.implementation.ProductExistsSpecification;
-import com.hortalsoft.products.domain.specification.implementation.UniqueProductNameSpecification;
+import com.hortalsoft.products.domain.specification.implementation.product.ProductExistsByIdSpecification;
+import com.hortalsoft.products.domain.specification.implementation.product.UniqueProductNameSpecification;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class ModifyProductService implements ModifyProductUseCase {
         try{
             UniqueProductNameSpecification uniqueNameSpec = new UniqueProductNameSpecification(domain.getName(), productRepository);
             ProductEntity entity =  mapperDomainToEntity.mapToEntity(domain,ProductEntity.class);
-            ProductExistsSpecification productExistsSpec = new ProductExistsSpecification(entity.getId(), productRepository);
+            ProductExistsByIdSpecification productExistsSpec = new ProductExistsByIdSpecification(entity.getId(), productRepository);
             if (productExistsSpec.isSatisfiedBy(entity)) {
                 if (uniqueNameSpec.isSatisfiedBy(entity)){
                     entity.setId(entity.getId());
