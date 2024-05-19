@@ -8,17 +8,15 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class ProductExistsByIdSpecification extends AbstractSpecification<ProductEntity> {
-    private final int productId;
     private final ProductRepository productRepository;
 
-    public ProductExistsByIdSpecification(int productId, ProductRepository productRepository) {
-        this.productId = productId;
+    public ProductExistsByIdSpecification(ProductEntity product, ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @Override
     public boolean isSatisfiedBy(ProductEntity product) {
-        Optional<ProductEntity> existingProduct = productRepository.findById(productId);
+        Optional<ProductEntity> existingProduct = productRepository.findById(product.getId());
         return Objects.equals(existingProduct.get().getId(), product.getId());
     }
 }

@@ -2,13 +2,17 @@ package com.hortalsoft.products.domain.port.usecase.product;
 
 
 import com.hortalsoft.products.domain.domain.Product;
+import com.hortalsoft.products.domain.entity.ProductEntity;
+import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.port.input.product.DeleteProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
+import com.hortalsoft.products.domain.specification.implementation.product.ProductExistsByIdSpecification;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 
 @Service
@@ -17,6 +21,7 @@ public class DeleteProductService implements DeleteProductUseCase {
 
     private final ProductRepository productRepository;
     private static final Layer layer = Layer.DOMAIN;
+    MapperDomainToEntity<Product, ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
 
     @Autowired
@@ -27,7 +32,9 @@ public class DeleteProductService implements DeleteProductUseCase {
     @Override
     public void execute(Product domain) {
         try {
-            if (productRepository.existsById(domain.getId())) {
+            ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
+            ProductExistsByIdSpecification productExistsSpec = new ProductExistsByIdSpecification(entity, productRepository);
+            if (productExistsSpec.isSatisfiedBy(entity)) {
                 productRepository.deleteById(domain.getId());
             } else {
                 throw new ExceptionHortalsoft("Producto no encontrado", 6001, layer);

@@ -11,8 +11,8 @@ public class ProductExistsByNameAndId extends AbstractSpecification<ProductEntit
 
 
     public ProductExistsByNameAndId(ProductRepository productRepository, ProductEntity product) {
-        regla1 = new ProductExistsByIdSpecification(product.getId(), productRepository);
-        regla2 = new UniqueProductNameSpecification(product.getName(), productRepository);
+        regla1 = new ProductExistsByIdSpecification(product, productRepository);
+        regla2 = new UniqueProductNameSpecification(product, productRepository);
     }
 
     @Override

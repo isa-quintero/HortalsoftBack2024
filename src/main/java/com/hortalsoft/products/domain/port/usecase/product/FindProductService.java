@@ -14,7 +14,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -35,10 +34,9 @@ public class FindProductService implements FindProductUseCase {
     public Product execute(Product domain) {
         try {
             ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
-            Optional<ProductEntity> resultEntity = productRepository.findById(entity.getId());
-            ProductExistsByIdSpecification productExistsSpec = new ProductExistsByIdSpecification(entity.getId(), productRepository);
+            ProductExistsByIdSpecification productExistsSpec = new ProductExistsByIdSpecification(entity, productRepository);
             if (productExistsSpec.isSatisfiedBy(entity)) {
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Product.class);
+                return mapperEntityToDomain.mapToDomain(entity, Product.class);
             } else {
                 throw new ExceptionHortalsoft("Producto no encontrado", 6001, layer);
             }

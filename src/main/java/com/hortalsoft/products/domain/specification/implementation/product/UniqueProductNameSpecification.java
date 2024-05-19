@@ -7,17 +7,17 @@ import com.hortalsoft.products.domain.specification.AbstractSpecification;
 import java.util.Objects;
 
 public class UniqueProductNameSpecification extends AbstractSpecification<ProductEntity> {
-    private final String productName;
+    private final ProductEntity product;
     private final ProductRepository productRepository;
 
-    public UniqueProductNameSpecification(String productName, ProductRepository productRepository) {
-        this.productName = productName;
+    public UniqueProductNameSpecification(ProductEntity product, ProductRepository productRepository) {
+        this.product = product;
         this.productRepository = productRepository;
     }
 
     @Override
     public boolean isSatisfiedBy(ProductEntity product) {
-        ProductEntity existingProduct = productRepository.findByName(productName);
+        ProductEntity existingProduct = productRepository.findByName(product.getName());
         if (existingProduct == null) {
             return true;
         }

@@ -29,10 +29,10 @@ public class CreateProductService implements CreateProductUseCase {
     @Override
     public void execute(Product domain) {
         try {
-            UniqueProductNameSpecification uniqueNameSpec = new UniqueProductNameSpecification(domain.getName(), productRepository);
             ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
+            UniqueProductNameSpecification uniqueProductNameSpecification = new UniqueProductNameSpecification(entity, productRepository);
 
-            if (uniqueNameSpec.isSatisfiedBy(entity)) {
+            if (uniqueProductNameSpecification.isSatisfiedBy(entity)) {
                 productRepository.save(entity);
             } else {
                 throw new ExceptionHortalsoft("El producto ya existe", 5001, layer);
