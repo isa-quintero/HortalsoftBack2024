@@ -20,7 +20,7 @@ import java.util.Optional;
 @Transactional
 public class FindProductService implements FindProductUseCase {
 
-    private final Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final ProductRepository productRepository;
     MapperDomainToEntity<Product, ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
     MapperEntityToDomain<ProductEntity, Product> mapperEntityToDomain = new MapperEntityToDomain<>();

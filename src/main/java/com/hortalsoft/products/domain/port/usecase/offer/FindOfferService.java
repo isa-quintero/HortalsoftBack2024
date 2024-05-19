@@ -19,7 +19,7 @@ import java.util.Optional;
 @Transactional
 public class FindOfferService implements FindOfferUseCase {
 
-    private final static Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final OfferRepository offerRepository;
     MapperDomainToEntity<Offer, OfferEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
     MapperEntityToDomain<OfferEntity, Offer> mapperEntityToDomain = new MapperEntityToDomain<>();

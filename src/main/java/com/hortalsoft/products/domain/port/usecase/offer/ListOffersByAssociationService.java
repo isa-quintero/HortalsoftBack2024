@@ -15,7 +15,7 @@ import java.util.List;
 //@Transactional
 public class ListOffersByAssociationService implements ListOfferUseCase {
 
-    private final static Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final OfferRepository offerRepository;
     MapperEntityToDomain<OfferEntity, Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
 

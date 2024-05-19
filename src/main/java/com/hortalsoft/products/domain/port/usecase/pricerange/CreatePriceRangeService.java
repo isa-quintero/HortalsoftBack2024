@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreatePriceRangeService implements CreatePriceRangeUseCase {
 
-    private final static Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final PriceRangeRepository priceRangeRepository;
     MapperDomainToEntity<PriceRange, PriceRangeEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 

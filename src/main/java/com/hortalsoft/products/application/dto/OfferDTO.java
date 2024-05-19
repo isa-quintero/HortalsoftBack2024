@@ -3,7 +3,6 @@ package com.hortalsoft.products.application.dto;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 

@@ -19,7 +19,7 @@ import java.util.Optional;
 @Transactional
 public class FindSubcategoryService implements FindSubcategoryUseCase {
 
-    private final Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final SubcategoryRepository subcategoryRepository;
     MapperDomainToEntity<Subcategory, SubcategoryEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
     MapperEntityToDomain<SubcategoryEntity, Subcategory> mapperEntityToDomain = new MapperEntityToDomain<>();

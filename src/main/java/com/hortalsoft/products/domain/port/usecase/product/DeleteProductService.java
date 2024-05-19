@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class DeleteProductService implements DeleteProductUseCase {
 
     private final ProductRepository productRepository;
-    private final Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
 
 
     @Autowired

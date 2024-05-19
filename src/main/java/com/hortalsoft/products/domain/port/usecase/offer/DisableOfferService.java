@@ -17,7 +17,7 @@ import java.util.Optional;
 @Transactional
 public class DisableOfferService implements DisableOfferUseCase {
 
-    private final static Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final OfferRepository offerRepository;
 
 

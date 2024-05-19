@@ -18,7 +18,7 @@ import java.util.List;
 @Transactional
 public class ListSubcategoryService implements ListSubcategoryUseCase {
 
-    private final Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final SubcategoryRepository subcategoryRepository;
     MapperEntityToDomain<SubcategoryEntity, Subcategory> mapperEntityToDomain = new MapperEntityToDomain<>();
 

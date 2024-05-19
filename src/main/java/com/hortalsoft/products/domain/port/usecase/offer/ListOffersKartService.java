@@ -16,7 +16,7 @@ import java.util.Optional;
 //@Transactional
 public class ListOffersKartService implements ListOfferUseCase {
 
-    private final static Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final OfferRepository offerRepository;
     MapperEntityToDomain<Optional<OfferEntity>, Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
 

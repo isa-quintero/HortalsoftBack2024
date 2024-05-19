@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreateOfferService implements CreateOfferUseCase {
 
-    private final static Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final OfferRepository offerRepository;
     MapperDomainToEntity<Offer, OfferEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 

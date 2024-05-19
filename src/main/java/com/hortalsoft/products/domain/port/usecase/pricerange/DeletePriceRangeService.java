@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class DeletePriceRangeService implements DeletePriceRangeUseCase {
 
-    private final static Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final PriceRangeRepository priceRangeRepository;
 
 

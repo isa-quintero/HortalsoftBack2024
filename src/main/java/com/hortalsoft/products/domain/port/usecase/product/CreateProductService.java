@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreateProductService implements CreateProductUseCase {
 
-    private final static Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final ProductRepository productRepository;
     MapperDomainToEntity<Product, ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 

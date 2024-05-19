@@ -19,7 +19,7 @@ import java.util.Optional;
 @Transactional
 public class FindPriceRangeService implements FindPriceRangeUseCase {
 
-    private final static Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final PriceRangeRepository priceRangeRepository;
     MapperDomainToEntity<PriceRange, PriceRangeEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
     MapperEntityToDomain<PriceRangeEntity, PriceRange> mapperEntityToDomain = new MapperEntityToDomain<>();

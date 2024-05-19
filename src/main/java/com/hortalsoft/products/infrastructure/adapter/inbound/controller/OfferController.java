@@ -26,7 +26,7 @@ public class OfferController {
     private final FindOfferFacade facadeFind;
     private final ListOfferFacade facadeList;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
-    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+    private static final Logger logger = LoggerFactory.getLogger(OfferController.class);
 
 
     public OfferController(CreateOfferFacade facade, DisableOfferFacade facadeDelete, FindOfferFacade facadeFind, ListOfferFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {

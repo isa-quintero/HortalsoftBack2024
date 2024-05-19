@@ -18,7 +18,7 @@ import java.util.List;
 @Transactional
 public class ListProductsService implements ListProductsUseCase {
 
-    private final Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final ProductRepository productRepository;
     MapperEntityToDomain<ProductEntity, Product> mapperEntityToDomain = new MapperEntityToDomain<>();
 

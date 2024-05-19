@@ -18,7 +18,7 @@ import java.util.List;
 @Transactional
 public class ListPriceRangesService implements ListPricesRangesUseCase {
 
-    private final static Layer layer = Layer.DOMAIN;
+    private static final Layer layer = Layer.DOMAIN;
     private final PriceRangeRepository priceRangeRepository;
     MapperEntityToDomain<PriceRangeEntity, PriceRange> mapperEntityToDomain = new MapperEntityToDomain<>();
 
