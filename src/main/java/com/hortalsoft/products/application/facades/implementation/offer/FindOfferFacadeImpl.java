@@ -1,7 +1,5 @@
 package com.hortalsoft.products.application.facades.implementation.offer;
 
-
-
 import com.hortalsoft.products.application.dto.OfferDTO;
 import com.hortalsoft.products.application.facades.facade.offer.FindOfferFacade;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
@@ -40,7 +38,7 @@ public class FindOfferFacadeImpl implements FindOfferFacade {
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {
-            throw new ExceptionHortalsoft("ha ocurrido un error", 500, layer, exception);
+            throw new ExceptionHortalsoft("ha ocurrido un error inesperado", 500, layer, exception);
         }
     }
 }

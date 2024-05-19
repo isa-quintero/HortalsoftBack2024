@@ -3,12 +3,11 @@ package com.hortalsoft.products.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 @Data
 @Entity
 @ToString
 @RequiredArgsConstructor
-@Table(name = "category",schema = "products")
+@Table(name = "category", schema = "products")
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

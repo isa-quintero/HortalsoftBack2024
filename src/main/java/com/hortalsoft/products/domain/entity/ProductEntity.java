@@ -7,7 +7,7 @@ import lombok.*;
 @Entity
 @ToString
 @RequiredArgsConstructor
-@Table(name = "product",schema = "products")
+@Table(name = "product", schema = "products")
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products.product_seq")
@@ -17,8 +17,6 @@ public class ProductEntity {
     @Column(name = "name")
     private String name;
     @ManyToOne
-    @JoinColumn(name="id_subcategory")
+    @JoinColumn(name = "id_subcategory")
     private SubcategoryEntity subcategory;
-
-
 }

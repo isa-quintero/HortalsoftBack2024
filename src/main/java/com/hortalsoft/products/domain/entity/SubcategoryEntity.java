@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-
 @Data
 @Entity
 @ToString
 @RequiredArgsConstructor
-@Table(name = "subcategory",schema="products")
+@Table(name = "subcategory", schema = "products")
 public class SubcategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,6 +20,6 @@ public class SubcategoryEntity {
     @Column(name = "description")
     private String description;
     @ManyToOne
-    @JoinColumn(name="id_category")
+    @JoinColumn(name = "id_category")
     private CategoryEntity category;
 }

@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Entity
 @ToString
 @RequiredArgsConstructor
-@Table(name = "offer",schema = "products")
+@Table(name = "offer", schema = "products")
 public class OfferEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products.offer_seq")
@@ -17,7 +17,7 @@ public class OfferEntity {
     @Column(name = "id_offer")
     private Integer idOffer;
     @ManyToOne
-    @JoinColumn(name="id_product")
+    @JoinColumn(name = "id_product")
     private ProductEntity product;
     @Column(name = "id_farmer")
     private Integer idFarmer;

@@ -16,28 +16,26 @@ import org.springframework.stereotype.Service;
 public class DeleteProductService implements DeleteProductUseCase {
 
     private final ProductRepository productRepository;
-
+    private final Layer layer = Layer.DOMAIN;
 
 
     @Autowired
     public DeleteProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-
     }
 
     @Override
     public void execute(Product domain) {
-        try{
-            if(productRepository.existsById(domain.getId())){
+        try {
+            if (productRepository.existsById(domain.getId())) {
                 productRepository.deleteById(domain.getId());
+            } else {
+                throw new ExceptionHortalsoft("Producto no encontrado", 6001, layer);
             }
-            else{
-                throw  new ExceptionHortalsoft("Producto no encontrado", 6001, Layer.DOMAIN);
-            }
-        } catch (ExceptionHortalsoft e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ExceptionHortalsoft(e.getMessage(), 500, Layer.DOMAIN);
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
+            throw exceptionHortalsoft;
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado eliminando el producto", 500, layer, exception);
         }
     }
 }

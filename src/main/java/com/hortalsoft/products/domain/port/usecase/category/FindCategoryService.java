@@ -1,6 +1,5 @@
 package com.hortalsoft.products.domain.port.usecase.category;
 
-
 import com.hortalsoft.products.domain.domain.Category;
 import com.hortalsoft.products.domain.entity.CategoryEntity;
 import com.hortalsoft.products.domain.port.input.category.FindCategoryUseCase;
@@ -22,7 +21,8 @@ public class FindCategoryService implements FindCategoryUseCase {
     private final static Layer layer = Layer.DOMAIN;
     private final CategoryRepository categoryRepository;
     MapperDomainToEntity<Category, CategoryEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
-    MapperEntityToDomain<CategoryEntity,Category> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperEntityToDomain<CategoryEntity, Category> mapperEntityToDomain = new MapperEntityToDomain<>();
+
     @Autowired
     public FindCategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
@@ -32,21 +32,18 @@ public class FindCategoryService implements FindCategoryUseCase {
 
     @Override
     public Category execute(Category domain) {
-        try{
-            CategoryEntity entity =  mapperDomainToEntity.mapToEntity(domain,CategoryEntity.class);
-            Optional<CategoryEntity> resultEntity= categoryRepository.findById(entity.getId());
+        try {
+            CategoryEntity entity = mapperDomainToEntity.mapToEntity(domain, CategoryEntity.class);
+            Optional<CategoryEntity> resultEntity = categoryRepository.findById(entity.getId());
             if (resultEntity.isPresent()) {
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(),Category.class);
+                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Category.class);
+            } else {
+                throw new ExceptionHortalsoft("Categoria no encontrada", 6001, layer);
             }
-            else{
-                throw  new ExceptionHortalsoft("Categoria no encontrada", 6001, layer);
-            }
-        }
-        catch(ExceptionHortalsoft exceptionHortalsoft){
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch (Exception exception){
-                throw new ExceptionHortalsoft("Ha ocurrido un error",500,layer, exception);
-
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado buscando la categoria", 500, layer, exception);
         }
     }
 }

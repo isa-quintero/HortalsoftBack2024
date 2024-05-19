@@ -1,6 +1,5 @@
 package com.hortalsoft.products.application.facades.implementation.product;
 
-
 import com.hortalsoft.products.application.dto.ProductDTO;
 import com.hortalsoft.products.application.facades.facade.product.ListProductsFacade;
 import com.hortalsoft.products.domain.domain.Product;
@@ -32,12 +31,12 @@ public class ListProductsFacadeImpl implements ListProductsFacade {
      */
     @Override
     public List<ProductDTO> execute() {
-        try{
-            return mapperDomainToDto.mapToDtoList(useCase.execute(),ProductDTO.class);
-        }catch(ExceptionHortalsoft exceptionHortalsoft){
+        try {
+            return mapperDomainToDto.mapToDtoList(useCase.execute(), ProductDTO.class);
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch(Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado", 500, layer, exception);
         }
     }
 }

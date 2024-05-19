@@ -19,27 +19,23 @@ public class DeletePriceRangeService implements DeletePriceRangeUseCase {
     private final PriceRangeRepository priceRangeRepository;
 
 
-
     @Autowired
     public DeletePriceRangeService(PriceRangeRepository priceRangeRepository) {
         this.priceRangeRepository = priceRangeRepository;
-
     }
 
     @Override
     public void execute(PriceRange domain) {
-        try{
-            if(priceRangeRepository.existsById(domain.getId())){
+        try {
+            if (priceRangeRepository.existsById(domain.getId())) {
                 priceRangeRepository.deleteById(domain.getId());
+            } else {
+                throw new ExceptionHortalsoft("El rnago de precios no existe", 6001, layer);
             }
-            else{
-                throw new ExceptionHortalsoft("El rnago de precios no existe",6001, layer);
-            }
-        }
-        catch(ExceptionHortalsoft exceptionHortalsoft){
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch (Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer,exception);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado eliminando el rango de precios", 500, layer, exception);
         }
     }
 }

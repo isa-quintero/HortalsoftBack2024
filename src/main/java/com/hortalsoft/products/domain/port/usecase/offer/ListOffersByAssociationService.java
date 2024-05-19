@@ -25,21 +25,20 @@ public class ListOffersByAssociationService implements ListOfferUseCase {
 
     @Override
     public List<Offer> execute() {
-        try{
-            OfferEntity offerEntity=new OfferEntity();
+        try {
+            OfferEntity offerEntity = new OfferEntity();
             offerEntity.setIdOffer(1);
             offerEntity.setIdOffer(2);
             if (offerRepository.count() != 0) {
                 List<OfferEntity> resultList = offerRepository.findByCodeFarmer(offerEntity.getIdFarmer());
                 return mapperEntityToDomain.mapToDomainList(resultList, Offer.class);
-            }else{
-                throw  new ExceptionHortalsoft("No hay productos para mostrar", 6001, Layer.DOMAIN);
+            } else {
+                throw new ExceptionHortalsoft("No hay productos para mostrar", 6001, layer);
             }
-        }
-        catch(ExceptionHortalsoft exceptionHortalsoft) {
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch (Exception exception){
-                throw new ExceptionHortalsoft("Ha ocurrido un error",500,layer);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado listando las ofertas por asociación", 500, layer, exception);
 
         }
     }

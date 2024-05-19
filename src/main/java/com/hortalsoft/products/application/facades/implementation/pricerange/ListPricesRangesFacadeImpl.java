@@ -1,6 +1,5 @@
 package com.hortalsoft.products.application.facades.implementation.pricerange;
 
-
 import com.hortalsoft.products.application.dto.PriceRangeDTO;
 import com.hortalsoft.products.application.facades.facade.pricerange.ListPricesRangesFacade;
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
@@ -35,10 +34,10 @@ public class ListPricesRangesFacadeImpl implements ListPricesRangesFacade {
     public List<PriceRangeDTO> execute() {
         try {
             return mapperDomainToDto.mapToDtoList(useCase.execute(), PriceRangeDTO.class);
-        }catch(ExceptionHortalsoft exceptionHortalsoft){
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch(Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error", 500, layer, exception);
         }
     }
 }

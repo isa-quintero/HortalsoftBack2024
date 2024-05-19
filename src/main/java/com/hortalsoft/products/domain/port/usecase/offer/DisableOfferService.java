@@ -29,19 +29,17 @@ public class DisableOfferService implements DisableOfferUseCase {
 
     @Override
     public void execute(Offer domain) {
-        try{
+        try {
             Optional<OfferEntity> findbyId = offerRepository.findById(domain.getId());
-            if(findbyId.isPresent()){
+            if (findbyId.isPresent()) {
                 offerRepository.delete(findbyId.get());
+            } else {
+                throw new ExceptionHortalsoft("Producto no encontrado", 6001, layer);
             }
-            else{
-                throw  new ExceptionHortalsoft("Producto no encontrado", 6001, layer);
-            }
-        }
-        catch(ExceptionHortalsoft exceptionHortalsoft){
-                throw exceptionHortalsoft;
-        }catch (Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer,exception);
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
+            throw exceptionHortalsoft;
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado deshabilitando la oferta", 500, layer, exception);
         }
     }
 }

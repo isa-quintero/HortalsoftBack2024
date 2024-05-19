@@ -22,31 +22,27 @@ public class FindPriceRangeService implements FindPriceRangeUseCase {
     private final static Layer layer = Layer.DOMAIN;
     private final PriceRangeRepository priceRangeRepository;
     MapperDomainToEntity<PriceRange, PriceRangeEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
-    MapperEntityToDomain<PriceRangeEntity,PriceRange> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperEntityToDomain<PriceRangeEntity, PriceRange> mapperEntityToDomain = new MapperEntityToDomain<>();
 
     @Autowired
     public FindPriceRangeService(PriceRangeRepository priceRangeRepository) {
         this.priceRangeRepository = priceRangeRepository;
-
     }
-
 
     @Override
     public PriceRange execute(PriceRange domain) {
-        try{
-            PriceRangeEntity entity =  mapperDomainToEntity.mapToEntity(domain,PriceRangeEntity.class);
-            Optional<PriceRangeEntity> resultEntity= priceRangeRepository.findByFinalDateValidAndId(entity.getIdPriceRange());
+        try {
+            PriceRangeEntity entity = mapperDomainToEntity.mapToEntity(domain, PriceRangeEntity.class);
+            Optional<PriceRangeEntity> resultEntity = priceRangeRepository.findByFinalDateValidAndId(entity.getIdPriceRange());
             if (resultEntity.isPresent()) {
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(),PriceRange.class);
+                return mapperEntityToDomain.mapToDomain(resultEntity.get(), PriceRange.class);
+            } else {
+                throw new ExceptionHortalsoft("El rango de precios no existe", 6001, layer);
             }
-            else{
-                throw new ExceptionHortalsoft("El rango de precios no existe",6001, layer);
-            }
-        }
-        catch(ExceptionHortalsoft e){
+        } catch (ExceptionHortalsoft e) {
             throw e;
-        }catch (Exception exception) {
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer,exception);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado buscando el rango de precios", 500, layer, exception);
         }
     }
 }

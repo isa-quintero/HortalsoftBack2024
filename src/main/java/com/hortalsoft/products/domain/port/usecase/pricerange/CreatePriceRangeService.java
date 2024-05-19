@@ -19,35 +19,28 @@ public class CreatePriceRangeService implements CreatePriceRangeUseCase {
     private final PriceRangeRepository priceRangeRepository;
     MapperDomainToEntity<PriceRange, PriceRangeEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
-
     @Autowired
     public CreatePriceRangeService(PriceRangeRepository priceRangeRepository) {
         this.priceRangeRepository = priceRangeRepository;
-
     }
 
     @Override
     public void execute(PriceRange domain) {
-        try{
-
-
-            PriceRangeEntity entity =  mapperDomainToEntity.mapToEntity(domain,PriceRangeEntity.class);
-            if (!priceRangeRepository.existsById(entity.getIdPriceRange())){
-                if (!priceRangeRepository.existsByAssociationIdAndInitialDateAndProductId(entity.getAssociationId(),entity.getInitialDatePriceRange(),entity.getProduct().getId())){
+        try {
+            PriceRangeEntity entity = mapperDomainToEntity.mapToEntity(domain, PriceRangeEntity.class);
+            if (!priceRangeRepository.existsById(entity.getIdPriceRange())) {
+                if (!priceRangeRepository.existsByAssociationIdAndInitialDateAndProductId(entity.getAssociationId(), entity.getInitialDatePriceRange(), entity.getProduct().getId())) {
                     priceRangeRepository.save(entity);
+                } else {
+                    throw new ExceptionHortalsoft("El rango de precios ya existe", 5001, layer);
                 }
-                else{
-                    throw  new ExceptionHortalsoft("El rango de precios ya existe", 5001, layer);
-                }
+            } else {
+                throw new ExceptionHortalsoft("El rango de precios ya existe", 5001, layer);
             }
-            else{
-                throw  new ExceptionHortalsoft("El rango de precios ya existe", 5001, layer);
-            }
-        }
-        catch(ExceptionHortalsoft exceptionHortalsoft){
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch (Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer,exception);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado creando el rango de precios", 500, layer, exception);
         }
     }
 }

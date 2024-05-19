@@ -18,6 +18,7 @@ import java.util.List;
 @Transactional
 public class ListSubcategoryService implements ListSubcategoryUseCase {
 
+    private final Layer layer = Layer.DOMAIN;
     private final SubcategoryRepository subcategoryRepository;
     MapperEntityToDomain<SubcategoryEntity, Subcategory> mapperEntityToDomain = new MapperEntityToDomain<>();
 
@@ -30,20 +31,17 @@ public class ListSubcategoryService implements ListSubcategoryUseCase {
 
     @Override
     public List<Subcategory> execute() {
-        try{
+        try {
             if (subcategoryRepository.count() != 0) {
                 List<SubcategoryEntity> resultList = subcategoryRepository.findAll();
                 return mapperEntityToDomain.mapToDomainList(resultList, Subcategory.class);
-            }else{
-                throw  new ExceptionHortalsoft("No hay subcategorias para mostrar", 6001, Layer.DOMAIN);
+            } else {
+                throw new ExceptionHortalsoft("No hay subcategorias para mostrar", 6001, layer);
             }
-        }
-        catch(Exception e){
-            if (e instanceof ExceptionHortalsoft){
-                throw (ExceptionHortalsoft) e;
-            }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500, Layer.DOMAIN);
-            }
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
+            throw exceptionHortalsoft;
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado listando las subcategorias", 500, layer, exception);
         }
     }
 }

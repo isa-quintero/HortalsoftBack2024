@@ -1,6 +1,5 @@
 package com.hortalsoft.products.application.facades.implementation.subcategory;
 
-
 import com.hortalsoft.products.application.dto.SubcategoryDTO;
 import com.hortalsoft.products.application.facades.facade.subcategory.FindSubcategoryFacade;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
@@ -33,14 +32,13 @@ public class FindSubcategoryFacadeImpl implements FindSubcategoryFacade {
      */
     @Override
     public SubcategoryDTO execute(SubcategoryDTO dto) {
-        try{
-            Subcategory domain = mapperDTOToDomain.mapToDomain(dto,Subcategory.class);
-            return mapperDomainToDto.mapToDto(useCase.execute(domain),SubcategoryDTO.class);
-        }catch(ExceptionHortalsoft exceptionHortalsoft){
+        try {
+            Subcategory domain = mapperDTOToDomain.mapToDomain(dto, Subcategory.class);
+            return mapperDomainToDto.mapToDto(useCase.execute(domain), SubcategoryDTO.class);
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch(Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado", 500, layer, exception);
         }
-
     }
 }

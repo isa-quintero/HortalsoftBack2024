@@ -16,7 +16,7 @@ import java.util.Optional;
 //@Transactional
 public class ListOffersKartService implements ListOfferUseCase {
 
-    private final static Layer layer = Layer.DOMAIN
+    private final static Layer layer = Layer.DOMAIN;
     private final OfferRepository offerRepository;
     MapperEntityToDomain<Optional<OfferEntity>, Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
 
@@ -27,18 +27,17 @@ public class ListOffersKartService implements ListOfferUseCase {
 
     @Override
     public List<Offer> execute() {
-        try{
+        try {
             if (offerRepository.count() != 0) {
                 Optional<OfferEntity> resultList = offerRepository.findById(1);
                 return (List<Offer>) mapperEntityToDomain.mapToDomain(resultList, Offer.class);
-            }else{
-                throw  new ExceptionHortalsoft("No hay productos para mostrar", 6001, layer);
+            } else {
+                throw new ExceptionHortalsoft("No hay productos para mostrar", 6001, layer);
             }
-        }
-        catch(ExceptionHortalsoft exceptionHortalsoft){
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch (Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado listando las ofertas del carrito", 500, layer, exception);
         }
     }
 }

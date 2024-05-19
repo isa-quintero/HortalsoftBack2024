@@ -9,16 +9,13 @@ import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-
 @Service
 @Transactional
 public class CreateProductFacadeImpl implements CreateProductFacade {
 
-    MapperDTOToDomain<ProductDTO ,Product> mapperDTOToDomain = new MapperDTOToDomain<>();
+    MapperDTOToDomain<ProductDTO, Product> mapperDTOToDomain = new MapperDTOToDomain<>();
     private final CreateProductUseCase useCaseCreate;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
-
-
 
     public CreateProductFacadeImpl(CreateProductUseCase useCase, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.useCaseCreate = useCase;
@@ -30,15 +27,13 @@ public class CreateProductFacadeImpl implements CreateProductFacade {
      * and invoking the execute method of the CreateProductUseCase with the domain object as a parameter.
      *
      * @param dto The ProductDTO object containing the data to be mapped to the domain object.
-     * @throws Exception If an error occurs during the execution of the use case.
      */
     @Override
     public void execute(ProductDTO dto) {
-        try{
+        try {
             Product domain = mapperDTOToDomain.mapToDomain(dto, Product.class);
             useCaseCreate.execute(domain);
-        }
-        catch(Exception exception){
+        } catch (Exception exception) {
             exceptionHandlingAspect.exceptionsApplication(exception);
         }
     }

@@ -1,6 +1,5 @@
 package com.hortalsoft.products.application.facades.implementation.pricerange;
 
-
 import com.hortalsoft.products.application.dto.PriceRangeDTO;
 import com.hortalsoft.products.application.facades.facade.pricerange.CreatePriceRangeFacade;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
@@ -29,10 +28,10 @@ public class CreatePriceRangeFacadeImpl implements CreatePriceRangeFacade {
      */
     @Override
     public void execute(PriceRangeDTO dto) {
-        try{
+        try {
             PriceRange domain = mapperDTOToDomain.mapToDomain(dto, PriceRange.class);
             useCase.execute(domain);
-        }catch(Exception exception){
+        } catch (Exception exception) {
             exceptionHandlingAspect.exceptionsApplication(exception);
         }
     }

@@ -19,10 +19,10 @@ import java.util.Optional;
 @Transactional
 public class FindOfferService implements FindOfferUseCase {
 
-    private final static Layer layer =Layer.DOMAIN;
+    private final static Layer layer = Layer.DOMAIN;
     private final OfferRepository offerRepository;
-    MapperDomainToEntity<Offer,OfferEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
-    MapperEntityToDomain<OfferEntity,Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperDomainToEntity<Offer, OfferEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
+    MapperEntityToDomain<OfferEntity, Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
 
     @Autowired
     public FindOfferService(OfferRepository offerRepository) {
@@ -33,20 +33,18 @@ public class FindOfferService implements FindOfferUseCase {
 
     @Override
     public Offer execute(Offer domain) {
-        try{
-            OfferEntity entity =  mapperDomainToEntity.mapToEntity(domain,OfferEntity.class);
-            Optional<OfferEntity> resultEntity= offerRepository.findById(entity.getIdOffer());
+        try {
+            OfferEntity entity = mapperDomainToEntity.mapToEntity(domain, OfferEntity.class);
+            Optional<OfferEntity> resultEntity = offerRepository.findById(entity.getIdOffer());
             if (resultEntity.isPresent()) {
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(),Offer.class);
+                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Offer.class);
+            } else {
+                throw new ExceptionHortalsoft("Oferta no encontrada", 6001, layer);
             }
-            else{
-                throw  new ExceptionHortalsoft("Oferta no encontrada", 6001, layer);
-            }
-        }
-        catch(ExceptionHortalsoft exceptionHortalsoft){
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch (Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer,exception);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado buscando la oferta", 500, layer, exception);
         }
     }
 }

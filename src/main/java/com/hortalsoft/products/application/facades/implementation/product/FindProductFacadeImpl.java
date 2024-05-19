@@ -1,6 +1,5 @@
 package com.hortalsoft.products.application.facades.implementation.product;
 
-
 import com.hortalsoft.products.application.dto.ProductDTO;
 import com.hortalsoft.products.application.facades.facade.product.FindProductFacade;
 import com.hortalsoft.products.domain.domain.Product;
@@ -21,7 +20,6 @@ public class FindProductFacadeImpl implements FindProductFacade {
     private final FindProductUseCase useCase;
     private final static Layer layer = Layer.APPLICATION;
 
-
     public FindProductFacadeImpl(FindProductUseCase useCase) {
         this.useCase = useCase;
     }
@@ -35,16 +33,15 @@ public class FindProductFacadeImpl implements FindProductFacade {
      * @return The resulting ProductDTO object.
      * @throws ExceptionHortalsoft if an ExceptionHortalsoft is thrown during execution.
      */
-
     @Override
     public ProductDTO execute(ProductDTO dto) {
-        try{
-            Product domain = mapperDTOToDomain.mapToDomain(dto,Product.class);
-            return mapperDomainToDto.mapToDto(useCase.execute(domain),ProductDTO.class);
-        }catch(ExceptionHortalsoft exceptionHortalsoft){
+        try {
+            Product domain = mapperDTOToDomain.mapToDomain(dto, Product.class);
+            return mapperDomainToDto.mapToDto(useCase.execute(domain), ProductDTO.class);
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch(Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado", 500, layer, exception);
         }
     }
 }

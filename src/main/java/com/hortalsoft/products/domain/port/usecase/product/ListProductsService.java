@@ -18,8 +18,9 @@ import java.util.List;
 @Transactional
 public class ListProductsService implements ListProductsUseCase {
 
+    private final Layer layer = Layer.DOMAIN;
     private final ProductRepository productRepository;
-    MapperEntityToDomain<ProductEntity,Product> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperEntityToDomain<ProductEntity, Product> mapperEntityToDomain = new MapperEntityToDomain<>();
 
 
     @Autowired
@@ -30,19 +31,17 @@ public class ListProductsService implements ListProductsUseCase {
 
     @Override
     public List<Product> execute() {
-        try{
+        try {
             if (productRepository.count() != 0) {
                 List<ProductEntity> resultList = productRepository.findAll();
-                return mapperEntityToDomain.mapToDomainList(resultList,Product.class);
+                return mapperEntityToDomain.mapToDomainList(resultList, Product.class);
+            } else {
+                throw new ExceptionHortalsoft("No hay productos para mostrar", 6001, layer);
             }
-            else{
-                throw  new ExceptionHortalsoft("No hay productos para mostrar", 6001, Layer.DOMAIN);
-            }
-
-        } catch (ExceptionHortalsoft e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ExceptionHortalsoft(e.getMessage(), 500, Layer.DOMAIN);
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
+            throw exceptionHortalsoft;
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado listando los productos", 500, layer, exception);
         }
     }
 }

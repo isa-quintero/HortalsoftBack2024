@@ -34,10 +34,10 @@ public class ListOfferFacadeImpl implements ListOfferFacade {
     public List<OfferDTO> execute() {
         try {
             return mapperDomainToDto.mapToDtoList(useCase.execute(), OfferDTO.class);
-        }catch(ExceptionHortalsoft exceptionHortalsoft){
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch(Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado", 500, layer, exception);
         }
     }
 }

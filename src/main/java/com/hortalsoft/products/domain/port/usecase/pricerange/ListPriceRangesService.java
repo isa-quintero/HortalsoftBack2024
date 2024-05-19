@@ -20,7 +20,7 @@ public class ListPriceRangesService implements ListPricesRangesUseCase {
 
     private final static Layer layer = Layer.DOMAIN;
     private final PriceRangeRepository priceRangeRepository;
-    MapperEntityToDomain<PriceRangeEntity,PriceRange> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperEntityToDomain<PriceRangeEntity, PriceRange> mapperEntityToDomain = new MapperEntityToDomain<>();
 
 
     @Autowired
@@ -28,21 +28,19 @@ public class ListPriceRangesService implements ListPricesRangesUseCase {
         this.priceRangeRepository = priceRangeRepository;
     }
 
-
     @Override
     public List<PriceRange> execute() {
-        try{
+        try {
             if (priceRangeRepository.count() != 0) {
                 List<PriceRangeEntity> resultList = priceRangeRepository.findAllByFinalDateValid();
                 return mapperEntityToDomain.mapToDomainList(resultList, PriceRange.class);
-            }else{
-                throw  new ExceptionHortalsoft("No hay rangos de precios vigentes para mostrar", 6001, layer);
+            } else {
+                throw new ExceptionHortalsoft("No hay rangos de precios vigentes para mostrar", 6001, layer);
             }
-        }
-        catch(ExceptionHortalsoft exceptionHortalsoft){
-                throw exceptionHortalsoft;
-        }catch (Exception exception){
-                throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer,exception);
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
+            throw exceptionHortalsoft;
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado listando los rangos de precios", 500, layer, exception);
         }
     }
 }

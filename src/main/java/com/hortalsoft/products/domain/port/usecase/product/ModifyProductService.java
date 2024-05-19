@@ -14,44 +14,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-
 @Service
 public class ModifyProductService implements ModifyProductUseCase {
 
+    private final Layer layer = Layer.DOMAIN;
     private final ProductRepository productRepository;
-    MapperDomainToEntity<Product,ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
+    MapperDomainToEntity<Product, ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
 
     @Autowired
     public ModifyProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-
     }
 
     @Override
     public void execute(Product domain) {
-        try{
+        try {
             UniqueProductNameSpecification uniqueNameSpec = new UniqueProductNameSpecification(domain.getName(), productRepository);
-            ProductEntity entity =  mapperDomainToEntity.mapToEntity(domain,ProductEntity.class);
+            ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
             ProductExistsByIdSpecification productExistsSpec = new ProductExistsByIdSpecification(entity.getId(), productRepository);
             if (productExistsSpec.isSatisfiedBy(entity)) {
-                if (uniqueNameSpec.isSatisfiedBy(entity)){
+                if (uniqueNameSpec.isSatisfiedBy(entity)) {
                     entity.setId(entity.getId());
                     entity.setName(entity.getName());
                     entity.setSubcategory(entity.getSubcategory());
                     productRepository.save(entity);
-                } else{
-                    throw  new ExceptionHortalsoft("No es posible modificar el producto", 5001, Layer.DOMAIN);
+                } else {
+                    throw new ExceptionHortalsoft("No es posible modificar el producto", 5001, layer);
                 }
-
+            } else {
+                throw new ExceptionHortalsoft("Producto no encontrado", 6001, layer);
             }
-            else{
-                throw  new ExceptionHortalsoft("Producto no encontrado", 6001, Layer.DOMAIN);
-            }
-        } catch (ExceptionHortalsoft e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ExceptionHortalsoft(e.getMessage(), 500, Layer.DOMAIN);
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
+            throw exceptionHortalsoft;
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado modificando el producto", 500, layer, exception);
         }
     }
 }

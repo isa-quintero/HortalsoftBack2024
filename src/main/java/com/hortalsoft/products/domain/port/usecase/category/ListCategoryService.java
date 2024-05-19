@@ -20,7 +20,7 @@ public class ListCategoryService implements ListCategoryUseCase {
 
     private final static Layer layer = Layer.DOMAIN;
     private final CategoryRepository categoryRepository;
-    MapperEntityToDomain<CategoryEntity,Category> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperEntityToDomain<CategoryEntity, Category> mapperEntityToDomain = new MapperEntityToDomain<>();
 
 
     @Autowired
@@ -31,19 +31,17 @@ public class ListCategoryService implements ListCategoryUseCase {
 
     @Override
     public List<Category> execute() {
-        try{
+        try {
             if (categoryRepository.count() != 0) {
                 List<CategoryEntity> resultList = categoryRepository.findAll();
                 return mapperEntityToDomain.mapToDomainList(resultList, Category.class);
-            }else{
-                throw  new ExceptionHortalsoft("No hay productos para mostrar", 6001, layer);
+            } else {
+                throw new ExceptionHortalsoft("No hay productos para mostrar", 6001, layer);
             }
-        }
-        catch(ExceptionHortalsoft exceptionHortalsoft){
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch (Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500,layer,exception);
-
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado listando las categorias", 500, layer, exception);
         }
     }
 }

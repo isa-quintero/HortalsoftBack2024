@@ -18,13 +18,12 @@ public class CreateProductService implements CreateProductUseCase {
 
     private final static Layer layer = Layer.DOMAIN;
     private final ProductRepository productRepository;
-    MapperDomainToEntity<Product,ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
+    MapperDomainToEntity<Product, ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
 
     @Autowired
     public CreateProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-
     }
 
     @Override
@@ -36,12 +35,12 @@ public class CreateProductService implements CreateProductUseCase {
             if (uniqueNameSpec.isSatisfiedBy(entity)) {
                 productRepository.save(entity);
             } else {
-                throw new ExceptionHortalsoft("El producto ya existe", 5001,layer);
+                throw new ExceptionHortalsoft("El producto ya existe", 5001, layer);
             }
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {
-            throw new ExceptionHortalsoft("Ha ocurrido un error", 500, layer,exception);
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado creando el producto", 500, layer, exception);
         }
     }
 }

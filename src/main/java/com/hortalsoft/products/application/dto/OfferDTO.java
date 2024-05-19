@@ -7,8 +7,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
-
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -22,7 +20,7 @@ public class OfferDTO {
     private Integer farmerId;
     @Size(max = 500)
     @Builder.Default
-    private String description= "";
+    private String description = "";
     @NotNull(message = "La cantidad no puede ser nula")
     @Min(1)
     private Integer amount;

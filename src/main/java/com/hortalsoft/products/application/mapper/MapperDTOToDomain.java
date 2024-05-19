@@ -1,10 +1,10 @@
 package com.hortalsoft.products.application.mapper;
 
 import org.modelmapper.ModelMapper;
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class MapperDTOToDomain<T,D>{
+import java.util.List;
+
+public class MapperDTOToDomain<T, D> {
     private static final ModelMapper mapper = new ModelMapper();
 
     /**
@@ -14,7 +14,7 @@ public class MapperDTOToDomain<T,D>{
      * @param domain The class of the domain object.
      * @return The mapped domain object.
      */
-    public D mapToDomain(T dto, Class<D> domain){
+    public D mapToDomain(T dto, Class<D> domain) {
         return mapper.map(dto, domain);
     }
 
@@ -25,10 +25,9 @@ public class MapperDTOToDomain<T,D>{
      * @param domain  The class of the domain object.
      * @return The list of mapped domain objects.
      */
-    public List<D> mapToDomainList(List<T> dtoList, Class<D> domain){
+    public List<D> mapToDomainList(List<T> dtoList, Class<D> domain) {
         return dtoList.parallelStream()
-                .map(dto -> mapToDomain(dto,domain))
-                .collect(Collectors.toList());
+                .map(dto -> mapToDomain(dto, domain))
+                .toList();
     }
-
 }

@@ -23,33 +23,31 @@ public class CategoryController {
     private final ExceptionHandlingAspect exceptionHandlingAspect;
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
-    public CategoryController( FindCategoryFacade facadeFind, ListCategoryFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
+    public CategoryController(FindCategoryFacade facadeFind, ListCategoryFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.facadeFind = facadeFind;
         this.facadeList = facadeList;
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
     @GetMapping("/category/{id}")
-    public ResponseEntity<?> findCategory(@PathVariable (name = "id") int id){
+    public ResponseEntity<?> findCategory(@PathVariable(name = "id") int id) {
         try {
-            CategoryDTO category = new CategoryDTO(id, "","");
+            CategoryDTO category = new CategoryDTO(id, "", "");
             CategoryDTO categoryDTO = facadeFind.execute(category);
             logger.info("Categoria encontrada");
             return ResponseEntity.ok().body(categoryDTO);
-        }
-        catch (ExceptionHortalsoft e){
+        } catch (ExceptionHortalsoft e) {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
 
     }
 
     @GetMapping("/categories")
-    public ResponseEntity<?> listCategories(){
-        try{
+    public ResponseEntity<?> listCategories() {
+        try {
             List<CategoryDTO> categoryDTOs = facadeList.execute();
             return new ResponseEntity<>(categoryDTOs, HttpStatus.OK);
-        }
-        catch (ExceptionHortalsoft e){
+        } catch (ExceptionHortalsoft e) {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Entity
 @ToString
 @RequiredArgsConstructor
-@Table(name = "price_range",schema = "products")
+@Table(name = "price_range", schema = "products")
 public class PriceRangeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products.price_range_seq")
@@ -20,7 +20,7 @@ public class PriceRangeEntity {
     @Column(name = "id_price_range")
     private Integer idPriceRange;
     @ManyToOne
-    @JoinColumn(name="id_product")
+    @JoinColumn(name = "id_product")
     private ProductEntity product;
     @Column(name = "id_association")
     private Integer associationId;

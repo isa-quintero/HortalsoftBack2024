@@ -1,6 +1,5 @@
 package com.hortalsoft.products.application.facades.implementation.category;
 
-
 import com.hortalsoft.products.application.dto.CategoryDTO;
 import com.hortalsoft.products.application.facades.facade.category.ListCategoryFacade;
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
@@ -20,7 +19,6 @@ public class ListCategoryFacadeImpl implements ListCategoryFacade {
     private final ListCategoryUseCase useCase;
     private final static Layer layer = Layer.APPLICATION;
 
-
     public ListCategoryFacadeImpl(ListCategoryUseCase useCase) {
         this.useCase = useCase;
     }
@@ -35,10 +33,10 @@ public class ListCategoryFacadeImpl implements ListCategoryFacade {
     public List<CategoryDTO> execute() {
         try {
             return mapperDomainToDto.mapToDtoList(useCase.execute(), CategoryDTO.class);
-        }catch(ExceptionHortalsoft exceptionHortalsoft){
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch(Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error al listar las categorias",500, layer,exception);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error al listar las categorias", 500, layer, exception);
         }
     }
 }

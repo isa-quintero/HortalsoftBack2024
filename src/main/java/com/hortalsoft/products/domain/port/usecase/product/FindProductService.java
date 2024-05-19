@@ -20,34 +20,33 @@ import java.util.Optional;
 @Transactional
 public class FindProductService implements FindProductUseCase {
 
+    private final Layer layer = Layer.DOMAIN;
     private final ProductRepository productRepository;
-    MapperDomainToEntity<Product,ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
-    MapperEntityToDomain<ProductEntity,Product> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperDomainToEntity<Product, ProductEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
+    MapperEntityToDomain<ProductEntity, Product> mapperEntityToDomain = new MapperEntityToDomain<>();
+
 
     @Autowired
     public FindProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-
     }
-
 
     @Override
     public Product execute(Product domain) {
-        try{
-            ProductEntity entity =  mapperDomainToEntity.mapToEntity(domain,ProductEntity.class);
-            Optional<ProductEntity> resultEntity= productRepository.findById(entity.getId());
+        try {
+            ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
+            Optional<ProductEntity> resultEntity = productRepository.findById(entity.getId());
             ProductExistsByIdSpecification productExistsSpec = new ProductExistsByIdSpecification(entity.getId(), productRepository);
             if (productExistsSpec.isSatisfiedBy(entity)) {
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(),Product.class);
-            }
-            else{
-                throw  new ExceptionHortalsoft("Producto no encontrado", 6001, Layer.DOMAIN);
+                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Product.class);
+            } else {
+                throw new ExceptionHortalsoft("Producto no encontrado", 6001, layer);
             }
 
-        } catch (ExceptionHortalsoft e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ExceptionHortalsoft(e.getMessage(), 500, Layer.DOMAIN);
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
+            throw exceptionHortalsoft;
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado buscando el producto", 500, layer, exception);
         }
     }
 }

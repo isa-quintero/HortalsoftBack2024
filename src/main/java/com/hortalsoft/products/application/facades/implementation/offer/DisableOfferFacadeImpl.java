@@ -16,12 +16,12 @@ public class DisableOfferFacadeImpl implements DisableOfferFacade {
     private final DisableOfferUseCase useCase;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
 
-
     public DisableOfferFacadeImpl(DisableOfferUseCase useCase, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.useCase = useCase;
 
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
+
     /**
      * Executes the disable offer operation.
      *
@@ -29,10 +29,10 @@ public class DisableOfferFacadeImpl implements DisableOfferFacade {
      */
     @Override
     public void execute(OfferDTO dto) {
-        try{
+        try {
             Offer domain = mapperDTOToDomain.mapToDomain(dto, Offer.class);
             useCase.execute(domain);
-        }catch(Exception exception){
+        } catch (Exception exception) {
             exceptionHandlingAspect.exceptionsApplication(exception);
         }
     }

@@ -37,10 +37,10 @@ public class FindPriceRangeFacadeImpl implements FindPriceRangeFacade {
         try {
             PriceRange domain = mapperDTOToDomain.mapToDomain(dto, PriceRange.class);
             return mapperDomainToDto.mapToDto(useCase.execute(domain), PriceRangeDTO.class);
-        }catch(ExceptionHortalsoft exceptionHortalsoft){
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch(Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer, exception);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado", 500, layer, exception);
         }
     }
 }

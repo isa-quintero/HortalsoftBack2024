@@ -18,7 +18,7 @@ public class SubcategoryDTO {
     private String name;
     @Size(max = 500)
     @Builder.Default
-    private String description= "";
+    private String description = "";
     @NotNull(message = "La categoría no puede ser nula")
     private Integer categoryId;
 }

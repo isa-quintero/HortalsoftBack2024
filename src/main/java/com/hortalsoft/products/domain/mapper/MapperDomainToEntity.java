@@ -2,10 +2,9 @@ package com.hortalsoft.products.domain.mapper;
 
 import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MapperDomainToEntity<D,E> {
+public class MapperDomainToEntity<D, E> {
     private static final ModelMapper mapper = new ModelMapper();
 
     /**
@@ -15,20 +14,21 @@ public class MapperDomainToEntity<D,E> {
      * @param entity the class of the entity object
      * @return the mapped entity object
      */
-    public E mapToEntity(D domain, Class<E> entity){
-        return mapper.map(domain,entity);
+    public E mapToEntity(D domain, Class<E> entity) {
+        return mapper.map(domain, entity);
     }
 
     /**
      * Maps a list of domain objects to a list of entity objects.
      *
      * @param domainList the list of domain objects to be mapped
-     * @param entity the class of the entity object
+     * @param entity     the class of the entity object
      * @return the list of mapped entity objects
      */
-    public List<E> mapToEntityList(List<D> domainList, Class<E> entity){
-        List<E> entityList = new ArrayList<E>();
-        domainList.forEach(dto -> entityList.add(mapToEntity(dto, entity)));
-        return entityList;
+
+    public List<E> mapToEntityList(List<D> domainList, Class<E> entity) {
+        return domainList.parallelStream()
+                .map(domain -> mapToEntity(domain, entity))
+                .toList();
     }
 }

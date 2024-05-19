@@ -2,6 +2,7 @@ package com.hortalsoft.products.domain.domain;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;

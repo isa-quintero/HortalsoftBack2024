@@ -1,6 +1,5 @@
 package com.hortalsoft.products.application.facades.implementation.category;
 
-
 import com.hortalsoft.products.application.dto.CategoryDTO;
 import com.hortalsoft.products.application.facades.facade.category.FindCategoryFacade;
 import com.hortalsoft.products.domain.domain.Category;
@@ -21,10 +20,10 @@ public class FindCategoryFacadeImpl implements FindCategoryFacade {
     private final FindCategoryUseCase useCase;
     private final static Layer layer = Layer.APPLICATION;
 
-
     public FindCategoryFacadeImpl(FindCategoryUseCase useCase) {
         this.useCase = useCase;
     }
+
     /**
      * Executes the FindCategoryFacadeImpl method.
      *
@@ -41,7 +40,7 @@ public class FindCategoryFacadeImpl implements FindCategoryFacade {
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {
-            throw new ExceptionHortalsoft("Ha ocurrido un error", 500, layer, exception);
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperando", 500, layer, exception);
         }
     }
 }

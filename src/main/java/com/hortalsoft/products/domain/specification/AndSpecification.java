@@ -2,7 +2,7 @@ package com.hortalsoft.products.domain.specification;
 
 import java.util.Optional;
 
-public final class AndSpecification <T> extends AbstractSpecification<T> {
+public final class AndSpecification<T> extends AbstractSpecification<T> {
 
     private final Specification<T> specificationA;
     private final Specification<T> specificationB;

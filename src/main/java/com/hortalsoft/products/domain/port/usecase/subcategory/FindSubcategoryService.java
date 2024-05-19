@@ -19,36 +19,31 @@ import java.util.Optional;
 @Transactional
 public class FindSubcategoryService implements FindSubcategoryUseCase {
 
+    private final Layer layer = Layer.DOMAIN;
     private final SubcategoryRepository subcategoryRepository;
     MapperDomainToEntity<Subcategory, SubcategoryEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
-    MapperEntityToDomain<SubcategoryEntity,Subcategory> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperEntityToDomain<SubcategoryEntity, Subcategory> mapperEntityToDomain = new MapperEntityToDomain<>();
 
     @Autowired
     public FindSubcategoryService(SubcategoryRepository subcategoryRepository) {
         this.subcategoryRepository = subcategoryRepository;
-
     }
 
 
     @Override
     public Subcategory execute(Subcategory domain) {
-        try{
-            SubcategoryEntity entity =  mapperDomainToEntity.mapToEntity(domain,SubcategoryEntity.class);
-            Optional<SubcategoryEntity> resultEntity= subcategoryRepository.findById(entity.getId());
+        try {
+            SubcategoryEntity entity = mapperDomainToEntity.mapToEntity(domain, SubcategoryEntity.class);
+            Optional<SubcategoryEntity> resultEntity = subcategoryRepository.findById(entity.getId());
             if (resultEntity.isPresent()) {
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(),Subcategory.class);
+                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Subcategory.class);
+            } else {
+                throw new ExceptionHortalsoft("Subcategoria no encontrado", 6001, layer);
             }
-            else{
-                throw  new ExceptionHortalsoft("Subcategoria no encontrado", 6001, Layer.DOMAIN);
-            }
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
+            throw exceptionHortalsoft;
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado buscando la categoria", 500, layer, exception);
         }
-        catch(Exception e){
-            if (e instanceof ExceptionHortalsoft){
-                throw (ExceptionHortalsoft) e;
-            }else{
-                throw new ExceptionHortalsoft(e.getMessage(),500, Layer.DOMAIN);
-            }
-        }
-
     }
 }

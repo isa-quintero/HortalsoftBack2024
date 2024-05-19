@@ -25,19 +25,17 @@ public class CreateOfferService implements CreateOfferUseCase {
 
     @Override
     public void execute(Offer domain) {
-        try{
-            OfferEntity entity =  mapperDomainToEntity.mapToEntity(domain,OfferEntity.class);
-            if (offerRepository.findByProduct_IdAndInitialDateAndCodeFarmer(entity.getProduct().getId(),entity.getInitialDateOffer(), entity.getIdFarmer()) != null) {
+        try {
+            OfferEntity entity = mapperDomainToEntity.mapToEntity(domain, OfferEntity.class);
+            if (offerRepository.findByProduct_IdAndInitialDateAndCodeFarmer(entity.getProduct().getId(), entity.getInitialDateOffer(), entity.getIdFarmer()) != null) {
                 offerRepository.save(entity);
+            } else {
+                throw new ExceptionHortalsoft("La oferta ya existe", 5001, layer);
             }
-            else{
-                throw  new ExceptionHortalsoft("La oferta ya existe", 5001, Layer.DOMAIN);
-            }
-        }
-        catch(ExceptionHortalsoft exceptionHortalsoft){
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
-        }catch (Exception exception){
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, layer,exception);
+        } catch (Exception exception) {
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado creando la oferta", 500, layer, exception);
         }
     }
 }
