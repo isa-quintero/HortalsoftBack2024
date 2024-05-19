@@ -5,7 +5,7 @@ import lombok.*;
 
 @Data
 @Builder
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 public class WalletDTO {
 

@@ -26,7 +26,7 @@ public class OfferDTO {
     private Integer amount;
     @NotNull(message = "El precio no puede ser nulo")
     @DecimalMin(value = "0.0", inclusive = false)
-    private BigDecimal price;
+    private Double price;
     @NotNull(message = "La fecha inicial no puede ser nula")
     @FutureOrPresent
     private LocalDate initialDate;

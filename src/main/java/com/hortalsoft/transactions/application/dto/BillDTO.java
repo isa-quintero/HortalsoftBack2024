@@ -6,7 +6,7 @@ import lombok.*;
 @Data
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class BillDTO {
 
 }

@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.FutureOrPresent;
@@ -26,10 +25,10 @@ public class PriceRangeDTO {
     private Integer associationId;
     @NotNull(message = "El rango inicial no puede ser nulo")
     @DecimalMin(value = "0.0", inclusive = false)
-    private BigDecimal initialRange;
+    private Double initialRange;
     @NotNull(message = "El rango final no puede ser nulo")
     @DecimalMin(value = "0.0", inclusive = false)
-    private BigDecimal finalRange;
+    private Double finalRange;
     @NotNull(message = "La fecha inicial no puede ser nula")
     @FutureOrPresent
     private LocalDate initialDate;

@@ -52,7 +52,7 @@ public class OfferController {
     public ResponseEntity<OfferDTO> disableOffer(@PathVariable(name = "id") int id) {
         try {
             LocalDate date = LocalDate.now();
-            OfferDTO offer = new OfferDTO(id, 0, 0, "", 0, 0, date, date, 0, "");
+            OfferDTO offer = new OfferDTO(id, 0, 0, "", 0, 0.0, date, date, 0, "");
             facadeDelete.execute(offer);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public class OfferController {
     @GetMapping("/offer/{id}")
     public ResponseEntity<?> findOffer(@PathVariable(name = "id") int id) {
         try {
-            OfferDTO offer = new OfferDTO(id, 0, 0, "", 0, 0, LocalDate.now(), LocalDate.now(), 0, "");
+            OfferDTO offer = new OfferDTO(id, 0, 0, "", 0, 0.0, LocalDate.now(), LocalDate.now(), 0, "");
             OfferDTO result = facadeFind.execute(offer);
             logger.info("Oferta encontrada");
             return ResponseEntity.ok().body(result);
