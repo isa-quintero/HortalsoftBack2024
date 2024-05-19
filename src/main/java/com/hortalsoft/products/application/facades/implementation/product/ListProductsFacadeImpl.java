@@ -17,7 +17,7 @@ import java.util.List;
 public class ListProductsFacadeImpl implements ListProductsFacade {
     MapperDomainToDto<Product, ProductDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListProductsUseCase useCase;
-    private final static Layer layer = Layer.APPLICATION;
+    private static final Layer layer = Layer.APPLICATION;
 
     public ListProductsFacadeImpl(ListProductsUseCase useCase) {
         this.useCase = useCase;

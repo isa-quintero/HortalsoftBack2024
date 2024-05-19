@@ -17,7 +17,7 @@ public class FindPriceRangeFacadeImpl implements FindPriceRangeFacade {
     MapperDTOToDomain<PriceRangeDTO, PriceRange> mapperDTOToDomain = new MapperDTOToDomain<>();
     MapperDomainToDto<PriceRange, PriceRangeDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final FindPriceRangeUseCase useCase;
-    private final static Layer layer = Layer.APPLICATION;
+    private static final Layer layer = Layer.APPLICATION;
 
     public FindPriceRangeFacadeImpl(FindPriceRangeUseCase useCase) {
         this.useCase = useCase;

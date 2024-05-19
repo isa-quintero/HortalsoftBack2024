@@ -18,7 +18,7 @@ public class ListOfferFacadeImpl implements ListOfferFacade {
 
     MapperDomainToDto<Offer, OfferDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListOfferUseCase useCase;
-    private final static Layer layer = Layer.APPLICATION;
+    private static final Layer layer = Layer.APPLICATION;
 
     public ListOfferFacadeImpl(ListOfferUseCase useCase) {
         this.useCase = useCase;

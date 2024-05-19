@@ -18,7 +18,7 @@ public class FindProductFacadeImpl implements FindProductFacade {
     MapperDTOToDomain<ProductDTO, Product> mapperDTOToDomain = new MapperDTOToDomain<>();
     MapperDomainToDto<Product, ProductDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final FindProductUseCase useCase;
-    private final static Layer layer = Layer.APPLICATION;
+    private static final Layer layer = Layer.APPLICATION;
 
     public FindProductFacadeImpl(FindProductUseCase useCase) {
         this.useCase = useCase;

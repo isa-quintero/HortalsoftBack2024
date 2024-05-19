@@ -11,41 +11,52 @@ import org.springframework.http.ResponseEntity;
 @Aspect
 public class ExceptionHandlingAspect {
     private static final Logger logger = LoggerFactory.getLogger(ExceptionHandlingAspect.class);
+    private static final Layer layerApp = Layer.APPLICATION;
+    private static final Layer layerInfra = Layer.INFRASTRUCTURE;
 
-    @AfterThrowing(pointcut = "execution(* com.hortalsoft.products.*.*(..))", throwing = "ex")
-    public ResponseEntity<String> handleException(Exception ex) {
+    @AfterThrowing(pointcut = "execution(* com.hortalsoft.products.*.*(..))", throwing = "exception")
+    public ResponseEntity<String> handleException(Exception exception) {
+        logger.error("Exception occurred: {}", exception.getMessage());
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        if (ex instanceof ExceptionHortalsoft exceptionHortalsoft) {
+        if (exception instanceof ExceptionHortalsoft exceptionHortalsoft) {
             status = switch (exceptionHortalsoft.getErrorCode()) {
                 case 4001 -> HttpStatus.BAD_REQUEST;
                 case 5001 -> HttpStatus.FORBIDDEN;
                 case 6001 -> HttpStatus.NOT_FOUND;
-                default -> status;
+                default -> HttpStatus.INTERNAL_SERVER_ERROR;
             };
         }
-        return ResponseEntity.status(status).body(ex.getMessage());
+        return ResponseEntity.status(status).body(exception.getMessage());
     }
 
-    public ResponseEntity<String> exceptionsInfrastructure(Exception e){
+    public ResponseEntity<String> exceptionsInfrastructure(Exception exception){
         String message;
-        String layer;
-        if (e instanceof ExceptionHortalsoft){
-            message=e.getMessage();
-            layer= String.valueOf(((ExceptionHortalsoft) e).getLayer());
+        Layer layer;
+        if (exception instanceof ExceptionHortalsoft){
+            message = exception.getMessage();
+            layer = ((ExceptionHortalsoft) exception).getLayer();
         }else{
-            ExceptionHortalsoft ex = new ExceptionHortalsoft(e.getMessage(),500, Layer.INFRASTRUCTURE);
-            message= ex.getMessage();
-            layer= String.valueOf(ex.getLayer());
+            message = "Ha ocurrido un error inesperado";
+            layer = layerInfra;
+            exception = new ExceptionHortalsoft(message,500, layerInfra,exception);
         }
-        logger.error("{}: Capa {}",message,layer);
-        return handleException(e);
+        logException(message,layer);
+        return createResponse(exception);
+    }
+
+    private void logException(String message, Layer layer){
+        logger.error("{}: Capa {}", message, layer);
+    }
+
+    private ResponseEntity<String> createResponse(Exception exception){
+        return handleException(exception);
     }
 
     public void exceptionsApplication(Exception exception){
         if (exception instanceof ExceptionHortalsoft){
             throw (ExceptionHortalsoft) exception;
         }else{
-            throw new ExceptionHortalsoft("Ha ocurrido un error",500, Layer.APPLICATION,exception);
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado",500, layerApp,exception);
         }
     }
 }

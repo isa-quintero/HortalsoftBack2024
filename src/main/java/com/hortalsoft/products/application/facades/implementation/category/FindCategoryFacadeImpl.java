@@ -18,7 +18,7 @@ public class FindCategoryFacadeImpl implements FindCategoryFacade {
     MapperDTOToDomain<CategoryDTO, Category> mapperDTOToDomain = new MapperDTOToDomain<>();
     MapperDomainToDto<Category, CategoryDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final FindCategoryUseCase useCase;
-    private final static Layer layer = Layer.APPLICATION;
+    private static final Layer layer = Layer.APPLICATION;
 
     public FindCategoryFacadeImpl(FindCategoryUseCase useCase) {
         this.useCase = useCase;

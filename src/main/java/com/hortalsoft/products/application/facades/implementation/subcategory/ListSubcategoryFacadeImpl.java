@@ -18,7 +18,7 @@ public class ListSubcategoryFacadeImpl implements ListSubcategoryFacade {
 
     MapperDomainToDto<Subcategory, SubcategoryDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListSubcategoryUseCase useCase;
-    private final Layer layer = Layer.APPLICATION;
+    private static final Layer layer = Layer.APPLICATION;
 
     public ListSubcategoryFacadeImpl(ListSubcategoryUseCase useCase) {
         this.useCase = useCase;

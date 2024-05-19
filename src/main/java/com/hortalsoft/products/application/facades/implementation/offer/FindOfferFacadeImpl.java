@@ -17,7 +17,7 @@ public class FindOfferFacadeImpl implements FindOfferFacade {
     MapperDTOToDomain<OfferDTO, Offer> mapperDTOToDomain = new MapperDTOToDomain<>();
     MapperDomainToDto<Offer, OfferDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final FindOfferUseCase useCase;
-    private final static Layer layer = Layer.APPLICATION;
+    private static final Layer layer = Layer.APPLICATION;
 
     public FindOfferFacadeImpl(FindOfferUseCase useCase) {
         this.useCase = useCase;

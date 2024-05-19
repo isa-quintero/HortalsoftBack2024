@@ -18,7 +18,7 @@ public class ListPricesRangesFacadeImpl implements ListPricesRangesFacade {
 
     MapperDomainToDto<PriceRange, PriceRangeDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final ListPricesRangesUseCase useCase;
-    private final static Layer layer = Layer.APPLICATION;
+    private static final Layer layer = Layer.APPLICATION;
 
     public ListPricesRangesFacadeImpl(ListPricesRangesUseCase useCase) {
         this.useCase = useCase;

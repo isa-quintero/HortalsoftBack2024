@@ -17,7 +17,7 @@ public class FindSubcategoryFacadeImpl implements FindSubcategoryFacade {
     MapperDTOToDomain<SubcategoryDTO, Subcategory> mapperDTOToDomain = new MapperDTOToDomain<>();
     MapperDomainToDto<Subcategory, SubcategoryDTO> mapperDomainToDto = new MapperDomainToDto<>();
     private final FindSubcategoryUseCase useCase;
-    private final static Layer layer = Layer.APPLICATION;
+    private static final Layer layer = Layer.APPLICATION;
 
     public FindSubcategoryFacadeImpl(FindSubcategoryUseCase useCase) {
         this.useCase = useCase;
