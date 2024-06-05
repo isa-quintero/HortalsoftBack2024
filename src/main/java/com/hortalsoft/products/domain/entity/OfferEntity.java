@@ -3,7 +3,7 @@ package com.hortalsoft.products.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -28,11 +28,11 @@ public class OfferEntity {
     @Column(name = "price")
     private Integer price;
     @Column(name = "initial_date")
-    private LocalDate initialDateOffer;
+    private LocalDateTime initialDateOffer;
     @Column(name = "final_date")
-    private LocalDate finalDateOffer;
+    private LocalDateTime finalDateOffer;
     @Column(name = "validity")
-    private Integer validity;
+    private boolean validity;
     @Column(name = "id_blockchain")
     private String idBlockchain;
 

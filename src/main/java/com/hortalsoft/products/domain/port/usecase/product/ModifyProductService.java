@@ -6,7 +6,7 @@ import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.port.input.product.ModifyProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
-import com.hortalsoft.products.domain.specification.implementation.product.ProductExistsByNameAndId;
+import com.hortalsoft.products.domain.specification.implementation.product.ProductExistsByNameAndIdSpec;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class ModifyProductService implements ModifyProductUseCase {
     @Override
     public void execute(Product domain) {
         try {
-            ProductExistsByNameAndId productExistsByNameAndId = new ProductExistsByNameAndId(productRepository);
+            ProductExistsByNameAndIdSpec productExistsByNameAndId = new ProductExistsByNameAndIdSpec(productRepository);
             ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
             if (productExistsByNameAndId.isSatisfiedBy(entity)) {
                 entity.setId(entity.getId());

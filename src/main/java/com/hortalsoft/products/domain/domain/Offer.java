@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Data
@@ -16,9 +16,9 @@ public class Offer implements Serializable {
     private String description;
     private Integer amount;
     private Integer price;
-    private LocalDate initialDate;
-    private LocalDate finalDate;
-    private Integer validity;
+    private LocalDateTime initialDate;
+    private LocalDateTime finalDate;
+    private boolean validity;
     private String idBlockchain;
 
     @Override

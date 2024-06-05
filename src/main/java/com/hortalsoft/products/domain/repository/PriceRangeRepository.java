@@ -4,7 +4,7 @@ import com.hortalsoft.products.domain.entity.PriceRangeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,5 +15,5 @@ public interface PriceRangeRepository extends JpaRepository<PriceRangeEntity, In
     @Query("SELECT p FROM PriceRangeEntity p WHERE p.finalDatePriceRange >= CURRENT_DATE AND p.idPriceRange =:id")
     Optional<PriceRangeEntity> findByFinalDateValidAndId(int id);
 
-    boolean existsByAssociationIdAndInitialDatePriceRangeAndProductId(int associationId, LocalDate initialDate, int productId);
+    List<PriceRangeEntity> findByAssociationIdAndProductId(int associationId, int productId);
 }

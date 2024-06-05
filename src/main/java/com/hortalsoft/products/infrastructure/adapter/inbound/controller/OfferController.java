@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -51,8 +51,8 @@ public class OfferController {
     @DeleteMapping("/offer/{id}")
     public ResponseEntity<Object> disableOffer(@PathVariable(name = "id") int id) {
         try {
-            LocalDate date = LocalDate.now();
-            OfferDTO offer = new OfferDTO(id, 0, 0, "", 0, 0.0, date, date, 0, "");
+            LocalDateTime date = LocalDateTime.now();
+            OfferDTO offer = new OfferDTO(id, 0, 0, "", 0, 0.0, date, date, true, "");
             facadeDelete.execute(offer);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -63,7 +63,7 @@ public class OfferController {
     @GetMapping("/offer/{id}")
     public ResponseEntity<Object> findOffer(@PathVariable(name = "id") int id) {
         try {
-            OfferDTO offer = new OfferDTO(id, 0, 0, "", 0, 0.0, LocalDate.now(), LocalDate.now(), 0, "");
+            OfferDTO offer = new OfferDTO(id, 0, 0, "", 0, 0.0, LocalDateTime.now(), LocalDateTime.now(), true, "");
             OfferDTO result = facadeFind.execute(offer);
             logger.info("Oferta encontrada");
             return ResponseEntity.ok().body(result);
@@ -73,9 +73,9 @@ public class OfferController {
     }
 
     @GetMapping("/offers")
-    public ResponseEntity<Object> listPriceRanges() {
+    public ResponseEntity<Object> listOffers(@RequestBody OfferDTO input) {
         try {
-            List<OfferDTO> offerDTOS = facadeList.execute();
+            List<OfferDTO> offerDTOS = facadeList.execute(input);
             return new ResponseEntity<>(offerDTOS, HttpStatus.OK);
         } catch (ExceptionHortalsoft e) {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);

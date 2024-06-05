@@ -3,7 +3,7 @@ package com.hortalsoft.products.application.dto;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Data
@@ -28,10 +28,10 @@ public class OfferDTO {
     private Double price;
     @NotNull(message = "La fecha inicial no puede ser nula")
     @FutureOrPresent
-    private LocalDate initialDate;
+    private LocalDateTime initialDate;
     @NotNull(message = "La fecha final no puede ser nula")
     @FutureOrPresent
-    private LocalDate finalDate;
-    private Integer validity;
+    private LocalDateTime finalDate;
+    private boolean validity;
     private String idBlockchain;
 }

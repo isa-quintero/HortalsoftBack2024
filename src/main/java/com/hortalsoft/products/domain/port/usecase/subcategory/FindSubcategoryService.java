@@ -9,6 +9,7 @@ import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
+import com.hortalsoft.products.domain.specification.implementation.subcategory.SubcategoryExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,9 +34,10 @@ public class FindSubcategoryService implements FindSubcategoryUseCase {
     @Override
     public Subcategory execute(Subcategory domain) {
         try {
+            SubcategoryExistByIdSpec subcategoryExistByIdSpec = new SubcategoryExistByIdSpec(subcategoryRepository);
             SubcategoryEntity entity = mapperDomainToEntity.mapToEntity(domain, SubcategoryEntity.class);
-            Optional<SubcategoryEntity> resultEntity = subcategoryRepository.findById(entity.getId());
-            if (resultEntity.isPresent()) {
+            if (subcategoryExistByIdSpec.isSatisfiedBy(entity)) {
+                Optional<SubcategoryEntity> resultEntity = subcategoryRepository.findById(entity.getId());
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(), Subcategory.class);
             } else {
                 throw new ExceptionHortalsoft("Subcategoria no encontrado", 6001, layer);

@@ -8,7 +8,7 @@ import com.hortalsoft.products.domain.port.input.product.DeleteProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
-import com.hortalsoft.products.domain.specification.implementation.product.ProductExistsByIdSpecification;
+import com.hortalsoft.products.domain.specification.implementation.product.ProductExistsByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class DeleteProductService implements DeleteProductUseCase {
     public void execute(Product domain) {
         try {
             ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
-            ProductExistsByIdSpecification productExistsSpec = new ProductExistsByIdSpecification(productRepository);
+            ProductExistsByIdSpec productExistsSpec = new ProductExistsByIdSpec(productRepository);
             if (productExistsSpec.isSatisfiedBy(entity)) {
                 productRepository.deleteById(domain.getId());
             } else {

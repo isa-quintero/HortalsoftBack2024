@@ -8,6 +8,7 @@ import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
+import com.hortalsoft.products.domain.specification.implementation.category.CategoryExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,9 +34,10 @@ public class FindCategoryService implements FindCategoryUseCase {
     @Override
     public Category execute(Category domain) {
         try {
+            CategoryExistByIdSpec categoryExistByIdSpec = new CategoryExistByIdSpec(categoryRepository);
             CategoryEntity entity = mapperDomainToEntity.mapToEntity(domain, CategoryEntity.class);
-            Optional<CategoryEntity> resultEntity = categoryRepository.findById(entity.getId());
-            if (resultEntity.isPresent()) {
+            if (categoryExistByIdSpec.isSatisfiedBy(entity)) {
+                Optional<CategoryEntity> resultEntity = categoryRepository.findById(entity.getId());
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(), Category.class);
             } else {
                 throw new ExceptionHortalsoft("Categoria no encontrada", 6001, layer);

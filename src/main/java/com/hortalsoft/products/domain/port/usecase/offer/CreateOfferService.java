@@ -7,8 +7,10 @@ import com.hortalsoft.products.domain.repository.OfferRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
+import com.hortalsoft.products.domain.specification.implementation.offer.ValidateOfferToBeCreatedSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class CreateOfferService implements CreateOfferUseCase {
@@ -26,8 +28,9 @@ public class CreateOfferService implements CreateOfferUseCase {
     @Override
     public void execute(Offer domain) {
         try {
+            ValidateOfferToBeCreatedSpec validateOfferToBeCreatedSpec = new ValidateOfferToBeCreatedSpec(offerRepository);
             OfferEntity entity = mapperDomainToEntity.mapToEntity(domain, OfferEntity.class);
-            if (offerRepository.findByProduct_IdAndInitialDateOfferAndIdFarmer(entity.getProduct().getId(), entity.getInitialDateOffer(), entity.getIdFarmer()) != null) {
+            if (validateOfferToBeCreatedSpec.isSatisfiedBy(entity)) {
                 offerRepository.save(entity);
             } else {
                 throw new ExceptionHortalsoft("La oferta ya existe", 5001, layer);

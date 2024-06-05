@@ -1,13 +1,12 @@
 package com.hortalsoft.products.application.dto;
 
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
@@ -31,10 +30,9 @@ public class PriceRangeDTO {
     private Double finalRange;
     @NotNull(message = "La fecha inicial no puede ser nula")
     @FutureOrPresent
-    private LocalDate initialDate;
+    private LocalDateTime initialDate;
     @NotNull(message = "La fecha final no puede ser nula")
     @FutureOrPresent
-    private LocalDate finalDate;
-    @PositiveOrZero
-    private Integer validity;
+    private LocalDateTime finalDate;
+    private boolean validity;
 }

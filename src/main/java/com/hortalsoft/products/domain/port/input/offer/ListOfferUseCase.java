@@ -1,7 +1,8 @@
 package com.hortalsoft.products.domain.port.input.offer;
 
-import com.hortalsoft.products.domain.port.input.UseCaseListDomain;
 import com.hortalsoft.products.domain.domain.Offer;
+import com.hortalsoft.products.domain.port.input.UseCaseListDomainWithArg;
 
-public interface ListOfferUseCase extends UseCaseListDomain<Offer> {
+
+public interface ListOfferUseCase extends UseCaseListDomainWithArg<Offer> {
 }

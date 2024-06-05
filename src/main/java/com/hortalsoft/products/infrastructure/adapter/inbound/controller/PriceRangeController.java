@@ -1,6 +1,5 @@
 package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
-import com.hortalsoft.products.application.dto.OfferDTO;
 import com.hortalsoft.products.application.dto.PriceRangeDTO;
 import com.hortalsoft.products.application.facades.facade.pricerange.CreatePriceRangeFacade;
 import com.hortalsoft.products.application.facades.facade.pricerange.DeletePriceRangeFacade;
@@ -14,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -51,7 +50,7 @@ public class PriceRangeController {
     @DeleteMapping("/price-range/{id}")
     public ResponseEntity<Object> deletePriceRange(@PathVariable (name = "id") int id){
         try{
-            PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0.0,0.0,LocalDate.now(), LocalDate.now(),0);
+            PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0.0,0.0,LocalDateTime.now(), LocalDateTime.now(),true);
             facadeDelete.execute(priceRange);
             logger.info("Rango de precio eliminado");
             return ResponseEntity.ok().build();
@@ -64,7 +63,7 @@ public class PriceRangeController {
     @GetMapping("/price-range/{id}")
     public ResponseEntity<Object> findPriceRange(@PathVariable (name = "id") int id){
         try {
-            PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0.0,0.0,LocalDate.now(), LocalDate.now(),0);
+            PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0.0,0.0,LocalDateTime.now(), LocalDateTime.now(),true);
             PriceRangeDTO priceRangeDTO = facadeFind.execute(priceRange);
             logger.info("Rango de precio encontrado");
             return ResponseEntity.ok().body(priceRangeDTO);

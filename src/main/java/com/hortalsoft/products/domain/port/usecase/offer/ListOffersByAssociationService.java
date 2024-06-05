@@ -24,7 +24,7 @@ public class ListOffersByAssociationService implements ListOfferUseCase {
     }
 
     @Override
-    public List<Offer> execute() {
+    public List<Offer> execute(Offer domain) {
         try {
             OfferEntity offerEntity = new OfferEntity();
             offerEntity.setIdOffer(1);
@@ -42,4 +42,5 @@ public class ListOffersByAssociationService implements ListOfferUseCase {
 
         }
     }
+
 }

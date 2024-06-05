@@ -5,18 +5,20 @@ import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.domain.specification.AbstractSpecification;
 
 import java.util.Objects;
-import java.util.Optional;
 
-public class ProductExistsByIdSpecification extends AbstractSpecification<ProductEntity> {
+public class UniqueProductNameSpec extends AbstractSpecification<ProductEntity> {
     private final ProductRepository productRepository;
 
-    public ProductExistsByIdSpecification( ProductRepository productRepository) {
+    public UniqueProductNameSpec(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @Override
     public boolean isSatisfiedBy(ProductEntity product) {
-        Optional<ProductEntity> existingProduct = productRepository.findById(product.getId());
-        return Objects.equals(existingProduct.get().getId(), product.getId());
+        ProductEntity existingProduct = productRepository.findByName(product.getName());
+        if (existingProduct == null) {
+            return true;
+        }
+        return Objects.equals(existingProduct.getId(), product.getId());
     }
 }

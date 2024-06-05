@@ -8,6 +8,7 @@ import com.hortalsoft.products.domain.repository.PriceRangeRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
+import com.hortalsoft.products.domain.specification.implementation.pricerange.UniquePriceRangeByAssociatioAndProductAndDateSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +28,10 @@ public class CreatePriceRangeService implements CreatePriceRangeUseCase {
     @Override
     public void execute(PriceRange domain) {
         try {
+            UniquePriceRangeByAssociatioAndProductAndDateSpec uniquePriceRangeByAssociatioAndProductAndDateSpec = new UniquePriceRangeByAssociatioAndProductAndDateSpec(priceRangeRepository);
             PriceRangeEntity entity = mapperDomainToEntity.mapToEntity(domain, PriceRangeEntity.class);
-            if (!priceRangeRepository.existsById(entity.getIdPriceRange())) {
-                if (!priceRangeRepository.existsByAssociationIdAndInitialDatePriceRangeAndProductId(entity.getAssociationId(), entity.getInitialDatePriceRange(), entity.getProduct().getId())) {
-                    priceRangeRepository.save(entity);
-                } else {
-                    throw new ExceptionHortalsoft("El rango de precios ya existe", 5001, layer);
-                }
+            if (!uniquePriceRangeByAssociatioAndProductAndDateSpec.isSatisfiedBy(entity)) {
+                priceRangeRepository.save(entity);
             } else {
                 throw new ExceptionHortalsoft("El rango de precios ya existe", 5001, layer);
             }

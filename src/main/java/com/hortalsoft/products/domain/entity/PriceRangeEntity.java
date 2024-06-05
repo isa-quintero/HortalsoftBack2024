@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -29,9 +30,9 @@ public class PriceRangeEntity {
     @Column(name = "final_range")
     private BigDecimal finalRange;
     @Column(name = "initial_date")
-    private LocalDate initialDatePriceRange;
+    private LocalDateTime initialDatePriceRange;
     @Column(name = "final_date")
-    private LocalDate finalDatePriceRange;
+    private LocalDateTime finalDatePriceRange;
     @Column(name = "validity")
-    private Integer validity;
+    private boolean validity;
 }

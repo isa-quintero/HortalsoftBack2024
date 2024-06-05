@@ -9,6 +9,7 @@ import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
+import com.hortalsoft.products.domain.specification.implementation.pricerange.PriceRangeExistsByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,9 +33,10 @@ public class FindPriceRangeService implements FindPriceRangeUseCase {
     @Override
     public PriceRange execute(PriceRange domain) {
         try {
+            PriceRangeExistsByIdSpec priceRangeExistsByIdSpec = new PriceRangeExistsByIdSpec(priceRangeRepository);
             PriceRangeEntity entity = mapperDomainToEntity.mapToEntity(domain, PriceRangeEntity.class);
-            Optional<PriceRangeEntity> resultEntity = priceRangeRepository.findByFinalDateValidAndId(entity.getIdPriceRange());
-            if (resultEntity.isPresent()) {
+            if (priceRangeExistsByIdSpec.isSatisfiedBy(entity)) {
+                Optional<PriceRangeEntity> resultEntity = priceRangeRepository.findByFinalDateValidAndId(entity.getIdPriceRange());
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(), PriceRange.class);
             } else {
                 throw new ExceptionHortalsoft("El rango de precios no existe", 6001, layer);
