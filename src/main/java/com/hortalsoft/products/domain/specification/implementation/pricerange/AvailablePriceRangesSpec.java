@@ -2,7 +2,7 @@ package com.hortalsoft.products.domain.specification.implementation.pricerange;
 
 import com.hortalsoft.products.domain.entity.PriceRangeEntity;
 import com.hortalsoft.products.domain.repository.PriceRangeRepository;
-import com.hortalsoft.products.domain.specification.AbstractSpecification;
+import com.hortalsoft.crosscutting.specificaction.AbstractSpecification;
 
 public class AvailablePriceRangesSpec extends AbstractSpecification<PriceRangeEntity> {
     private final PriceRangeRepository priceRangeRepository;

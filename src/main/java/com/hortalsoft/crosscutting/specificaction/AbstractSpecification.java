@@ -1,4 +1,4 @@
-package com.hortalsoft.products.domain.specification;
+package com.hortalsoft.crosscutting.specificaction;
 
 
 public abstract class AbstractSpecification<T> implements Specification<T> {

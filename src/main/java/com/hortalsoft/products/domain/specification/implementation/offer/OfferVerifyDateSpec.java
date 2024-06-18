@@ -2,7 +2,7 @@ package com.hortalsoft.products.domain.specification.implementation.offer;
 
 import com.hortalsoft.crosscutting.helper.DateHelper;
 import com.hortalsoft.products.domain.entity.OfferEntity;
-import com.hortalsoft.products.domain.specification.AbstractSpecification;
+import com.hortalsoft.crosscutting.specificaction.AbstractSpecification;
 
 import java.time.LocalDateTime;
 

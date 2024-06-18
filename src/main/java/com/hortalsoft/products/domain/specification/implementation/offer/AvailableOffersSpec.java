@@ -2,8 +2,7 @@ package com.hortalsoft.products.domain.specification.implementation.offer;
 
 import com.hortalsoft.products.domain.entity.OfferEntity;
 import com.hortalsoft.products.domain.repository.OfferRepository;
-import com.hortalsoft.products.domain.repository.ProductRepository;
-import com.hortalsoft.products.domain.specification.AbstractSpecification;
+import com.hortalsoft.crosscutting.specificaction.AbstractSpecification;
 
 public class AvailableOffersSpec extends AbstractSpecification<OfferEntity> {
     private final OfferRepository offerRepository;

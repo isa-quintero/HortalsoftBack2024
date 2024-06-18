@@ -2,7 +2,7 @@ package com.hortalsoft.products.domain.specification.implementation.subcategory;
 
 import com.hortalsoft.products.domain.entity.SubcategoryEntity;
 import com.hortalsoft.products.domain.repository.SubcategoryRepository;
-import com.hortalsoft.products.domain.specification.AbstractSpecification;
+import com.hortalsoft.crosscutting.specificaction.AbstractSpecification;
 
 import java.util.Objects;
 import java.util.Optional;

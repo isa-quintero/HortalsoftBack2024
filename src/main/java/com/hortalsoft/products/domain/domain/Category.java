@@ -3,11 +3,12 @@ package com.hortalsoft.products.domain.domain;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Data
 @RequiredArgsConstructor
-public class Category {
+public class Category implements Serializable {
     private Integer id;
     private String name;
     private String description;

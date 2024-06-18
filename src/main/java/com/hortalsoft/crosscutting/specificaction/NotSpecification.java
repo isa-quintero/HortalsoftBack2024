@@ -1,4 +1,4 @@
-package com.hortalsoft.products.domain.specification;
+package com.hortalsoft.crosscutting.specificaction;
 
 import java.util.Optional;
 

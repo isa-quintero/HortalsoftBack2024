@@ -2,7 +2,7 @@ package com.hortalsoft.products.domain.specification.implementation.product;
 
 import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.repository.ProductRepository;
-import com.hortalsoft.products.domain.specification.AbstractSpecification;
+import com.hortalsoft.crosscutting.specificaction.AbstractSpecification;
 
 public class ProductExistsByNameAndIdSpec extends AbstractSpecification<ProductEntity> {
 

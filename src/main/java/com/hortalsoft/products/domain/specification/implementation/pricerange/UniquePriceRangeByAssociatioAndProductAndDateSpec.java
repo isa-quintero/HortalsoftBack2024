@@ -3,7 +3,7 @@ package com.hortalsoft.products.domain.specification.implementation.pricerange;
 import com.hortalsoft.crosscutting.helper.DateHelper;
 import com.hortalsoft.products.domain.entity.PriceRangeEntity;
 import com.hortalsoft.products.domain.repository.PriceRangeRepository;
-import com.hortalsoft.products.domain.specification.AbstractSpecification;
+import com.hortalsoft.crosscutting.specificaction.AbstractSpecification;
 
 import java.time.LocalDateTime;
 import java.util.List;
