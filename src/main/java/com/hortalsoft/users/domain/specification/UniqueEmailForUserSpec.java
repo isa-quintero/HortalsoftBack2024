@@ -13,7 +13,7 @@ public class UniqueEmailForUserSpec extends AbstractSpecification<UserEntity> {
     @Override
     public boolean isSatisfiedBy(UserEntity user) {
         String email = user.getEmail();
-        return userRepository.findByEmail(email)==null;
+        return userRepository.findByEmail(email).isEmpty();
 
     }
 }
