@@ -19,7 +19,11 @@ public class UserDTO {
     private String address;
     private String city;
     private Integer wallet;
+    private String userType;
 
     public static class UserDTOBuilder {
+    }
+    public boolean isFarmer(){
+        return "FARMER".equals(this.userType);
     }
 }

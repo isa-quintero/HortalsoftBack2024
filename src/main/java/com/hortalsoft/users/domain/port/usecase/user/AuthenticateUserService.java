@@ -39,7 +39,7 @@ public class AuthenticateUserService implements AuthenticateUserUseCase {
     public Map<String, String> execute(String idToken) {
         Map<String, String> response = new HashMap<>();
         try {
-            Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(idToken).getBody();
+            var claims = Jwts.parser().setSigningKey(key).parseClaimsJws(idToken).getBody();
             String userEmail = claims.get("email", String.class);
 
             Optional<UserEntity> optionalUser = userRepository.findByEmail(userEmail);

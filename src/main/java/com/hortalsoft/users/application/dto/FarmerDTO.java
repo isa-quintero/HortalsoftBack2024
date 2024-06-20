@@ -8,11 +8,13 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class FarmerDTO extends UserDTO {
     private Integer association;
+    private static final String userType = "Farmer";
 
     @Builder(builderMethodName = "farmerDTOBuilder")
-    public FarmerDTO(Integer id, String documentType, long idNumber, String username, long phoneNumber, String email, String address, String city, Integer wallet, Integer association) {
-        super(id, documentType, idNumber, username, phoneNumber, email, address, city, wallet);
+    public FarmerDTO(Integer id, String documentType, long idNumber, String username, long phoneNumber, String email, String address, String city, Integer wallet, String userType,Integer association) {
+        super(id, documentType, idNumber, username, phoneNumber, email, address, city, wallet,"");
         this.association = association;
+        userType = userType;
     }
 
     public static class FarmerDTOBuilder extends UserDTO.UserDTOBuilder {
@@ -25,7 +27,7 @@ public class FarmerDTO extends UserDTO {
 
         @Override
         public FarmerDTO build() {
-            return new FarmerDTO(id, documentType, idNumber, username, phoneNumber, email, address, city, wallet, association);
+            return new FarmerDTO(id, documentType, idNumber, username, phoneNumber, email, address, city, wallet, userType,association);
         }
     }
 }
