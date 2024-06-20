@@ -3,11 +3,12 @@ package com.hortalsoft.users.domain.port.usecase.farmer;
 
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
-import com.hortalsoft.users.domain.domain.User;
-import com.hortalsoft.users.domain.entity.UserEntity;
+import com.hortalsoft.users.domain.domain.Farmer;
+import com.hortalsoft.users.domain.entity.FarmerEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
-import com.hortalsoft.users.domain.port.input.user.FindUserUseCase;
+import com.hortalsoft.users.domain.port.input.farmer.FindFarmerUseCase;
+import com.hortalsoft.users.domain.repository.FarmerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
 import com.hortalsoft.users.domain.specification.UserExistByIdSpec;
 import jakarta.transaction.Transactional;
@@ -18,35 +19,36 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class FindFarmerService implements FindUserUseCase {
+public class FindFarmerService implements FindFarmerUseCase {
 
     private static final Layer layer = Layer.DOMAIN;
     private final UserRepository userRepository;
-    MapperDomainToEntity<User, UserEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
-    MapperEntityToDomain<UserEntity, User> mapperEntityToDomain = new MapperEntityToDomain<>();
+    private final FarmerRepository farmerRepository;
+    MapperDomainToEntity<Farmer, FarmerEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
+    MapperEntityToDomain<FarmerEntity, Farmer> mapperEntityToDomain = new MapperEntityToDomain<>();
 
     @Autowired
-    public FindFarmerService(UserRepository userRepository) {
+    public FindFarmerService(UserRepository userRepository, FarmerRepository farmerRepository) {
         this.userRepository = userRepository;
-
+        this.farmerRepository = farmerRepository;
     }
 
 
     @Override
-    public User execute(User domain) {
+    public Farmer execute(Farmer domain) {
         try {
             UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            UserEntity entity = mapperDomainToEntity.mapToEntity(domain, UserEntity.class);
+            FarmerEntity entity = mapperDomainToEntity.mapToEntity(domain, FarmerEntity.class);
             if (userExistByIdSpec.isSatisfiedBy(entity)) {
-                Optional<UserEntity> resultEntity = userRepository.findById(entity.getId());
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(), User.class);
+                Optional<FarmerEntity> resultEntity = farmerRepository.findById(entity.getId());
+                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Farmer.class);
             } else {
-                throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
+                throw new ExceptionHortalsoft("Agricultor no encontrada", 6001, layer);
             }
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {
-            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado buscando el usuario" , 500, layer, exception);
+            throw new ExceptionHortalsoft("Ha ocurrido un error inesperado buscando el agricultor" , 500, layer, exception);
         }
     }
 }
