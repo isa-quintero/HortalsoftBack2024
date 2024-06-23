@@ -1,5 +1,6 @@
 package com.hortalsoft.users.application.dto;
 
+import com.hortalsoft.users.util.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,11 +20,17 @@ public class UserDTO {
     private String address;
     private String city;
     private Integer wallet;
-    private String userType;
+    private UserType userType;
 
     public static class UserDTOBuilder {
     }
     public boolean isFarmer(){
-        return "FARMER".equals(this.userType);
+        return userType.FARMER.equals(this.userType);
+    }
+    public boolean isCustomer(){
+        return userType.CUSTOMER.equals(this.userType);
+    }
+    public boolean isAssociation(){
+        return userType.ASSOCIATION.equals(this.userType);
     }
 }

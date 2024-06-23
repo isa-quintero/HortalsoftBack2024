@@ -9,12 +9,10 @@ import com.hortalsoft.crosscutting.specificaction.AbstractSpecification;
 public class OfferVerifyPriceSpec extends AbstractSpecification<OfferEntity> {
 
     public OfferVerifyPriceSpec() {
-
     }
 
     @Override
     public boolean isSatisfiedBy(OfferEntity offerEntity) {
-
         return (NumberHelper.greaterThan(offerEntity.getPrice(),0));
     }
 }

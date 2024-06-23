@@ -39,13 +39,13 @@ public class CreateUserFacadeImpl implements CreateUserFacade {
     @Override
     public void execute(UserDTO dto) {
         try {
-            if (dto instanceof FarmerDTO) {
+            if (dto.isFarmer()){
                 Farmer domain = mapperDTOToDomainFarmer.mapToDomain((FarmerDTO) dto, Farmer.class);
                 createFarmerUseCase.execute(domain);
-            } else if (dto instanceof CustomerDTO) {
+            } else if (dto.isCustomer()) {
                 Customer domain = mapperDTOToDomainCustomer.mapToDomain((CustomerDTO) dto, Customer.class);
                 createCustomerUseCase.execute(domain);
-            } else if (dto instanceof AssociationDTO) {
+            } else if (dto.isAssociation()) {
                 Association domain = mapperDTOToDomainAssociation.mapToDomain((AssociationDTO) dto, Association.class);
                 createAssociationUseCase.execute(domain);
             } else {
