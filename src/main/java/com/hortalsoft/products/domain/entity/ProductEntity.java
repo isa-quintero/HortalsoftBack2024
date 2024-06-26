@@ -13,7 +13,7 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products.product_seq")
     @SequenceGenerator(name = "products.product_seq", sequenceName = "products.product_seq", allocationSize = 1)
     @Column(name = "id_product")
-    private Integer id;
+    private Integer idProduct;
     @Column(name = "name")
     private String name;
     @ManyToOne

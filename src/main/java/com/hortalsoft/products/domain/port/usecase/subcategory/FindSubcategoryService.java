@@ -37,7 +37,7 @@ public class FindSubcategoryService implements FindSubcategoryUseCase {
             SubcategoryExistByIdSpec subcategoryExistByIdSpec = new SubcategoryExistByIdSpec(subcategoryRepository);
             SubcategoryEntity entity = mapperDomainToEntity.mapToEntity(domain, SubcategoryEntity.class);
             if (subcategoryExistByIdSpec.isSatisfiedBy(entity)) {
-                Optional<SubcategoryEntity> resultEntity = subcategoryRepository.findById(entity.getId());
+                Optional<SubcategoryEntity> resultEntity = subcategoryRepository.findById(entity.getIdSubcategory());
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(), Subcategory.class);
             } else {
                 throw new ExceptionHortalsoft("Subcategoria no encontrado", 6001, layer);

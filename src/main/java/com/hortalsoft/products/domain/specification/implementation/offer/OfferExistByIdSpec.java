@@ -16,7 +16,7 @@ public class OfferExistByIdSpec extends AbstractSpecification<OfferEntity> {
 
     @Override
     public boolean isSatisfiedBy(OfferEntity offerEntity) {
-        Optional<OfferEntity> existingOffer = offerRepository.findById(offerEntity.getIdOffer());
-        return existingOffer.filter(entity -> Objects.equals(entity.getIdOffer(), offerEntity.getIdOffer())).isPresent();
+        Optional<OfferEntity> existingOffer = offerRepository.findById(offerEntity.getOfferId());
+        return existingOffer.filter(entity -> Objects.equals(entity.getOfferId(), offerEntity.getOfferId())).isPresent();
     }
 }

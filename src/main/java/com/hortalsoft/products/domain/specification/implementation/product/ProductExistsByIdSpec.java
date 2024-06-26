@@ -16,7 +16,7 @@ public class ProductExistsByIdSpec extends AbstractSpecification<ProductEntity> 
 
     @Override
     public boolean isSatisfiedBy(ProductEntity product) {
-        Optional<ProductEntity> existingProduct = productRepository.findById(product.getId());
-        return existingProduct.filter(entity -> Objects.equals(entity.getId(), product.getId())).isPresent();
+        Optional<ProductEntity> existingProduct = productRepository.findById(product.getIdProduct());
+        return existingProduct.filter(entity -> Objects.equals(entity.getIdProduct(), product.getIdProduct())).isPresent();
     }
 }

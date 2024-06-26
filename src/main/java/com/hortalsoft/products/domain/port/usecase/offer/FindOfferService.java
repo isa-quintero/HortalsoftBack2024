@@ -39,7 +39,7 @@ public class FindOfferService implements FindOfferUseCase {
             AvailableOffersSpec availableOffersSpec = new AvailableOffersSpec(offerRepository);
             OfferEntity entity = mapperDomainToEntity.mapToEntity(domain, OfferEntity.class);
             if (availableOffersSpec.isSatisfiedBy(entity)) {
-                Optional<OfferEntity> resultEntity = offerRepository.findById(entity.getIdOffer());
+                Optional<OfferEntity> resultEntity = offerRepository.findById(entity.getOfferId());
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(), Offer.class);
             } else {
                 throw new ExceptionHortalsoft("Oferta no encontrada", 6001, layer);

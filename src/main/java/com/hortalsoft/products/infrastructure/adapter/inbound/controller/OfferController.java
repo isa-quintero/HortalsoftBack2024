@@ -1,10 +1,7 @@
 package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.products.application.dto.OfferDTO;
-import com.hortalsoft.products.application.facades.facade.offer.CreateOfferFacade;
-import com.hortalsoft.products.application.facades.facade.offer.DisableOfferFacade;
-import com.hortalsoft.products.application.facades.facade.offer.FindOfferFacade;
-import com.hortalsoft.products.application.facades.facade.offer.ListOfferFacade;
+import com.hortalsoft.products.application.facades.facade.offer.*;
 import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
@@ -24,12 +21,12 @@ public class OfferController {
     private final CreateOfferFacade facadeCreate;
     private final DisableOfferFacade facadeDelete;
     private final FindOfferFacade facadeFind;
-    private final ListOfferFacade facadeList;
+    private final ListOffersFacade facadeList;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
     private static final Logger logger = LoggerFactory.getLogger(OfferController.class);
 
 
-    public OfferController(CreateOfferFacade facade, DisableOfferFacade facadeDelete, FindOfferFacade facadeFind, ListOfferFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
+    public OfferController(CreateOfferFacade facade, DisableOfferFacade facadeDelete, FindOfferFacade facadeFind, ListOffersFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.facadeCreate = facade;
         this.facadeDelete = facadeDelete;
         this.facadeFind = facadeFind;
@@ -73,9 +70,9 @@ public class OfferController {
     }
 
     @GetMapping("/offers")
-    public ResponseEntity<Object> listOffers(@RequestBody OfferDTO input) {
+    public ResponseEntity<Object> listOffers() {
         try {
-            List<OfferDTO> offerDTOS = facadeList.execute(input);
+            List<OfferDTO> offerDTOS = facadeList.execute();
             return new ResponseEntity<>(offerDTOS, HttpStatus.OK);
         } catch (ExceptionHortalsoft e) {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);

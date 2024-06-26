@@ -19,6 +19,6 @@ public class UniqueProductNameSpec extends AbstractSpecification<ProductEntity> 
         if (existingProduct == null) {
             return true;
         }
-        return Objects.equals(existingProduct.getId(), product.getId());
+        return Objects.equals(existingProduct.getIdProduct(), product.getIdProduct());
     }
 }

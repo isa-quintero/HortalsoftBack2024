@@ -12,7 +12,7 @@ public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_category")
-    private Integer id;
+    private Integer idCategory;
     @Column(name = "name")
     private String name;
     @Column(name = "description")

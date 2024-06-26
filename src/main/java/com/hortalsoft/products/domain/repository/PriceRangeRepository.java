@@ -1,6 +1,7 @@
 package com.hortalsoft.products.domain.repository;
 
 import com.hortalsoft.products.domain.entity.PriceRangeEntity;
+import com.hortalsoft.products.domain.entity.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,5 +16,5 @@ public interface PriceRangeRepository extends JpaRepository<PriceRangeEntity, In
     @Query("SELECT p FROM PriceRangeEntity p WHERE p.finalDatePriceRange >= CURRENT_DATE AND p.idPriceRange =:id")
     Optional<PriceRangeEntity> findByFinalDateValidAndId(int id);
 
-    List<PriceRangeEntity> findByAssociationIdAndProductId(int associationId, int productId);
+    List<PriceRangeEntity> findByAssociationIdAndProduct(int associationId, ProductEntity productId);
 }

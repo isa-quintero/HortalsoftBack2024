@@ -32,7 +32,7 @@ public class ModifyProductService implements ModifyProductUseCase {
             ProductExistsByNameAndIdSpec productExistsByNameAndId = new ProductExistsByNameAndIdSpec(productRepository);
             ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
             if (productExistsByNameAndId.isSatisfiedBy(entity)) {
-                entity.setId(entity.getId());
+                entity.setIdProduct(entity.getIdProduct());
                 entity.setName(entity.getName());
                 entity.setSubcategory(entity.getSubcategory());
                 productRepository.save(entity);

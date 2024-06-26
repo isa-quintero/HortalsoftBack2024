@@ -14,7 +14,7 @@ public class SubcategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_subcategory")
-    private Integer id;
+    private Integer idSubcategory;
     @Column(name = "name")
     private String name;
     @Column(name = "description")

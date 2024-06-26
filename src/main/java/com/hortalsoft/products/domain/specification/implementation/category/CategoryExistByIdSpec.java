@@ -16,7 +16,7 @@ public class CategoryExistByIdSpec extends AbstractSpecification<CategoryEntity>
 
     @Override
     public boolean isSatisfiedBy(CategoryEntity categoryEntity) {
-        Optional<CategoryEntity> existingOffer = categoryRepository.findById(categoryEntity.getId());
-        return existingOffer.filter(entity -> Objects.equals(entity.getId(), categoryEntity.getId())).isPresent();
+        Optional<CategoryEntity> existingOffer = categoryRepository.findById(categoryEntity.getIdCategory());
+        return existingOffer.filter(entity -> Objects.equals(entity.getIdCategory(), categoryEntity.getIdCategory())).isPresent();
     }
 }

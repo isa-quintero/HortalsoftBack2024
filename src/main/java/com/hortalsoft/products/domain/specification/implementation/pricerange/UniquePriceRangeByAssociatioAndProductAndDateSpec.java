@@ -2,6 +2,7 @@ package com.hortalsoft.products.domain.specification.implementation.pricerange;
 
 import com.hortalsoft.crosscutting.helper.DateHelper;
 import com.hortalsoft.products.domain.entity.PriceRangeEntity;
+import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.repository.PriceRangeRepository;
 import com.hortalsoft.crosscutting.specificaction.AbstractSpecification;
 
@@ -20,12 +21,12 @@ public class UniquePriceRangeByAssociatioAndProductAndDateSpec extends AbstractS
     @Override
     public boolean isSatisfiedBy(PriceRangeEntity priceRangeEntity) {
         Integer associationId = priceRangeEntity.getAssociationId();
-        Integer productId = priceRangeEntity.getProduct().getId();
+        ProductEntity productId = priceRangeEntity.getProduct();
         LocalDateTime initialDate = priceRangeEntity.getInitialDatePriceRange();
         LocalDateTime finalDate = priceRangeEntity.getFinalDatePriceRange();
 
 
-        List<PriceRangeEntity> existingPriceRanges = priceRangeRepository.findByAssociationIdAndProductId(associationId, productId);
+        List<PriceRangeEntity> existingPriceRanges = priceRangeRepository.findByAssociationIdAndProduct(associationId, productId);
 
         return existingPriceRanges.stream().filter(o ->
                 DateHelper.isBetweenInclusive(o.getInitialDatePriceRange(), initialDate, finalDate) ||

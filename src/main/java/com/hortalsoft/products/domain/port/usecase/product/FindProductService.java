@@ -38,7 +38,7 @@ public class FindProductService implements FindProductUseCase {
             ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
             ProductExistsByIdSpec productExistsSpec = new ProductExistsByIdSpec(productRepository);
             if (productExistsSpec.isSatisfiedBy(entity)) {
-                Optional<ProductEntity> productEntity =productRepository.findById(entity.getId());
+                Optional<ProductEntity> productEntity =productRepository.findById(entity.getIdProduct());
                 return mapperEntityToDomain.mapToDomain(productEntity.get(), Product.class);
             } else {
                 throw new ExceptionHortalsoft("Producto no encontrado", 6001, layer);

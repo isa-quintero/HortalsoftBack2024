@@ -1,6 +1,5 @@
 package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
-import com.hortalsoft.products.application.dto.OfferDTO;
 import com.hortalsoft.products.application.dto.ProductDTO;
 import com.hortalsoft.products.application.facades.facade.product.*;
 import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;

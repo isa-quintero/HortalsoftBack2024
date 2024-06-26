@@ -16,7 +16,7 @@ public class SubcategoryExistByIdSpec extends AbstractSpecification<SubcategoryE
 
     @Override
     public boolean isSatisfiedBy(SubcategoryEntity subcategoryEntity) {
-        Optional<SubcategoryEntity> existingOffer = subcategoryRepository.findById(subcategoryEntity.getId());
-        return existingOffer.filter(entity -> Objects.equals(entity.getId(), subcategoryEntity.getId())).isPresent();
+        Optional<SubcategoryEntity> existingOffer = subcategoryRepository.findById(subcategoryEntity.getIdSubcategory());
+        return existingOffer.filter(entity -> Objects.equals(entity.getIdSubcategory(), subcategoryEntity.getIdSubcategory())).isPresent();
     }
 }

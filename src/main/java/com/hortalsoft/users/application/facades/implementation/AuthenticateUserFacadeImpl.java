@@ -4,6 +4,7 @@ package com.hortalsoft.users.application.facades.implementation;
 import com.hortalsoft.users.application.facades.facade.user.AuthenticateUserFacade;
 import com.hortalsoft.users.domain.port.input.user.AuthenticateUserUseCase;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
 public class AuthenticateUserFacadeImpl implements AuthenticateUserFacade {
     private final AuthenticateUserUseCase authenticateUserUseCase;
 
+    @Autowired
     public AuthenticateUserFacadeImpl(AuthenticateUserUseCase authenticateUserUseCase) {
         this.authenticateUserUseCase = authenticateUserUseCase;
     }

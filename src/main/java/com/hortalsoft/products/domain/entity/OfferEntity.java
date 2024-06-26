@@ -15,12 +15,12 @@ public class OfferEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products.offer_seq")
     @SequenceGenerator(name = "products.offer_seq", sequenceName = "products.offer_seq", allocationSize = 1)
     @Column(name = "id_offer")
-    private Integer idOffer;
+    private Integer offerId;
     @ManyToOne
     @JoinColumn(name = "id_product")
     private ProductEntity product;
     @Column(name = "id_farmer")
-    private Integer idFarmer;
+    private Integer farmer;
     @Column(name = "description")
     private String description;
     @Column(name = "amount")
@@ -34,6 +34,6 @@ public class OfferEntity {
     @Column(name = "validity")
     private boolean validity;
     @Column(name = "id_blockchain")
-    private String idBlockchain;
+    private String blockchain;
 
 }

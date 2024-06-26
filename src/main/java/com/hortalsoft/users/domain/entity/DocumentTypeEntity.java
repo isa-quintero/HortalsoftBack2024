@@ -17,10 +17,10 @@ public class DocumentTypeEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "id_user")
+    @Column(name = "code")
     private String code;
-    @Column(name = "id_user")
+    @Column(name = "name")
     private String name;
-    @Column(name = "id_user")
+    @Column(name = "descrption")
     private String description;
 }
