@@ -13,4 +13,10 @@ public final class ObjectHelper {
     public static final <T> T getDefault(final T object, final T defaultObject) {
         return isNull(object) ? defaultObject : object;
     }
+
+    //Cambio para control de nulos.
+
+    public static final String getDefaultString(final String string) {
+        return getDefault(string, "");
+    }
 }

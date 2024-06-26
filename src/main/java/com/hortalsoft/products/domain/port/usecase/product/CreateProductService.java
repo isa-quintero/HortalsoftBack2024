@@ -6,6 +6,7 @@ import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.products.domain.port.input.product.CreateProductUseCase;
 import com.hortalsoft.products.domain.repository.ProductRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
+import com.hortalsoft.products.domain.specification.implementation.product.EmptyNameProductSpec;
 import com.hortalsoft.products.domain.specification.implementation.product.UniqueProductNameSpec;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
@@ -29,13 +30,19 @@ public class CreateProductService implements CreateProductUseCase {
     @Override
     public void execute(Product domain) {
         try {
+            EmptyNameProductSpec emptyNameProductSpec = new EmptyNameProductSpec();
             UniqueProductNameSpec uniqueProductNameSpec = new UniqueProductNameSpec(productRepository);
             ProductEntity entity = mapperDomainToEntity.mapToEntity(domain, ProductEntity.class);
-            if (uniqueProductNameSpec.isSatisfiedBy(entity)) {
-                productRepository.save(entity);
-            } else {
-                throw new ExceptionHortalsoft("El producto ya existe", 5001, layer);
+            if(!emptyNameProductSpec.isSatisfiedBy((entity))){
+                if (uniqueProductNameSpec.isSatisfiedBy(entity)) {
+                    productRepository.save(entity);
+                } else {
+                    throw new ExceptionHortalsoft("El producto ya existe", 5001, layer);
+                }
+            } else{
+                throw new ExceptionHortalsoft("El nombre del producto no puede estar vacio", 5001, layer);
             }
+
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {

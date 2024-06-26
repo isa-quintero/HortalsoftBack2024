@@ -20,8 +20,9 @@ public final class TextHelper {
         return isNull(string) || EMPTY.equals(applyTrim(string));
     }
 
+    //Modifica el applyTrim para usar getDefaultString de ObjectHelper
     public static final String applyTrim(final String string) {
-        return getDefault(string).trim();
+        return ObjectHelper.getDefaultString(string).trim();
     }
 
     public static final String getDefault(final String string, final String defaultValue) {
@@ -32,8 +33,10 @@ public final class TextHelper {
         return getDefault(string, EMPTY);
     }
 
+    //Modifica concatenate para asegurar que la cadena sea no null mediante el getDefaultString
     public static final String concatenate(final String... strings) {
-        return Arrays.asList(ObjectHelper.getDefault(strings, new String[0])).stream().map(string -> string)
+        return Arrays.asList(ObjectHelper.getDefault(strings, new String[0])).stream()
+                .map(ObjectHelper::getDefaultString)
                 .collect(Collectors.joining());
     }
 }
