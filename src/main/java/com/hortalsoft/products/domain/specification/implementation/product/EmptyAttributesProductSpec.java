@@ -5,9 +5,9 @@ import com.hortalsoft.crosscutting.specificaction.AbstractSpecification;
 
 import java.util.Objects;
 
-public class EmptyNameProductSpec extends AbstractSpecification<ProductEntity> {
+public class EmptyAttributesProductSpec extends AbstractSpecification<ProductEntity> {
     @Override
     public boolean isSatisfiedBy(ProductEntity product) {
-        return Objects.equals(product.getName(),"");
+        return Objects.equals(product.getName(),"") || Objects.equals(product.getSubcategory(),0);
     }
 }
