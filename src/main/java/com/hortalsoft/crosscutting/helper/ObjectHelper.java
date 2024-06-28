@@ -14,9 +14,11 @@ public final class ObjectHelper {
         return isNull(object) ? defaultObject : object;
     }
 
-    //Cambio para control de nulos.
-
     public static final String getDefaultString(final String string) {
-        return getDefault(string, "");
+        return isNull(string) || string.isEmpty() || string.isBlank()  ? "" : string;
+    }
+
+    public static final Integer getDefaultInteger(final Integer integer) {
+        return isNull(integer) ? 0 : integer;
     }
 }
