@@ -37,4 +37,5 @@ public class ProductDTO {
     public Integer getSubcategoryId() {
         return ObjectHelper.getDefaultInteger(subcategoryId);
     }
+
 }

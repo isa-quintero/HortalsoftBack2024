@@ -10,7 +10,9 @@ public final class DateHelper {
     }
 
     public static boolean isEqual(final LocalDateTime date, final LocalDateTime comparator) {
-        // Isabella: Ensure first date and comparator aren't null!!!!
+        if (ObjectHelper.isNull(date) || ObjectHelper.isNull(comparator)) {
+            return false;
+        }
         return date.equals(comparator);
     }
 
@@ -63,4 +65,5 @@ public final class DateHelper {
         // Isabella: Ensure first date aren't null!!!!
         return ZonedDateTime.of(date, ZoneId.systemDefault()).toInstant().toEpochMilli();
     }
+
 }
