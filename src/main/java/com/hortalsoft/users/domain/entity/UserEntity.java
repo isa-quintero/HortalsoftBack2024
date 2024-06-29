@@ -1,5 +1,6 @@
 package com.hortalsoft.users.domain.entity;
 
+import com.hortalsoft.users.util.UserType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +32,6 @@ public class UserEntity {
     private String address;
     @Column(name = "city")
     private String city;
-    private Integer wallet;
+    private UserType userType;
+
 }

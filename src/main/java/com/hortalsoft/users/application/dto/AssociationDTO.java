@@ -12,14 +12,14 @@ import static com.hortalsoft.users.util.UserType.ASSOCIATION;
 public class AssociationDTO extends UserDTO {
     private static final UserType userType = ASSOCIATION;
     @Builder(builderMethodName = "associationDTOBuilder")
-    public AssociationDTO(Integer id, String documentType, long idNumber, String username, long phoneNumber, String email, String address, String city, Integer wallet) {
-        super(id, documentType, idNumber, username, phoneNumber, email, address, city, wallet,userType);
+    public AssociationDTO(Integer id, String documentType, long idNumber, String username, long phoneNumber, String email, String address, String city) {
+        super(id, documentType, idNumber, username, phoneNumber, email, address, city,userType);
     }
 
     public static class AssociationDTOBuilder extends UserDTO.UserDTOBuilder {
         @Override
         public CustomerDTO build() {
-            return new CustomerDTO(id, documentType, idNumber, username, phoneNumber, email, address, city, wallet);
+            return new CustomerDTO(id, documentType, idNumber, username, phoneNumber, email, address, city);
         }
     }
 }

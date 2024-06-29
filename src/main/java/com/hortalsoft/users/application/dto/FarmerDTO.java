@@ -14,8 +14,8 @@ public class FarmerDTO extends UserDTO {
     private static final UserType userType = FARMER;
 
     @Builder(builderMethodName = "farmerDTOBuilder")
-    public FarmerDTO(Integer id, String documentType, long idNumber, String username, long phoneNumber, String email, String address, String city, Integer wallet,Integer association) {
-        super(id, documentType, idNumber, username, phoneNumber, email, address, city, wallet,userType);
+    public FarmerDTO(Integer id, String documentType, long idNumber, String username, long phoneNumber, String email, String address, String city,Integer association) {
+        super(id, documentType, idNumber, username, phoneNumber, email, address, city,userType);
         this.association = association;
     }
 
@@ -29,7 +29,7 @@ public class FarmerDTO extends UserDTO {
 
         @Override
         public FarmerDTO build() {
-            return new FarmerDTO(id, documentType, idNumber, username, phoneNumber, email, address, city, wallet,association);
+            return new FarmerDTO(id, documentType, idNumber, username, phoneNumber, email, address, city,association);
         }
     }
 }

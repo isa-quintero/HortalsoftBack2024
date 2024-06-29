@@ -1,5 +1,6 @@
 package com.hortalsoft.users.domain.domain;
 
+import com.hortalsoft.users.util.UserType;
 import lombok.*;
 
 import java.io.Serializable;
@@ -16,5 +17,6 @@ public class User implements Serializable {
     private String email;
     private String address;
     private String city;
-    private Integer wallet;
+    private UserType userType;
+
 }

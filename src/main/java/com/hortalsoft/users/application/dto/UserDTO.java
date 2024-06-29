@@ -30,8 +30,6 @@ public class UserDTO {
 
     private String city;
 
-    private Integer wallet;
-    
     private UserType userType;
 
     // Setters using helpers
@@ -59,9 +57,6 @@ public class UserDTO {
         this.city = TextHelper.getDefault(city);
     }
 
-    public void setWallet(Integer wallet) {
-        this.wallet = ObjectHelper.getDefaultInteger(wallet);
-    }
 
     public void setUserType(UserType userType) {
         this.userType = ObjectHelper.getDefault(userType, UserType.CUSTOMER); // Default to CUSTOMER if null
@@ -90,10 +85,6 @@ public class UserDTO {
 
     public String getCity() {
         return TextHelper.getDefault(city);
-    }
-
-    public Integer getWallet() {
-        return ObjectHelper.getDefaultInteger(wallet);
     }
 
     public UserType getUserType() {

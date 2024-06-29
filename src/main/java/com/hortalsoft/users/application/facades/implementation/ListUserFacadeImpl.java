@@ -27,9 +27,8 @@ public class ListUserFacadeImpl implements ListUserFacade {
     }
 
     @Override
-    public List<UserDTO> execute(UserDTO dto) {
+    public List<UserDTO> execute() {
         try {
-            User domain = mapperDTOToDomain.mapToDomain(dto, User.class);
             return mapperDomainToDto.mapToDtoList(useCase.execute(), UserDTO.class);
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;

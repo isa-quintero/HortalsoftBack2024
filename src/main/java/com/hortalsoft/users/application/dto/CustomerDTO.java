@@ -12,14 +12,14 @@ import static com.hortalsoft.users.util.UserType.CUSTOMER;
 public class CustomerDTO extends UserDTO {
     private static final UserType userType = CUSTOMER;
     @Builder(builderMethodName = "customerDTOBuilder")
-    public CustomerDTO(Integer id, String documentType, long idNumber, String username, long phoneNumber, String email, String address, String city, Integer wallet) {
-        super(id, documentType, idNumber, username, phoneNumber, email, address, city, wallet,userType);
+    public CustomerDTO(Integer id, String documentType, long idNumber, String username, long phoneNumber, String email, String address, String city) {
+        super(id, documentType, idNumber, username, phoneNumber, email, address, city,userType);
     }
 
     public static class CustomerDTOBuilder extends UserDTO.UserDTOBuilder {
         @Override
         public CustomerDTO build() {
-            return new CustomerDTO(id, documentType, idNumber, username, phoneNumber, email, address, city, wallet);
+            return new CustomerDTO(id, documentType, idNumber, username, phoneNumber, email, address, city);
         }
     }
 }
