@@ -4,10 +4,7 @@ import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.products.infrastructure.adapter.inbound.controller.OfferController;
 import com.hortalsoft.users.application.dto.UserDTO;
-import com.hortalsoft.users.application.facades.facade.user.CreateUserFacade;
-import com.hortalsoft.users.application.facades.facade.user.DeleteUserFacade;
-import com.hortalsoft.users.application.facades.facade.user.FindUserFacade;
-import com.hortalsoft.users.application.facades.facade.user.ListUserFacade;
+import com.hortalsoft.users.application.facades.facade.user.*;
 import com.hortalsoft.users.util.UserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,15 +20,17 @@ public class UserController {
     private final CreateUserFacade facadeCreate;
     private final DeleteUserFacade facadeDelete;
     private final FindUserFacade facadeFind;
+    private final FindUserFacadeEmail facadeFindByEmail;
     private final ListUserFacade facadeList;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
     private static final Logger logger = LoggerFactory.getLogger(OfferController.class);
 
 
-    public UserController(CreateUserFacade facadeCreate, DeleteUserFacade facadeDelete, FindUserFacade facadeFind, ListUserFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
+    public UserController(CreateUserFacade facadeCreate, DeleteUserFacade facadeDelete, FindUserFacade facadeFind, FindUserFacadeEmail facadeFindByEmail, ListUserFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.facadeCreate = facadeCreate;
         this.facadeDelete = facadeDelete;
         this.facadeFind = facadeFind;
+        this.facadeFindByEmail = facadeFindByEmail;
         this.facadeList = facadeList;
 
         this.exceptionHandlingAspect = exceptionHandlingAspect;
@@ -51,7 +50,7 @@ public class UserController {
     @DeleteMapping("/user/{id}")
     public ResponseEntity<Object> disableUser(@PathVariable(name = "id") int id) {
         try {
-            UserDTO user = new UserDTO(id,"",0,"",0,"","","", UserType.FARMER);
+            UserDTO user = new UserDTO(id,0,0,"",0,"","","", UserType.FARMER);
             facadeDelete.execute(user);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -62,8 +61,19 @@ public class UserController {
     @GetMapping("/user/{id}")
     public ResponseEntity<Object> findUser(@PathVariable(name = "id") int id) {
         try {
-            UserDTO user = new UserDTO(id,"",0,"",0,"","","", UserType.FARMER);
+            UserDTO user = new UserDTO(id,0,0,"",0,"","","", UserType.FARMER);
             UserDTO result = facadeFind.execute(user);
+            logger.info("Usuario encontrado");
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
+        }
+    }
+    @GetMapping("/user/{email}")
+    public ResponseEntity<Object> findUserByEmail(@PathVariable(name = "email") String email) {
+        try {
+            UserDTO user = new UserDTO(0,0,0,"",0,email,"","", UserType.FARMER);
+            UserDTO result = facadeFindByEmail.execute(user);
             logger.info("Usuario encontrado");
             return ResponseEntity.ok().body(result);
         } catch (Exception e) {

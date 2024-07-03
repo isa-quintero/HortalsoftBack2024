@@ -1,13 +1,11 @@
 package com.hortalsoft.users.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.*;
 
-@Data
+
 @Entity
 @Table(name = "customer", schema = "users")
-@EqualsAndHashCode(callSuper = true)
-public class CustomerEntity extends UserEntity{
+@PrimaryKeyJoinColumn(name = "id_user")
+public class CustomerEntity extends UserEntity {
+
 }

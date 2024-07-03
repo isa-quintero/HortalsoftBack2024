@@ -9,7 +9,6 @@ import com.hortalsoft.users.domain.entity.CustomerEntity;
 import com.hortalsoft.users.domain.port.input.customer.DeleteCustomerUseCase;
 import com.hortalsoft.users.domain.repository.CustomerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
-import com.hortalsoft.users.domain.specification.UserExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,12 +32,7 @@ public class DeleteCustomerService implements DeleteCustomerUseCase {
     public void execute(Customer domain) {
         try {
             CustomerEntity entity = mapperDomainToEntity.mapToEntity(domain, CustomerEntity.class);
-            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (userExistByIdSpec.isSatisfiedBy(entity)) {
-                customerRepository.deleteById(domain.getId());
-            } else {
-                throw new ExceptionHortalsoft("Cliente no encontrado", 6001, layer);
-            }
+            customerRepository.deleteById(domain.getId());
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {

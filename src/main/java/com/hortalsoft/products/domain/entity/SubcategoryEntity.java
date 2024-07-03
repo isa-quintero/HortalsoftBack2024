@@ -12,7 +12,6 @@ import lombok.ToString;
 @Table(name = "subcategory", schema = "products")
 public class SubcategoryEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_subcategory")
     private Integer idSubcategory;
     @Column(name = "name")

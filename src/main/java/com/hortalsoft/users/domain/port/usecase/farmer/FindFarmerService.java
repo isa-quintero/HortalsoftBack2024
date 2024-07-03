@@ -10,7 +10,6 @@ import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.users.domain.port.input.farmer.FindFarmerUseCase;
 import com.hortalsoft.users.domain.repository.FarmerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
-import com.hortalsoft.users.domain.specification.UserExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,14 +36,10 @@ public class FindFarmerService implements FindFarmerUseCase {
     @Override
     public Farmer execute(Farmer domain) {
         try {
-            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
             FarmerEntity entity = mapperDomainToEntity.mapToEntity(domain, FarmerEntity.class);
-            if (userExistByIdSpec.isSatisfiedBy(entity)) {
-                Optional<FarmerEntity> resultEntity = farmerRepository.findById(entity.getId());
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Farmer.class);
-            } else {
-                throw new ExceptionHortalsoft("Agricultor no encontrada", 6001, layer);
-            }
+            Optional<FarmerEntity> resultEntity = farmerRepository.findById(entity.getId());
+            return mapperEntityToDomain.mapToDomain(resultEntity.get(), Farmer.class);
+
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {

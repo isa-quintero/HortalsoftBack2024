@@ -10,7 +10,6 @@ import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.users.domain.port.input.customer.FindCustomerUseCase;
 import com.hortalsoft.users.domain.repository.CustomerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
-import com.hortalsoft.users.domain.specification.UserExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,14 +36,9 @@ public class FindCustomerService implements FindCustomerUseCase {
     @Override
     public Customer execute(Customer domain) {
         try {
-            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
             CustomerEntity entity = mapperDomainToEntity.mapToEntity(domain, CustomerEntity.class);
-            if (userExistByIdSpec.isSatisfiedBy(entity)) {
-                Optional<CustomerEntity> resultEntity = customerRepository.findById(entity.getId());
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Customer.class);
-            } else {
-                throw new ExceptionHortalsoft("Cliente no encontrada", 6001, layer);
-            }
+            Optional<CustomerEntity> resultEntity = customerRepository.findById(entity.getId());
+            return mapperEntityToDomain.mapToDomain(resultEntity.get(), Customer.class);
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {

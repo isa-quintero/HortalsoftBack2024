@@ -9,7 +9,6 @@ import com.hortalsoft.users.domain.entity.FarmerEntity;
 import com.hortalsoft.users.domain.port.input.farmer.DeleteFarmerUseCase;
 import com.hortalsoft.users.domain.repository.FarmerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
-import com.hortalsoft.users.domain.specification.UserExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,12 +32,7 @@ public class DeleteFarmerService implements DeleteFarmerUseCase {
     public void execute(Farmer domain) {
         try {
             FarmerEntity entity = mapperDomainToEntity.mapToEntity(domain, FarmerEntity.class);
-            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (userExistByIdSpec.isSatisfiedBy(entity)) {
-                farmerRepository.deleteById(domain.getId());
-            } else {
-                throw new ExceptionHortalsoft("Agricultor no encontrado", 6001, layer);
-            }
+            farmerRepository.deleteById(domain.getId());
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {

@@ -8,7 +8,7 @@ import com.hortalsoft.users.domain.domain.User;
 import com.hortalsoft.users.domain.entity.UserEntity;
 import com.hortalsoft.users.domain.port.input.user.DeleteUserUseCase;
 import com.hortalsoft.users.domain.repository.UserRepository;
-import com.hortalsoft.users.domain.specification.UserExistByIdSpec;
+import com.hortalsoft.users.domain.specification.user.UserExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

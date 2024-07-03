@@ -5,32 +5,32 @@ import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.users.domain.domain.Association;
 import com.hortalsoft.users.domain.entity.AssociationEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
-import com.hortalsoft.users.domain.port.input.association.CreateAssociationUseCase;
+import com.hortalsoft.users.domain.port.usecase.user.AbstractUserService;
 import com.hortalsoft.users.domain.repository.AssociationRepository;
+import com.hortalsoft.users.domain.repository.UserRepository;
+import com.hortalsoft.users.domain.specification.user.ValidateUserCreatedSpec;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class CreateAssociationService implements CreateAssociationUseCase {
+public class CreateAssociationService  extends AbstractUserService<Association> {
 
     private static final Layer layer = Layer.DOMAIN;
     private final AssociationRepository associationRepository;
+    private final UserRepository userRepository;
     MapperDomainToEntity<Association, AssociationEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
-    public CreateAssociationService(AssociationRepository associationRepository) {
+    public CreateAssociationService(AssociationRepository associationRepository, UserRepository userRepository) {
+
         this.associationRepository = associationRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public void execute(Association domain) {
         try {
-            //ValidateUserCreatedSpec validateUserCreatedSpec = new ValidateUserCreatedSpec(associationRepository);
             AssociationEntity entity = mapperDomainToEntity.mapToEntity(domain, AssociationEntity.class);
-            //if (validateUserCreatedSpec.isSatisfiedBy(entity)) {
-                associationRepository.save(entity);
-            //} else {
-                //throw new ExceptionHortalsoft("La asociación ya existe", 5001, layer);
-           // }
+            associationRepository.save(entity);
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {

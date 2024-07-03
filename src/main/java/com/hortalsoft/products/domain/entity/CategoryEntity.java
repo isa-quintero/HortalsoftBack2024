@@ -10,7 +10,6 @@ import lombok.*;
 @Table(name = "category", schema = "products")
 public class CategoryEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_category")
     private Integer idCategory;
     @Column(name = "name")

@@ -14,13 +14,12 @@ import lombok.ToString;
 @Table(name = "document_type", schema = "users")
 public class DocumentTypeEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "id_document_type")
+    private Integer idDocumentType;
     @Column(name = "code")
     private String code;
     @Column(name = "name")
     private String name;
-    @Column(name = "descrption")
+    @Column(name = "description")
     private String description;
 }

@@ -7,9 +7,9 @@ import com.hortalsoft.users.domain.domain.User;
 import com.hortalsoft.users.domain.entity.UserEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
-import com.hortalsoft.users.domain.port.input.user.FindUserUseCase;
+import com.hortalsoft.users.domain.port.input.user.FindUserEmailUseCase;
 import com.hortalsoft.users.domain.repository.UserRepository;
-import com.hortalsoft.users.domain.specification.user.UserExistByIdSpec;
+import com.hortalsoft.users.domain.specification.user.UserExistByEmailSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class FindUserService implements FindUserUseCase {
+public class FindUserEmailService implements FindUserEmailUseCase {
 
     private static final Layer layer = Layer.DOMAIN;
     private final UserRepository userRepository;
@@ -26,7 +26,7 @@ public class FindUserService implements FindUserUseCase {
     MapperEntityToDomain<UserEntity, User> mapperEntityToDomain = new MapperEntityToDomain<>();
 
     @Autowired
-    public FindUserService(UserRepository userRepository) {
+    public FindUserEmailService(UserRepository userRepository) {
         this.userRepository = userRepository;
 
     }
@@ -35,10 +35,10 @@ public class FindUserService implements FindUserUseCase {
     @Override
     public User execute(User domain) {
         try {
-            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
+            UserExistByEmailSpec userExistByEmailSpec = new UserExistByEmailSpec(userRepository);
             UserEntity entity = mapperDomainToEntity.mapToEntity(domain, UserEntity.class);
-            if (userExistByIdSpec.isSatisfiedBy(entity)) {
-                Optional<UserEntity> resultEntity = userRepository.findById(entity.getId());
+            if (userExistByEmailSpec.isSatisfiedBy(entity)) {
+                Optional<UserEntity> resultEntity = userRepository.findByEmail(entity.getEmail());
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(), User.class);
             } else {
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);

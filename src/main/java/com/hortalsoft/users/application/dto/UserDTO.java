@@ -6,23 +6,18 @@ import com.hortalsoft.users.util.UserType;
 import lombok.*;
 
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+@AllArgsConstructor
+public abstract class UserDTO {
     private Integer id;
 
-    private String documentType;
+    private Integer documentType;
 
-    @Setter
-    @Getter
-    private long idNumber; // idNumber is a primitive type, no need for null check
+    private long idNumber;
 
     private String username;
 
-    @Setter
-    @Getter
-    private long phoneNumber; // phoneNumber is a primitive type, no need for null check
+    private long phoneNumber;
 
     private String email;
 
@@ -32,13 +27,14 @@ public class UserDTO {
 
     private UserType userType;
 
+
     // Setters using helpers
     public void setId(Integer id) {
         this.id = ObjectHelper.getDefaultInteger(id);
     }
 
-    public void setDocumentType(String documentType) {
-        this.documentType = TextHelper.getDefault(documentType);
+    public void setDocumentType(Integer documentType) {
+        this.documentType = ObjectHelper.getDefaultInteger(documentType);
     }
 
     public void setUsername(String username) {
@@ -67,8 +63,8 @@ public class UserDTO {
         return ObjectHelper.getDefaultInteger(id);
     }
 
-    public String getDocumentType() {
-        return TextHelper.getDefault(documentType);
+    public Integer getDocumentType() {
+        return ObjectHelper.getDefaultInteger(documentType);
     }
 
     public String getUsername() {

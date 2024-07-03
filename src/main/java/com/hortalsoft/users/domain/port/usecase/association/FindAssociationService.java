@@ -10,7 +10,6 @@ import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.users.domain.port.input.association.FindAssociationUseCase;
 import com.hortalsoft.users.domain.repository.AssociationRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
-import com.hortalsoft.users.domain.specification.UserExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,14 +36,10 @@ public class FindAssociationService implements FindAssociationUseCase {
     @Override
     public Association execute(Association domain) {
         try {
-            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
             AssociationEntity entity = mapperDomainToEntity.mapToEntity(domain, AssociationEntity.class);
-            if (userExistByIdSpec.isSatisfiedBy(entity)) {
-                Optional<AssociationEntity> resultEntity = associationRepository.findById(entity.getId());
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Association.class);
-            } else {
-                throw new ExceptionHortalsoft("Asociación no encontrada", 6001, layer);
-            }
+            Optional<AssociationEntity> resultEntity = associationRepository.findById(entity.getId());
+            return mapperEntityToDomain.mapToDomain(resultEntity.get(), Association.class);
+
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {

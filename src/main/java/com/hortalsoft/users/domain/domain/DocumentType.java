@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Data
 @RequiredArgsConstructor
 public class DocumentType implements Serializable {
-    private Integer id;
+    private Integer idDocumentType;
     private String code;
     private String name;
     private String description;

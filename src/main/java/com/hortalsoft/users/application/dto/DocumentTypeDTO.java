@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DocumentTypeDTO {
-    private Integer id;
+    private Integer idDocumentType;
 
     private String code;
 

@@ -1,13 +1,12 @@
 package com.hortalsoft.users.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.*;
 
-@Data
+
 @Entity
 @Table(name = "association", schema = "users")
-@EqualsAndHashCode(callSuper = true)
+@PrimaryKeyJoinColumn(name = "id_user")
 public class AssociationEntity extends UserEntity {
+    @Column(name = "association_name")
+    private String associationName;
 }

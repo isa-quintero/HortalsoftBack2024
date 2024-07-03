@@ -1,4 +1,4 @@
-package com.hortalsoft.users.application.facades.implementation;
+package com.hortalsoft.users.application.facades.implementation.user;
 
 
 import com.hortalsoft.users.application.facades.facade.user.AuthenticateUserFacade;

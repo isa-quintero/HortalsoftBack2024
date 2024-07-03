@@ -9,7 +9,6 @@ import com.hortalsoft.users.domain.entity.AssociationEntity;
 import com.hortalsoft.users.domain.port.input.association.DeleteAssociationUseCase;
 import com.hortalsoft.users.domain.repository.AssociationRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
-import com.hortalsoft.users.domain.specification.UserExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,12 +33,8 @@ public class DeleteAssociationService implements DeleteAssociationUseCase {
     public void execute(Association domain) {
         try {
             AssociationEntity entity = mapperDomainToEntity.mapToEntity(domain, AssociationEntity.class);
-            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (userExistByIdSpec.isSatisfiedBy(entity)) {
-                associationRepository.deleteById(domain.getId());
-            } else {
-                throw new ExceptionHortalsoft("Asociación no encontrada", 6001, layer);
-            }
+            associationRepository.deleteById(domain.getId());
+
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {
