@@ -7,6 +7,4 @@ import jakarta.persistence.*;
 @Table(name = "association", schema = "users")
 @PrimaryKeyJoinColumn(name = "id_user")
 public class AssociationEntity extends UserEntity {
-    @Column(name = "association_name")
-    private String associationName;
 }

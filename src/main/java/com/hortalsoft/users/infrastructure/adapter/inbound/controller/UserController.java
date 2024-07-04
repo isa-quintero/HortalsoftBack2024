@@ -5,7 +5,6 @@ import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.products.infrastructure.adapter.inbound.controller.OfferController;
 import com.hortalsoft.users.application.dto.UserDTO;
 import com.hortalsoft.users.application.facades.facade.user.*;
-import com.hortalsoft.users.util.UserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -44,40 +43,6 @@ public class UserController {
         } catch (Exception e) {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
 
-        }
-    }
-
-    @DeleteMapping("/user/{id}")
-    public ResponseEntity<Object> disableUser(@PathVariable(name = "id") int id) {
-        try {
-            UserDTO user = new UserDTO(id,0,0,"",0,"","","", UserType.FARMER);
-            facadeDelete.execute(user);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            return exceptionHandlingAspect.exceptionsInfrastructure(e);
-        }
-    }
-
-    @GetMapping("/user/{id}")
-    public ResponseEntity<Object> findUser(@PathVariable(name = "id") int id) {
-        try {
-            UserDTO user = new UserDTO(id,0,0,"",0,"","","", UserType.FARMER);
-            UserDTO result = facadeFind.execute(user);
-            logger.info("Usuario encontrado");
-            return ResponseEntity.ok().body(result);
-        } catch (Exception e) {
-            return exceptionHandlingAspect.exceptionsInfrastructure(e);
-        }
-    }
-    @GetMapping("/user/{email}")
-    public ResponseEntity<Object> findUserByEmail(@PathVariable(name = "email") String email) {
-        try {
-            UserDTO user = new UserDTO(0,0,0,"",0,email,"","", UserType.FARMER);
-            UserDTO result = facadeFindByEmail.execute(user);
-            logger.info("Usuario encontrado");
-            return ResponseEntity.ok().body(result);
-        } catch (Exception e) {
-            return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
 

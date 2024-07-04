@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/profiles")
-public class DocumentTypeController {
+public class    DocumentTypeController {
 
     private final FindDocumentTypeFacade facadeFind;
     private final ListDocumentTypeFacade facadeList;

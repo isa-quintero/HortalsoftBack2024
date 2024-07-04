@@ -18,15 +18,13 @@ import org.springframework.stereotype.Service;
 public class DeleteAssociationService implements DeleteAssociationUseCase {
 
     private final AssociationRepository associationRepository;
-    private final UserRepository userRepository;
 
     private static final Layer layer = Layer.DOMAIN;
     MapperDomainToEntity<Association, AssociationEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
     @Autowired
-    public DeleteAssociationService(AssociationRepository associationRepository, UserRepository userRepository) {
+    public DeleteAssociationService(AssociationRepository associationRepository) {
         this.associationRepository = associationRepository;
-        this.userRepository = userRepository;
     }
 
     @Override

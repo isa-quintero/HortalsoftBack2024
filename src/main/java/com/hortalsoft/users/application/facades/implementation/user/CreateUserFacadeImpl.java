@@ -21,7 +21,7 @@ public class CreateUserFacadeImpl implements CreateUserFacade {
     private final CreateUserUseCase createUserUseCase;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
 
-    public CreateUserFacadeImpl(CreateAssociationUseCase createUserUseCase, ExceptionHandlingAspect exceptionHandlingAspect) {
+    public CreateUserFacadeImpl(CreateUserUseCase createUserUseCase, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.createUserUseCase = createUserUseCase;
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }

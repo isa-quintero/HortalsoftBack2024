@@ -5,25 +5,20 @@ import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.users.domain.domain.Association;
 import com.hortalsoft.users.domain.entity.AssociationEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
-import com.hortalsoft.users.domain.port.usecase.user.AbstractUserService;
+import com.hortalsoft.users.domain.port.input.association.CreateAssociationUseCase;
 import com.hortalsoft.users.domain.repository.AssociationRepository;
-import com.hortalsoft.users.domain.repository.UserRepository;
-import com.hortalsoft.users.domain.specification.user.ValidateUserCreatedSpec;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class CreateAssociationService  extends AbstractUserService<Association> {
+public class CreateAssociationService  implements CreateAssociationUseCase {
 
     private static final Layer layer = Layer.DOMAIN;
     private final AssociationRepository associationRepository;
-    private final UserRepository userRepository;
     MapperDomainToEntity<Association, AssociationEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
-    public CreateAssociationService(AssociationRepository associationRepository, UserRepository userRepository) {
-
+    public CreateAssociationService(AssociationRepository associationRepository){
         this.associationRepository = associationRepository;
-        this.userRepository = userRepository;
     }
 
     @Override

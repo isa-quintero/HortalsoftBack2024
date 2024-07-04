@@ -1,8 +1,6 @@
 package com.hortalsoft.users.domain.domain;
 
-import jakarta.persistence.JoinColumn;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;

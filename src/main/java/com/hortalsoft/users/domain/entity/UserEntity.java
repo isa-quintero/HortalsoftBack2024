@@ -3,8 +3,7 @@ package com.hortalsoft.users.domain.entity;
 import com.hortalsoft.users.util.UserType;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+
 
 @Data
 @Entity
