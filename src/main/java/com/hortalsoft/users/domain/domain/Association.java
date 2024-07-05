@@ -12,7 +12,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 public class Association extends User implements Serializable {
 
-    public Association(Integer id, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city, UserType userType) {
-        super(id, documentType, idNumber, username, phoneNumber, email, address, city, userType);
+    public Association(Integer id, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city) {
+        super(id, documentType, idNumber, username, phoneNumber, email, address, city, UserType.ASSOCIATION);
     }
 }

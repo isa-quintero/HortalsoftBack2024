@@ -2,10 +2,8 @@ package com.hortalsoft.users.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.products.infrastructure.adapter.inbound.controller.OfferController;
 import com.hortalsoft.users.application.dto.AssociationDTO;
 import com.hortalsoft.users.application.facades.facade.association.*;
-import com.hortalsoft.users.util.UserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -25,7 +23,7 @@ public class AssociationController {
     private final FindAssociationFacadeEmail facadeFindByEmail;
     private final ListAssociationFacade facadeList;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
-    private static final Logger logger = LoggerFactory.getLogger(OfferController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AssociationController.class);
 
     public AssociationController(CreateAssociationFacade facadeCreate, DeleteAssociationFacade facadeDelete, FindAssociationFacade facadeFind, FindAssociationFacadeEmail facadeFindByEmail, ListAssociationFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.facadeCreate = facadeCreate;
@@ -38,7 +36,7 @@ public class AssociationController {
 
 
     @PostMapping("/association")
-    public ResponseEntity<Object> createUser(@RequestBody AssociationDTO input) {
+    public ResponseEntity<Object> createAssociation(@RequestBody AssociationDTO input) {
         try {
             facadeCreate.execute(input);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -49,9 +47,9 @@ public class AssociationController {
     }
 
     @DeleteMapping("/association/{id}")
-    public ResponseEntity<Object> disableUser(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Object> disableAssociation(@PathVariable(name = "id") int id) {
         try {
-            AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","",UserType.ASSOCIATION);
+            AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","");
             facadeDelete.execute(association);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -60,9 +58,9 @@ public class AssociationController {
     }
 
     @GetMapping("/association/{id}")
-    public ResponseEntity<Object> findUser(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Object> findAssociation(@PathVariable(name = "id") int id) {
         try {
-            AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","",UserType.ASSOCIATION);
+            AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","");
             AssociationDTO result = facadeFind.execute(association);
             logger.info(USUARIO_ENCONTRADO);
             return ResponseEntity.ok().body(result);
@@ -70,10 +68,10 @@ public class AssociationController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
-    @GetMapping("/association/{email}")
-    public ResponseEntity<Object> findUserByEmail(@PathVariable(name = "email") String email) {
+    @GetMapping("/association-email/{email}")
+    public ResponseEntity<Object> findAssociationByEmail(@PathVariable(name = "email") String email) {
         try {
-            AssociationDTO user = new AssociationDTO(0,0,0,"",0,email,"","", UserType.ASSOCIATION);
+            AssociationDTO user = new AssociationDTO(0,0,0,"",0,email,"","");
             AssociationDTO result = facadeFindByEmail.execute(user);
             logger.info(USUARIO_ENCONTRADO);
             return ResponseEntity.ok().body(result);
@@ -83,7 +81,7 @@ public class AssociationController {
     }
 
     @GetMapping("/associations")
-    public ResponseEntity<Object> listUsers() {
+    public ResponseEntity<Object> listAssociations() {
         try {
             List<AssociationDTO> associationDTOS = facadeList.execute();
             return new ResponseEntity<>(associationDTOS, HttpStatus.OK);

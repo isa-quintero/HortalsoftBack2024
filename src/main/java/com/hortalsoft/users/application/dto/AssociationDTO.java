@@ -9,8 +9,8 @@ import static com.hortalsoft.users.util.UserType.ASSOCIATION;
 @Setter
 @AllArgsConstructor
 public class AssociationDTO extends UserDTO {
-    public AssociationDTO(Integer id, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city,UserType userType) {
-        super(id, documentType, idNumber, username, phoneNumber, email, address, city, userType);
+    public AssociationDTO(Integer id, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city) {
+        super(id, documentType, idNumber, username, phoneNumber, email, address, city, ASSOCIATION);
     }
 
 }

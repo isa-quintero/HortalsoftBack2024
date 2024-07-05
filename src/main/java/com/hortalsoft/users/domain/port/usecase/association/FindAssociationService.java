@@ -5,12 +5,20 @@ import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.users.domain.domain.Association;
 import com.hortalsoft.users.domain.domain.User;
+import com.hortalsoft.users.domain.entity.AssociationEntity;
+import com.hortalsoft.users.domain.entity.UserEntity;
+import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.users.domain.mapper.MapperUserToAssociation;
 import com.hortalsoft.users.domain.port.input.association.FindAssociationUseCase;
 import com.hortalsoft.users.domain.port.usecase.user.FindUserService;
+import com.hortalsoft.users.domain.repository.AssociationRepository;
+import com.hortalsoft.users.domain.repository.UserRepository;
+import com.hortalsoft.users.domain.specification.user.UserExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @Service
@@ -19,18 +27,30 @@ public class FindAssociationService implements FindAssociationUseCase {
 
     private static final Layer layer = Layer.DOMAIN;
     private final FindUserService findUserService;
+    private final UserRepository userRepository;
+    private final AssociationRepository associationRepository;
     MapperUserToAssociation<User, Association> mapperUserToAssociation = new MapperUserToAssociation<>();
+    MapperEntityToDomain<AssociationEntity, Association> mapperEntityToDomain = new MapperEntityToDomain<>();
+
 
     @Autowired
-    public FindAssociationService(FindUserService findUserService) {
+    public FindAssociationService(FindUserService findUserService, UserRepository userRepository, AssociationRepository associationRepository) {
         this.findUserService = findUserService;
+        this.userRepository = userRepository;
+        this.associationRepository = associationRepository;
     }
 
 
     @Override
     public Association execute(Association domain) {
         try {
-            return mapperUserToAssociation.mapToAssociation(findUserService.execute(domain), Association.class);
+            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
+            if (userExistByIdSpec.isSatisfiedBy(domain.getId())){
+                Optional<AssociationEntity> resultEntity = associationRepository.findById(domain.getId());
+                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Association.class);            }
+            else{
+                throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
+            }
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {

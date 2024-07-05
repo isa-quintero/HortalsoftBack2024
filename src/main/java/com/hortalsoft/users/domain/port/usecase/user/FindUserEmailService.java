@@ -37,7 +37,7 @@ public class FindUserEmailService implements FindUserEmailUseCase {
         try {
             UserExistByEmailSpec userExistByEmailSpec = new UserExistByEmailSpec(userRepository);
             UserEntity entity = mapperDomainToEntity.mapToEntity(domain, UserEntity.class);
-            if (userExistByEmailSpec.isSatisfiedBy(entity)) {
+            if (userExistByEmailSpec.isSatisfiedBy(entity.getEmail())) {
                 Optional<UserEntity> resultEntity = userRepository.findByEmail(entity.getEmail());
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(), User.class);
             } else {

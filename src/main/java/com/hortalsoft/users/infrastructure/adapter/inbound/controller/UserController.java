@@ -2,7 +2,6 @@ package com.hortalsoft.users.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.products.infrastructure.adapter.inbound.controller.OfferController;
 import com.hortalsoft.users.application.dto.UserDTO;
 import com.hortalsoft.users.application.facades.facade.user.*;
 import org.slf4j.Logger;
@@ -22,7 +21,7 @@ public class UserController {
     private final FindUserFacadeEmail facadeFindByEmail;
     private final ListUserFacade facadeList;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
-    private static final Logger logger = LoggerFactory.getLogger(OfferController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 
     public UserController(CreateUserFacade facadeCreate, DeleteUserFacade facadeDelete, FindUserFacade facadeFind, FindUserFacadeEmail facadeFindByEmail, ListUserFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {

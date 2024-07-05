@@ -2,22 +2,41 @@ package com.hortalsoft.users.domain.domain;
 
 import com.hortalsoft.users.util.UserType;
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-@Data
 @RequiredArgsConstructor
 public abstract class User implements Serializable {
+    @Getter
+    @Setter
     private Integer id;
+    @Getter
+    @Setter
     private Integer documentTypeId;
+    @Getter
+    @Setter
     private long idNumber;
+    @Getter
+    @Setter
     private String username;
+    @Getter
+    @Setter
     private long phoneNumber;
+    @Getter
+    @Setter
     private String email;
+    @Getter
+    @Setter
     private String address;
+    @Getter
+    @Setter
     private String city;
+    @Setter
+    @Getter
     private UserType userType;
 
     public User(Integer id, Integer documentTypeId, long idNumber, String username, long phoneNumber, String email, String address, String city, UserType userType) {

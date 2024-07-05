@@ -7,7 +7,7 @@ import com.hortalsoft.users.domain.repository.UserRepository;
 import java.util.Objects;
 import java.util.Optional;
 
-public class UserExistByEmailSpec extends AbstractSpecification<UserEntity> {
+public class UserExistByEmailSpec extends AbstractSpecification<String> {
     private final UserRepository userRepository;
 
     public UserExistByEmailSpec(UserRepository userRepository) {
@@ -15,8 +15,8 @@ public class UserExistByEmailSpec extends AbstractSpecification<UserEntity> {
     }
 
     @Override
-    public boolean isSatisfiedBy(UserEntity userEntity) {
-        Optional<UserEntity> existingOffer = userRepository.findByEmail(userEntity.getEmail());
-        return existingOffer.filter(entity -> Objects.equals(entity.getEmail(), userEntity.getEmail())).isPresent();
+    public boolean isSatisfiedBy(String email) {
+        Optional<UserEntity> existingOffer = userRepository.findByEmail(email);
+        return existingOffer.filter(entity -> Objects.equals(entity.getEmail(), email)).isPresent();
     }
 }

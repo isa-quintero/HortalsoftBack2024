@@ -5,26 +5,35 @@ import com.hortalsoft.crosscutting.helper.TextHelper;
 import com.hortalsoft.users.util.UserType;
 import lombok.*;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class UserDTO {
+    @Getter
+    @Setter
     private Integer id;
-
+    @Getter
+    @Setter
     private Integer documentTypeId;
-
+    @Getter
+    @Setter
     private long idNumber;
-
+    @Getter
+    @Setter
     private String username;
-
+    @Getter
+    @Setter
     private long phoneNumber;
-
+    @Getter
+    @Setter
     private String email;
-
+    @Getter
+    @Setter
     private String address;
-
+    @Getter
+    @Setter
     private String city;
-
+    @Setter
+    @Getter
     private UserType userType;
 
 

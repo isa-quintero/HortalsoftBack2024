@@ -32,7 +32,7 @@ public class DeleteUserService implements DeleteUserUseCase {
         try {
             UserEntity entity = mapperDomainToEntity.mapToEntity(domain, UserEntity.class);
             UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (userExistByIdSpec.isSatisfiedBy(entity)) {
+            if (userExistByIdSpec.isSatisfiedBy(entity.getId())) {
                 userRepository.deleteById(domain.getId());
             } else {
                 throw new ExceptionHortalsoft("Usuario no encontrado", 6001, layer);

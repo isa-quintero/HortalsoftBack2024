@@ -6,13 +6,20 @@ import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.users.domain.domain.Association;
 import com.hortalsoft.users.domain.domain.User;
 import com.hortalsoft.users.domain.entity.AssociationEntity;
+import com.hortalsoft.users.domain.entity.UserEntity;
+import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.users.domain.mapper.MapperUserToAssociation;
 import com.hortalsoft.users.domain.port.input.association.FindAssociationEmailUseCase;
 import com.hortalsoft.users.domain.port.usecase.user.FindUserEmailService;
+import com.hortalsoft.users.domain.repository.AssociationRepository;
+import com.hortalsoft.users.domain.repository.UserRepository;
+import com.hortalsoft.users.domain.specification.user.UserExistByEmailSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @Service
@@ -20,20 +27,28 @@ import org.springframework.stereotype.Service;
 public class FindAssociationEmailService implements FindAssociationEmailUseCase {
 
     private static final Layer layer = Layer.DOMAIN;
-    private final FindUserEmailService findUserEmailService;
-    MapperUserToAssociation <User, Association> mapperUserToAssociation = new MapperUserToAssociation<>();
+    private final UserRepository userRepository;
+    private final AssociationRepository associationRepository;
     MapperEntityToDomain<AssociationEntity, Association> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperDomainToEntity<Association, AssociationEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
     @Autowired
-    public FindAssociationEmailService(FindUserEmailService findUserEmailService) {
-        this.findUserEmailService = findUserEmailService;
+    public FindAssociationEmailService(UserRepository userRepository, AssociationRepository associationRepository) {
+        this.userRepository = userRepository;
+        this.associationRepository = associationRepository;
     }
 
 
     @Override
     public Association execute(Association domain) {
         try {
-            return mapperUserToAssociation.mapToAssociation(findUserEmailService.execute(domain), Association.class);
+            UserExistByEmailSpec userExistByEmailSpec = new UserExistByEmailSpec(userRepository);
+            if (userExistByEmailSpec.isSatisfiedBy(domain.getEmail())) {
+                Optional<AssociationEntity> resultEntity = associationRepository.findByEmail(domain.getEmail());
+                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Association.class);
+            } else {
+                throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
+            }
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {
