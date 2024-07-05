@@ -1,30 +1,18 @@
 package com.hortalsoft.users.domain.domain;
 
-import jakarta.persistence.JoinColumn;
+import com.hortalsoft.users.util.UserType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Association extends User implements Serializable {
-    private Integer associationId;
-    private Integer user;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Association that = (Association) o;
-        return Objects.equals(associationId, that.associationId) && Objects.equals(user, that.user);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), associationId, user);
+    public Association(Integer id, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city, UserType userType) {
+        super(id, documentType, idNumber, username, phoneNumber, email, address, city, userType);
     }
 }

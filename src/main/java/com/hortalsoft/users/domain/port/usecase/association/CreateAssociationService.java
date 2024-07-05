@@ -8,16 +8,18 @@ import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.port.input.association.CreateAssociationUseCase;
 import com.hortalsoft.users.domain.repository.AssociationRepository;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class CreateAssociationService  implements CreateAssociationUseCase {
+@Transactional
+public class CreateAssociationService implements CreateAssociationUseCase {
 
     private static final Layer layer = Layer.DOMAIN;
     private final AssociationRepository associationRepository;
     MapperDomainToEntity<Association, AssociationEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
-    public CreateAssociationService(AssociationRepository associationRepository){
+
+    public CreateAssociationService(AssociationRepository associationRepository) {
         this.associationRepository = associationRepository;
     }
 

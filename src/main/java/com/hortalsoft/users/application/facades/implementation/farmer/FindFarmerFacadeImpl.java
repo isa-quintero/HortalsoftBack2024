@@ -3,15 +3,11 @@ package com.hortalsoft.users.application.facades.implementation.farmer;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.users.application.dto.FarmerDTO;
-import com.hortalsoft.users.application.dto.UserDTO;
 import com.hortalsoft.users.application.facades.facade.farmer.FindFarmerFacade;
-import com.hortalsoft.users.application.facades.facade.user.FindUserFacade;
 import com.hortalsoft.users.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.users.application.mapper.MapperDomainToDto;
 import com.hortalsoft.users.domain.domain.Farmer;
-import com.hortalsoft.users.domain.domain.User;
 import com.hortalsoft.users.domain.port.input.farmer.FindFarmerUseCase;
-import com.hortalsoft.users.domain.port.input.user.FindUserUseCase;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

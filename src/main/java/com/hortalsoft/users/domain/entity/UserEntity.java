@@ -18,7 +18,7 @@ public abstract class UserEntity {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "document_type", referencedColumnName = "id_document_type")
+    @JoinColumn(name = "id_document_type")
     private DocumentTypeEntity documentType;
 
     @Column(name = "id_number")

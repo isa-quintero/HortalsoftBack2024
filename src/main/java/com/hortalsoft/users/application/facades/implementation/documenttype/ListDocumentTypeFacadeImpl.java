@@ -4,7 +4,6 @@ import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.users.application.dto.DocumentTypeDTO;
 import com.hortalsoft.users.application.facades.facade.documenttype.ListDocumentTypeFacade;
-import com.hortalsoft.users.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.users.application.mapper.MapperDomainToDto;
 import com.hortalsoft.users.domain.domain.DocumentType;
 import com.hortalsoft.users.domain.port.input.documenttype.ListDocumentTypeUseCase;
@@ -18,7 +17,6 @@ import java.util.List;
 public class ListDocumentTypeFacadeImpl implements ListDocumentTypeFacade {
 
     MapperDomainToDto<DocumentType, DocumentTypeDTO> mapperDomainToDto = new MapperDomainToDto<>();
-    MapperDTOToDomain<DocumentTypeDTO, DocumentType> mapperDTOToDomain = new MapperDTOToDomain<>();
     private final ListDocumentTypeUseCase useCase;
     private static final Layer layer = Layer.APPLICATION;
 

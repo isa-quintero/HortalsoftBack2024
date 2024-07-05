@@ -8,7 +8,6 @@ import com.hortalsoft.users.domain.domain.Association;
 import com.hortalsoft.users.domain.entity.AssociationEntity;
 import com.hortalsoft.users.domain.port.input.association.DeleteAssociationUseCase;
 import com.hortalsoft.users.domain.repository.AssociationRepository;
-import com.hortalsoft.users.domain.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

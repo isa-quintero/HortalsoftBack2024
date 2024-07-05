@@ -7,7 +7,6 @@ import com.hortalsoft.users.application.facades.facade.customer.FindCustomerFaca
 import com.hortalsoft.users.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.users.application.mapper.MapperDomainToDto;
 import com.hortalsoft.users.domain.domain.Customer;
-import com.hortalsoft.users.domain.domain.User;
 import com.hortalsoft.users.domain.port.input.customer.FindCustomerUseCase;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;

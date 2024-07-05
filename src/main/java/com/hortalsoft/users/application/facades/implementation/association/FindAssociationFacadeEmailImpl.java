@@ -9,7 +9,6 @@ import com.hortalsoft.users.application.mapper.MapperDomainToDto;
 import com.hortalsoft.users.domain.domain.Association;
 import com.hortalsoft.users.domain.port.input.association.FindAssociationEmailUseCase;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service

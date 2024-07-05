@@ -11,7 +11,7 @@ import lombok.*;
 public abstract class UserDTO {
     private Integer id;
 
-    private Integer documentType;
+    private Integer documentTypeId;
 
     private long idNumber;
 
@@ -33,8 +33,8 @@ public abstract class UserDTO {
         this.id = ObjectHelper.getDefaultInteger(id);
     }
 
-    public void setDocumentType(Integer documentType) {
-        this.documentType = ObjectHelper.getDefaultInteger(documentType);
+    public void setDocumentTypeId(Integer documentTypeId) {
+        this.documentTypeId = ObjectHelper.getDefaultInteger(documentTypeId);
     }
 
     public void setUsername(String username) {
@@ -54,17 +54,17 @@ public abstract class UserDTO {
     }
 
 
-    public void setUserType(UserType userType) {
-        this.userType = ObjectHelper.getDefault(userType, UserType.CUSTOMER); // Default to CUSTOMER if null
-    }
+//    public void setUserType(UserType userType) {
+//        this.userType = ObjectHelper.getDefault(userType, UserType.CUSTOMER); // Default to CUSTOMER if null
+//    }
 
     // Getters using helpers
     public Integer getId() {
         return ObjectHelper.getDefaultInteger(id);
     }
 
-    public Integer getDocumentType() {
-        return ObjectHelper.getDefaultInteger(documentType);
+    public Integer getDocumentTypeId() {
+        return ObjectHelper.getDefaultInteger(documentTypeId);
     }
 
     public String getUsername() {
@@ -87,17 +87,17 @@ public abstract class UserDTO {
         return ObjectHelper.getDefault(userType, UserType.CUSTOMER); // Default to CUSTOMER if null
     }
 
-    // Methods to check user type
-    public boolean isFarmer() {
-        return UserType.FARMER.equals(this.userType);
-    }
-
-    public boolean isCustomer() {
-        return UserType.CUSTOMER.equals(this.userType);
-    }
-
-    public boolean isAssociation() {
-        return UserType.ASSOCIATION.equals(this.userType);
-    }
+//    // Methods to check user type
+//    public boolean isFarmer() {
+//        return UserType.FARMER.equals(this.userType);
+//    }
+//
+//    public boolean isCustomer() {
+//        return UserType.CUSTOMER.equals(this.userType);
+//    }
+//
+//    public boolean isAssociation() {
+//        return UserType.ASSOCIATION.equals(this.userType);
+//    }
 }
 

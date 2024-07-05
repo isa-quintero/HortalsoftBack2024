@@ -13,7 +13,7 @@ public class FarmerDTO extends UserDTO {
     private Integer association;
 
     public FarmerDTO(Integer id, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city, UserType userType, Integer association) {
-        super(id, documentType, idNumber, username, phoneNumber, email, address, city, userType);
+        super(id, documentType, idNumber, username, phoneNumber, email, address, city, FARMER);
         this.association = association;
     }
 }

@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/profiles")
 public class AssociationController {
+    public static final String USUARIO_ENCONTRADO = "Usuario encontrado";
     private final CreateAssociationFacade facadeCreate;
     private final DeleteAssociationFacade facadeDelete;
     private final FindAssociationFacade facadeFind;
@@ -50,7 +51,7 @@ public class AssociationController {
     @DeleteMapping("/association/{id}")
     public ResponseEntity<Object> disableUser(@PathVariable(name = "id") int id) {
         try {
-            AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","", UserType.ASSOCIATION);
+            AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","",UserType.ASSOCIATION);
             facadeDelete.execute(association);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -61,9 +62,9 @@ public class AssociationController {
     @GetMapping("/association/{id}")
     public ResponseEntity<Object> findUser(@PathVariable(name = "id") int id) {
         try {
-            AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","", UserType.FARMER);
+            AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","",UserType.ASSOCIATION);
             AssociationDTO result = facadeFind.execute(association);
-            logger.info("Usuario encontrado");
+            logger.info(USUARIO_ENCONTRADO);
             return ResponseEntity.ok().body(result);
         } catch (Exception e) {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
@@ -72,9 +73,9 @@ public class AssociationController {
     @GetMapping("/association/{email}")
     public ResponseEntity<Object> findUserByEmail(@PathVariable(name = "email") String email) {
         try {
-            AssociationDTO user = new AssociationDTO(0,0,0,"",0,email,"","", UserType.FARMER);
+            AssociationDTO user = new AssociationDTO(0,0,0,"",0,email,"","", UserType.ASSOCIATION);
             AssociationDTO result = facadeFindByEmail.execute(user);
-            logger.info("Usuario encontrado");
+            logger.info(USUARIO_ENCONTRADO);
             return ResponseEntity.ok().body(result);
         } catch (Exception e) {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
