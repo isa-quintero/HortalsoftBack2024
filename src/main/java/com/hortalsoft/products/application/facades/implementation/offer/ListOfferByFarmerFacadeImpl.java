@@ -1,29 +1,28 @@
 package com.hortalsoft.products.application.facades.implementation.offer;
 
 import com.hortalsoft.products.application.dto.OfferDTO;
-import com.hortalsoft.products.application.facades.facade.offer.ListOfferFacade;
+import com.hortalsoft.products.application.facades.facade.offer.ListOfferByFarmerFacade;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
 import com.hortalsoft.products.domain.domain.Offer;
-import com.hortalsoft.products.domain.port.input.offer.ListOfferUseCase;
+import com.hortalsoft.products.domain.port.input.offer.ListOfferByFarmerUseCase;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
-public class ListOfferFacadeImpl implements ListOfferFacade {
+public class ListOfferByFarmerFacadeImpl implements ListOfferByFarmerFacade {
 
     MapperDomainToDto<Offer, OfferDTO> mapperDomainToDto = new MapperDomainToDto<>();
     MapperDTOToDomain<OfferDTO, Offer> mapperDTOToDomain = new MapperDTOToDomain<>();
-    private final ListOfferUseCase useCase;
+    private final ListOfferByFarmerUseCase useCase;
     private static final Layer layer = Layer.APPLICATION;
 
-    public ListOfferFacadeImpl(ListOfferUseCase useCase) {
+    public ListOfferByFarmerFacadeImpl(ListOfferByFarmerUseCase useCase) {
         this.useCase = useCase;
     }
 

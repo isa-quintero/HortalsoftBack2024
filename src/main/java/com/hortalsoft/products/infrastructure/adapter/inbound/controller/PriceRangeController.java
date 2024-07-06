@@ -1,10 +1,7 @@
 package com.hortalsoft.products.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.products.application.dto.PriceRangeDTO;
-import com.hortalsoft.products.application.facades.facade.pricerange.CreatePriceRangeFacade;
-import com.hortalsoft.products.application.facades.facade.pricerange.DeletePriceRangeFacade;
-import com.hortalsoft.products.application.facades.facade.pricerange.FindPriceRangeFacade;
-import com.hortalsoft.products.application.facades.facade.pricerange.ListPricesRangesFacade;
+import com.hortalsoft.products.application.facades.facade.pricerange.*;
 import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import org.slf4j.Logger;
@@ -24,14 +21,16 @@ public class PriceRangeController {
     private final CreatePriceRangeFacade facadeCreate;
     private final DeletePriceRangeFacade facadeDelete;
     private final FindPriceRangeFacade facadeFind;
+    private final ListPricesRangesByAssociationFacade facadeListByAssociations;
     private final ListPricesRangesFacade facadeList;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
     private static final Logger logger = LoggerFactory.getLogger(PriceRangeController.class);
 
-    public PriceRangeController(CreatePriceRangeFacade facadeCreate, DeletePriceRangeFacade facadeDelete, FindPriceRangeFacade facadeFind, ListPricesRangesFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
+    public PriceRangeController(CreatePriceRangeFacade facadeCreate, DeletePriceRangeFacade facadeDelete, FindPriceRangeFacade facadeFind, ListPricesRangesByAssociationFacade facadeListByAssociations, ListPricesRangesFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.facadeCreate = facadeCreate;
         this.facadeDelete = facadeDelete;
         this.facadeFind = facadeFind;
+        this.facadeListByAssociations = facadeListByAssociations;
         this.facadeList = facadeList;
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
@@ -72,6 +71,17 @@ public class PriceRangeController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
 
+    }
+    @GetMapping("/price-ranges-association/{id}")
+    public ResponseEntity<Object> listPriceRangesByAssociation(@PathVariable (name = "id") int id){
+        try{
+            PriceRangeDTO priceRange = new PriceRangeDTO(id,0,id,0.0,0.0,LocalDateTime.now(), LocalDateTime.now(),true);
+            List<PriceRangeDTO> priceRangeDTOS = facadeListByAssociations.execute(priceRange);
+            return new ResponseEntity<>(priceRangeDTOS, HttpStatus.OK);
+        }
+        catch (ExceptionHortalsoft e){
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
+        }
     }
 
     @GetMapping("/price-ranges")

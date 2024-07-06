@@ -5,10 +5,11 @@ import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.products.domain.domain.Offer;
 import com.hortalsoft.products.domain.entity.OfferEntity;
+import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
-import com.hortalsoft.products.domain.port.input.offer.ListOfferUseCase;
+import com.hortalsoft.products.domain.port.input.offer.ListOfferByFarmerUseCase;
 import com.hortalsoft.products.domain.repository.OfferRepository;
-import com.hortalsoft.products.domain.specification.implementation.offer.AvailableOffersSpec;
+import com.hortalsoft.products.domain.specification.implementation.offer.OfferExistByFarmerSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +17,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ListOffersByFarmerService implements ListOfferUseCase {
+public class ListOffersByFarmerService implements ListOfferByFarmerUseCase {
 
     private static final Layer layer = Layer.DOMAIN;
     private final OfferRepository offerRepository;
     MapperEntityToDomain<OfferEntity, Offer> mapperEntityToDomain = new MapperEntityToDomain<>();
+    MapperDomainToEntity<Offer, OfferEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
     public ListOffersByFarmerService(OfferRepository offerRepository) {
         this.offerRepository = offerRepository;
@@ -30,13 +32,14 @@ public class ListOffersByFarmerService implements ListOfferUseCase {
     @Override
     public List<Offer> execute(Offer domain) {
         try {
-            List <OfferEntity> offers = offerRepository.findByFarmer(domain.getFarmerId()).stream()
-                    .filter(offer -> {
-                        AvailableOffersSpec availableOffersSpec = new AvailableOffersSpec(offerRepository);
-                        availableOffersSpec.isSatisfiedBy(offer);
-                        return availableOffersSpec.isSatisfiedBy(offer);
-                    }).toList();
-            return mapperEntityToDomain.mapToDomainList(offers,Offer.class);
+            OfferExistByFarmerSpec offerExistByFarmerSpec = new OfferExistByFarmerSpec(offerRepository);
+            OfferEntity entity = mapperDomainToEntity.mapToEntity(domain, OfferEntity.class);
+            if (!offerExistByFarmerSpec.isSatisfiedBy(entity)){
+                List<OfferEntity> resultList = offerRepository.findByFarmer(entity.getFarmer());
+                return mapperEntityToDomain.mapToDomainList(resultList, Offer.class);
+            } else {
+                throw new ExceptionHortalsoft("No tiene ofertas disponibles", 6001, layer);
+            }
 
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;

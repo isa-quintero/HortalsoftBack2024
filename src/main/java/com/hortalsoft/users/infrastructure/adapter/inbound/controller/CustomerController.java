@@ -4,7 +4,6 @@ import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.users.application.dto.CustomerDTO;
 import com.hortalsoft.users.application.facades.facade.customer.*;
-import com.hortalsoft.users.util.UserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,15 +21,17 @@ public class CustomerController {
     private final DeleteCustomerFacade facadeDelete;
     private final FindCustomerFacade facadeFind;
     private final FindCustomerFacadeEmail facadeFindByEmail;
+    private final FindCustomerIdNumberFacade facadeFindByIdNumber;
     private final ListCustomerFacade facadeList;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
-    public CustomerController(CreateCustomerFacade facadeCreate, DeleteCustomerFacade facadeDelete, FindCustomerFacade facadeFind, FindCustomerFacadeEmail facadeFindByEmail, ListCustomerFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
+    public CustomerController(CreateCustomerFacade facadeCreate, DeleteCustomerFacade facadeDelete, FindCustomerFacade facadeFind, FindCustomerFacadeEmail facadeFindByEmail, FindCustomerIdNumberFacade facadeFindByIdNumber, ListCustomerFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.facadeCreate = facadeCreate;
         this.facadeDelete = facadeDelete;
         this.facadeFind = facadeFind;
         this.facadeFindByEmail = facadeFindByEmail;
+        this.facadeFindByIdNumber = facadeFindByIdNumber;
         this.facadeList = facadeList;
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
@@ -69,11 +70,23 @@ public class CustomerController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
-    @GetMapping("/customer-email    /{email}")
+    @GetMapping("/customer-email/{email}")
     public ResponseEntity<Object> findCustomerByEmail(@PathVariable(name = "email") String email) {
         try {
             CustomerDTO customer = new CustomerDTO(0,0,0,"",0,email,"","");
             CustomerDTO result = facadeFindByEmail.execute(customer);
+            logger.info(USUARIO_ENCONTRADO);
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
+        }
+    }
+
+    @GetMapping("/customerid/{idNumber}")
+    public ResponseEntity<Object> findCustomerByIdNumber(@PathVariable(name = "idNumber") Long idNumber) {
+        try {
+            CustomerDTO customer = new CustomerDTO(0,0,idNumber,"",0,"","","");
+            CustomerDTO result = facadeFindByIdNumber.execute(customer);
             logger.info(USUARIO_ENCONTRADO);
             return ResponseEntity.ok().body(result);
         } catch (Exception e) {

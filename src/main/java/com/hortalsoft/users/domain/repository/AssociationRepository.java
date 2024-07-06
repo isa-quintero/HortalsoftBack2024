@@ -8,5 +8,7 @@ import java.util.Optional;
 
 public interface AssociationRepository  extends JpaRepository<AssociationEntity, Integer> {
     Optional<AssociationEntity> findByEmail(String email);
+    Optional<AssociationEntity> findByIdNumber(Long idNumber);
+
 
 }

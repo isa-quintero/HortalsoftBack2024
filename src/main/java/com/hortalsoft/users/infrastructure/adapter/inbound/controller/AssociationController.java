@@ -21,15 +21,17 @@ public class AssociationController {
     private final DeleteAssociationFacade facadeDelete;
     private final FindAssociationFacade facadeFind;
     private final FindAssociationFacadeEmail facadeFindByEmail;
+    private final FindAssociationIdNumberFacade facadeFindByIdNumber;
     private final ListAssociationFacade facadeList;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
     private static final Logger logger = LoggerFactory.getLogger(AssociationController.class);
 
-    public AssociationController(CreateAssociationFacade facadeCreate, DeleteAssociationFacade facadeDelete, FindAssociationFacade facadeFind, FindAssociationFacadeEmail facadeFindByEmail, ListAssociationFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
+    public AssociationController(CreateAssociationFacade facadeCreate, DeleteAssociationFacade facadeDelete, FindAssociationFacade facadeFind, FindAssociationFacadeEmail facadeFindByEmail, FindAssociationIdNumberFacade facadeFindByIdNumber, ListAssociationFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.facadeCreate = facadeCreate;
         this.facadeDelete = facadeDelete;
         this.facadeFind = facadeFind;
         this.facadeFindByEmail = facadeFindByEmail;
+        this.facadeFindByIdNumber = facadeFindByIdNumber;
         this.facadeList = facadeList;
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
@@ -73,6 +75,17 @@ public class AssociationController {
         try {
             AssociationDTO user = new AssociationDTO(0,0,0,"",0,email,"","","");
             AssociationDTO result = facadeFindByEmail.execute(user);
+            logger.info(USUARIO_ENCONTRADO);
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
+        }
+    }
+    @GetMapping("/associationid/{idNumber}")
+    public ResponseEntity<Object> findAssociationIdNumber(@PathVariable(name = "idNumber") Long idNumber) {
+        try {
+            AssociationDTO user = new AssociationDTO(0,0,idNumber,"",0,"","","","");
+            AssociationDTO result = facadeFindByIdNumber.execute(user);
             logger.info(USUARIO_ENCONTRADO);
             return ResponseEntity.ok().body(result);
         } catch (Exception e) {

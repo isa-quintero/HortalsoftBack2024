@@ -21,15 +21,17 @@ public class OfferController {
     private final CreateOfferFacade facadeCreate;
     private final DisableOfferFacade facadeDelete;
     private final FindOfferFacade facadeFind;
+    private final ListOfferByFarmerFacade facadeListByFarmer;
     private final ListOffersFacade facadeList;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
     private static final Logger logger = LoggerFactory.getLogger(OfferController.class);
 
 
-    public OfferController(CreateOfferFacade facade, DisableOfferFacade facadeDelete, FindOfferFacade facadeFind, ListOffersFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
+    public OfferController(CreateOfferFacade facade, DisableOfferFacade facadeDelete, FindOfferFacade facadeFind, ListOfferByFarmerFacade facadeListByFarmer, ListOffersFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.facadeCreate = facade;
         this.facadeDelete = facadeDelete;
         this.facadeFind = facadeFind;
+        this.facadeListByFarmer = facadeListByFarmer;
         this.facadeList = facadeList;
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
@@ -65,6 +67,16 @@ public class OfferController {
             logger.info("Oferta encontrada");
             return ResponseEntity.ok().body(result);
         } catch (Exception e) {
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
+        }
+    }
+    @GetMapping("/offers-farmer/{id}")
+    public ResponseEntity<Object> listOffersByFarmer(@PathVariable(name = "id") int id) {
+        try {
+            OfferDTO offer = new OfferDTO(id, 0, id, "", 0, 0.0, LocalDateTime.now(), LocalDateTime.now(), true, "");
+            List<OfferDTO> offerDTOS = facadeListByFarmer.execute(offer);
+            return new ResponseEntity<>(offerDTOS, HttpStatus.OK);
+        } catch (ExceptionHortalsoft e) {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
