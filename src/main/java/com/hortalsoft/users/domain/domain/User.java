@@ -1,15 +1,13 @@
 package com.hortalsoft.users.domain.domain;
 
 import com.hortalsoft.users.util.UserType;
-import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-@RequiredArgsConstructor
+@NoArgsConstructor
+
 public abstract class User implements Serializable {
     @Getter
     @Setter

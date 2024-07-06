@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 
-public class UniqueIdNumberSpec extends AbstractSpecification<Integer> {
+public class UniqueIdNumberSpec extends AbstractSpecification<Long> {
     private final UserRepository userRepository;
 
     public UniqueIdNumberSpec(UserRepository userRepository) {
@@ -18,7 +18,7 @@ public class UniqueIdNumberSpec extends AbstractSpecification<Integer> {
 
 
     @Override
-    public boolean isSatisfiedBy(Integer idNumber) {
+    public boolean isSatisfiedBy(Long idNumber) {
         Optional<UserEntity> existingOffer = userRepository.findByIdNumber(idNumber);
         return existingOffer.filter(entity -> Objects.equals(entity.getIdNumber(), idNumber)).isPresent();
     }

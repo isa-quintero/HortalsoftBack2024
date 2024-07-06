@@ -8,7 +8,7 @@ import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.port.input.customer.CreateCustomerUseCase;
 import com.hortalsoft.users.domain.repository.CustomerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
-import com.hortalsoft.users.domain.specification.user.UserExistByIdSpec;
+import com.hortalsoft.users.domain.specification.user.UniqueIdNumberSpec;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,8 +26,8 @@ public class CreateCustomerService  implements CreateCustomerUseCase {
     @Override
     public void execute(Customer domain) {
         try {
-            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (!userExistByIdSpec.isSatisfiedBy(domain.getId())) {
+            UniqueIdNumberSpec uniqueIdNumberSpec = new UniqueIdNumberSpec(userRepository);
+            if (!uniqueIdNumberSpec.isSatisfiedBy(domain.getIdNumber())) {
                 CustomerEntity entity = mapperDomainToEntity.mapToEntity(domain, CustomerEntity.class);
                 customerRepository.save(entity);
             } else{

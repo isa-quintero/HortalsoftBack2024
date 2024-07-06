@@ -69,7 +69,7 @@ public class CustomerController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
-    @GetMapping("/customer/{email}")
+    @GetMapping("/customer-email    /{email}")
     public ResponseEntity<Object> findCustomerByEmail(@PathVariable(name = "email") String email) {
         try {
             CustomerDTO customer = new CustomerDTO(0,0,0,"",0,email,"","");

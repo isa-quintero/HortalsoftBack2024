@@ -8,7 +8,7 @@ import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.port.input.association.CreateAssociationUseCase;
 import com.hortalsoft.users.domain.repository.AssociationRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
-import com.hortalsoft.users.domain.specification.user.UserExistByIdSpec;
+import com.hortalsoft.users.domain.specification.user.UniqueIdNumberSpec;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,8 +30,8 @@ public class CreateAssociationService implements CreateAssociationUseCase {
     @Override
     public void execute(Association domain) {
         try {
-            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (!userExistByIdSpec.isSatisfiedBy(domain.getId())) {
+            UniqueIdNumberSpec uniqueIdNumberSpec = new UniqueIdNumberSpec(userRepository);
+            if (!uniqueIdNumberSpec.isSatisfiedBy(domain.getIdNumber())) {
                 AssociationEntity entity = mapperDomainToEntity.mapToEntity(domain, AssociationEntity.class);
                 associationRepository.save(entity);
             } else{

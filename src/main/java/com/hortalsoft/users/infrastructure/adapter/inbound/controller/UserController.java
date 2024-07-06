@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.hortalsoft.users.util.UserType.CUSTOMER;
+
 @RestController
 @RequestMapping("/profiles")
 public class UserController {
-    private final CreateUserFacade facadeCreate;
-    private final DeleteUserFacade facadeDelete;
+    public static final String USUARIO_ENCONTRADO = "Usuario encontrado";
     private final FindUserFacade facadeFind;
     private final FindUserFacadeEmail facadeFindByEmail;
     private final ListUserFacade facadeList;
@@ -24,24 +25,36 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 
-    public UserController(CreateUserFacade facadeCreate, DeleteUserFacade facadeDelete, FindUserFacade facadeFind, FindUserFacadeEmail facadeFindByEmail, ListUserFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
-        this.facadeCreate = facadeCreate;
-        this.facadeDelete = facadeDelete;
+    public UserController( FindUserFacade facadeFind, FindUserFacadeEmail facadeFindByEmail, ListUserFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.facadeFind = facadeFind;
         this.facadeFindByEmail = facadeFindByEmail;
         this.facadeList = facadeList;
 
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
-
-    @PostMapping("/user")
-    public ResponseEntity<Object> createUser(@RequestBody UserDTO input) {
+    @GetMapping("/user/{id}")
+    public ResponseEntity<Object> findUser(@PathVariable(name = "id") int id) {
         try {
-            facadeCreate.execute(input);
-            return new ResponseEntity<>(HttpStatus.OK);
+            UserDTO userDTO = new UserDTO(id, 0, 0, "", 0, "", "", "", CUSTOMER){
+
+            };
+            UserDTO result = facadeFind.execute(userDTO);
+            logger.info(USUARIO_ENCONTRADO);
+            return ResponseEntity.ok().body(result);
         } catch (Exception e) {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
-
+        }
+    }
+    @GetMapping("/user-email/{email}")
+    public ResponseEntity<Object> findAssociationByEmail(@PathVariable(name = "email") String email) {
+        try {
+            UserDTO user = new UserDTO(0, 0, 0, "", 0, email, "", "",CUSTOMER) {
+            };
+            UserDTO result = facadeFindByEmail.execute(user);
+            logger.info(USUARIO_ENCONTRADO);
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
 

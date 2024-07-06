@@ -8,6 +8,7 @@ import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.port.input.farmer.CreateFarmerUseCase;
 import com.hortalsoft.users.domain.repository.FarmerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
+import com.hortalsoft.users.domain.specification.user.UniqueIdNumberSpec;
 import com.hortalsoft.users.domain.specification.user.UserExistByIdSpec;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,8 @@ public class CreateFarmerService implements CreateFarmerUseCase {
     @Override
     public void execute(Farmer domain) {
         try {
-            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (!userExistByIdSpec.isSatisfiedBy(domain.getId())) {
+            UniqueIdNumberSpec uniqueIdNumberSpec = new UniqueIdNumberSpec(userRepository);
+            if (!uniqueIdNumberSpec.isSatisfiedBy(domain.getIdNumber())) {
                 FarmerEntity entity = mapperDomainToEntity.mapToEntity(domain, FarmerEntity.class);
                 farmerRepository.save(entity);
             } else{
