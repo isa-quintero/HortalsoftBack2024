@@ -4,14 +4,9 @@ package com.hortalsoft.users.domain.port.usecase.association;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.users.domain.domain.Association;
-import com.hortalsoft.users.domain.domain.User;
 import com.hortalsoft.users.domain.entity.AssociationEntity;
-import com.hortalsoft.users.domain.entity.UserEntity;
-import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
-import com.hortalsoft.users.domain.mapper.MapperUserToAssociation;
 import com.hortalsoft.users.domain.port.input.association.FindAssociationEmailUseCase;
-import com.hortalsoft.users.domain.port.usecase.user.FindUserEmailService;
 import com.hortalsoft.users.domain.repository.AssociationRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
 import com.hortalsoft.users.domain.specification.user.UserExistByEmailSpec;
@@ -30,7 +25,6 @@ public class FindAssociationEmailService implements FindAssociationEmailUseCase 
     private final UserRepository userRepository;
     private final AssociationRepository associationRepository;
     MapperEntityToDomain<AssociationEntity, Association> mapperEntityToDomain = new MapperEntityToDomain<>();
-    MapperDomainToEntity<Association, AssociationEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
     @Autowired
     public FindAssociationEmailService(UserRepository userRepository, AssociationRepository associationRepository) {

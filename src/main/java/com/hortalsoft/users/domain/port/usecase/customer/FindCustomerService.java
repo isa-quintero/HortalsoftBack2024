@@ -3,13 +3,16 @@ package com.hortalsoft.users.domain.port.usecase.customer;
 
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
+import com.hortalsoft.users.domain.domain.Association;
 import com.hortalsoft.users.domain.domain.Customer;
+import com.hortalsoft.users.domain.entity.AssociationEntity;
 import com.hortalsoft.users.domain.entity.CustomerEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.users.domain.port.input.customer.FindCustomerUseCase;
 import com.hortalsoft.users.domain.repository.CustomerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
+import com.hortalsoft.users.domain.specification.user.UserExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,9 +39,14 @@ public class FindCustomerService implements FindCustomerUseCase {
     @Override
     public Customer execute(Customer domain) {
         try {
-            CustomerEntity entity = mapperDomainToEntity.mapToEntity(domain, CustomerEntity.class);
-            Optional<CustomerEntity> resultEntity = customerRepository.findById(entity.getId());
-            return mapperEntityToDomain.mapToDomain(resultEntity.get(), Customer.class);
+            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
+            if (userExistByIdSpec.isSatisfiedBy(domain.getId())) {
+                Optional<CustomerEntity> resultEntity = customerRepository.findById(domain.getId());
+                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Customer.class);
+            } else{
+                throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
+            }
+
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {

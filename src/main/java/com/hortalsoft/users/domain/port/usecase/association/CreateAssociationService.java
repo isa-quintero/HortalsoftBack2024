@@ -7,6 +7,8 @@ import com.hortalsoft.users.domain.entity.AssociationEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.port.input.association.CreateAssociationUseCase;
 import com.hortalsoft.users.domain.repository.AssociationRepository;
+import com.hortalsoft.users.domain.repository.UserRepository;
+import com.hortalsoft.users.domain.specification.user.UserExistByIdSpec;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,18 +18,26 @@ public class CreateAssociationService implements CreateAssociationUseCase {
 
     private static final Layer layer = Layer.DOMAIN;
     private final AssociationRepository associationRepository;
+    private final UserRepository userRepository;
     MapperDomainToEntity<Association, AssociationEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
 
-    public CreateAssociationService(AssociationRepository associationRepository) {
+    public CreateAssociationService(AssociationRepository associationRepository, UserRepository userRepository) {
         this.associationRepository = associationRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public void execute(Association domain) {
         try {
-            AssociationEntity entity = mapperDomainToEntity.mapToEntity(domain, AssociationEntity.class);
-            associationRepository.save(entity);
+            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
+            if (!userExistByIdSpec.isSatisfiedBy(domain.getId())) {
+                AssociationEntity entity = mapperDomainToEntity.mapToEntity(domain, AssociationEntity.class);
+                associationRepository.save(entity);
+            } else{
+                throw new ExceptionHortalsoft("El usuario ya existe", 6001, layer);
+            }
+
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {

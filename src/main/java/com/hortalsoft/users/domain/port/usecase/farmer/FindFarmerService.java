@@ -3,13 +3,16 @@ package com.hortalsoft.users.domain.port.usecase.farmer;
 
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
+import com.hortalsoft.users.domain.domain.Customer;
 import com.hortalsoft.users.domain.domain.Farmer;
+import com.hortalsoft.users.domain.entity.CustomerEntity;
 import com.hortalsoft.users.domain.entity.FarmerEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.users.domain.port.input.farmer.FindFarmerUseCase;
 import com.hortalsoft.users.domain.repository.FarmerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
+import com.hortalsoft.users.domain.specification.user.UserExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,9 +39,14 @@ public class FindFarmerService implements FindFarmerUseCase {
     @Override
     public Farmer execute(Farmer domain) {
         try {
-            FarmerEntity entity = mapperDomainToEntity.mapToEntity(domain, FarmerEntity.class);
-            Optional<FarmerEntity> resultEntity = farmerRepository.findById(entity.getId());
-            return mapperEntityToDomain.mapToDomain(resultEntity.get(), Farmer.class);
+            UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
+            if (userExistByIdSpec.isSatisfiedBy(domain.getId())) {
+                FarmerEntity entity = mapperDomainToEntity.mapToEntity(domain, FarmerEntity.class);
+                Optional<FarmerEntity> resultEntity = farmerRepository.findById(entity.getId());
+                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Farmer.class);
+            } else{
+                throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
+            }
 
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;

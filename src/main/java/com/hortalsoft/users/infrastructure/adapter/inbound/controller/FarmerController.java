@@ -50,7 +50,7 @@ public class FarmerController {
     @DeleteMapping("/farmer/{id}")
     public ResponseEntity<Object> disableFarmer(@PathVariable(name = "id") int id) {
         try {
-            FarmerDTO farmer = new FarmerDTO(id,0,0,"",0,"","","", UserType.FARMER,0);
+            FarmerDTO farmer = new FarmerDTO(id,0,0,"",0,"","","", 0);
             facadeDelete.execute(farmer);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class FarmerController {
     @GetMapping("/farmer/{id}")
     public ResponseEntity<Object> findFarmer(@PathVariable(name = "id") int id) {
         try {
-            FarmerDTO farmer = new FarmerDTO(id,0,0,"",0,"","","",UserType.FARMER,0);
+            FarmerDTO farmer = new FarmerDTO(id,0,0,"",0,"","","",0);
             FarmerDTO result = facadeFind.execute(farmer);
             logger.info(USUARIO_ENCONTRADO);
             return ResponseEntity.ok().body(result);
@@ -72,7 +72,7 @@ public class FarmerController {
     @GetMapping("/farmer/{email}")
     public ResponseEntity<Object> findCustomerByEmail(@PathVariable(name = "email") String email) {
         try {
-            FarmerDTO farmer = new FarmerDTO(0,0,0,"",0,email,"","", UserType.FARMER,0);
+            FarmerDTO farmer = new FarmerDTO(0,0,0,"",0,email,"","",0);
             FarmerDTO result = facadeFindByEmail.execute(farmer);
             logger.info(USUARIO_ENCONTRADO);
             return ResponseEntity.ok().body(result);

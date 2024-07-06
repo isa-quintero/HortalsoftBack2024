@@ -4,13 +4,9 @@ package com.hortalsoft.users.domain.port.usecase.association;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.users.domain.domain.Association;
-import com.hortalsoft.users.domain.domain.User;
 import com.hortalsoft.users.domain.entity.AssociationEntity;
-import com.hortalsoft.users.domain.entity.UserEntity;
 import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
-import com.hortalsoft.users.domain.mapper.MapperUserToAssociation;
 import com.hortalsoft.users.domain.port.input.association.FindAssociationUseCase;
-import com.hortalsoft.users.domain.port.usecase.user.FindUserService;
 import com.hortalsoft.users.domain.repository.AssociationRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
 import com.hortalsoft.users.domain.specification.user.UserExistByIdSpec;
@@ -26,16 +22,13 @@ import java.util.Optional;
 public class FindAssociationService implements FindAssociationUseCase {
 
     private static final Layer layer = Layer.DOMAIN;
-    private final FindUserService findUserService;
     private final UserRepository userRepository;
     private final AssociationRepository associationRepository;
-    MapperUserToAssociation<User, Association> mapperUserToAssociation = new MapperUserToAssociation<>();
     MapperEntityToDomain<AssociationEntity, Association> mapperEntityToDomain = new MapperEntityToDomain<>();
 
 
     @Autowired
-    public FindAssociationService(FindUserService findUserService, UserRepository userRepository, AssociationRepository associationRepository) {
-        this.findUserService = findUserService;
+    public FindAssociationService( UserRepository userRepository, AssociationRepository associationRepository) {
         this.userRepository = userRepository;
         this.associationRepository = associationRepository;
     }

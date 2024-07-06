@@ -30,7 +30,7 @@ public class CreateUserService implements CreateUserUseCase {
         try {
             UniqueEmailForUserSpec uniqueEmailForUserSpec = new UniqueEmailForUserSpec(userRepository);
             UserEntity entity = mapperDomainToEntity.mapToEntity(domain, UserEntity.class);
-            if ( uniqueEmailForUserSpec.isSatisfiedBy(entity)){
+            if ( uniqueEmailForUserSpec.isSatisfiedBy(entity.getEmail())){
                 userRepository.save(entity);
             } else {
                 throw new ExceptionHortalsoft("El usuario ya existe", 5001, layer);

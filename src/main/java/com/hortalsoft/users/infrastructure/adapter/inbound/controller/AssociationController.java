@@ -49,7 +49,7 @@ public class AssociationController {
     @DeleteMapping("/association/{id}")
     public ResponseEntity<Object> disableAssociation(@PathVariable(name = "id") int id) {
         try {
-            AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","");
+            AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","","");
             facadeDelete.execute(association);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -60,7 +60,7 @@ public class AssociationController {
     @GetMapping("/association/{id}")
     public ResponseEntity<Object> findAssociation(@PathVariable(name = "id") int id) {
         try {
-            AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","");
+            AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","","");
             AssociationDTO result = facadeFind.execute(association);
             logger.info(USUARIO_ENCONTRADO);
             return ResponseEntity.ok().body(result);
@@ -71,7 +71,7 @@ public class AssociationController {
     @GetMapping("/association-email/{email}")
     public ResponseEntity<Object> findAssociationByEmail(@PathVariable(name = "email") String email) {
         try {
-            AssociationDTO user = new AssociationDTO(0,0,0,"",0,email,"","");
+            AssociationDTO user = new AssociationDTO(0,0,0,"",0,email,"","","");
             AssociationDTO result = facadeFindByEmail.execute(user);
             logger.info(USUARIO_ENCONTRADO);
             return ResponseEntity.ok().body(result);

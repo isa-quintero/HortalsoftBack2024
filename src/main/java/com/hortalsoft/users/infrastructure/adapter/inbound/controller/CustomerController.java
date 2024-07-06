@@ -50,7 +50,7 @@ public class CustomerController {
     @DeleteMapping("/customer/{id}")
     public ResponseEntity<Object> disableCustomer(@PathVariable(name = "id") int id) {
         try {
-            CustomerDTO customer = new CustomerDTO(id,0,0,"",0,"","","", UserType.CUSTOMER);
+            CustomerDTO customer = new CustomerDTO(id,0,0,"",0,"","","");
             facadeDelete.execute(customer);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class CustomerController {
     @GetMapping("/customer/{id}")
     public ResponseEntity<Object> findCustomer(@PathVariable(name = "id") int id) {
         try {
-            CustomerDTO customer = new CustomerDTO(id,0,0,"",0,"","","",UserType.CUSTOMER);
+            CustomerDTO customer = new CustomerDTO(id,0,0,"",0,"","","");
             CustomerDTO result = facadeFind.execute(customer);
             logger.info(USUARIO_ENCONTRADO);
             return ResponseEntity.ok().body(result);
@@ -72,7 +72,7 @@ public class CustomerController {
     @GetMapping("/customer/{email}")
     public ResponseEntity<Object> findCustomerByEmail(@PathVariable(name = "email") String email) {
         try {
-            CustomerDTO customer = new CustomerDTO(0,0,0,"",0,email,"","", UserType.CUSTOMER);
+            CustomerDTO customer = new CustomerDTO(0,0,0,"",0,email,"","");
             CustomerDTO result = facadeFindByEmail.execute(customer);
             logger.info(USUARIO_ENCONTRADO);
             return ResponseEntity.ok().body(result);

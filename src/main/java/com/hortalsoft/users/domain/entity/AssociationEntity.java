@@ -10,5 +10,6 @@ import lombok.Data;
 @DiscriminatorValue("ASSOCIATION")
 @PrimaryKeyJoinColumn(name = "id_user")
 public class AssociationEntity extends UserEntity {
-
+    @Column(name = "association_name")
+    private String name;
 }
