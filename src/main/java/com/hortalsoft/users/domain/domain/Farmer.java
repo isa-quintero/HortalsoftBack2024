@@ -2,10 +2,12 @@ package com.hortalsoft.users.domain.domain;
 
 import com.hortalsoft.users.util.UserType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Data
+@NoArgsConstructor
 public class Farmer extends User implements Serializable {
     private Integer associationId;
 
