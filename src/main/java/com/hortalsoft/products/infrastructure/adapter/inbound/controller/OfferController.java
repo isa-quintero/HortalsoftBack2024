@@ -36,7 +36,7 @@ public class OfferController {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
-    @PostMapping("/offer")
+    @PostMapping("/offers")
     public ResponseEntity<Object> createOffer(@RequestBody OfferDTO input) {
         try {
             facadeCreate.execute(input);
@@ -47,7 +47,7 @@ public class OfferController {
         }
     }
 
-    @DeleteMapping("/offer/{id}")
+    @DeleteMapping("/offers/{id}")
     public ResponseEntity<Object> disableOffer(@PathVariable(name = "id") int id) {
         try {
             LocalDateTime date = LocalDateTime.now();
@@ -59,7 +59,7 @@ public class OfferController {
         }
     }
 
-    @GetMapping("/offer/{id}")
+    @GetMapping("/offers/{id}")
     public ResponseEntity<Object> findOffer(@PathVariable(name = "id") int id) {
         try {
             OfferDTO offer = new OfferDTO(id, 0, 0, "", 0, 0.0, LocalDateTime.now(), LocalDateTime.now(), true, "");
@@ -70,7 +70,7 @@ public class OfferController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
-    @GetMapping("/offers-farmer/{id}")
+    @GetMapping("/offers-farmers/{id}")
     public ResponseEntity<Object> listOffersByFarmer(@PathVariable(name = "id") int id) {
         try {
             OfferDTO offer = new OfferDTO(id, 0, id, "", 0, 0.0, LocalDateTime.now(), LocalDateTime.now(), true, "");

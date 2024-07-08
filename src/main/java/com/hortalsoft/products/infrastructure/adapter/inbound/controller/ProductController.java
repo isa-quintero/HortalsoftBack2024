@@ -33,7 +33,7 @@ public class ProductController {
         this.facadeModify = facadeModify;
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
-    @PostMapping("/product")
+    @PostMapping("/products")
     public ResponseEntity<Object> createProduct(@RequestBody ProductDTO input){
         try{
             facadeCreate.execute(input);
@@ -45,7 +45,7 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("/product/{id}")
+    @DeleteMapping("/products/{id}")
     public ResponseEntity<Object> deleteProduct(@PathVariable (name = "id") int id){
         try{
             ProductDTO product = new ProductDTO(id,"",0);
@@ -58,7 +58,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/products/{id}")
     public ResponseEntity<Object> findProduct(@PathVariable (name = "id") int id){
         try {
             ProductDTO product = new ProductDTO(id, "",0);
@@ -82,7 +82,7 @@ public class ProductController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
-    @PutMapping("/product")
+    @PutMapping("/products")
     public ResponseEntity<Object> updateProduct(@RequestBody ProductDTO input){
         try{
             facadeModify.execute(input);

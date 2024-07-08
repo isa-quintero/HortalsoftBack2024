@@ -37,7 +37,7 @@ public class CustomerController {
     }
 
 
-    @PostMapping("/customer")
+    @PostMapping("/customers")
     public ResponseEntity<Object> createCustomer(@RequestBody CustomerDTO input) {
         try {
             facadeCreate.execute(input);
@@ -48,7 +48,7 @@ public class CustomerController {
         }
     }
 
-    @DeleteMapping("/customer/{id}")
+    @DeleteMapping("/customers/{id}")
     public ResponseEntity<Object> disableCustomer(@PathVariable(name = "id") int id) {
         try {
             CustomerDTO customer = new CustomerDTO(id,0,0,"",0,"","","");
@@ -59,7 +59,7 @@ public class CustomerController {
         }
     }
 
-    @GetMapping("/customer/{id}")
+    @GetMapping("/customers/{id}")
     public ResponseEntity<Object> findCustomer(@PathVariable(name = "id") int id) {
         try {
             CustomerDTO customer = new CustomerDTO(id,0,0,"",0,"","","");
@@ -70,7 +70,7 @@ public class CustomerController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
-    @GetMapping("/customer-email/{email}")
+    @GetMapping("/customers-emails/{email}")
     public ResponseEntity<Object> findCustomerByEmail(@PathVariable(name = "email") String email) {
         try {
             CustomerDTO customer = new CustomerDTO(0,0,0,"",0,email,"","");
@@ -82,7 +82,7 @@ public class CustomerController {
         }
     }
 
-    @GetMapping("/customerid/{idNumber}")
+    @GetMapping("/customers-id/{idNumber}")
     public ResponseEntity<Object> findCustomerByIdNumber(@PathVariable(name = "idNumber") Long idNumber) {
         try {
             CustomerDTO customer = new CustomerDTO(0,0,idNumber,"",0,"","","");

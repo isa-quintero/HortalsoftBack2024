@@ -29,7 +29,7 @@ public class CategoryController {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
-    @GetMapping("/category/{id}")
+    @GetMapping("/categories/{id}")
     public ResponseEntity<Object> findCategory(@PathVariable(name = "id") int id) {
         try {
             CategoryDTO category = new CategoryDTO(id, "", "");

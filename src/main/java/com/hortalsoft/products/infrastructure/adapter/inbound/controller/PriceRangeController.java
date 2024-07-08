@@ -34,7 +34,7 @@ public class PriceRangeController {
         this.facadeList = facadeList;
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
-    @PostMapping("/price-range")
+    @PostMapping("/price-ranges")
     public ResponseEntity<Object> createPriceRange(@RequestBody PriceRangeDTO input){
         try{
             facadeCreate.execute(input);
@@ -46,7 +46,7 @@ public class PriceRangeController {
         }
     }
 
-    @DeleteMapping("/price-range/{id}")
+    @DeleteMapping("/price-ranges/{id}")
     public ResponseEntity<Object> deletePriceRange(@PathVariable (name = "id") int id){
         try{
             PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0.0,0.0,LocalDateTime.now(), LocalDateTime.now(),true);
@@ -59,7 +59,7 @@ public class PriceRangeController {
         }
     }
 
-    @GetMapping("/price-range/{id}")
+    @GetMapping("/price-ranges/{id}")
     public ResponseEntity<Object> findPriceRange(@PathVariable (name = "id") int id){
         try {
             PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0.0,0.0,LocalDateTime.now(), LocalDateTime.now(),true);
@@ -72,7 +72,7 @@ public class PriceRangeController {
         }
 
     }
-    @GetMapping("/price-ranges-association/{id}")
+    @GetMapping("/price-ranges-associations/{id}")
     public ResponseEntity<Object> listPriceRangesByAssociation(@PathVariable (name = "id") int id){
         try{
             PriceRangeDTO priceRange = new PriceRangeDTO(id,0,id,0.0,0.0,LocalDateTime.now(), LocalDateTime.now(),true);

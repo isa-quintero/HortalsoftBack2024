@@ -35,7 +35,7 @@ public class    DocumentTypeController {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
-    @GetMapping("/document-type/{id}")
+    @GetMapping("/document-types/{id}")
     public ResponseEntity<Object> findCategory(@PathVariable(name = "id") int id) {
         try {
             DocumentTypeDTO documentType = new DocumentTypeDTO(id, "", "","");

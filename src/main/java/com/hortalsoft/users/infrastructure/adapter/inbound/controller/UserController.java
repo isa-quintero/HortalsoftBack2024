@@ -32,7 +32,7 @@ public class UserController {
 
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
-    @GetMapping("/user/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<Object> findUser(@PathVariable(name = "id") int id) {
         try {
             UserDTO userDTO = new UserDTO(id, 0, 0, "", 0, "", "", "", CUSTOMER){
@@ -45,7 +45,7 @@ public class UserController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
-    @GetMapping("/user-email/{email}")
+    @GetMapping("/users-emails/{email}")
     public ResponseEntity<Object> findAssociationByEmail(@PathVariable(name = "email") String email) {
         try {
             UserDTO user = new UserDTO(0, 0, 0, "", 0, email, "", "",CUSTOMER) {

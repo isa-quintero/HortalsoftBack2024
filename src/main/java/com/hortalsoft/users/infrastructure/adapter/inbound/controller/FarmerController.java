@@ -37,7 +37,7 @@ public class FarmerController {
     }
 
 
-    @PostMapping("/farmer")
+    @PostMapping("/farmers")
     public ResponseEntity<Object> createFarmer(@RequestBody FarmerDTO input) {
         try {
             facadeCreate.execute(input);
@@ -48,7 +48,7 @@ public class FarmerController {
         }
     }
 
-    @DeleteMapping("/farmer/{id}")
+    @DeleteMapping("/farmers/{id}")
     public ResponseEntity<Object> disableFarmer(@PathVariable(name = "id") int id) {
         try {
             FarmerDTO farmer = new FarmerDTO(id,0,0,"",0,"","","", 0);
@@ -59,7 +59,7 @@ public class FarmerController {
         }
     }
 
-    @GetMapping("/farmer/{id}")
+    @GetMapping("/farmers/{id}")
     public ResponseEntity<Object> findFarmer(@PathVariable(name = "id") int id) {
         try {
             FarmerDTO farmer = new FarmerDTO(id,0,0,"",0,"","","",0);
@@ -70,7 +70,7 @@ public class FarmerController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
-    @GetMapping("/farmer-email/{email}")
+    @GetMapping("/farmers-emails/{email}")
     public ResponseEntity<Object> findCustomerByEmail(@PathVariable(name = "email") String email) {
         try {
             FarmerDTO farmer = new FarmerDTO(0,0,0,"",0,email,"","",0);
@@ -81,7 +81,7 @@ public class FarmerController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
-    @GetMapping("/farmerid/{idNumber}")
+    @GetMapping("/farmers-id/{idNumber}")
     public ResponseEntity<Object> findCustomerByIdNumber(@PathVariable(name = "idNumber") Long idNumber) {
         try {
             FarmerDTO farmer = new FarmerDTO(0,0,idNumber,"",0,"","","",0);

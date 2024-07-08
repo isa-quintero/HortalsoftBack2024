@@ -29,7 +29,7 @@ public class SubcategoryController {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
-    @GetMapping("/subcategory/{id}")
+    @GetMapping("/subcategories/{id}")
     public ResponseEntity<Object> findSubcategory(@PathVariable (name = "id") int id){
         try {
             SubcategoryDTO subcategory = new SubcategoryDTO(id, "","",0);

@@ -37,7 +37,7 @@ public class AssociationController {
     }
 
 
-    @PostMapping("/association")
+    @PostMapping("/associations")
     public ResponseEntity<Object> createAssociation(@RequestBody AssociationDTO input) {
         try {
             facadeCreate.execute(input);
@@ -48,7 +48,7 @@ public class AssociationController {
         }
     }
 
-    @DeleteMapping("/association/{id}")
+    @DeleteMapping("/associations/{id}")
     public ResponseEntity<Object> disableAssociation(@PathVariable(name = "id") int id) {
         try {
             AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","","");
@@ -59,7 +59,7 @@ public class AssociationController {
         }
     }
 
-    @GetMapping("/association/{id}")
+    @GetMapping("/associations/{id}")
     public ResponseEntity<Object> findAssociation(@PathVariable(name = "id") int id) {
         try {
             AssociationDTO association = new AssociationDTO(id,0,0,"",0,"","","","");
@@ -70,7 +70,7 @@ public class AssociationController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
-    @GetMapping("/association-email/{email}")
+    @GetMapping("/associations-emails/{email}")
     public ResponseEntity<Object> findAssociationByEmail(@PathVariable(name = "email") String email) {
         try {
             AssociationDTO user = new AssociationDTO(0,0,0,"",0,email,"","","");
@@ -81,7 +81,7 @@ public class AssociationController {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
-    @GetMapping("/associationid/{idNumber}")
+    @GetMapping("/associations-id/{idNumber}")
     public ResponseEntity<Object> findAssociationIdNumber(@PathVariable(name = "idNumber") Long idNumber) {
         try {
             AssociationDTO user = new AssociationDTO(0,0,idNumber,"",0,"","","","");
