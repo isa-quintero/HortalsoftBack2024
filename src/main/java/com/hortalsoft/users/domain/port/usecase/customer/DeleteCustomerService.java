@@ -35,8 +35,8 @@ public class DeleteCustomerService implements DeleteCustomerUseCase {
     public void execute(Customer domain) {
         try {
             UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (userExistByIdSpec.isSatisfiedBy(domain.getId())) {
-                customerRepository.deleteById(domain.getId());
+            if (userExistByIdSpec.isSatisfiedBy(domain.getIdUser())) {
+                customerRepository.deleteById(domain.getIdUser());
             } else{
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
             }

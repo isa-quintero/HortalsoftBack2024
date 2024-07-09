@@ -3,9 +3,7 @@ package com.hortalsoft.users.domain.port.usecase.customer;
 
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
-import com.hortalsoft.users.domain.domain.Association;
 import com.hortalsoft.users.domain.domain.Customer;
-import com.hortalsoft.users.domain.entity.AssociationEntity;
 import com.hortalsoft.users.domain.entity.CustomerEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
@@ -40,8 +38,8 @@ public class FindCustomerService implements FindCustomerUseCase {
     public Customer execute(Customer domain) {
         try {
             UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (userExistByIdSpec.isSatisfiedBy(domain.getId())) {
-                Optional<CustomerEntity> resultEntity = customerRepository.findById(domain.getId());
+            if (userExistByIdSpec.isSatisfiedBy(domain.getIdUser())) {
+                Optional<CustomerEntity> resultEntity = customerRepository.findById(domain.getIdUser());
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(), Customer.class);
             } else{
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);

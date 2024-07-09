@@ -17,6 +17,6 @@ public class UserExistByIdSpec extends AbstractSpecification<Integer> {
     @Override
     public boolean isSatisfiedBy(Integer id) {
         Optional<UserEntity> existingOffer = userRepository.findById(id);
-        return existingOffer.filter(entity -> Objects.equals(entity.getId(), id)).isPresent();
+        return existingOffer.filter(entity -> Objects.equals(entity.getIdUser(), id)).isPresent();
     }
 }

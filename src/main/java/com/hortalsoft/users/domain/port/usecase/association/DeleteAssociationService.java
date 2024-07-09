@@ -3,7 +3,10 @@ package com.hortalsoft.users.domain.port.usecase.association;
 
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
+import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.users.domain.domain.Association;
+import com.hortalsoft.users.domain.entity.AssociationEntity;
+import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.port.input.association.DeleteAssociationUseCase;
 import com.hortalsoft.users.domain.repository.AssociationRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
@@ -20,6 +23,7 @@ public class DeleteAssociationService implements DeleteAssociationUseCase {
     private final AssociationRepository associationRepository;
     private final UserRepository userRepository;
     private static final Layer layer = Layer.DOMAIN;
+    MapperDomainToEntity<Association, AssociationEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
     @Autowired
     public DeleteAssociationService(AssociationRepository associationRepository, UserRepository userRepository) {
@@ -30,9 +34,10 @@ public class DeleteAssociationService implements DeleteAssociationUseCase {
     @Override
     public void execute(Association domain) {
         try {
+            AssociationEntity entity = mapperDomainToEntity.mapToEntity(domain, AssociationEntity.class);
             UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (userExistByIdSpec.isSatisfiedBy(domain.getId())){
-                associationRepository.deleteById(domain.getId());
+            if (userExistByIdSpec.isSatisfiedBy(entity.getIdUser())){
+                associationRepository.deleteById(entity.getIdUser());
             } else{
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
             }

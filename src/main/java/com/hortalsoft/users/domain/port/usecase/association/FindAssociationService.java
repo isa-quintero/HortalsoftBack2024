@@ -38,8 +38,8 @@ public class FindAssociationService implements FindAssociationUseCase {
     public Association execute(Association domain) {
         try {
             UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (userExistByIdSpec.isSatisfiedBy(domain.getId())){
-                Optional<AssociationEntity> resultEntity = associationRepository.findById(domain.getId());
+            if (userExistByIdSpec.isSatisfiedBy(domain.getIdUser())){
+                Optional<AssociationEntity> resultEntity = associationRepository.findById(domain.getIdUser());
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(), Association.class);            }
             else{
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);

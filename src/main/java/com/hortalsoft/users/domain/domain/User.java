@@ -11,7 +11,7 @@ import java.util.Objects;
 public abstract class User implements Serializable {
     @Getter
     @Setter
-    private Integer id;
+    private Integer idUser;
     @Getter
     @Setter
     private Integer documentTypeId;
@@ -37,8 +37,8 @@ public abstract class User implements Serializable {
     @Getter
     private UserType userType;
 
-    public User(Integer id, Integer documentTypeId, long idNumber, String username, long phoneNumber, String email, String address, String city, UserType userType) {
-        this.id = id;
+    public User(Integer idUser, Integer documentTypeId, long idNumber, String username, long phoneNumber, String email, String address, String city, UserType userType) {
+        this.idUser = idUser;
         this.documentTypeId = documentTypeId;
         this.idNumber = idNumber;
         this.username = username;
@@ -56,7 +56,7 @@ public abstract class User implements Serializable {
         User user = (User) o;
         return idNumber == user.idNumber &&
                 phoneNumber == user.phoneNumber &&
-                Objects.equals(id, user.id) &&
+                Objects.equals(idUser, user.idUser) &&
                 Objects.equals(documentTypeId, user.documentTypeId) &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(email, user.email) &&
@@ -67,6 +67,6 @@ public abstract class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, documentTypeId, idNumber, username, phoneNumber, email, address, city, userType);
+        return Objects.hash(idUser, documentTypeId, idNumber, username, phoneNumber, email, address, city, userType);
     }
 }

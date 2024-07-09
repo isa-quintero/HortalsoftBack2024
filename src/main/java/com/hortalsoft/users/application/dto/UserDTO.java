@@ -10,7 +10,7 @@ import lombok.*;
 public abstract class UserDTO {
     @Getter
     @Setter
-    private Integer id;
+    private Integer idUser;
     @Getter
     @Setter
     private Integer documentTypeId;
@@ -38,8 +38,8 @@ public abstract class UserDTO {
 
 
     // Setters using helpers
-    public void setId(Integer id) {
-        this.id = ObjectHelper.getDefaultInteger(id);
+    public void setIdUser(Integer idUser) {
+        this.idUser = ObjectHelper.getDefaultInteger(idUser);
     }
 
     public void setDocumentTypeId(Integer documentTypeId) {
@@ -68,8 +68,8 @@ public abstract class UserDTO {
 //    }
 
     // Getters using helpers
-    public Integer getId() {
-        return ObjectHelper.getDefaultInteger(id);
+    public Integer getIdUser() {
+        return ObjectHelper.getDefaultInteger(idUser);
     }
 
     public Integer getDocumentTypeId() {

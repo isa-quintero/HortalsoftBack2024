@@ -2,7 +2,6 @@ package com.hortalsoft.users.domain.entity;
 
 import com.hortalsoft.users.util.UserType;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +17,7 @@ public abstract class UserEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users.user_seq")
     @SequenceGenerator(name = "users.user_seq", sequenceName = "users.user_seq", allocationSize = 1)
     @Column(name = "id_user")
-    private Integer id;
+    private Integer idUser;
 
     @Getter
     @Setter

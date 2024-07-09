@@ -11,8 +11,8 @@ import java.io.Serializable;
 public class Farmer extends User implements Serializable {
     private Integer associationId;
 
-    public Farmer(Integer id, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city,Integer associationId) {
-        super(id, documentType, idNumber, username, phoneNumber, email, address, city, UserType.FARMER);
+    public Farmer(Integer idUser, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city,Integer associationId) {
+        super(idUser, documentType, idNumber, username, phoneNumber, email, address, city, UserType.FARMER);
         this.associationId = associationId;
     }
 }

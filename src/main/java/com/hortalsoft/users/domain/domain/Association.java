@@ -13,8 +13,8 @@ import java.io.Serializable;
 public class Association extends User implements Serializable {
     private String name;
 
-    public Association(Integer id, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city,String name) {
-        super(id, documentType, idNumber, username, phoneNumber, email, address, city, UserType.ASSOCIATION);
+    public Association(Integer idUser, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city,String name) {
+        super(idUser, documentType, idNumber, username, phoneNumber, email, address, city, UserType.ASSOCIATION);
         this.name = name;
     }
 }

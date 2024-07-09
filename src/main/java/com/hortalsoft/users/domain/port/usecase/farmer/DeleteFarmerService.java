@@ -14,8 +14,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @Transactional
 public class DeleteFarmerService implements DeleteFarmerUseCase {
@@ -35,8 +33,9 @@ public class DeleteFarmerService implements DeleteFarmerUseCase {
     public void execute(Farmer domain) {
         try {
             UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (userExistByIdSpec.isSatisfiedBy(domain.getId())) {
-                farmerRepository.deleteById(domain.getId());
+
+            if (userExistByIdSpec.isSatisfiedBy(domain.getIdUser())) {
+                farmerRepository.deleteById(domain.getIdUser());
             } else{
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
             }

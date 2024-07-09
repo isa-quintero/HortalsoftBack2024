@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Data
 @RequiredArgsConstructor
 public class Customer extends User implements Serializable {
-    public Customer(Integer id, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city) {
-        super(id, documentType, idNumber, username, phoneNumber, email, address, city, UserType.CUSTOMER);
+    public Customer(Integer idUser, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city) {
+        super(idUser, documentType, idNumber, username, phoneNumber, email, address, city, UserType.CUSTOMER);
     }
 }

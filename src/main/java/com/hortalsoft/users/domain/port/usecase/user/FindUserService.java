@@ -36,8 +36,8 @@ public class FindUserService implements FindUserUseCase {
     public User execute(User domain) {
         try {
             UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
-            if (userExistByIdSpec.isSatisfiedBy(domain.getId())) {
-                Optional<UserEntity> resultEntity = userRepository.findById(domain.getId());
+            if (userExistByIdSpec.isSatisfiedBy(domain.getIdUser())) {
+                Optional<UserEntity> resultEntity = userRepository.findById(domain.getIdUser());
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(), User.class);
             } else {
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
