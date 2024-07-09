@@ -26,9 +26,9 @@ public class PriceRangeEntity {
     @Column(name = "id_association")
     private Integer associationId;
     @Column(name = "initial_range")
-    private BigDecimal initialRange;
+    private Integer initialRange;
     @Column(name = "final_range")
-    private BigDecimal finalRange;
+    private Integer finalRange;
     @Column(name = "initial_date")
     private LocalDateTime initialDatePriceRange;
     @Column(name = "final_date")

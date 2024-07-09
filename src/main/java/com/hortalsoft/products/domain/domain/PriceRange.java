@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -14,8 +13,8 @@ public class PriceRange implements Serializable {
     private Integer id;
     private Integer productId;
     private Integer associationId;
-    private BigDecimal initialRange;
-    private BigDecimal finalRange;
+    private Integer initialRange;
+    private Integer finalRange;
     private LocalDateTime initialDate;
     private LocalDateTime finalDate;
     private boolean validity;

@@ -27,11 +27,11 @@ public class PriceRangeDTO {
 
     @NotNull(message = "El rango inicial no puede ser nulo")
     @DecimalMin(value = "0.0", inclusive = false)
-    private Double initialRange;
+    private Integer initialRange;
 
     @NotNull(message = "El rango final no puede ser nulo")
     @DecimalMin(value = "0.0", inclusive = false)
-    private Double finalRange;
+    private Integer finalRange;
 
     @NotNull(message = "La fecha inicial no puede ser nula")
     @FutureOrPresent
@@ -52,12 +52,12 @@ public class PriceRangeDTO {
         this.associationId = ObjectHelper.getDefaultInteger(associationId);
     }
 
-    public void setInitialRange(Double initialRange) {
-        this.initialRange = ObjectHelper.isNull(initialRange) ? 0.0 : initialRange;
+    public void setInitialRange(Integer initialRange) {
+        this.initialRange = ObjectHelper.isNull(initialRange) ? 0 : initialRange;
     }
 
-    public void setFinalRange(Double finalRange) {
-        this.finalRange = ObjectHelper.isNull(finalRange) ? 0.0 : finalRange;
+    public void setFinalRange(Integer finalRange) {
+        this.finalRange = ObjectHelper.isNull(finalRange) ? 0: finalRange;
     }
 
     public void setInitialDate(LocalDateTime initialDate) {

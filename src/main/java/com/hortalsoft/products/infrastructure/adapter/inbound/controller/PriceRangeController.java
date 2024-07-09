@@ -49,7 +49,7 @@ public class PriceRangeController {
     @DeleteMapping("/price-ranges/{id}")
     public ResponseEntity<Object> deletePriceRange(@PathVariable (name = "id") int id){
         try{
-            PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0.0,0.0,LocalDateTime.now(), LocalDateTime.now(),true);
+            PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0,0,LocalDateTime.now(), LocalDateTime.now(),true);
             facadeDelete.execute(priceRange);
             logger.info("Rango de precio eliminado");
             return ResponseEntity.ok().build();
@@ -62,7 +62,7 @@ public class PriceRangeController {
     @GetMapping("/price-ranges/{id}")
     public ResponseEntity<Object> findPriceRange(@PathVariable (name = "id") int id){
         try {
-            PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0.0,0.0,LocalDateTime.now(), LocalDateTime.now(),true);
+            PriceRangeDTO priceRange = new PriceRangeDTO(id,0,0,0,0,LocalDateTime.now(), LocalDateTime.now(),true);
             PriceRangeDTO priceRangeDTO = facadeFind.execute(priceRange);
             logger.info("Rango de precio encontrado");
             return ResponseEntity.ok().body(priceRangeDTO);
@@ -75,7 +75,7 @@ public class PriceRangeController {
     @GetMapping("/price-ranges-associations/{id}")
     public ResponseEntity<Object> listPriceRangesByAssociation(@PathVariable (name = "id") int id){
         try{
-            PriceRangeDTO priceRange = new PriceRangeDTO(id,0,id,0.0,0.0,LocalDateTime.now(), LocalDateTime.now(),true);
+            PriceRangeDTO priceRange = new PriceRangeDTO(id,0,id,0,0,LocalDateTime.now(), LocalDateTime.now(),true);
             List<PriceRangeDTO> priceRangeDTOS = facadeListByAssociations.execute(priceRange);
             return new ResponseEntity<>(priceRangeDTOS, HttpStatus.OK);
         }
