@@ -39,8 +39,8 @@ public class CreatePriceRangeService implements CreatePriceRangeUseCase {
             ValidatePriceAndDatePriceRangeSpec validatePriceAndDatePriceRangeSpec = new ValidatePriceAndDatePriceRangeSpec();
             PriceRangeEntity entity = mapperDomainToEntity.mapToEntity(domain, PriceRangeEntity.class);
             if(!productOrAssociationPriceRangeSpec.isSatisfiedBy((entity))){
-                if (!uniquePriceRangeByAssociatioAndProductAndDateSpec.isSatisfiedBy(entity)) {
-                    if (validatePriceAndDatePriceRangeSpec.isSatisfiedBy(entity)){
+                if (uniquePriceRangeByAssociatioAndProductAndDateSpec.isSatisfiedBy(entity)) {
+                    if (!validatePriceAndDatePriceRangeSpec.isSatisfiedBy(entity)){
                         priceRangeRepository.save(entity);
                     } else {
                         throw new ExceptionHortalsoft("El rango de precios no esta vigente", 5001, layer);
