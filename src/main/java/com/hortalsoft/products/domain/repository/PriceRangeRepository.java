@@ -1,11 +1,10 @@
 package com.hortalsoft.products.domain.repository;
 
 import com.hortalsoft.products.domain.entity.PriceRangeEntity;
-import com.hortalsoft.products.domain.entity.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,5 +17,7 @@ public interface PriceRangeRepository extends JpaRepository<PriceRangeEntity, In
 
     List<PriceRangeEntity> findByAssociationId(int associationId);
 
-    List<PriceRangeEntity> findByAssociationIdAndProduct(int associationId, ProductEntity productId);
+    @Query("SELECT p FROM PriceRangeEntity p WHERE p.associationId = :associationId AND p.product.idProduct = :productId")
+    List<PriceRangeEntity> findByAssociationAndProduct(@Param("associationId") Integer associationId, @Param("productId") Integer productId);
+
 }

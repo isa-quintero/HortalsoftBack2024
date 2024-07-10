@@ -26,7 +26,7 @@ public class UniquePriceRangeByAssociatioAndProductAndDateSpec extends AbstractS
         LocalDateTime finalDate = priceRangeEntity.getFinalDatePriceRange();
 
 
-        List<PriceRangeEntity> existingPriceRanges = priceRangeRepository.findByAssociationIdAndProduct(associationId, productId);
+        List<PriceRangeEntity> existingPriceRanges = priceRangeRepository.findByAssociationAndProduct(associationId, productId.getIdProduct());
 
         return existingPriceRanges.stream().filter(o ->
                 DateHelper.isBetweenInclusive(o.getInitialDatePriceRange(), initialDate, finalDate) ||
