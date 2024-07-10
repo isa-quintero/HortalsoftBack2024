@@ -35,7 +35,7 @@ public class CreatePriceRangeService implements CreatePriceRangeUseCase {
             ValidatePriceAndDatePriceRangeSpec validatePriceAndDatePriceRangeSpec = new ValidatePriceAndDatePriceRangeSpec();
             PriceRangeEntity entity = mapperDomainToEntity.mapToEntity(domain, PriceRangeEntity.class);
             if(!productOrAssociationPriceRangeSpec.isSatisfiedBy((entity))){
-                if (!uniquePriceRangeByAssociatioAndProductAndDateSpec.isSatisfiedBy(entity)) {
+                if (uniquePriceRangeByAssociatioAndProductAndDateSpec.isSatisfiedBy(entity)) {
                     if (validatePriceAndDatePriceRangeSpec.isSatisfiedBy(entity)){
                         priceRangeRepository.save(entity);
                     }

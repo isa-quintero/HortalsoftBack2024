@@ -34,7 +34,7 @@ public class DeletePriceRangeService implements DeletePriceRangeUseCase {
             PriceRangeExistsByIdSpec priceRangeExistsByIdSpec = new PriceRangeExistsByIdSpec(priceRangeRepository);
             PriceRangeEntity entity = mapperDomainToEntity.mapToEntity(domain, PriceRangeEntity.class);
             if (priceRangeExistsByIdSpec.isSatisfiedBy(entity)) {
-                priceRangeRepository.deleteById(domain.getId());
+                priceRangeRepository.deleteById(domain.getIdPriceRange());
             } else {
                 throw new ExceptionHortalsoft("El rango de precios no existe", 6001, layer);
             }

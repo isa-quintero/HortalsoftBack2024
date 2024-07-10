@@ -14,7 +14,7 @@ public interface PriceRangeRepository extends JpaRepository<PriceRangeEntity, In
     List<PriceRangeEntity> findAllByFinalDateValid();
 
     @Query("SELECT p FROM PriceRangeEntity p WHERE p.finalDatePriceRange >= CURRENT_DATE AND p.idPriceRange =:id")
-    Optional<PriceRangeEntity> findByFinalDateValidAndId(int id);
+    Optional<PriceRangeEntity> findByFinalDateValidAndIdPriceRange(int id);
 
     List<PriceRangeEntity> findByAssociationId(int associationId);
 

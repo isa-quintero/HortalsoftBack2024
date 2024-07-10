@@ -9,10 +9,10 @@ import static com.hortalsoft.users.util.UserType.FARMER;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FarmerDTO extends UserDTO {
-    private Integer belongAssociation;
+    private Integer associationId;
 
-    public FarmerDTO(Integer idUser, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city, Integer belongAssociation) {
+    public FarmerDTO(Integer idUser, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city, Integer associationId) {
         super(idUser, documentType, idNumber, username, phoneNumber, email, address, city, FARMER);
-        this.belongAssociation = belongAssociation;
+        this.associationId = associationId;
     }
 }

@@ -17,7 +17,7 @@ import jakarta.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PriceRangeDTO {
-    private Integer id;
+    private Integer idPriceRange;
 
     @NotNull(message = "El producto no puede ser nulo")
     private Integer productId;
@@ -43,6 +43,9 @@ public class PriceRangeDTO {
 
     private boolean validity;
 
+    public void setIdPriceRange(Integer idPriceRange) {
+        this.idPriceRange = ObjectHelper.getDefaultInteger(idPriceRange);
+    }
     // Setters using helpers
     public void setProductId(Integer productId) {
         this.productId = ObjectHelper.getDefaultInteger(productId);
@@ -69,6 +72,9 @@ public class PriceRangeDTO {
     }
 
     // Getters using helpers
+    public Integer getIdPriceRange() {
+        return ObjectHelper.getDefaultInteger(idPriceRange);
+    }
     public Integer getProductId() {
         return ObjectHelper.getDefaultInteger(productId);
     }
