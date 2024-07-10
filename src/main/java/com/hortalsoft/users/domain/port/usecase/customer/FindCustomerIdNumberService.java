@@ -37,8 +37,8 @@ public class FindCustomerIdNumberService implements FindCustomerIdNumberUseCase 
     public Customer execute(Customer domain) {
         try {
             UniqueIdNumberSpec uniqueIdNumberSpec = new UniqueIdNumberSpec(userRepository);
-            if (uniqueIdNumberSpec.isSatisfiedBy(domain.getIdNumber())) {
-                Optional<CustomerEntity> resultEntity = customerRepository.findByIdNumber(domain.getIdNumber());
+            if (uniqueIdNumberSpec.isSatisfiedBy(domain.getNumberId())) {
+                Optional<CustomerEntity> resultEntity = customerRepository.findByNumberId(domain.getNumberId());
                 return mapperEntityToDomain.mapToDomain(resultEntity.get(), Customer.class);
             } else {
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);

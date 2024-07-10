@@ -27,7 +27,7 @@ public class CreateCustomerService  implements CreateCustomerUseCase {
     public void execute(Customer domain) {
         try {
             UniqueIdNumberSpec uniqueIdNumberSpec = new UniqueIdNumberSpec(userRepository);
-            if (!uniqueIdNumberSpec.isSatisfiedBy(domain.getIdNumber())) {
+            if (!uniqueIdNumberSpec.isSatisfiedBy(domain.getNumberId())) {
                 CustomerEntity entity = mapperDomainToEntity.mapToEntity(domain, CustomerEntity.class);
                 customerRepository.save(entity);
             } else{

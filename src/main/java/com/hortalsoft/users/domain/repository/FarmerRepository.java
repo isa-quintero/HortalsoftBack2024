@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface FarmerRepository extends JpaRepository<FarmerEntity, Integer> {
     Optional<FarmerEntity> findByEmail(String email);
-    Optional<FarmerEntity> findByIdNumber(Long idNumber);
+    Optional<FarmerEntity> findByNumberId(Long numberId);
 }

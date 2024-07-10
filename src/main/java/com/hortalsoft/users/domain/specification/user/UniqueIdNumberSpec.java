@@ -19,7 +19,7 @@ public class UniqueIdNumberSpec extends AbstractSpecification<Long> {
 
     @Override
     public boolean isSatisfiedBy(Long idNumber) {
-        Optional<UserEntity> existingOffer = userRepository.findByIdNumber(idNumber);
-        return existingOffer.filter(entity -> Objects.equals(entity.getIdNumber(), idNumber)).isPresent();
+        Optional<UserEntity> existingOffer = userRepository.findByNumberId(idNumber);
+        return existingOffer.filter(entity -> Objects.equals(entity.getNumberId(), idNumber)).isPresent();
     }
 }

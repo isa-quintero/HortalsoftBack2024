@@ -17,7 +17,7 @@ public abstract class User implements Serializable {
     private Integer documentTypeId;
     @Getter
     @Setter
-    private long idNumber;
+    private long numberId;
     @Getter
     @Setter
     private String username;
@@ -37,10 +37,10 @@ public abstract class User implements Serializable {
     @Getter
     private UserType userType;
 
-    public User(Integer idUser, Integer documentTypeId, long idNumber, String username, long phoneNumber, String email, String address, String city, UserType userType) {
+    public User(Integer idUser, Integer documentTypeId, long numberId, String username, long phoneNumber, String email, String address, String city, UserType userType) {
         this.idUser = idUser;
         this.documentTypeId = documentTypeId;
-        this.idNumber = idNumber;
+        this.numberId = numberId;
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -54,7 +54,7 @@ public abstract class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return idNumber == user.idNumber &&
+        return numberId == user.numberId &&
                 phoneNumber == user.phoneNumber &&
                 Objects.equals(idUser, user.idUser) &&
                 Objects.equals(documentTypeId, user.documentTypeId) &&
@@ -67,6 +67,6 @@ public abstract class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUser, documentTypeId, idNumber, username, phoneNumber, email, address, city, userType);
+        return Objects.hash(idUser, documentTypeId, numberId, username, phoneNumber, email, address, city, userType);
     }
 }

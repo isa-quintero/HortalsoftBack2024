@@ -16,7 +16,7 @@ public abstract class UserDTO {
     private Integer documentTypeId;
     @Getter
     @Setter
-    private long idNumber;
+    private long numberId;
     @Getter
     @Setter
     private String username;

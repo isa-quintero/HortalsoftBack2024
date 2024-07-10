@@ -28,7 +28,7 @@ public abstract class UserEntity {
     @Getter
     @Setter
     @Column(name = "id_number")
-    private long idNumber;
+    private long numberId;
 
     @Getter
     @Setter

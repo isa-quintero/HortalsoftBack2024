@@ -6,7 +6,7 @@ import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.users.domain.domain.Farmer;
 import com.hortalsoft.users.domain.entity.FarmerEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
-import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
+import com.hortalsoft.users.domain.mapper.MapperEntityToDomainFarmer;
 import com.hortalsoft.users.domain.port.input.farmer.FindFarmerUseCase;
 import com.hortalsoft.users.domain.repository.FarmerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
@@ -25,12 +25,13 @@ public class FindFarmerService implements FindFarmerUseCase {
     private final UserRepository userRepository;
     private final FarmerRepository farmerRepository;
     MapperDomainToEntity<Farmer, FarmerEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
-    MapperEntityToDomain<FarmerEntity, Farmer> mapperEntityToDomain = new MapperEntityToDomain<>();
+    private final MapperEntityToDomainFarmer mapperEntityToDomain;
 
     @Autowired
-    public FindFarmerService(UserRepository userRepository, FarmerRepository farmerRepository) {
+    public FindFarmerService(UserRepository userRepository, FarmerRepository farmerRepository, MapperEntityToDomainFarmer mapperEntityToDomain) {
         this.userRepository = userRepository;
         this.farmerRepository = farmerRepository;
+        this.mapperEntityToDomain = mapperEntityToDomain;
     }
 
 
@@ -41,7 +42,7 @@ public class FindFarmerService implements FindFarmerUseCase {
             if (userExistByIdSpec.isSatisfiedBy(domain.getIdUser())) {
                 FarmerEntity entity = mapperDomainToEntity.mapToEntity(domain, FarmerEntity.class);
                 Optional<FarmerEntity> resultEntity = farmerRepository.findById(entity.getIdUser());
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Farmer.class);
+                return mapperEntityToDomain.mapToFarmer(resultEntity.get());
             } else{
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
             }

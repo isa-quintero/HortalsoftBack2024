@@ -9,7 +9,7 @@ import static com.hortalsoft.users.util.UserType.CUSTOMER;
 @Setter
 @AllArgsConstructor
 public class CustomerDTO extends UserDTO {
-    public CustomerDTO(Integer idUser, Integer documentType, long idNumber, String username, long phoneNumber, String email, String address, String city) {
-        super(idUser, documentType, idNumber, username, phoneNumber, email, address, city, CUSTOMER);
+    public CustomerDTO(Integer idUser, Integer documentType, long numberId, String username, long phoneNumber, String email, String address, String city) {
+        super(idUser, documentType, numberId, username, phoneNumber, email, address, city, CUSTOMER);
     }
 }

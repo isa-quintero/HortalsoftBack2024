@@ -31,7 +31,7 @@ public class CreateAssociationService implements CreateAssociationUseCase {
     public void execute(Association domain) {
         try {
             UniqueIdNumberSpec uniqueIdNumberSpec = new UniqueIdNumberSpec(userRepository);
-            if (!uniqueIdNumberSpec.isSatisfiedBy(domain.getIdNumber())) {
+            if (!uniqueIdNumberSpec.isSatisfiedBy(domain.getNumberId())) {
                 AssociationEntity entity = mapperDomainToEntity.mapToEntity(domain, AssociationEntity.class);
                 associationRepository.save(entity);
             } else{
