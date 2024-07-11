@@ -3,7 +3,6 @@ package com.hortalsoft.products.domain.specification.implementation.pricerange;
 import com.hortalsoft.crosscutting.helper.NumberHelper;
 import com.hortalsoft.crosscutting.specificaction.AbstractSpecification;
 import com.hortalsoft.products.domain.entity.PriceRangeEntity;
-import com.hortalsoft.products.domain.repository.PriceRangeRepository;
 
 
 public class PriceRangeVerifyPriceSpec extends AbstractSpecification<PriceRangeEntity>  {

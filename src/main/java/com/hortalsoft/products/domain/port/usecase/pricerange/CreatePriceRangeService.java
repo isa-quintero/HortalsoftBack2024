@@ -33,7 +33,6 @@ public class CreatePriceRangeService implements CreatePriceRangeUseCase {
     @Override
     public void execute(PriceRange domain) {
         try {
-            logger.info("Iniciando la creación del rango de precios...");
             EmptyProductOrAssociationPriceRangeSpec productOrAssociationPriceRangeSpec = new EmptyProductOrAssociationPriceRangeSpec();
             UniquePriceRangeByAssociatioAndProductAndDateSpec uniquePriceRangeByAssociatioAndProductAndDateSpec = new UniquePriceRangeByAssociatioAndProductAndDateSpec(priceRangeRepository);
             ValidatePriceAndDatePriceRangeSpec validatePriceAndDatePriceRangeSpec = new ValidatePriceAndDatePriceRangeSpec();

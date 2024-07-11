@@ -19,7 +19,7 @@ public class OfferDTO {
     private Integer productId;
 
     @NotNull(message = "El agricultor no puede ser nulo")
-    private Integer farmerId;
+    private Integer farmer;
 
     @Size(max = 500)
     @Builder.Default
@@ -53,8 +53,8 @@ public class OfferDTO {
         this.productId = ObjectHelper.getDefaultInteger(productId);
     }
 
-    public void setFarmerId(Integer farmerId) {
-        this.farmerId = ObjectHelper.getDefaultInteger(farmerId);
+    public void setFarmer(Integer farmer) {
+        this.farmer = ObjectHelper.getDefaultInteger(farmer);
     }
 
     public void setDescription(String description) {
@@ -90,8 +90,8 @@ public class OfferDTO {
         return ObjectHelper.getDefaultInteger(productId);
     }
 
-    public Integer getFarmerId() {
-        return ObjectHelper.getDefaultInteger(farmerId);
+    public Integer getFarmer() {
+        return ObjectHelper.getDefaultInteger(farmer);
     }
 
     public String getDescription() {

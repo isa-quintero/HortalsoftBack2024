@@ -47,7 +47,7 @@ public class CreateOfferFacadeImpl implements CreateOfferFacade {
         if (dto.getProductId() == null) {
             throw new ValidationException("Producto ID no puede ser nulo");
         }
-        if (dto.getFarmerId() == null) {
+        if (dto.getFarmer() == null) {
             throw new ValidationException("Agricultor ID no puede ser nulo");
         }
     }
