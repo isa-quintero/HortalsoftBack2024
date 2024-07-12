@@ -2,7 +2,6 @@ package com.hortalsoft.users.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.products.infrastructure.adapter.inbound.controller.OfferController;
 import com.hortalsoft.users.application.dto.FarmerDTO;
 import com.hortalsoft.users.application.facades.facade.farmer.*;
 import org.slf4j.Logger;
@@ -24,7 +23,7 @@ public class FarmerController {
     private final FindFarmerIdNumberFacade facadeFindByIdNumber;
     private final ListFarmerFacade facadeList;
     private final ExceptionHandlingAspect exceptionHandlingAspect;
-    private static final Logger logger = LoggerFactory.getLogger(OfferController.class);
+    private static final Logger logger = LoggerFactory.getLogger(FarmerController.class);
 
     public FarmerController(CreateFarmerFacade facadeCreate, DeleteFarmerFacade facadeDelete, FindFarmerFacade facadeFind, FindFarmerFacadeEmail facadeFindByEmail, FindFarmerIdNumberFacade facadeFindByIdNumber, ListFarmerFacade facadeList, ExceptionHandlingAspect exceptionHandlingAspect) {
         this.facadeCreate = facadeCreate;
