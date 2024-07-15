@@ -2,9 +2,6 @@ package com.hortalsoft.users.infrastructure.adapter.inbound.controller;
 
 import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
-import com.hortalsoft.products.application.dto.CategoryDTO;
-import com.hortalsoft.products.application.facades.facade.category.FindCategoryFacade;
-import com.hortalsoft.products.application.facades.facade.category.ListCategoryFacade;
 import com.hortalsoft.users.application.dto.DocumentTypeDTO;
 import com.hortalsoft.users.application.facades.facade.documenttype.FindDocumentTypeFacade;
 import com.hortalsoft.users.application.facades.facade.documenttype.ListDocumentTypeFacade;

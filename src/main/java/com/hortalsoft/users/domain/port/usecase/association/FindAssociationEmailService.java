@@ -39,7 +39,11 @@ public class FindAssociationEmailService implements FindAssociationEmailUseCase 
             UserExistByEmailSpec userExistByEmailSpec = new UserExistByEmailSpec(userRepository);
             if (userExistByEmailSpec.isSatisfiedBy(domain.getEmail())) {
                 Optional<AssociationEntity> resultEntity = associationRepository.findByEmail(domain.getEmail());
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Association.class);
+                if (resultEntity.isPresent()) {
+                    return mapperEntityToDomain.mapToDomain(resultEntity.get(), Association.class);
+                } else {
+                    throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
+                }
             } else {
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
             }

@@ -3,9 +3,7 @@ package com.hortalsoft.users.domain.port.usecase.farmer;
 
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
-import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.domain.Farmer;
-import com.hortalsoft.users.domain.entity.FarmerEntity;
 import com.hortalsoft.users.domain.port.input.farmer.DeleteFarmerUseCase;
 import com.hortalsoft.users.domain.repository.FarmerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
@@ -21,7 +19,6 @@ public class DeleteFarmerService implements DeleteFarmerUseCase {
     private final UserRepository userRepository;
     private final FarmerRepository farmerRepository;
     private static final Layer layer = Layer.DOMAIN;
-    MapperDomainToEntity<Farmer, FarmerEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
 
     @Autowired
     public DeleteFarmerService(UserRepository userRepository, FarmerRepository farmerRepository) {

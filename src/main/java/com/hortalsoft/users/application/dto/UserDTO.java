@@ -62,12 +62,6 @@ public abstract class UserDTO {
         this.city = TextHelper.getDefault(city);
     }
 
-
-//    public void setUserType(UserType userType) {
-//        this.userType = ObjectHelper.getDefault(userType, UserType.CUSTOMER); // Default to CUSTOMER if null
-//    }
-
-    // Getters using helpers
     public Integer getIdUser() {
         return ObjectHelper.getDefaultInteger(idUser);
     }
@@ -96,17 +90,5 @@ public abstract class UserDTO {
         return ObjectHelper.getDefault(userType, UserType.CUSTOMER); // Default to CUSTOMER if null
     }
 
-//    // Methods to check user type
-//    public boolean isFarmer() {
-//        return UserType.FARMER.equals(this.userType);
-//    }
-//
-//    public boolean isCustomer() {
-//        return UserType.CUSTOMER.equals(this.userType);
-//    }
-//
-//    public boolean isAssociation() {
-//        return UserType.ASSOCIATION.equals(this.userType);
-//    }
 }
 

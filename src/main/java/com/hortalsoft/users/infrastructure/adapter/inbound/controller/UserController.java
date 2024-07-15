@@ -24,19 +24,17 @@ public class UserController {
     }
     @GetMapping("/users-emails/{email}")
     public ResponseEntity<Object> findUserByEmail(@PathVariable(name = "email") String email) {
-        try {
-            UserDTO user = new UserDTO(0, 0, 0, "", 0, email, "", "",CUSTOMER) {
-            };
-            UserDTO result = facadeFindByEmail.execute(user);
-            logger.info(USUARIO_ENCONTRADO);
-            return ResponseEntity.ok().body(result);
-        } catch (Exception e) {
-            return exceptionHandlingAspect.exceptionsInfrastructure(e);
-        }
+        return getObjectResponseEntity(email);
     }
+
+
 
     @GetMapping("/users-roles/{email}")
     public ResponseEntity<Object> findRoleByEmail(@PathVariable(name = "email") String email) {
+        return getObjectResponseEntity(email);
+    }
+
+    private ResponseEntity<Object> getObjectResponseEntity(@PathVariable(name = "email") String email) {
         try {
             UserDTO user = new UserDTO(0, 0, 0, "", 0, email, "", "",CUSTOMER) {
             };

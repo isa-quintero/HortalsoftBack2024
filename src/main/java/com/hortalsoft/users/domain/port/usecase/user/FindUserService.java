@@ -22,7 +22,6 @@ public class FindUserService implements FindUserUseCase {
 
     private static final Layer layer = Layer.DOMAIN;
     private final UserRepository userRepository;
-    MapperDomainToEntity<User, UserEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
     MapperEntityToDomain<UserEntity, User> mapperEntityToDomain = new MapperEntityToDomain<>();
 
     @Autowired

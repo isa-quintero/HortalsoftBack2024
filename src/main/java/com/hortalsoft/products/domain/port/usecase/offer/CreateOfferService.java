@@ -8,7 +8,6 @@ import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.products.domain.specification.implementation.offer.ExistingOfferOverlapSpecification;
-import com.hortalsoft.products.domain.specification.implementation.offer.OfferVerifyDateSpec;
 import com.hortalsoft.products.domain.specification.implementation.offer.ValidateOfferToBeCreatedSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

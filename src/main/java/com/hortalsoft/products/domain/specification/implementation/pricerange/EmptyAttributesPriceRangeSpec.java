@@ -13,5 +13,4 @@ public class EmptyAttributesPriceRangeSpec extends AbstractSpecification<PriceRa
                 Objects.equals(priceRange.getInitialRange(), 0) || Objects.equals(priceRange.getFinalRange(), 0));
 
     }
-
 }

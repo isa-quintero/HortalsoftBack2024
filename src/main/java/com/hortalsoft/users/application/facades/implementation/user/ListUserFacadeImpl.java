@@ -4,7 +4,6 @@ import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.users.application.dto.UserDTO;
 import com.hortalsoft.users.application.facades.facade.user.ListUserFacade;
-import com.hortalsoft.users.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.users.application.mapper.MapperDomainToDto;
 import com.hortalsoft.users.domain.domain.User;
 import com.hortalsoft.users.domain.port.input.user.ListUserUseCase;
@@ -18,7 +17,6 @@ import java.util.List;
 public class ListUserFacadeImpl implements ListUserFacade {
 
     MapperDomainToDto<User, UserDTO> mapperDomainToDto = new MapperDomainToDto<>();
-    MapperDTOToDomain<UserDTO, User> mapperDTOToDomain = new MapperDTOToDomain<>();
     private final ListUserUseCase useCase;
     private static final Layer layer = Layer.APPLICATION;
 
