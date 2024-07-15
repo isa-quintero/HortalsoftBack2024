@@ -1,5 +1,6 @@
 package com.hortalsoft.users.application.dto;
 
+import com.hortalsoft.crosscutting.helper.TextHelper;
 import lombok.*;
 
 import static com.hortalsoft.users.util.UserType.ASSOCIATION;
@@ -15,4 +16,7 @@ public class AssociationDTO extends UserDTO {
         this.name = name;
     }
 
+    public void setName(String name) {
+        this.name = TextHelper.getDefault(name);
+    }
 }
