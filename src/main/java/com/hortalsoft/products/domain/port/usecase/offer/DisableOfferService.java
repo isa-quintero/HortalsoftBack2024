@@ -8,6 +8,7 @@ import com.hortalsoft.products.domain.repository.OfferRepository;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.products.domain.specification.implementation.offer.AvailableOffersSpec;
+import com.hortalsoft.products.domain.specification.implementation.offer.OfferExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,12 +32,11 @@ public class DisableOfferService implements DisableOfferUseCase {
     @Override
     public void execute(Offer domain) {
         try {
-            AvailableOffersSpec availableOffersSpec = new AvailableOffersSpec(offerRepository);
+            OfferExistByIdSpec offerExistByIdSpec = new OfferExistByIdSpec(offerRepository);
             Optional<OfferEntity> findbyId = offerRepository.findById(domain.getId());
             if (findbyId.isPresent()) {
-                if (availableOffersSpec.isSatisfiedBy(findbyId.get())) {
-                    findbyId.get().setValidity(false);
-                    offerRepository.save(findbyId.get());
+                if (offerExistByIdSpec.isSatisfiedBy(findbyId.get())) {
+                    offerRepository.deleteById(domain.getId());
                 } else {
                     throw new ExceptionHortalsoft("Producto no encontrado", 6001, layer);
                 }
