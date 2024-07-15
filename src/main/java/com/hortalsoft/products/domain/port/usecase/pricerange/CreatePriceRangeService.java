@@ -11,8 +11,6 @@ import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.products.domain.specification.implementation.pricerange.EmptyProductOrAssociationPriceRangeSpec;
 import com.hortalsoft.products.domain.specification.implementation.pricerange.UniquePriceRangeByAssociatioAndProductAndDateSpec;
 import com.hortalsoft.products.domain.specification.implementation.pricerange.ValidatePriceAndDatePriceRangeSpec;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +21,6 @@ public class CreatePriceRangeService implements CreatePriceRangeUseCase {
     private static final Layer layer = Layer.DOMAIN;
     private final PriceRangeRepository priceRangeRepository;
     MapperDomainToEntity<PriceRange, PriceRangeEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
-    private static final Logger logger = LoggerFactory.getLogger(CreatePriceRangeService.class);
 
     @Autowired
     public CreatePriceRangeService(PriceRangeRepository priceRangeRepository) {

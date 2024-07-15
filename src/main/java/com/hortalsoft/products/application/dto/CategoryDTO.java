@@ -1,6 +1,5 @@
 package com.hortalsoft.products.application.dto;
 
-import com.hortalsoft.crosscutting.helper.ObjectHelper;
 import com.hortalsoft.crosscutting.helper.TextHelper;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,10 +24,6 @@ public class CategoryDTO {
     @Builder.Default
     private String description = "";
 
-    // Setters using helpers
-    /* public void setId(Integer id) {
-        this.id = ObjectHelper.getDefaultInteger(id);
-    }*/
 
     public void setName(String name) {
         this.name = TextHelper.getDefault(name);
@@ -37,11 +32,6 @@ public class CategoryDTO {
     public void setDescription(String description) {
         this.description = TextHelper.getDefault(description);
     }
-
-    // Getters using helpers
-    /*public Integer getId() {
-        return ObjectHelper.getDefaultInteger(id);
-    }*/
 
     public String getName() {
         return TextHelper.getDefault(name);

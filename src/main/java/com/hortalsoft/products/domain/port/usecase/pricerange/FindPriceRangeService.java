@@ -37,7 +37,11 @@ public class FindPriceRangeService implements FindPriceRangeUseCase {
             PriceRangeEntity entity = mapperDomainToEntity.mapToEntity(domain, PriceRangeEntity.class);
             if (priceRangeExistsByIdSpec.isSatisfiedBy(entity)) {
                 Optional<PriceRangeEntity> resultEntity = priceRangeRepository.findByFinalDateValidAndIdPriceRange(entity.getIdPriceRange());
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(), PriceRange.class);
+                if (resultEntity.isPresent()) {
+                    return mapperEntityToDomain.mapToDomain(resultEntity.get(), PriceRange.class);
+                } else{
+                    throw new ExceptionHortalsoft("El rango de precios no existe", 6001, layer);
+                }
             } else {
                 throw new ExceptionHortalsoft("El rango de precios no existe", 6001, layer);
             }

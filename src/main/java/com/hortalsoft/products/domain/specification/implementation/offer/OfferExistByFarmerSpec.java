@@ -5,8 +5,7 @@ import com.hortalsoft.products.domain.entity.OfferEntity;
 import com.hortalsoft.products.domain.repository.OfferRepository;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+
 
 public class OfferExistByFarmerSpec extends AbstractSpecification<OfferEntity> {
     private final OfferRepository offerRepository;

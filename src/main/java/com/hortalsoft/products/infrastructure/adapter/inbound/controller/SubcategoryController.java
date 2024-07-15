@@ -5,6 +5,11 @@ import com.hortalsoft.products.application.facades.facade.subcategory.FindSubcat
 import com.hortalsoft.products.application.facades.facade.subcategory.ListSubcategoryFacade;
 import com.hortalsoft.crosscutting.util.ExceptionHandlingAspect;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -29,26 +34,44 @@ public class SubcategoryController {
         this.exceptionHandlingAspect = exceptionHandlingAspect;
     }
 
+    @Operation(summary = "Encuentra una subcategoria por su id", description = "Regresa una subcategoria por un id dado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Subcategoria encontrada",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = SubcategoryDTO.class))),
+            @ApiResponse(responseCode = "404", description = "Subcategoria no encontrada",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error inesperado",
+                    content = @Content)
+    })
     @GetMapping("/subcategories/{id}")
-    public ResponseEntity<Object> findSubcategory(@PathVariable (name = "id") int id){
+    public ResponseEntity<Object> findSubcategory(@PathVariable(name = "id") int id) {
         try {
-            SubcategoryDTO subcategory = new SubcategoryDTO(id, "","",0);
+            SubcategoryDTO subcategory = new SubcategoryDTO(id, "", "", 0);
             SubcategoryDTO subcategoryDTO = facadeFind.execute(subcategory);
-            logger.info("Subcategoria encontrado");
+            logger.info("Subcategoria encontrada");
             return ResponseEntity.ok().body(subcategoryDTO);
-        }
-        catch (ExceptionHortalsoft e){
+        } catch (ExceptionHortalsoft e) {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }
 
+    @Operation(summary = "Lista todas las subcategorias", description = "Regresa una lista con todas las subcategorias")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Subcategorias listadas",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = SubcategoryDTO.class))),
+            @ApiResponse(responseCode = "404", description = "No hay subcategorias para listar",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error inesperado ",
+                    content = @Content)
+    })
     @GetMapping("/subcategories")
-    public ResponseEntity<Object> listSubcategories(){
-        try{
+    public ResponseEntity<Object> listSubcategories() {
+        try {
             List<SubcategoryDTO> subcategoryDTOS = facadeList.execute();
             return new ResponseEntity<>(subcategoryDTOS, HttpStatus.OK);
-        }
-        catch (ExceptionHortalsoft e){
+        } catch (ExceptionHortalsoft e) {
             return exceptionHandlingAspect.exceptionsInfrastructure(e);
         }
     }

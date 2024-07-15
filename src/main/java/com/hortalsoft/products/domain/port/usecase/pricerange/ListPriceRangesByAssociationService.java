@@ -9,7 +9,7 @@ import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.products.domain.port.input.pricerange.ListPricesRangesByAssociationUseCase;
 import com.hortalsoft.products.domain.repository.PriceRangeRepository;
-import com.hortalsoft.products.domain.specification.implementation.pricerange.PriceRangeExistsByIdSpec;
+import com.hortalsoft.products.domain.specification.implementation.pricerange.PriceRangeExistsByAssociationSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,9 +34,9 @@ public class ListPriceRangesByAssociationService implements ListPricesRangesByAs
     @Override
     public List<PriceRange> execute(PriceRange domain) {
         try {
-            PriceRangeExistsByIdSpec priceRangeExistsByIdSpec = new PriceRangeExistsByIdSpec(priceRangeRepository);
+            PriceRangeExistsByAssociationSpec priceRangeExistsByAssociationSpec = new PriceRangeExistsByAssociationSpec(priceRangeRepository);
             PriceRangeEntity entity = mapperDomainToEntity.mapToEntity(domain, PriceRangeEntity.class);
-            if (!priceRangeExistsByIdSpec.isSatisfiedBy(entity)) {
+            if (!priceRangeExistsByAssociationSpec.isSatisfiedBy(entity)) {
                 List<PriceRangeEntity> resultList = priceRangeRepository.findByAssociationId(entity.getAssociationId());
                 return mapperEntityToDomain.mapToDomainList(resultList, PriceRange.class);
             } else {

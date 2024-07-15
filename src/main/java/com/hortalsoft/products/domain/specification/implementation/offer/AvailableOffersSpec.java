@@ -5,12 +5,10 @@ import com.hortalsoft.products.domain.repository.OfferRepository;
 import com.hortalsoft.crosscutting.specificaction.AbstractSpecification;
 
 public class AvailableOffersSpec extends AbstractSpecification<OfferEntity> {
-    private final OfferRepository offerRepository;
     private final AbstractSpecification<OfferEntity> reglaA;
     private final AbstractSpecification<OfferEntity> reglaB;
 
     public AvailableOffersSpec(OfferRepository offerRepository) {
-        this.offerRepository = offerRepository;
         reglaA = new OfferExistByIdSpec(offerRepository);
         reglaB = new OfferVerifyValiditySpec(offerRepository);
     }

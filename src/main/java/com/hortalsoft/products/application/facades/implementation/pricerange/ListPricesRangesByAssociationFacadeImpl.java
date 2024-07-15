@@ -2,12 +2,10 @@ package com.hortalsoft.products.application.facades.implementation.pricerange;
 
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
-import com.hortalsoft.products.application.dto.OfferDTO;
 import com.hortalsoft.products.application.dto.PriceRangeDTO;
 import com.hortalsoft.products.application.facades.facade.pricerange.ListPricesRangesByAssociationFacade;
 import com.hortalsoft.products.application.mapper.MapperDTOToDomain;
 import com.hortalsoft.products.application.mapper.MapperDomainToDto;
-import com.hortalsoft.products.domain.domain.Offer;
 import com.hortalsoft.products.domain.domain.PriceRange;
 import com.hortalsoft.products.domain.port.input.pricerange.ListPricesRangesByAssociationUseCase;
 import jakarta.transaction.Transactional;

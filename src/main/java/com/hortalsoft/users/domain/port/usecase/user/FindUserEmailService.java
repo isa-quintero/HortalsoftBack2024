@@ -10,8 +10,6 @@ import com.hortalsoft.users.domain.domain.User;
 import com.hortalsoft.users.domain.entity.CustomerEntity;
 import com.hortalsoft.users.domain.entity.UserEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
-import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
-import com.hortalsoft.users.domain.mapper.MapperEntityToDomainFarmer;
 import com.hortalsoft.users.domain.port.input.user.FindUserEmailUseCase;
 import com.hortalsoft.users.domain.port.usecase.association.FindAssociationEmailService;
 import com.hortalsoft.users.domain.port.usecase.customer.FindCustomerEmailService;
@@ -33,21 +31,14 @@ public class FindUserEmailService implements FindUserEmailUseCase {
 
     private static final Layer layer = Layer.DOMAIN;
     private final UserRepository userRepository;
-    private final FindUserService findUserService;
     private final FindFarmerEmailService findFarmerEmailService;
     private final FindCustomerEmailService findCustomerEmailService;
     private final FindAssociationEmailService findAssociationEmailService;
     MapperDomainToEntity<User, CustomerEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
-    MapperEntityToDomain<UserEntity, Customer> mapperEntityToDomainCustomer = new MapperEntityToDomain<>();
-    private final MapperEntityToDomainFarmer mapperEntityToDomainFarmer;
-    MapperEntityToDomain<UserEntity, Association> mapperEntityToDomainAssociation = new MapperEntityToDomain<>();
 
     @Autowired
-    public FindUserEmailService(UserRepository userRepository, MapperEntityToDomainFarmer mapperEntityToDomainFarmer, FindUserService findUserService, FindFarmerEmailService findFarmerEmailService, FindCustomerEmailService findCustomerEmailService, FindAssociationEmailService findAssociationEmailService) {
+    public FindUserEmailService(UserRepository userRepository, FindFarmerEmailService findFarmerEmailService, FindCustomerEmailService findCustomerEmailService, FindAssociationEmailService findAssociationEmailService) {
         this.userRepository = userRepository;
-
-        this.mapperEntityToDomainFarmer = mapperEntityToDomainFarmer;
-        this.findUserService = findUserService;
         this.findFarmerEmailService = findFarmerEmailService;
         this.findCustomerEmailService = findCustomerEmailService;
         this.findAssociationEmailService = findAssociationEmailService;

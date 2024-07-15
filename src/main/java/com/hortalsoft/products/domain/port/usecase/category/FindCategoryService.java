@@ -38,7 +38,11 @@ public class FindCategoryService implements FindCategoryUseCase {
             CategoryEntity entity = mapperDomainToEntity.mapToEntity(domain, CategoryEntity.class);
             if (categoryExistByIdSpec.isSatisfiedBy(entity)) {
                 Optional<CategoryEntity> resultEntity = categoryRepository.findById(entity.getIdCategory());
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Category.class);
+                if (resultEntity.isPresent()) {
+                    return mapperEntityToDomain.mapToDomain(resultEntity.get(), Category.class);
+                } else {
+                    throw new ExceptionHortalsoft("Categoria no encontrada", 6001, layer);
+                }
             } else {
                 throw new ExceptionHortalsoft("Categoria no encontrada", 6001, layer);
             }

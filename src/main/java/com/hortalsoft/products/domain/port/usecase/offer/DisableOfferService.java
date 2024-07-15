@@ -33,10 +33,15 @@ public class DisableOfferService implements DisableOfferUseCase {
         try {
             AvailableOffersSpec availableOffersSpec = new AvailableOffersSpec(offerRepository);
             Optional<OfferEntity> findbyId = offerRepository.findById(domain.getId());
-            if (availableOffersSpec.isSatisfiedBy(findbyId.get())) {
-                findbyId.get().setValidity(false);
-                offerRepository.save(findbyId.get());
-            } else {
+            if (findbyId.isPresent()) {
+                if (availableOffersSpec.isSatisfiedBy(findbyId.get())) {
+                    findbyId.get().setValidity(false);
+                    offerRepository.save(findbyId.get());
+                } else {
+                    throw new ExceptionHortalsoft("Producto no encontrado", 6001, layer);
+                }
+            }
+            else{
                 throw new ExceptionHortalsoft("Producto no encontrado", 6001, layer);
             }
         } catch (ExceptionHortalsoft exceptionHortalsoft) {

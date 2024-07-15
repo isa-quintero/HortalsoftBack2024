@@ -70,7 +70,7 @@ public class FarmerController {
         }
     }
     @GetMapping("/farmers-emails/{email}")
-    public ResponseEntity<Object> findCustomerByEmail(@PathVariable(name = "email") String email) {
+    public ResponseEntity<Object> findFarmerByEmail(@PathVariable(name = "email") String email) {
         try {
             FarmerDTO farmer = new FarmerDTO(0,0,0,"",0,email,"","",0);
             FarmerDTO result = facadeFindByEmail.execute(farmer);
@@ -81,7 +81,7 @@ public class FarmerController {
         }
     }
     @GetMapping("/farmers-id/{idNumber}")
-    public ResponseEntity<Object> findCustomerByIdNumber(@PathVariable(name = "idNumber") Long idNumber) {
+    public ResponseEntity<Object> findFarmerByIdNumber(@PathVariable(name = "idNumber") Long idNumber) {
         try {
             FarmerDTO farmer = new FarmerDTO(0,0,idNumber,"",0,"","","",0);
             FarmerDTO result = facadeFindByIdNumber.execute(farmer);
@@ -93,7 +93,7 @@ public class FarmerController {
     }
 
     @GetMapping("/farmers")
-    public ResponseEntity<Object> listCustomers() {
+    public ResponseEntity<Object> listFarmer() {
         try {
             List<FarmerDTO> farmerDTOS = facadeList.execute();
             return new ResponseEntity<>(farmerDTOS, HttpStatus.OK);

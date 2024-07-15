@@ -9,7 +9,6 @@ import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.products.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
-import com.hortalsoft.products.domain.specification.implementation.offer.AvailableOffersSpec;
 import com.hortalsoft.products.domain.specification.implementation.offer.OfferExistByIdSpec;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +39,12 @@ public class FindOfferService implements FindOfferUseCase {
             OfferEntity entity = mapperDomainToEntity.mapToEntity(domain, OfferEntity.class);
             if (offerExistByIdSpec.isSatisfiedBy(entity)) {
                 Optional<OfferEntity> resultEntity = offerRepository.findById(entity.getOfferId());
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Offer.class);
+                if (resultEntity.isPresent()) {
+                    return mapperEntityToDomain.mapToDomain(resultEntity.get(), Offer.class);
+                }
+                else{
+                    throw new ExceptionHortalsoft("Oferta no encontrada", 6001, layer);
+                }
             } else {
                 throw new ExceptionHortalsoft("Oferta no encontrada", 6001, layer);
             }

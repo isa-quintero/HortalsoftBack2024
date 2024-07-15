@@ -44,10 +44,6 @@ public class OfferDTO {
     private boolean validity;
     private String idBlockchain;
 
-    // Setters using helpers
-    /*public void setId(Integer id) {
-        this.id = ObjectHelper.getDefaultInteger(id);
-    }*/
 
     public void setProductId(Integer productId) {
         this.productId = ObjectHelper.getDefaultInteger(productId);
@@ -81,10 +77,6 @@ public class OfferDTO {
         this.idBlockchain = TextHelper.getDefault(idBlockchain);
     }
 
-    // Getters using helpers
-    /*public Integer getId() {
-        return ObjectHelper.getDefaultInteger(id);
-    }*/
 
     public Integer getProductId() {
         return ObjectHelper.getDefaultInteger(productId);

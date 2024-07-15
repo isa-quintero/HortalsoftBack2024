@@ -28,7 +28,6 @@ public class CreateOfferFacadeImpl implements CreateOfferFacade {
      *
      * @param dto The OfferDTO object to be executed.
      * @throws ValidationException If the Product ID or Farmer ID in the OfferDTO is null.
-     * @throws Exception           If any other exception occurs during execution.
      */
     @Override
     public void execute(OfferDTO dto) {

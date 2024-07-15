@@ -9,8 +9,8 @@ public class ValidateOfferToBeCreatedSpec extends AbstractSpecification<OfferEnt
     private final AbstractSpecification<OfferEntity> reglaA;
     private final AbstractSpecification<OfferEntity> reglaB;
 
-    public ValidateOfferToBeCreatedSpec(OfferRepository offerRepository) {
-        reglaA = new ExistingOfferOverlapSpecification(offerRepository);
+    public ValidateOfferToBeCreatedSpec() {
+        reglaA = new OfferVerifyDateSpec();
         reglaB = new ValidatePriceAndAmountOfferSpec();
     }
 
