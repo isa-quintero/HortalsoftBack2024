@@ -3,7 +3,6 @@ package com.hortalsoft.users.domain.port.usecase.association;
 
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
-import com.hortalsoft.products.domain.entity.ProductEntity;
 import com.hortalsoft.users.domain.domain.Association;
 import com.hortalsoft.users.domain.entity.AssociationEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;

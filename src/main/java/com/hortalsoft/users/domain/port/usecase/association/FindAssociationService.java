@@ -40,8 +40,12 @@ public class FindAssociationService implements FindAssociationUseCase {
             UserExistByIdSpec userExistByIdSpec = new UserExistByIdSpec(userRepository);
             if (userExistByIdSpec.isSatisfiedBy(domain.getIdUser())){
                 Optional<AssociationEntity> resultEntity = associationRepository.findById(domain.getIdUser());
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Association.class);            }
-            else{
+                if (resultEntity.isPresent()) {
+                    return mapperEntityToDomain.mapToDomain(resultEntity.get(), Association.class);
+                }else{
+                    throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
+                }
+            } else{
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
             }
         } catch (ExceptionHortalsoft exceptionHortalsoft) {

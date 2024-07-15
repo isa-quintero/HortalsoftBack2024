@@ -5,7 +5,6 @@ import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
 import com.hortalsoft.users.domain.domain.Customer;
 import com.hortalsoft.users.domain.entity.CustomerEntity;
-import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.mapper.MapperEntityToDomain;
 import com.hortalsoft.users.domain.port.input.customer.FindCustomerUseCase;
 import com.hortalsoft.users.domain.repository.CustomerRepository;
@@ -24,7 +23,6 @@ public class FindCustomerService implements FindCustomerUseCase {
     private static final Layer layer = Layer.DOMAIN;
     private final UserRepository userRepository;
     private final CustomerRepository customerRepository;
-    MapperDomainToEntity<Customer, CustomerEntity> mapperDomainToEntity = new MapperDomainToEntity<>();
     MapperEntityToDomain<CustomerEntity, Customer> mapperEntityToDomain = new MapperEntityToDomain<>();
 
     @Autowired

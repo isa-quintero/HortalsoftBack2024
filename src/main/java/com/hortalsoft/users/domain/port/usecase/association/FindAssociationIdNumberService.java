@@ -39,7 +39,11 @@ public class FindAssociationIdNumberService implements FindAssociationIdNumberUs
             UniqueIdNumberSpec uniqueIdNumberSpec = new UniqueIdNumberSpec(userRepository);
             if (uniqueIdNumberSpec.isSatisfiedBy(domain.getNumberId())) {
                 Optional<AssociationEntity> resultEntity = associationRepository.findByNumberId(domain.getNumberId());
-                return mapperEntityToDomain.mapToDomain(resultEntity.get(), Association.class);
+                if (resultEntity.isPresent()) {
+                    return mapperEntityToDomain.mapToDomain(resultEntity.get(), Association.class);
+                } else {
+                    throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
+                }
             } else {
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
             }

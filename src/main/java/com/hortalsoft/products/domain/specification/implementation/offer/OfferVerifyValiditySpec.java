@@ -5,10 +5,8 @@ import com.hortalsoft.products.domain.repository.OfferRepository;
 import com.hortalsoft.crosscutting.specificaction.AbstractSpecification;
 
 public class OfferVerifyValiditySpec extends AbstractSpecification<OfferEntity> {
-    private final OfferRepository offerRepository;
 
-    public OfferVerifyValiditySpec(OfferRepository offerRepository) {
-        this.offerRepository = offerRepository;
+    public OfferVerifyValiditySpec() {
     }
 
     @Override

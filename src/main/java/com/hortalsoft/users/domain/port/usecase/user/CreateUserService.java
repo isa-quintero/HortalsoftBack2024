@@ -2,16 +2,12 @@ package com.hortalsoft.users.domain.port.usecase.user;
 
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
-import com.hortalsoft.users.domain.domain.Customer;
 import com.hortalsoft.users.domain.domain.User;
-import com.hortalsoft.users.domain.entity.CustomerEntity;
 import com.hortalsoft.users.domain.entity.UserEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.port.input.user.CreateUserUseCase;
-import com.hortalsoft.users.domain.repository.CustomerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
 import com.hortalsoft.users.domain.specification.user.UniqueEmailForUserSpec;
-import com.hortalsoft.users.domain.specification.user.UserExistByEmailSpec;
 import org.springframework.stereotype.Service;
 
 

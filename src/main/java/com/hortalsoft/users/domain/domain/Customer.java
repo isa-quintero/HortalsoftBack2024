@@ -1,10 +1,7 @@
 package com.hortalsoft.users.domain.domain;
 
 import com.hortalsoft.users.util.UserType;
-import lombok.Data;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 import java.io.Serializable;
 

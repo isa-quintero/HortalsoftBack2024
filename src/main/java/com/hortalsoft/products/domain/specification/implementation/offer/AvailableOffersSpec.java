@@ -10,7 +10,7 @@ public class AvailableOffersSpec extends AbstractSpecification<OfferEntity> {
 
     public AvailableOffersSpec(OfferRepository offerRepository) {
         reglaA = new OfferExistByIdSpec(offerRepository);
-        reglaB = new OfferVerifyValiditySpec(offerRepository);
+        reglaB = new OfferVerifyValiditySpec();
     }
 
     @Override

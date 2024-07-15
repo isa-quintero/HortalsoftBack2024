@@ -7,34 +7,17 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @NoArgsConstructor
-
+@Getter
+@Setter
 public abstract class User implements Serializable {
-    @Getter
-    @Setter
     private Integer idUser;
-    @Getter
-    @Setter
     private Integer documentTypeId;
-    @Getter
-    @Setter
     private long numberId;
-    @Getter
-    @Setter
     private String username;
-    @Getter
-    @Setter
     private long phoneNumber;
-    @Getter
-    @Setter
     private String email;
-    @Getter
-    @Setter
     private String address;
-    @Getter
-    @Setter
     private String city;
-    @Setter
-    @Getter
     private UserType userType;
 
     public User(Integer idUser, Integer documentTypeId, long numberId, String username, long phoneNumber, String email, String address, String city, UserType userType) {

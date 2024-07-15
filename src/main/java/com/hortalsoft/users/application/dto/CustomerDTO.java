@@ -1,6 +1,5 @@
 package com.hortalsoft.users.application.dto;
 
-import com.hortalsoft.users.util.UserType;
 import lombok.*;
 
 import static com.hortalsoft.users.util.UserType.CUSTOMER;
