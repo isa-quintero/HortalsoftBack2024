@@ -10,6 +10,7 @@ import com.hortalsoft.users.domain.port.input.farmer.CreateFarmerUseCase;
 import com.hortalsoft.users.domain.repository.AssociationRepository;
 import com.hortalsoft.users.domain.repository.FarmerRepository;
 import com.hortalsoft.users.domain.repository.UserRepository;
+import com.hortalsoft.users.domain.specification.farmer.EmptyAttributesFarmerSpec;
 import com.hortalsoft.users.domain.specification.user.UniqueIdNumberSpec;
 import org.springframework.stereotype.Service;
 
@@ -31,17 +32,22 @@ public class CreateFarmerService implements CreateFarmerUseCase {
     @Override
     public void execute(Farmer domain) {
         try {
+            EmptyAttributesFarmerSpec emptyAttributesFarmerSpec = new EmptyAttributesFarmerSpec();
             UniqueIdNumberSpec uniqueIdNumberSpec = new UniqueIdNumberSpec(userRepository);
-            if (!uniqueIdNumberSpec.isSatisfiedBy(domain.getNumberId())) {
-                FarmerEntity entity = mapperDomainToEntity.mapToEntity(domain, FarmerEntity.class);
-                if (domain.getAssociationId() != null) {
-                    AssociationEntity association = associationRepository.findById(domain.getAssociationId())
-                            .orElseThrow(() -> new ExceptionHortalsoft("Asociación no encontrada",6001,layer));
-                    entity.setAssociation(association);
+            FarmerEntity entity = mapperDomainToEntity.mapToEntity(domain, FarmerEntity.class);
+            if (!emptyAttributesFarmerSpec.isSatisfiedBy(entity)) {
+                if (!uniqueIdNumberSpec.isSatisfiedBy(domain.getNumberId())) {
+                    if (domain.getAssociationId() != null) {
+                        AssociationEntity association = associationRepository.findById(domain.getAssociationId())
+                                .orElseThrow(() -> new ExceptionHortalsoft("Asociación no encontrada",6001,layer));
+                        entity.setAssociation(association);
+                    }
+                    farmerRepository.save(entity);
+                } else{
+                    throw new ExceptionHortalsoft("El usuario ya existe", 6001, layer);
                 }
-                farmerRepository.save(entity);
             } else{
-                throw new ExceptionHortalsoft("El usuario ya existe", 6001, layer);
+                throw new ExceptionHortalsoft("Existen elementos vacios dentro del perfil de agricultor", 5001, layer);
             }
 
         } catch (ExceptionHortalsoft exceptionHortalsoft) {

@@ -7,6 +7,7 @@ import com.hortalsoft.products.domain.repository.OfferRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
+import com.hortalsoft.products.domain.specification.implementation.offer.EmptyAttributesOfferSpec;
 import com.hortalsoft.products.domain.specification.implementation.offer.ExistingOfferOverlapSpecification;
 import com.hortalsoft.products.domain.specification.implementation.offer.ValidateOfferToBeCreatedSpec;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +30,24 @@ public class CreateOfferService implements CreateOfferUseCase {
     @Override
     public void execute(Offer domain) {
         try {
+            EmptyAttributesOfferSpec emptyAttributesOfferSpec = new EmptyAttributesOfferSpec();
             ValidateOfferToBeCreatedSpec validateOfferToBeCreatedSpec = new ValidateOfferToBeCreatedSpec();
             ExistingOfferOverlapSpecification existingOfferOverlapSpecification = new ExistingOfferOverlapSpecification(offerRepository);
             OfferEntity entity = mapperDomainToEntity.mapToEntity(domain, OfferEntity.class);
-            if (validateOfferToBeCreatedSpec.isSatisfiedBy(entity)) {
-                if (existingOfferOverlapSpecification.isSatisfiedBy(entity)) {
-                    offerRepository.save(entity);
+            if (!emptyAttributesOfferSpec.isSatisfiedBy(entity)){
+                if (validateOfferToBeCreatedSpec.isSatisfiedBy(entity)) {
+                    if (existingOfferOverlapSpecification.isSatisfiedBy(entity)) {
+                        offerRepository.save(entity);
+                    } else {
+                        throw new ExceptionHortalsoft("La oferta ya existe", 5001, layer);
+                    }
                 } else {
-                    throw new ExceptionHortalsoft("La oferta ya existe", 5001, layer);
+                    throw new ExceptionHortalsoft("La oferta no cumple con las condiciones", 5001, layer);
                 }
-            } else {
-                throw new ExceptionHortalsoft("La oferta no cumple con las condiciones", 5001, layer);
+            }else{
+                throw new ExceptionHortalsoft("Existen elementos vacios dentro de la oferta", 5001, layer);
             }
+
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {

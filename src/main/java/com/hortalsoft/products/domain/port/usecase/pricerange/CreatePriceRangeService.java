@@ -8,7 +8,7 @@ import com.hortalsoft.products.domain.repository.PriceRangeRepository;
 import com.hortalsoft.products.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.crosscutting.util.ExceptionHortalsoft;
 import com.hortalsoft.crosscutting.util.Layer;
-import com.hortalsoft.products.domain.specification.implementation.pricerange.EmptyProductOrAssociationPriceRangeSpec;
+import com.hortalsoft.products.domain.specification.implementation.pricerange.EmptyAttributesPriceRangeSpec;
 import com.hortalsoft.products.domain.specification.implementation.pricerange.UniquePriceRangeByAssociatioAndProductAndDateSpec;
 import com.hortalsoft.products.domain.specification.implementation.pricerange.ValidatePriceAndDatePriceRangeSpec;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +30,11 @@ public class CreatePriceRangeService implements CreatePriceRangeUseCase {
     @Override
     public void execute(PriceRange domain) {
         try {
-            EmptyProductOrAssociationPriceRangeSpec productOrAssociationPriceRangeSpec = new EmptyProductOrAssociationPriceRangeSpec();
+            EmptyAttributesPriceRangeSpec emptyAttributesPriceRangeSpec = new EmptyAttributesPriceRangeSpec();
             UniquePriceRangeByAssociatioAndProductAndDateSpec uniquePriceRangeByAssociatioAndProductAndDateSpec = new UniquePriceRangeByAssociatioAndProductAndDateSpec(priceRangeRepository);
             ValidatePriceAndDatePriceRangeSpec validatePriceAndDatePriceRangeSpec = new ValidatePriceAndDatePriceRangeSpec();
             PriceRangeEntity entity = mapperDomainToEntity.mapToEntity(domain, PriceRangeEntity.class);
-            if(!productOrAssociationPriceRangeSpec.isSatisfiedBy((entity))){
+            if(!emptyAttributesPriceRangeSpec.isSatisfiedBy((entity))){
                 if (uniquePriceRangeByAssociatioAndProductAndDateSpec.isSatisfiedBy(entity)) {
                     if (!validatePriceAndDatePriceRangeSpec.isSatisfiedBy(entity)){
                         priceRangeRepository.save(entity);
@@ -45,9 +45,10 @@ public class CreatePriceRangeService implements CreatePriceRangeUseCase {
                     throw new ExceptionHortalsoft("El rango de precios ya existe", 5001, layer);
                 }
             } else{
-                throw new ExceptionHortalsoft("La asociación o el producto del rango de precios estan vacios", 5001, layer);
+                throw new ExceptionHortalsoft("Existen elementos vacios dentro del rango de precio", 5001, layer);
             }
-
+        }  catch (ExceptionHortalsoft exceptionHortalsoft) {
+            throw exceptionHortalsoft;
         } catch (Exception exception) {
             throw new ExceptionHortalsoft("Ha ocurrido un error inesperado creando el rango de precios", 500, layer, exception);
         }

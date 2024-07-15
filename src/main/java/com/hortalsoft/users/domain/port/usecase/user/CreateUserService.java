@@ -7,6 +7,7 @@ import com.hortalsoft.users.domain.entity.UserEntity;
 import com.hortalsoft.users.domain.mapper.MapperDomainToEntity;
 import com.hortalsoft.users.domain.port.input.user.CreateUserUseCase;
 import com.hortalsoft.users.domain.repository.UserRepository;
+import com.hortalsoft.users.domain.specification.user.EmptyAttributesUserSpec;
 import com.hortalsoft.users.domain.specification.user.UniqueEmailForUserSpec;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,17 @@ public class CreateUserService implements CreateUserUseCase {
     @Override
     public void execute(User domain) {
         try {
+            EmptyAttributesUserSpec emptyAttributesUserSpec = new EmptyAttributesUserSpec();
             UniqueEmailForUserSpec uniqueEmailForUserSpec = new UniqueEmailForUserSpec(userRepository);
             UserEntity entity = mapperDomainToEntity.mapToEntity(domain, UserEntity.class);
-            if ( uniqueEmailForUserSpec.isSatisfiedBy(entity.getEmail())){
-                userRepository.save(entity);
-            } else {
-                throw new ExceptionHortalsoft("El usuario ya existe", 5001, layer);
+            if (!emptyAttributesUserSpec.isSatisfiedBy(entity)){
+                if ( uniqueEmailForUserSpec.isSatisfiedBy(entity.getEmail())){
+                    userRepository.save(entity);
+                } else {
+                    throw new ExceptionHortalsoft("El usuario ya existe", 5001, layer);
+                }
+            } else{
+                throw new ExceptionHortalsoft("Existen elementos vacios dentro del perfil de asociación", 5001, layer);
             }
         } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;

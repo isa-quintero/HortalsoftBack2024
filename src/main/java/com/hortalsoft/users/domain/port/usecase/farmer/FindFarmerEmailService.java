@@ -43,7 +43,8 @@ public class FindFarmerEmailService implements FindFarmerEmailUseCase {
                 return mapperEntityToDomain.mapToFarmer(resultEntity.get());
             } else {
                 throw new ExceptionHortalsoft("Usuario no encontrada", 6001, layer);
-            }            } catch (ExceptionHortalsoft exceptionHortalsoft) {
+            }
+        } catch (ExceptionHortalsoft exceptionHortalsoft) {
             throw exceptionHortalsoft;
         } catch (Exception exception) {
             throw new ExceptionHortalsoft("Ha ocurrido un error inesperado buscando el usuario" , 500, layer, exception);
